@@ -8,7 +8,7 @@ draft: false
 
 ## intro
 
-i'm 18 years old, from the 6ix, and i like building things.
+i'm 18 years old, from toronto, and i like building things.
 
 incoming student studying applied math and ml at [hover-1] [@uwaterloo](https://uwaterloo.ca/).
 
@@ -37,4 +37,4 @@ probably still building in tech, maybe in a niche like environmental or health t
 
 ## photo
 
-![Shayaan in workshop](/000129720010.JPG)
+
