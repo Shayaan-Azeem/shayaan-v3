@@ -9,10 +9,12 @@ import ClientHome from "@/components/client-home"
 export default function Home() {
   // Get content data (server-side)
   const allFieldnotes = getAllFieldnotes()
+  const philosophy = getPhilosophy()
 
   return (
     <ClientHome
       fieldnotes={allFieldnotes}
+      philosophy={philosophy}
     />
   )
 }
