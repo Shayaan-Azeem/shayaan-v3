@@ -131,3 +131,32 @@ export function getPhilosophy(): ContentItem | null {
     return null
   }
 }
+
+export function getContentWorthConsuming(): ContentItem | null {
+  try {
+    // Try .md first, then .mdx
+    let fullPath = path.join(contentDirectory, "content-worth-consuming.md")
+    if (!fs.existsSync(fullPath)) {
+      fullPath = path.join(contentDirectory, "content-worth-consuming.mdx")
+    }
+    if (!fs.existsSync(fullPath)) {
+      return null
+    }
+    
+    const fileContents = fs.readFileSync(fullPath, "utf8")
+    const { data, content } = matter(fileContents)
+
+    return {
+      slug: "content-worth-consuming",
+      title: data.title || "Content Worth Consuming",
+      date: data.date || new Date().toISOString().split("T")[0],
+      summary: data.summary || "",
+      banner: data.banner || null,
+      tags: data.tags || [],
+      draft: data.draft || false,
+      content,
+    }
+  } catch {
+    return null
+  }
+}
