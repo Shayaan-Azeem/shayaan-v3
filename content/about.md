@@ -37,4 +37,4 @@ probably still building in tech, maybe in a niche like environmental or health t
 
 ## photo
 
-
+![Shayaan in workshop](/000129720010.JPG)
