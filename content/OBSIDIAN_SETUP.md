@@ -56,29 +56,25 @@ Once configured:
 4. 🚀 **GitHub webhook triggers Vercel deployment**
 5. 🌐 **Your fieldnote appears live** on your website!
 
-## Step 6: Adding Banner Images
+## Step 6: Adding Images
 
-### Method 1: Drag & Drop (Easiest)
-1. **Drag an image** directly into your Obsidian note
-2. Obsidian will save it to `/public/banners/` automatically
-3. **Copy the generated path** (e.g., `[[../public/banners/image.jpg]]`)
-4. **Paste in banner field** as: `/banners/image.jpg` (remove the `[[]]` and `../public`)
+### Adding Images to Your Fieldnotes
+1. **Drag any image** directly into your Obsidian note
+2. **Obsidian automatically saves** it to `/public/fieldnotes/`
+3. **Use images in content** normally with the generated markdown links
 
-### Method 2: Manual Upload
-1. **Add your image** to the `/public/banners/` folder (in Finder/Explorer)
-2. **Reference it** in the banner field as: `/banners/your-image-name.jpg`
+### Adding Banner Images (Super Simple!)
+1. **Drag your banner image** into the note (saves to `/public/fieldnotes/`)
+2. **Copy just the filename** (e.g., `my-banner.jpg`)
+3. **Paste in banner field**: `banner: "my-banner.jpg"`
+4. **Done!** The system automatically adds `/fieldnotes/` path
 
-### Method 3: Use Existing Project Images
-Reference any image in your `/public/` folder:
-- **Existing images**: `/tensorforest.png`, `/vibetype.png`, etc.
-- **Apo images**: `/apoimages/vickyapo.png`, etc.
-
-### Banner Format Examples
+### Banner Examples
 ```yaml
-banner: "/banners/my-fieldnote-image.jpg"     # Custom banner
-banner: "/tensorforest.png"                   # Existing project image  
-banner: "/apoimages/selfie.png"              # Existing apo image
-banner: ""                                   # No banner
+banner: "my-image.jpg"           # Image from /public/fieldnotes/ (auto-path)
+banner: "/tensorforest.png"      # Existing project image (full path)
+banner: "/apoimages/selfie.png"  # Existing apo image (full path)
+banner: ""                      # No banner
 ```
 
 ## Step 7: Test the Setup
@@ -93,7 +89,7 @@ banner: ""                                   # No banner
 - 📁 Use **Daily Notes** plugin to quickly capture thoughts
 - 🔗 Link between fieldnotes using `[[double brackets]]`
 - 🏷️ Use consistent **tags** for better organization
-- 📸 **Drag images** into Obsidian or add to `/public/banners/` folder
+- 📸 **Drag images** into Obsidian (auto-saves to `/public/fieldnotes/`)
 - ✅ Set `draft: true` to work on fieldnotes privately
 
 ## Troubleshooting

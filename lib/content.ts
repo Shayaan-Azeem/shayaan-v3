@@ -37,12 +37,18 @@ function getContentItems(type: 'fieldnotes' | 'writings'): ContentItem[] {
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
 
+      // Auto-prepend /fieldnotes/ to banner if it's just a filename
+      let banner = data.banner || null
+      if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
+        banner = `/fieldnotes/${banner}`
+      }
+
       return {
         slug,
         title: data.title || slug,
         date: data.date || new Date().toISOString().split('T')[0],
         summary: data.summary || '',
-        banner: data.banner || null,
+        banner,
         tags: data.tags || [],
         draft: data.draft || false,
         content,
@@ -73,12 +79,18 @@ export function getContentItem(type: 'fieldnotes' | 'writings', slug: string): C
     const fileContents = fs.readFileSync(fullPath, 'utf8')
     const { data, content } = matter(fileContents)
 
+    // Auto-prepend /fieldnotes/ to banner if it's just a filename
+    let banner = data.banner || null
+    if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
+      banner = `/fieldnotes/${banner}`
+    }
+
     return {
       slug,
       title: data.title || slug,
       date: data.date || new Date().toISOString().split('T')[0],
       summary: data.summary || '',
-      banner: data.banner || null,
+      banner,
       tags: data.tags || [],
       draft: data.draft || false,
       content,

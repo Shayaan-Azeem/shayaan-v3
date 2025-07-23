@@ -17,7 +17,7 @@ title: "Your Title Here"
 slug: "url-friendly-slug"
 date: "YYYY-MM-DD"
 summary: "Brief description of the content"
-banner: "/banners/image.jpg" # Optional - drag image into Obsidian or add to /public/banners/
+banner: "image.jpg" # Optional - just filename, images auto-save to /public/fieldnotes/
 tags: ["tag1", "tag2", "tag3"] # Array of strings
 draft: false # Set to true to hide from site
 ---
