@@ -8,14 +8,16 @@ import { cn } from "@/lib/utils"
 import type { ContentItem } from "@/lib/content"
 import MDXRenderer from "@/components/mdx-renderer"
 import ContentRenderer from "@/components/content-renderer"
+import AboutRenderer from "@/components/about-renderer"
 
 interface ClientHomeProps {
   fieldnotes: ContentItem[]
   philosophy: ContentItem | null
   contentWorthConsuming: ContentItem | null
+  about: ContentItem | null
 }
 
-export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming }: ClientHomeProps) {
+export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming, about }: ClientHomeProps) {
   /* ────────────────────────────────
      section definitions
   ────────────────────────────────── */

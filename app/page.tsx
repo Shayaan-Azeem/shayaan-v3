@@ -11,12 +11,14 @@ export default function Home() {
   const allFieldnotes = getAllFieldnotes()
   const philosophy = getPhilosophy()
   const contentWorthConsuming = getContentWorthConsuming()
+  const about = getAbout()
 
   return (
     <ClientHome
       fieldnotes={allFieldnotes}
       philosophy={philosophy}
       contentWorthConsuming={contentWorthConsuming}
+      about={about}
     />
   )
 }
