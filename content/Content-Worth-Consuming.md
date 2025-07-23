@@ -1,3 +1,23 @@
+---
+
+title: "Content Worth Consuming"
+
+slug: "content-worth-consuming"
+
+date: "2024-07-23"
+
+summary: "My curated list of meaningful content"
+
+draft: false
+
+---
+
+  
+
+# Content Worth Consuming IMO:
+
+  
+
 [hover-1] [the bear](https://www.fxnetworks.com/shows/the-bear) [tv show]
 
 [hover-2] [atomic habits](https://jamesclear.com/atomic-habits) – james clear [book]
@@ -25,5 +45,3 @@
 [hover-5] [reject advice](https://nav.al/reject-advice) – naval ravikant [blog]
 
 [hover-6] [there's no thinking without writing](https://harsehaj.substack.com/p/theres-no-thinking-without-writing) – harsehaj [short essay]
-
-[hover-9] [there's no thinking without writing](https://harsehaj.substack.com/p/theres-no-thinking-without-writing) – harsehaj [short essay]
