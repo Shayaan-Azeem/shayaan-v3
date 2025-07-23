@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  /* Modern sans-serif font stack to match the screenshot */
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* Pure white background */
+    --foreground: 0 0% 15%; /* Dark grey text, slightly lighter than black */
+    --muted-foreground: 0 0% 40%; /* Lighter grey for sidebar labels */
+    --highlight-bg: 210 100% 90%; /* Light green for link highlights */
+    
+    /* Multiple highlight colors for links */
+    --highlight-blue: 220 100% 88%;
+    --highlight-blue-hover: 220 100% 78%;
+    --highlight-green: 130 60% 85%;
+    --highlight-green-hover: 130 60% 75%;
+    --highlight-purple: 280 60% 88%;
+    --highlight-purple-hover: 280 60% 78%;
+    --highlight-orange: 30 90% 85%;
+    --highlight-orange-hover: 30 90% 75%;
+    --highlight-pink: 330 60% 88%;
+    --highlight-pink-hover: 330 60% 78%;
+    --highlight-teal: 180 50% 85%;
+    --highlight-teal-hover: 180 50% 75%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+    --primary: 0 0% 15%; /* Primary elements like buttons will be dark */
+    --primary-foreground: 0 0% 98%; /* White text on dark primary */
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 15%;
+    --muted: 0 0% 96.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 15%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%; /* Light background for sidebar */
+    --sidebar-foreground: 0 0% 15%; /* Dark text for sidebar */
+    --sidebar-primary: 0 0% 15%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 96.1%;
+    --sidebar-accent-foreground: 0 0% 15%;
+    --sidebar-border: 0 0% 89.8%;
+    --sidebar-ring: 0 0% 15%;
+  }
+  .dark {
+    --background: 240 10% 3.9%; /* Dark background for dark mode */
+    --foreground: 0 0% 98%; /* Light text for dark mode */
+    --muted-foreground: 240 5% 65%; /* Muted text for dark mode */
+    --highlight-bg: 210 100% 20%; /* Darker green for link highlights in dark mode */
+    
+    /* Dark mode highlight colors */
+    --highlight-blue: 220 70% 25%;
+    --highlight-blue-hover: 220 70% 35%;
+    --highlight-green: 130 50% 25%;
+    --highlight-green-hover: 130 50% 35%;
+    --highlight-purple: 280 50% 25%;
+    --highlight-purple-hover: 280 50% 35%;
+    --highlight-orange: 30 70% 25%;
+    --highlight-orange-hover: 30 70% 35%;
+    --highlight-pink: 330 50% 25%;
+    --highlight-pink-hover: 330 50% 35%;
+    --highlight-teal: 180 40% 25%;
+    --highlight-teal-hover: 180 40% 35%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 5% 65%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 10% 5%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 240 10% 5%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 240 5% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Custom list item styling for tighter bullet spacing */
+  .tight-list-item {
+    position: relative;
+    padding-left: 1.2em; /* Adjust this value to control overall indentation */
+  }
+
+  .tight-list-item::before {
+    content: "•"; /* The bullet character */
+    position: absolute;
+    left: 0.2em; /* Adjust this value to control bullet position */
+    margin-right: 0.2em; /* Adjust this value for space between bullet and text */
+    top: 0; /* Align with text baseline */
+  }
+  
+  /* Colored link highlight classes */
+  .link-blue {
+    @apply px-1 py-0.5 transition-all duration-200;
+    background-color: hsl(var(--highlight-blue));
+  }
+  
+  /* Random dark hover colors */
+  .hover-dark-1:hover {
+    background-color: hsl(220 50% 20%); /* Dark blue */
+    color: hsl(0 0% 98%);
+  }
+  .hover-dark-2:hover {
+    background-color: hsl(280 40% 25%); /* Dark purple */
+    color: hsl(0 0% 98%);
+  }
+  .hover-dark-3:hover {
+    background-color: hsl(140 35% 22%); /* Dark green */
+    color: hsl(0 0% 98%);
+  }
+  .hover-dark-4:hover {
+    background-color: hsl(15 45% 28%); /* Dark red-brown */
+    color: hsl(0 0% 98%);
+  }
+  .hover-dark-5:hover {
+    background-color: hsl(190 30% 25%); /* Dark teal */
+    color: hsl(0 0% 98%);
+  }
+  .hover-dark-6:hover {
+    background-color: hsl(30 40% 30%); /* Dark orange */
+    color: hsl(0 0% 98%);
+  }
+  .hover-dark-7:hover {
+    background-color: hsl(340 35% 28%); /* Dark pink */
+    color: hsl(0 0% 98%);
+  }
+  .hover-dark-8:hover {
+    background-color: hsl(60 25% 25%); /* Dark olive */
+    color: hsl(0 0% 98%);
+  }
+  
+  /* Dark mode hover colors */
+  .dark .hover-dark-1:hover {
+    background-color: hsl(220 50% 80%);
+    color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-2:hover {
+    background-color: hsl(280 40% 75%);
+    color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-3:hover {
+    background-color: hsl(140 35% 78%);
+    color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-4:hover {
+    background-color: hsl(15 45% 72%);
+    color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-5:hover {
+    background-color: hsl(190 30% 75%);
+    color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-6:hover {
+    background-color: hsl(30 40% 70%);
+    color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-7:hover {
+    background-color: hsl(340 35% 72%);
+    color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-8:hover {
+    background-color: hsl(60 25% 75%);
+    color: hsl(0 0% 15%);
+  }
+  
+  .link-green {
+    @apply px-1 py-0.5 rounded-sm transition-all duration-200;
+    background-color: hsl(var(--highlight-green));
+  }
+  .link-green:hover {
+    background-color: hsl(var(--highlight-green-hover));
+  }
+  
+  .link-purple {
+    @apply px-1 py-0.5 rounded-sm transition-all duration-200;
+    background-color: hsl(var(--highlight-purple));
+  }
+  .link-purple:hover {
+    background-color: hsl(var(--highlight-purple-hover));
+  }
+  
+  .link-orange {
+    @apply px-1 py-0.5 rounded-sm transition-all duration-200;
+    background-color: hsl(var(--highlight-orange));
+  }
+  .link-orange:hover {
+    background-color: hsl(var(--highlight-orange-hover));
+  }
+  
+  .link-pink {
+    @apply px-1 py-0.5 rounded-sm transition-all duration-200;
+    background-color: hsl(var(--highlight-pink));
+  }
+  .link-pink:hover {
+    background-color: hsl(var(--highlight-pink-hover));
+  }
+  
+  .link-teal {
+    @apply px-1 py-0.5 rounded-sm transition-all duration-200;
+    background-color: hsl(var(--highlight-teal));
+  }
+  .link-teal:hover {
+    background-color: hsl(var(--highlight-teal-hover));
+  }
+}
