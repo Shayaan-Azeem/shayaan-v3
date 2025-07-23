@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "philosophy.md",
+                "file": "about.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "philosophy"
+              "title": "about"
             }
           }
         ],
@@ -217,12 +217,13 @@
   },
   "active": "9bed441905edeec9",
   "lastOpenFiles": [
-    "about.md",
     "OBSIDIAN_SETUP.md",
-    "Content-Worth-Consuming.md",
-    "fieldnotes-template.md",
     "Untitled.md",
     "philosophy.md",
+    "templates/about-template.md",
+    "about.md",
+    "Content-Worth-Consuming.md",
+    "fieldnotes-template.md",
     "Users/shayaanazeem/Documents/Shayaan Portfolio/public/Mark Zuckerberg Early Days.jpg",
     "fieldnotes/test.md",
     "Users/shayaanazeem/Documents/Shayaan Portfolio/public",
