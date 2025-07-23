@@ -7,6 +7,7 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { cn } from "@/lib/utils"
 import type { ContentItem } from "@/lib/content"
 import MDXRenderer from "@/components/mdx-renderer"
+import ContentRenderer from "@/components/content-renderer"
 
 interface ClientHomeProps {
   fieldnotes: ContentItem[]
