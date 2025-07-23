@@ -15,7 +15,6 @@ draft: false
 yay?
 ## Key Points
 
-- 
 
 ## Thoughts
 
