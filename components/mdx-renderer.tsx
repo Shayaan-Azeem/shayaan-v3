@@ -4,6 +4,7 @@ import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
 import { useEffect, useState } from 'react'
 import type { ContentItem } from '@/lib/content'
+import HeroBanner from '@/components/hero-banner'
 
 interface MDXRendererProps {
   item: ContentItem
@@ -59,41 +60,44 @@ export default function MDXRenderer({ item }: MDXRendererProps) {
 
   return (
     <article className="prose prose-gray dark:prose-invert max-w-none">
-      {/* Header */}
+      {/* Hero Banner */}
       {item.banner && (
-        <div className="mb-8 -mx-4 sm:-mx-6 lg:-mx-8">
-          <img 
-            src={item.banner} 
-            alt={item.title}
-            className="w-full h-64 object-cover rounded-lg"
-          />
-        </div>
+        <HeroBanner
+          title={item.title}
+          subtitle={item.summary}
+          date={item.date}
+          tags={item.tags}
+          backgroundImage={item.banner}
+        />
       )}
       
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">{item.title}</h1>
-        <div className="flex items-center gap-4 text-muted-foreground text-sm">
-          <time dateTime={item.date}>
-            {new Date(item.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </time>
-          {item.tags.length > 0 && (
-            <div className="flex gap-2">
-              {item.tags.map((tag) => (
-                <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">
-                  {tag}
-                </span>
-              ))}
-            </div>
+      {/* Fallback Header (when no banner) */}
+      {!item.banner && (
+        <header className="mb-8">
+          <h1 className="text-4xl font-bold mb-4">{item.title}</h1>
+          <div className="flex items-center gap-4 text-muted-foreground text-sm">
+            <time dateTime={item.date}>
+              {new Date(item.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+            {item.tags.length > 0 && (
+              <div className="flex gap-2">
+                {item.tags.map((tag) => (
+                  <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+          {item.summary && (
+            <p className="text-lg text-muted-foreground mt-4">{item.summary}</p>
           )}
-        </div>
-        {item.summary && (
-          <p className="text-lg text-muted-foreground mt-4">{item.summary}</p>
-        )}
-      </header>
+        </header>
+      )}
 
       {/* Content */}
       <div className="prose prose-gray dark:prose-invert max-w-none">

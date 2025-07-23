@@ -9,6 +9,7 @@ import type { ContentItem } from "@/lib/content"
 import MDXRenderer from "@/components/mdx-renderer"
 import ContentRenderer from "@/components/content-renderer"
 import AboutRenderer from "@/components/about-renderer"
+import HeroBanner from "@/components/hero-banner"
 
 interface ClientHomeProps {
   fieldnotes: ContentItem[]
@@ -206,24 +207,13 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return (
       <div>
         {/* Hero Banner */}
-        <div className="mb-12 -mx-4 sm:-mx-6 lg:-mx-8">
-          <div className="relative h-80 overflow-hidden rounded-lg">
-            <img 
-              src="/tensorforest.png" 
-              alt="TensorForest project cover" 
-              className="w-full h-full object-cover object-center"
-            />
-            {/* Dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
-            {/* Text overlay */}
-            <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl sm:text-4xl font-bold text-white mb-3">TensorForest</h1>
-              <p className="text-lg text-white/90 max-w-2xl">
-                Autonomous drone system for wildfire prediction and prevention
-              </p>
-            </div>
-          </div>
-        </div>
+        <HeroBanner
+          title="TensorForest"
+          subtitle="Autonomous drone system for wildfire prediction and prevention"
+          date="2023-12-01"
+          tags={["AI", "Drones", "Environmental Tech", "Machine Learning"]}
+          backgroundImage="/tensorforest.png"
+        />
 
         {/* The Problem */}
         <div className="mb-10">
@@ -400,24 +390,13 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return (
       <div>
         {/* Hero Banner */}
-        <div className="mb-12 -mx-4 sm:-mx-6 lg:-mx-8">
-          <div className="relative h-80 overflow-hidden rounded-lg">
-            <img 
-              src="/apoimages/vickyapo.png" 
-              alt="Apocalypse Hacks project cover" 
-              className="w-full h-full object-cover object-center"
-            />
-            {/* Dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
-            {/* Text overlay */}
-            <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl sm:text-4xl font-bold text-white mb-3">Apocalypse Hacks</h1>
-              <p className="text-lg text-white/90 max-w-2xl">
-                Canada's largest high school hackathon
-              </p>
-            </div>
-          </div>
-        </div>
+        <HeroBanner
+          title="Apocalypse Hacks"
+          subtitle="Canada's largest high school hackathon"
+          date="2024-05-17"
+          tags={["Hackathon", "Community", "High School", "Toronto"]}
+          backgroundImage="/apoimages/vickyapo.png"
+        />
 
         {/* Summary */}
         <div className="mb-10">
