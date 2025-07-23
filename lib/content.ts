@@ -30,9 +30,9 @@ function getContentItems(type: 'fieldnotes' | 'writings'): ContentItem[] {
 
   const fileNames = fs.readdirSync(contentPath)
   const items = fileNames
-    .filter((fileName) => fileName.endsWith('.mdx'))
-    .map((fileName) => {
-      const slug = fileName.replace(/\.mdx$/, '')
+    .filter((fileName) => fileName.endsWith('.mdx') || fileName.endsWith('.md'))
+          .map((fileName) => {
+        const slug = fileName.replace(/\.(mdx|md)$/, '')
       const fullPath = path.join(contentPath, fileName)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
@@ -65,7 +65,11 @@ export function getAllWritings(): ContentItem[] {
 
 export function getContentItem(type: 'fieldnotes' | 'writings', slug: string): ContentItem | null {
   try {
-    const fullPath = path.join(contentDirectory, type, `${slug}.mdx`)
+    // Try .mdx first, then .md
+    let fullPath = path.join(contentDirectory, type, `${slug}.mdx`)
+    if (!fs.existsSync(fullPath)) {
+      fullPath = path.join(contentDirectory, type, `${slug}.md`)
+    }
     const fileContents = fs.readFileSync(fullPath, 'utf8')
     const { data, content } = matter(fileContents)
 

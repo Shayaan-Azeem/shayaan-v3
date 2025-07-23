@@ -9,7 +9,7 @@ This directory contains MDX files for the blog-like content on the site.
 
 ## Frontmatter Format
 
-Each `.mdx` file should include frontmatter with these fields:
+Each `.mdx` or `.md` file should include frontmatter with these fields:
 
 ```yaml
 ---

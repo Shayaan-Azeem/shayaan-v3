@@ -82,6 +82,12 @@ Once configured:
 - Ensure template files have `.md` extension
 - Restart Obsidian after configuration changes
 
+### Files Not Showing on Website
+- Both `.md` and `.mdx` files are supported
+- Ensure frontmatter is properly formatted
+- Check that `draft: false` is set
+- Verify the file is in the correct folder (`fieldnotes/` or `writings/`)
+
 ---
 
 **Need help?** Check the individual plugin documentation or reach out! 
