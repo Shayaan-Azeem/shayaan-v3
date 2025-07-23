@@ -183,8 +183,7 @@
       "command-palette:Open command palette": false,
       "markdown-importer:Open format converter": false,
       "zk-prefixer:Create new unique note": false,
-      "random-note:Open random note": false,
-      "obsidian-git:Open Git source control": false
+      "random-note:Open random note": false
     }
   },
   "active": "9d108aa726895bcf",
