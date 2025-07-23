@@ -4,5 +4,4 @@ One of my favorite quotes is by Charles Bukowski:
 
 This quote perfectly captures how I feel about effort and ambition. Over the past few years, I've failed a lot. I've been told no more times than I can count. And yeah, it sucks. It's one of the worst feelings there is. But I also believe we only get one shot at life. We only have the time and energy to truly go after a handful of things. So when you do decide to chase something, I think you owe it to yourself to go all the way.
 
-
 That doesn't mean failure isn't allowed. It totally is. But there's a difference between failing when you gave it everything you had, and failing when you know you held back. The first one hurts less. Because at least then, you know it was out of your hands.
