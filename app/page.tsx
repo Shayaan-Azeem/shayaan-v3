@@ -3,7 +3,7 @@ import type React from "react"
 import Link from "next/link"
 import { ModeToggle } from "@/components/mode-toggle"
 import { cn } from "@/lib/utils"
-import { getAllFieldnotes, getPhilosophy, getContentWorthConsuming, type ContentItem } from "@/lib/content"
+import { getAllFieldnotes, getPhilosophy, getContentWorthConsuming, getAbout, type ContentItem } from "@/lib/content"
 import ClientHome from "@/components/client-home"
 
 export default function Home() {
