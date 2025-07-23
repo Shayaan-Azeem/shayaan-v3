@@ -1212,7 +1212,7 @@ export default function ClientHome({ fieldnotes }: ClientHomeProps) {
                   <button
                     key={item.slug}
                     onClick={() => selectFieldnote(item.slug)}
-                    className="block w-full text-left transition-all duration-200 cursor-pointer group max-w-md"
+                    className="block w-full text-left transition-all duration-200 cursor-pointer group "
                   >
                     <div className="relative h-48 rounded-lg overflow-hidden transition-all duration-300 group-hover:h-56">
                       {/* Background Image */}
@@ -1274,7 +1274,7 @@ export default function ClientHome({ fieldnotes }: ClientHomeProps) {
         return renderWithHeading("projects:", (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
             {/* vibetype */}
-            <div className="rounded-lg p-3 bg-card transition-all duration-200 group max-w-md">
+            <div className="rounded-lg p-3 bg-card transition-all duration-200 group ">
               <Link
                 href="https://www.gptfixtsfor.me/"
                 target="_blank"
@@ -1327,7 +1327,7 @@ export default function ClientHome({ fieldnotes }: ClientHomeProps) {
             </div>
 
             {/* shoppy wrapped */}
-            <div className="rounded-lg p-3 bg-card transition-all duration-200 group max-w-md">
+            <div className="rounded-lg p-3 bg-card transition-all duration-200 group ">
               <Link
                 href="https://github.com/ultratrikx/shoppy-wrapped/pulls"
                 target="_blank"
@@ -1369,7 +1369,7 @@ export default function ClientHome({ fieldnotes }: ClientHomeProps) {
             </div>
 
             {/* tensorforest */}
-            <div className="rounded-lg p-4 bg-card transition-all duration-200 group max-w-md">
+            <div className="rounded-lg p-4 bg-card transition-all duration-200 group ">
                 <button
                   onClick={selectTensorForest}
                   className="block w-full"
@@ -1407,7 +1407,7 @@ export default function ClientHome({ fieldnotes }: ClientHomeProps) {
               </div>
 
             {/* apocalypse hacks */}
-            <div className="rounded-lg p-4 bg-card transition-all duration-200 group max-w-md">
+            <div className="rounded-lg p-4 bg-card transition-all duration-200 group ">
                             <button
                 onClick={selectApocalypseHacks}
                 className="block w-full"
