@@ -113,3 +113,13 @@ banner: ""                      # No banner
 ---
 
 **Need help?** Check the individual plugin documentation or reach out! 
+
+### Editing Your Philosophy Page
+
+Your philosophy page is editable directly in Obsidian:
+1. **Open** `philosophy.md` in the content root
+2. **Edit** your thoughts, quotes, and beliefs
+3. **Save** - it automatically updates your website!
+4. **Use the template** from `templates/philosophy-template.md` if starting fresh
+
+
