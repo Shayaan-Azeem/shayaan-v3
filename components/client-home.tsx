@@ -14,7 +14,7 @@ interface ClientHomeProps {
   contentWorthConsuming: ContentItem | null
 }
 
-export default function ClientHome({ fieldnotes, philosophy }: ClientHomeProps) {
+export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming }: ClientHomeProps) {
   /* ────────────────────────────────
      section definitions
   ────────────────────────────────── */
