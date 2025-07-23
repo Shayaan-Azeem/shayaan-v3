@@ -4,7 +4,8 @@ slug: "{{test}}"
 date: 2025-07-23
 summary: banana banana minions
 banner: 
-tags: 
+tags:
+  - tag1
 draft: false
 ---
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "fieldnotes-template.md",
+                "file": "fieldnotes/test.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "fieldnotes-template"
+              "title": "test"
             }
           }
         ]
@@ -174,11 +174,11 @@
   },
   "active": "df70b1f55f1b9667",
   "lastOpenFiles": [
+    "fieldnotes-template.md",
     "OBSIDIAN_SETUP.md",
     "README.md",
     "fieldnotes/test.md",
     "templates/fieldnote-template.md",
-    "templates/writing-template.md",
-    "fieldnotes-template.md"
+    "templates/writing-template.md"
   ]
 }
