@@ -10,7 +10,7 @@ tags:
 draft: false
 ---
 
-# Untitled
+# Untitled![](../Users/shayaanazeem/Documents/Shayaan%20Portfolio/public/fieldnotes/Mark%20Zuckerberg%20Early%20Days.jpg)
 
 yay?
 ## Key Points
@@ -20,7 +20,7 @@ yay?
 
 ## Next Steps
 
-- 
+- ../public/fieldnotes
 
 ## Related Links
 
