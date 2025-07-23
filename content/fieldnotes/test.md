@@ -3,7 +3,7 @@ title: my test article
 slug: "{{test}}"
 date: 2025-07-23
 summary: banana banana minions
-banner: Mark%20Zuckerberg%20Early%20Days.jpg
+banner: /000129720010.JPG
 tags:
   - tag1
   - tag2
