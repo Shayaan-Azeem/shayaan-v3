@@ -11,6 +11,7 @@ import MDXRenderer from "@/components/mdx-renderer"
 interface ClientHomeProps {
   fieldnotes: ContentItem[]
   philosophy: ContentItem | null
+  contentWorthConsuming: ContentItem | null
 }
 
 export default function ClientHome({ fieldnotes, philosophy }: ClientHomeProps) {
