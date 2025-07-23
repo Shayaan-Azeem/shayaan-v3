@@ -160,3 +160,32 @@ export function getContentWorthConsuming(): ContentItem | null {
     return null
   }
 }
+
+export function getAbout(): ContentItem | null {
+  try {
+    // Try .md first, then .mdx
+    let fullPath = path.join(contentDirectory, "about.md")
+    if (!fs.existsSync(fullPath)) {
+      fullPath = path.join(contentDirectory, "about.mdx")
+    }
+    if (!fs.existsSync(fullPath)) {
+      return null
+    }
+    
+    const fileContents = fs.readFileSync(fullPath, "utf8")
+    const { data, content } = matter(fileContents)
+
+    return {
+      slug: "about",
+      title: data.title || "About",
+      date: data.date || new Date().toISOString().split("T")[0],
+      summary: data.summary || "",
+      banner: data.banner || null,
+      tags: data.tags || [],
+      draft: data.draft || false,
+      content,
+    }
+  } catch {
+    return null
+  }
+}
