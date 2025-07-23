@@ -175,6 +175,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-git:Open Git source control": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -188,6 +189,13 @@
   },
   "active": "9d108aa726895bcf",
   "lastOpenFiles": [
+    "Users/shayaanazeem/Documents/Shayaan Portfolio/public/fieldnotes/Screenshot 2025-07-23 at 9.23.54 AM.png",
+    "Users/shayaanazeem/Documents/Shayaan Portfolio/public/fieldnotes",
+    "Users/shayaanazeem/Documents/Shayaan Portfolio/public",
+    "Users/shayaanazeem/Documents/Shayaan Portfolio",
+    "Users/shayaanazeem/Documents",
+    "Users/shayaanazeem",
+    "Users",
     "Untitled.md",
     "fieldnotes/test.md",
     "templates/writing-template.md",

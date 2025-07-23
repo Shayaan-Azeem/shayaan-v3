@@ -3,13 +3,13 @@ title: my test article
 slug: "{{test}}"
 date: 2025-07-23
 summary: banana banana minions
-banner: 
+banner: /public/fieldnotes/Screenshot%202025-07-23%20at%209.23.54%20AM.png
 tags:
   - tag1
   - tag2
 draft: false
 ---
-
+![](../Users/shayaanazeem/Documents/Shayaan%20Portfolio/public/fieldnotes/Screenshot%202025-07-23%20at%209.23.54%20AM.png)
 # Untitled
 
 yay?
