@@ -10,10 +10,9 @@ import MDXRenderer from "@/components/mdx-renderer"
 
 interface ClientHomeProps {
   fieldnotes: ContentItem[]
-  philosophy: ContentItem | null
 }
 
-export default function ClientHome({ fieldnotes, philosophy }: ClientHomeProps) {
+export default function ClientHome({ fieldnotes }: ClientHomeProps) {
   /* ────────────────────────────────
      section definitions
   ────────────────────────────────── */
@@ -1459,18 +1458,33 @@ export default function ClientHome({ fieldnotes, philosophy }: ClientHomeProps) 
         ))
 
       case "inspirations":
-        return (
-          <div className="pt-2">
-            {philosophy ? (
-              <MDXRenderer item={philosophy} />
-            ) : (
-              <div>
-                <h2 className="text-2xl font-bold mb-4">My Philosophy</h2>
-                <p className="text-muted-foreground">Philosophy content not found. Create a philosophy.md file in the content directory.</p>
-              </div>
-            )}
-          </div>
-        )
+        return renderWithHeading("my philosophy:", (
+          <>
+            <p className="mb-2">one of my favorite quotes is by charles bukowski:</p>
+            <blockquote className="border-l-2 pl-4 italic text-muted-foreground">
+              "if you're going to try, go all the way. otherwise, don't even start… this could mean losing girlfriends,
+              wives, relatives and maybe even your mind. it could mean not eating for three or four days. it could mean
+              freezing on a park bench. it could mean jail. it could mean derision. it could mean mockery, isolation.
+              isolation is the gift. all the others are a test of your endurance, of how much you really want to do it.
+              and you'll do it, despite rejection and the worst odds. and it will be better than anything else you can
+              imagine… you'll be alone with the gods, and the nights will flame with fire. you will ride life straight
+              to perfect laughter. it's the only good fight there is."
+            </blockquote>
+            <p className="mt-2">
+              this quote perfectly captures how i feel about effort and ambition. over the past few years, i've failed a
+              lot. i've been told no more times than i can count. and yeah, it sucks. it's one of the worst feelings
+              there is. but i also believe we only get one shot at life. we only have the time and energy to truly go
+              after a handful of things. so when you do decide to chase something, i think you owe it to yourself to go
+              all the way.
+            </p>
+            <p>
+              that doesn't mean failure isn't allowed. it totally is. but there's a difference between failing when you
+              gave it everything you had, and failing when you know you held back. the first one hurts less. because at
+              least then, you know it was out of your hands.
+            </p>
+          </>
+        ))
+
       case "content":
         return renderWithHeading("content worth consuming imo:", (
             <ul className="list-none space-y-2">
