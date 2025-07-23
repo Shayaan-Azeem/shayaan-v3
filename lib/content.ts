@@ -103,3 +103,31 @@ export function getContentItem(type: 'fieldnotes' | 'writings', slug: string): C
 export function getRecentContent(type: 'fieldnotes' | 'writings', limit: number = 5): ContentItem[] {
   return getContentItems(type).slice(0, limit)
 } 
+export function getPhilosophy(): ContentItem | null {
+  try {
+    // Try .md first, then .mdx
+    let fullPath = path.join(contentDirectory, "philosophy.md")
+    if (!fs.existsSync(fullPath)) {
+      fullPath = path.join(contentDirectory, "philosophy.mdx")
+    }
+    if (!fs.existsSync(fullPath)) {
+      return null
+    }
+    
+    const fileContents = fs.readFileSync(fullPath, "utf8")
+    const { data, content } = matter(fileContents)
+
+    return {
+      slug: "philosophy",
+      title: data.title || "My Philosophy",
+      date: data.date || new Date().toISOString().split("T")[0],
+      summary: data.summary || "",
+      banner: data.banner || null,
+      tags: data.tags || [],
+      draft: data.draft || false,
+      content,
+    }
+  } catch {
+    return null
+  }
+}
