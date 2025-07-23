@@ -20,7 +20,7 @@ yay?
 
 ## Next Steps
 
-- ../public/fieldnotes
+- 
 
 ## Related Links
 
