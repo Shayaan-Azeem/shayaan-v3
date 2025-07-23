@@ -15,8 +15,7 @@ draft: false
 yay?
 ## Key Points
 
-![](../Users/shayaanazeem/Documents/Shayaan%20Portfolio/public/fieldnotes/Mark%20Zuckerberg%20Early%20Days.jpg)
-## Thoughts
+## Thoughts![](../Users/shayaanazeem/Documents/Shayaan%20Portfolio/public/Mark%20Zuckerberg%20Early%20Days.jpg)
 
 ## Next Steps
 
