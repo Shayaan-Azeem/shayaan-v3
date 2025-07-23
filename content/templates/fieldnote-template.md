@@ -3,7 +3,7 @@ title: "{{title}}"
 slug: "{{slug}}"
 date: "{{date:YYYY-MM-DD}}"
 summary: "Brief description of this fieldnote"
-banner: "" # Optional: "/path/to/image.jpg"
+banner: "" # Optional: "/banners/your-image.jpg" or drag image here and copy path
 tags: [""]
 draft: false
 ---

@@ -13,5 +13,10 @@
   "showFrontmatter": true,
   "foldHeading": true,
   "foldIndent": true,
-  "showUnsupportedFiles": false
+  "showUnsupportedFiles": false,
+  "attachmentFolderPath": "../public/banners",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "newFileLocation": "current",
+  "alwaysUpdateLinks": true
 }

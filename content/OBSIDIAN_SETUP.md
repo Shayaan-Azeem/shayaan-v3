@@ -44,6 +44,7 @@ This guide will help you set up Obsidian to work seamlessly with your portfolio'
    - **Title**: Your fieldnote title
    - **Slug**: URL-friendly version (lowercase, hyphens)
    - **Summary**: Brief description
+   - **Banner**: See "Adding Banner Images" section below
    - **Tags**: Relevant tags in array format
 
 ### Automatic Deployment
