@@ -2,9 +2,9 @@
 title: "{{title}}"
 slug: "{{slug}}"
 date: "{{date:YYYY-MM-DD}}"
-summary: "Brief description of this writing"
-banner: "" # Optional: "/path/to/image.jpg"
-tags: [""]
+summary: Brief description of this writing
+banner: 
+tags: 
 draft: false
 ---
 
