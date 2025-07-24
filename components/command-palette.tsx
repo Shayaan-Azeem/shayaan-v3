@@ -242,6 +242,14 @@ export default function CommandPalette({
     </kbd>
   )
 
+  // Helper for icon styling
+  const iconClassName = `mr-3 h-4 w-4 ${
+    theme === 'reading' ? 'text-[#3E2F1C]' : 'text-muted-foreground'
+  }`
+
+  // Helper for span text styling  
+  const spanClassName = theme === 'reading' ? 'text-[#2C2C2C]' : ''
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
@@ -326,43 +334,43 @@ export default function CommandPalette({
             <Command.Group heading="navigation">
               <Command.Item onSelect={() => handleNavigate('about')}>
                 <div className="flex items-center">
-                  <User className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>go to about</span>
+                  <User className={iconClassName} />
+                  <span className={spanClassName}>go to about</span>
                 </div>
                 <KbdShortcut>shift + a</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('experience')}>
                 <div className="flex items-center">
-                  <Briefcase className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>go to experience</span>
+                  <Briefcase className={iconClassName} />
+                  <span className={spanClassName}>go to experience</span>
                 </div>
                 <KbdShortcut>shift + e</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('projects')}>
                 <div className="flex items-center">
-                  <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>go to projects</span>
+                  <FolderOpen className={iconClassName} />
+                  <span className={spanClassName}>go to projects</span>
                 </div>
                 <KbdShortcut>shift + p</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('fieldnotes')}>
                 <div className="flex items-center">
-                  <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>go to fieldnotes</span>
+                  <BookOpen className={iconClassName} />
+                  <span className={spanClassName}>go to fieldnotes</span>
                 </div>
                 <KbdShortcut>shift + f</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('inspirations')}>
                 <div className="flex items-center">
-                  <Heart className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>go to philosophy</span>
+                  <Heart className={iconClassName} />
+                  <span className={spanClassName}>go to philosophy</span>
                 </div>
                 <KbdShortcut>shift + m</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('content')}>
                 <div className="flex items-center">
-                  <List className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>go to content</span>
+                  <List className={iconClassName} />
+                  <span className={spanClassName}>go to content</span>
                 </div>
                 <KbdShortcut>shift + c</KbdShortcut>
               </Command.Item>
@@ -372,22 +380,22 @@ export default function CommandPalette({
             <Command.Group heading="projects">
               <Command.Item onSelect={() => handleSelectProject('tensorforest')}>
                 <div className="flex items-center">
-                  <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>tensorforest</span>
+                  <FolderOpen className={iconClassName} />
+                  <span className={spanClassName}>tensorforest</span>
                 </div>
                 <KbdShortcut>shift + t</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleSelectProject('apocalypse')}>
                 <div className="flex items-center">
-                  <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>apocalypse hacks</span>
+                  <FolderOpen className={iconClassName} />
+                  <span className={spanClassName}>apocalypse hacks</span>
                 </div>
                 <KbdShortcut>shift + h</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://www.gptfixtsfor.me/')}>
                 <div className="flex items-center">
-                  <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>vibetype</span>
+                  <ExternalLink className={iconClassName} />
+                  <span className={spanClassName}>vibetype</span>
                 </div>
                 <KbdShortcut>shift + v</KbdShortcut>
               </Command.Item>
