@@ -105,19 +105,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   /* ────────────────────────────────
      render
   ────────────────────────────────── */
-  return (
+    return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
-      {/* theme toggle and command palette hint */}
-      <div className="absolute top-4 right-4 flex items-center gap-3">
-        <KeyboardHint />
-        <ModeToggle />
-      </div>
-
-            <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
-            {/* ───────────── mobile navigation ───────────── */}
-    <div className="md:hidden mb-6">
-      <div className="flex items-center justify-center">
-        <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1">
+      {/* ───────────── mobile top bar ───────────── */}
+      <div className="md:hidden fixed top-4 right-4 z-50">
+        <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1 backdrop-blur-sm">
           <Button
             variant="ghost"
             size="sm"
@@ -183,9 +175,18 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           >
             <Bookmark className="h-4 w-4" />
           </Button>
+          <div className="w-px h-4 bg-border" />
+          <ModeToggle />
         </div>
       </div>
-    </div>
+
+      {/* desktop theme toggle and command palette hint */}
+      <div className="hidden md:flex absolute top-4 right-4 items-center gap-3">
+        <KeyboardHint />
+        <ModeToggle />
+      </div>
+
+      <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
 
         {/* ───────────── desktop sidebar ───────────── */}
         <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
