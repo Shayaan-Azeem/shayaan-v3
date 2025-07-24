@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "fieldnotes/Untitled.md",
+                "file": "fieldnotes/everything happens for a reason.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled"
+              "title": "everything happens for a reason"
             }
           }
         ],
@@ -246,7 +246,7 @@
   "active": "557e779eb8571997",
   "lastOpenFiles": [
     "fieldnotes/17 lessons from 17.md",
-    "fieldnotes/Untitled.md",
+    "fieldnotes/everything happens for a reason.md",
     "about.md",
     "fieldnotes-template.md",
     "philosophy.md",

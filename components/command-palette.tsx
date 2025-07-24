@@ -240,7 +240,7 @@ export default function CommandPalette({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay className="bg-black/10 dark:bg-black/20" />
-        <DialogContent className={`overflow-hidden p-0 shadow-2xl border bg-card backdrop-blur-sm ${
+        <DialogContent className={`overflow-hidden p-0 shadow-2xl border bg-muted/50 backdrop-blur-sm ${
           isMobile 
             ? 'max-w-[90vw] max-h-[85vh] m-4 w-[calc(100vw-2rem)] rounded-xl border-border/50' 
             : 'max-w-lg rounded-lg border-border/50'
