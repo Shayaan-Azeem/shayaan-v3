@@ -59,63 +59,68 @@ export default function CommandPalette({
           return
         }
         
-        switch (e.key.toLowerCase()) {
-          case 'a':
-            handleNavigate('about')
-            break
-          case 'e':
-            handleNavigate('experience')
-            break
-          case 'p':
-            handleNavigate('projects')
-            break
-          case 'f':
-            handleNavigate('fieldnotes')
-            break
-          case 'm':
-            handleNavigate('inspirations')
-            break
-          case 'c':
-            handleNavigate('content')
-            break
-          case 't':
-            handleSelectProject('tensorforest')
-            break
-          case 'h':
-            handleSelectProject('apocalypse')
-            break
-          case 'v':
-            handleExternalLink('https://www.gptfixtsfor.me/')
-            break
-          case 's':
-            handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')
-            break
-          case 'x':
-            handleExternalLink('https://twitter.com/shayaan_azeem')
-            break
-          case 'l':
-            handleExternalLink('https://linkedin.com/in/shayaan-azeem')
-            break
-          case 'g':
-            handleExternalLink('https://github.com/shayaanazeem1')
-            break
-
-          case 'd':
-            toggleTheme()
-            break
-          case '1':
-            if (fieldnotes[0]) handleSelectFieldnote(fieldnotes[0].slug)
-            break
-          case '2':
-            if (e.shiftKey) {
+        // Handle Shift + letter shortcuts
+        if (e.shiftKey) {
+          switch (e.key.toLowerCase()) {
+            case 'a':
+              handleNavigate('about')
+              break
+            case 'e':
+              handleNavigate('experience')
+              break
+            case 'p':
+              handleNavigate('projects')
+              break
+            case 'f':
+              handleNavigate('fieldnotes')
+              break
+            case 'm':
+              handleNavigate('inspirations')
+              break
+            case 'c':
+              handleNavigate('content')
+              break
+            case 't':
+              handleSelectProject('tensorforest')
+              break
+            case 'h':
+              handleSelectProject('apocalypse')
+              break
+            case 'v':
+              handleExternalLink('https://www.gptfixtsfor.me/')
+              break
+            case 's':
+              handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')
+              break
+            case 'x':
+              handleExternalLink('https://twitter.com/shayaan_azeem')
+              break
+            case 'l':
+              handleExternalLink('https://linkedin.com/in/shayaan-azeem')
+              break
+            case 'g':
+              handleExternalLink('https://github.com/shayaanazeem1')
+              break
+            case 'd':
+              toggleTheme()
+              break
+            case '2':
               handleEmail() // @ key on many keyboards
-            } else if (fieldnotes[1]) {
-              handleSelectFieldnote(fieldnotes[1].slug)
-            }
-            break
-          case '3':
-            if (fieldnotes[2]) handleSelectFieldnote(fieldnotes[2].slug)
-            break
+              break
+          }
+        } else {
+          // Handle number shortcuts (without shift)
+          switch (e.key) {
+            case '1':
+              if (fieldnotes[0]) handleSelectFieldnote(fieldnotes[0].slug)
+              break
+            case '2':
+              if (fieldnotes[1]) handleSelectFieldnote(fieldnotes[1].slug)
+              break
+            case '3':
+              if (fieldnotes[2]) handleSelectFieldnote(fieldnotes[2].slug)
+              break
+          }
         }
       }
     }
@@ -222,111 +227,111 @@ export default function CommandPalette({
             </Command.Empty>
             
             {/* Navigation */}
-            <Command.Group heading="Navigation">
+            <Command.Group heading="navigation">
               <Command.Item onSelect={() => handleNavigate('about')}>
                 <div className="flex items-center">
                   <User className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>Go to About</span>
+                  <span>go to about</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  A
+                  ⇧A
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('experience')}>
                 <div className="flex items-center">
                   <Briefcase className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>Go to Experience</span>
+                  <span>go to experience</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  E
+                  ⇧E
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('projects')}>
                 <div className="flex items-center">
                   <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>Go to Projects</span>
+                  <span>go to projects</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  P
+                  ⇧P
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('fieldnotes')}>
                 <div className="flex items-center">
                   <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>Go to Fieldnotes</span>
+                  <span>go to fieldnotes</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  F
+                  ⇧F
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('inspirations')}>
                 <div className="flex items-center">
                   <Heart className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>Go to Philosophy</span>
+                  <span>go to philosophy</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  M
+                  ⇧M
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('content')}>
                 <div className="flex items-center">
                   <List className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>Go to Content</span>
+                  <span>go to content</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  C
+                  ⇧C
                 </kbd>
               </Command.Item>
             </Command.Group>
 
             {/* Projects */}
-            <Command.Group heading="Projects">
+            <Command.Group heading="projects">
               <Command.Item onSelect={() => handleSelectProject('tensorforest')}>
                 <div className="flex items-center">
                   <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>TensorForest</span>
+                  <span>tensorforest</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  T
+                  ⇧T
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleSelectProject('apocalypse')}>
                 <div className="flex items-center">
                   <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>Apocalypse Hacks</span>
+                  <span>apocalypse hacks</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  H
+                  ⇧H
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://www.gptfixtsfor.me/')}>
                 <div className="flex items-center">
                   <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>VibeType</span>
+                  <span>vibetype</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  V
+                  ⇧V
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')}>
                 <div className="flex items-center">
                   <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>Shoppy Wrapped</span>
+                  <span>shoppy wrapped</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  S
+                  ⇧S
                 </kbd>
               </Command.Item>
             </Command.Group>
 
             {/* Recent Fieldnotes */}
             {fieldnotes.length > 0 && (
-              <Command.Group heading="Recent Fieldnotes">
+              <Command.Group heading="recent fieldnotes">
                 {fieldnotes.slice(0, 3).map((item, index) => (
                   <Command.Item key={item.slug} onSelect={() => handleSelectFieldnote(item.slug)}>
                     <div className="flex items-center">
                       <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
-                      <span>{item.title}</span>
+                      <span>{item.title.toLowerCase()}</span>
                     </div>
                     <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                       {index + 1}
@@ -337,43 +342,43 @@ export default function CommandPalette({
             )}
 
             {/* Links */}
-            <Command.Group heading="Links">
+            <Command.Group heading="links">
               <Command.Item onSelect={() => handleExternalLink('https://twitter.com/shayaan_azeem')}>
                 <div className="flex items-center">
                   <Twitter className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>X Profile</span>
+                  <span>twitter</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  X
+                  ⇧X
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://linkedin.com/in/shayaan-azeem')}>
                 <div className="flex items-center">
                   <Linkedin className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>LinkedIn Profile</span>
+                  <span>linkedin</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  L
+                  ⇧L
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/shayaanazeem1')}>
                 <div className="flex items-center">
                   <Github className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>GitHub Profile</span>
+                  <span>github</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  G
+                  ⇧G
                 </kbd>
               </Command.Item>
-                             <Command.Item onSelect={handleEmail}>
-                 <div className="flex items-center">
-                   <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
-                   <span>Send Email</span>
-                 </div>
-                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                   @
-                 </kbd>
-               </Command.Item>
+              <Command.Item onSelect={handleEmail}>
+                <div className="flex items-center">
+                  <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>send email</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  @
+                </kbd>
+              </Command.Item>
             </Command.Group>
 
             {/* Settings */}
