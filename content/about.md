@@ -25,7 +25,6 @@ incoming student studying applied math and ml at [hover-1] [@uwaterloo](https://
 
 i've always been really creative, and a builder at heart, from a young age always wanted to sell things tried to become an entrepreneur with everything
 
-- at 11 i started selling premade slime at school (honestly was profitable af not gonna lie)
 - at 13 i was doing freelance video editing and design on upwork and fiverr (got banned from upwork for being underage)
 - also at 13 i started a tech review youtube channel (hit 50k views 500 subs and got into twitter but lowkey gave up too early) {this taught me perfection is the enemy of..}
 - at 14 i made my first $10k from crypto
