@@ -237,17 +237,14 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             </Button>
             
                                     <div
-                          className="flex-1 h-20 overflow-hidden cursor-grab active:cursor-grabbing relative bg-muted/30 rounded-lg border"
+                          className="flex-1 h-20 overflow-hidden cursor-grab active:cursor-grabbing relative"
                           onWheel={handleScroll}
                           onTouchStart={handleTouchStart}
                           onTouchMove={handleTouchMove}
                           onTouchEnd={handleTouchEnd}
                         >
-                          {/* Center focus indicator */}
-                          <div className="absolute inset-x-0 top-1/2 transform -translate-y-1/2 h-10 bg-background border border-border rounded-md shadow-sm z-10 pointer-events-none" />
-                          
                           <div
-                            className="flex flex-col h-full justify-center relative z-20"
+                            className="flex flex-col h-full justify-center relative"
                             style={{
                               transform: `translateY(${-getCurrentItemIndex() * 40 + 40}px)`,
                               transition: 'transform 0.3s ease-out'
@@ -264,7 +261,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                                   onClick={() => navigateToItem(index)}
                                   className={cn(
                                     "h-10 flex items-center justify-center transition-all duration-300 px-4 text-sm flex-shrink-0 relative",
-                                    isActive && "text-foreground font-bold scale-110 z-30",
+                                    isActive && "text-foreground font-bold scale-110",
                                     distance === 1 && "text-muted-foreground font-medium scale-95",
                                     distance === 2 && "text-muted-foreground/60 font-normal scale-90",
                                     distance >= 3 && "text-muted-foreground/30 font-normal scale-85"
