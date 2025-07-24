@@ -7,8 +7,17 @@ import { useIsMobile } from '@/components/ui/use-mobile'
 import { 
   User, 
   Briefcase, 
-  FolderOpen, 
-  BookOpen, 
+  Fold            <Command.Input
+              placeholder="search for actions..."
+              className={`flex w-full rounded-md bg-transparent outline-none disabled:cursor-not-allowed disabled:opacity-50 ${
+                isMobile ? 'h-10 py-2 text-sm' : 'h-12 py-3 text-sm'
+              } ${
+                theme === 'matcha'
+                  ? 'placeholder:text-green-500'
+                  : 'placeholder:text-muted-foreground'
+              }`}
+            />
+          </div>BookOpen, 
   Heart, 
   List,
   Mail,
@@ -240,8 +249,10 @@ export default function CommandPalette({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay className={
-          theme === 'dark' || theme === 'reading' || theme === 'matcha'
+          theme === 'dark' || theme === 'reading'
             ? 'bg-black/10 dark:bg-black/20'
+            : theme === 'matcha'
+            ? 'bg-black/5'
             : 'bg-black/5'
         } />
         <DialogContent className={`overflow-hidden p-0 shadow-2xl backdrop-blur-sm ${
@@ -249,8 +260,10 @@ export default function CommandPalette({
             ? 'max-w-[90vw] max-h-[85vh] m-4 w-[calc(100vw-2rem)] rounded-xl' 
             : 'max-w-lg rounded-lg'
         } ${
-          theme === 'dark' || theme === 'reading' || theme === 'matcha'
+          theme === 'dark' || theme === 'reading'
             ? 'border border-white/20 bg-muted/50'
+            : theme === 'matcha'
+            ? 'border border-green-200/60 bg-green-50/85 text-green-900'
             : 'border border-gray-200/60 bg-white/70'
         }`}>
         <DialogTitle className="sr-only">
@@ -263,8 +276,10 @@ export default function CommandPalette({
           <div className={`flex items-center gap-3 px-4 ${
             isMobile ? 'py-3' : 'py-4'
           } ${
-            theme === 'dark' || theme === 'reading' || theme === 'matcha'
+            theme === 'dark' || theme === 'reading'
               ? 'border-b border-white/10'
+              : theme === 'matcha'
+              ? 'border-b border-green-200/50'
               : 'border-b border-gray-200/40'
           }`}>
             <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
@@ -276,15 +291,22 @@ export default function CommandPalette({
           
           {/* Search Input */}
           <div className={`flex items-center px-4 ${
-            theme === 'dark' || theme === 'reading' || theme === 'matcha'
+            theme === 'dark' || theme === 'reading'
               ? 'border-b border-white/10'
+              : theme === 'matcha'
+              ? 'border-b border-green-200/50'
               : 'border-b border-gray-200/40'
           }`} cmdk-input-wrapper="">
             <Command.Input
               placeholder="search for actions..."
-              className={`flex w-full rounded-md bg-transparent outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 ${
+              className={`flex w-full rounded-md bg-transparent outline-none disabled:cursor-not-allowed disabled:opacity-50 ${
                 isMobile ? 'h-10 py-2 text-sm' : 'h-12 py-3 text-sm'
+              } ${
+                theme === 'matcha'
+                  ? 'placeholder:text-green-500'
+                  : 'placeholder:text-muted-foreground'
               }`}
+            />
             />
           </div>
           <Command.List className={`overflow-y-auto overflow-x-hidden ${
