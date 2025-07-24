@@ -130,7 +130,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-full">
+            <DropdownMenuContent className="w-full max-w-xs">
               {sections.map((section) => (
                 <div key={section}>
                   <DropdownMenuItem 
