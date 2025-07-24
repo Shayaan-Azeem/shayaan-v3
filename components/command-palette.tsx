@@ -427,29 +427,29 @@ export default function CommandPalette({
             <Command.Group heading="links">
               <Command.Item onSelect={() => handleExternalLink('https://twitter.com/shayaan_azeem')}>
                 <div className="flex items-center">
-                  <Twitter className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>twitter</span>
+                  <Twitter className={iconClassName} />
+                  <span className={spanClassName}>twitter</span>
                 </div>
                 <KbdShortcut>shift + x</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://linkedin.com/in/shayaan-azeem')}>
                 <div className="flex items-center">
-                  <Linkedin className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>linkedin</span>
+                  <Linkedin className={iconClassName} />
+                  <span className={spanClassName}>linkedin</span>
                 </div>
                 <KbdShortcut>shift + l</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/shayaanazeem1')}>
                 <div className="flex items-center">
-                  <Github className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>github</span>
+                  <Github className={iconClassName} />
+                  <span className={spanClassName}>github</span>
                 </div>
                 <KbdShortcut>shift + g</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={handleEmail}>
                 <div className="flex items-center">
-                  <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>send email</span>
+                  <Mail className={iconClassName} />
+                  <span className={spanClassName}>send email</span>
                 </div>
                 <KbdShortcut>@</KbdShortcut>
               </Command.Item>
@@ -460,27 +460,27 @@ export default function CommandPalette({
               <Command.Item onSelect={toggleTheme}>
                 <div className="flex items-center">
                   {theme === 'dark' ? (
-                    <Sun className="mr-3 h-4 w-4 text-muted-foreground" />
+                    <Sun className={iconClassName} />
                   ) : (
-                    <Moon className="mr-3 h-4 w-4 text-muted-foreground" />
+                    <Moon className={iconClassName} />
                   )}
-                  <span>toggle theme</span>
+                  <span className={spanClassName}>toggle theme</span>
                 </div>
                 <KbdShortcut>shift + d</KbdShortcut>
               </Command.Item>
               
               <Command.Item onSelect={setReadingMode}>
                 <div className="flex items-center">
-                  <BookOpenCheck className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>reading mode</span>
+                  <BookOpenCheck className={iconClassName} />
+                  <span className={spanClassName}>reading mode</span>
                 </div>
                 <KbdShortcut>shift + 8</KbdShortcut>
               </Command.Item>
               
               <Command.Item onSelect={setMatchaMode}>
                 <div className="flex items-center">
-                  <Leaf className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>matcha mode</span>
+                  <Leaf className={iconClassName} />
+                  <span className={spanClassName}>matcha mode</span>
                 </div>
                 <KbdShortcut>shift + 9</KbdShortcut>
               </Command.Item>
@@ -488,7 +488,7 @@ export default function CommandPalette({
           </Command.List>
           
           {/* Footer Instructions */}
-          <div className={`flex items-center justify-between px-4 text-muted-foreground ${
+          <div className={`flex items-center justify-between px-4 ${
             isMobile ? 'py-2 text-[10px] flex-col gap-1.5 sm:flex-row sm:gap-0' : 'py-3 text-xs'
           } ${
             theme === 'dark' || theme === 'reading'
@@ -496,6 +496,8 @@ export default function CommandPalette({
               : theme === 'matcha'
               ? 'border-t border-green-200/50'
               : 'border-t border-gray-200/40'
+          } ${
+            theme === 'reading' ? 'text-[#3E2F1C]' : 'text-muted-foreground'
           }`}>
             <div className="flex items-center gap-2">
               <span>type</span>
