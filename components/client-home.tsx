@@ -13,9 +13,8 @@ import ContentWorthConsumingRenderer from "@/components/content-worth-consuming-
 import CommandPalette from "@/components/command-palette"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 
 interface ClientHomeProps {
@@ -191,73 +190,39 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               <ChevronLeft className="h-4 w-4" />
             </Button>
             
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="flex-1 justify-between">
-                  <span className="font-medium truncate">{getCurrentLabel()}</span>
-                  <ChevronDown className="h-4 w-4 shrink-0 ml-2" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-64">
-                {sections.map((section) => (
-                  <div key={section}>
-                    <DropdownMenuItem 
-                      onClick={() => selectSection(section)}
+            <div className="flex-1 h-24 overflow-hidden">
+              <div 
+                className="flex flex-col h-full justify-center relative"
+                style={{
+                  transform: `translateY(${-getCurrentItemIndex() * 32}px)`,
+                  transition: 'transform 0.3s ease-out'
+                }}
+              >
+                {getNavigationItems().map((item, index) => {
+                  const currentIndex = getCurrentItemIndex()
+                  const isActive = index === currentIndex
+                  const isAdjacent = Math.abs(index - currentIndex) === 1
+                  const isVisible = Math.abs(index - currentIndex) <= 1
+                  
+                  if (!isVisible) return null
+                  
+                  return (
+                    <button
+                      key={`${item.type}-${item.id}`}
+                      onClick={() => navigateToItem(index)}
                       className={cn(
-                        "cursor-pointer",
-                        activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) && !(section === "fieldnotes" && activeFieldnote) 
-                          ? "bg-accent text-accent-foreground font-medium" 
-                          : ""
+                        "h-8 flex items-center justify-center transition-all duration-300 px-3 rounded-md text-sm",
+                        isActive && "bg-accent text-accent-foreground font-medium",
+                        isAdjacent && "text-muted-foreground/60 hover:text-muted-foreground",
+                        !isActive && !isAdjacent && "text-muted-foreground/30"
                       )}
                     >
-                      {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
-                    </DropdownMenuItem>
-                    
-                    {/* Project sub-items */}
-                    {section === "projects" && activeSection === "projects" && (
-                      <>
-                        <DropdownMenuItem 
-                          onClick={selectTensorForest}
-                          className={cn(
-                            "cursor-pointer pl-6 text-sm",
-                            activeTensorForest ? "bg-accent text-accent-foreground font-medium" : ""
-                          )}
-                        >
-                          tensorforest
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={selectApocalypseHacks}
-                          className={cn(
-                            "cursor-pointer pl-6 text-sm",
-                            activeApocalypseHacks ? "bg-accent text-accent-foreground font-medium" : ""
-                          )}
-                        >
-                          apocalypse hacks
-                        </DropdownMenuItem>
-                      </>
-                    )}
-                    
-                    {/* Fieldnotes sub-items */}
-                    {section === "fieldnotes" && activeSection === "fieldnotes" && recentFieldnotes.length > 0 && (
-                      <>
-                        {recentFieldnotes.map((item) => (
-                          <DropdownMenuItem 
-                            key={item.slug}
-                            onClick={() => selectFieldnote(item.slug)}
-                            className={cn(
-                              "cursor-pointer pl-6 text-sm",
-                              activeFieldnote === item.slug ? "bg-accent text-accent-foreground font-medium" : ""
-                            )}
-                          >
-                            {item.title}
-                          </DropdownMenuItem>
-                        ))}
-                      </>
-                    )}
-                  </div>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                      <span className="truncate">{item.label}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
 
             <Button
               variant="ghost"
