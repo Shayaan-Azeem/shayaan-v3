@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Command } from 'cmdk'
 import { Dialog, DialogContent, DialogTitle, DialogOverlay, DialogPortal } from '@/components/ui/dialog'
+import { useIsMobile } from '@/components/ui/use-mobile'
 import { 
   User, 
   Briefcase, 
