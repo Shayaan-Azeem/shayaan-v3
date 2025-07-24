@@ -1101,7 +1101,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       case "experience":
         return (
           <div className="pt-2">
-            <h2 className="text-4xl font-bold mb-4">experience</h2>
+            <h2 className="text-4xl font-bold mb-8">experience</h2>
             <div className="space-y-8">
               {/* Hack Club */}
               <div className="relative flex gap-4">
@@ -1531,12 +1531,12 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           <div className="pt-2">
             {contentWorthConsuming ? (
               <div>
-                <h2 className="text-4xl font-bold mb-4">{contentWorthConsuming.title}</h2>
+                <h2 className="text-4xl font-bold mb-8">{contentWorthConsuming.title}</h2>
                 <ContentWorthConsumingRenderer content={contentWorthConsuming.content} />
               </div>
             ) : (
               <div>
-                <h2 className="text-4xl font-bold mb-4">Content Worth Consuming</h2>
+                <h2 className="text-4xl font-bold mb-8">Content Worth Consuming</h2>
                 <p className="text-muted-foreground">Content not found. Create a content-worth-consuming.md file in the content directory.</p>
               </div>
             )}
