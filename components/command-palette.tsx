@@ -229,7 +229,7 @@ export default function CommandPalette({
 
   // Reusable keyboard shortcut component
   const KbdShortcut = ({ children }: { children: React.ReactNode }) => (
-    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-muted font-mono font-medium text-muted-foreground opacity-100 ${
+    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border border-border bg-secondary font-mono font-medium text-foreground/70 opacity-100 ${
       isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
     }`}>
       {children}
@@ -271,7 +271,7 @@ export default function CommandPalette({
               }`}
             />
           </div>
-          <Command.List className={`overflow-y-auto overflow-x-hidden ${
+          <Command.List className={`overflow-y-auto overflow-x-hidden bg-card ${
             isMobile ? 'max-h-[50vh]' : 'max-h-[300px]'
           }`}>
             <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
@@ -352,9 +352,7 @@ export default function CommandPalette({
                   <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>shoppy wrapped</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + s
-                </kbd>
+                <KbdShortcut>shift + s</KbdShortcut>
               </Command.Item>
             </Command.Group>
 
@@ -454,12 +452,12 @@ export default function CommandPalette({
           </Command.List>
           
           {/* Footer Instructions */}
-          <div className={`flex items-center justify-between px-4 border-t border-white/10 text-muted-foreground ${
+          <div className={`flex items-center justify-between px-4 border-t border-border/30 text-muted-foreground bg-card ${
             isMobile ? 'py-2 text-[10px] flex-col gap-1.5 sm:flex-row sm:gap-0' : 'py-3 text-xs'
           }`}>
             <div className="flex items-center gap-2">
               <span>type</span>
-              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-background font-mono font-medium ${
+              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border border-border bg-secondary font-mono font-medium text-foreground/70 ${
                 isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
               }`}>
                 ↵
@@ -468,7 +466,7 @@ export default function CommandPalette({
             </div>
             <div className="flex items-center gap-2">
               <span>press</span>
-              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-background font-mono font-medium ${
+              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border border-border bg-secondary font-mono font-medium text-foreground/70 ${
                 isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
               }`}>
                 esc

@@ -1,25 +1,10 @@
 ---
 title: 17 lessons from 17
 slug: "{{slug}}"
-date: 2025-07-24
+date: 2025-06-21
 summary: the most important things last year has taught me
-banner: 
+banner: photo6.jpg
 tags: 
 draft: false
 ---
 
-# Untitled
-
-## Key Points
-
-- 
-
-## Thoughts
-
-## Next Steps
-
-- 
-
-## Related Links
-
-- 
