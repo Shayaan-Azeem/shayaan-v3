@@ -25,6 +25,34 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
   const parseHoverLinks = (text: string) => {
     // Handle inline hover links: [hover-X] [title](url)
     return text.replace(/\[hover-(\d+)\]\s*\[([^\]]+)\]\(([^)]+)\)/g, (match, hoverNum, title, url) => {
+      // Special handling for uwaterloo link
+      if (title.toLowerCase().includes('uwaterloo') || url.includes('uwaterloo.ca')) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-uwaterloo">${title}</a>`
+      }
+      // Special handling for preseed link
+      if (title.toLowerCase().includes('offered $250k preseed') || url.includes('joinef.com')) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-preseed">${title}</a>`
+      }
+      // Special handling for bloomberg link
+      if (title.toLowerCase().includes('bloomberg') || url.includes('bloomberg.org')) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-bloomberg">${title}</a>`
+      }
+      // Special handling for specific hack club links
+      if (title.toLowerCase() === 'hack club' || title.toLowerCase() === '@starthackclub') {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-hackclub">${title}</a>`
+      }
+      // Special handling for hackathon link
+      if (title.toLowerCase().includes('hackathon') || url.includes('apocalypse.hackclub.com')) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-hackathon">${title}</a>`
+      }
+      // Special handling for robotics club link
+      if (title.toLowerCase().includes('robotics club') || url.includes('wossrobotics.ca')) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-robotics">${title}</a>`
+      }
+      // Special handling for robot olympiad link
+      if (title.toLowerCase().includes('robot olympiad') || url.includes('wro-association.org')) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-olympiad">${title}</a>`
+      }
       return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-blue hover-dark-${hoverNum}">${title}</a>`
     })
   }

@@ -253,4 +253,143 @@ body {
   .link-teal:hover {
     background-color: hsl(var(--highlight-teal-hover));
   }
+  
+  /* Custom golden yellow highlight for uwaterloo */
+  .link-uwaterloo {
+    @apply px-1 py-0.5 transition-all duration-200;
+    background-color: #FFD44F;
+    color: #000;
+  }
+  .link-uwaterloo:hover {
+    background-color: #FFB800; /* Slightly darker on hover */
+    color: #000;
+  }
+  
+  /* Dark mode version */
+  .dark .link-uwaterloo {
+    background-color: #FFD44F;
+    color: #000;
+  }
+  .dark .link-uwaterloo:hover {
+    background-color: #FFB800;
+    color: #000;
+  }
+  
+  /* Custom purple highlight for Bloomberg Philanthropies */
+  .link-bloomberg {
+    @apply px-1 py-0.5 transition-all duration-200;
+    background-color: #7B4FAE;
+    color: #fff;
+  }
+  .link-bloomberg:hover {
+    background-color: #5F3B87; /* Slightly darker on hover */
+    color: #fff;
+  }
+  
+  /* Dark mode version */
+  .dark .link-bloomberg {
+    background-color: #7B4FAE;
+    color: #fff;
+  }
+  .dark .link-bloomberg:hover {
+    background-color: #5F3B87;
+    color: #fff;
+  }
+  
+  /* Custom bright purple highlight for preseed link */
+  .link-preseed {
+    @apply px-1 py-0.5 transition-all duration-200;
+    background-color: #8B5FFF;
+    color: #fff;
+  }
+  .link-preseed:hover {
+    background-color: #7A4EE6; /* Slightly darker on hover */
+    color: #fff;
+  }
+  
+  /* Dark mode version */
+  .dark .link-preseed {
+    background-color: #8B5FFF;
+    color: #fff;
+  }
+  .dark .link-preseed:hover {
+    background-color: #7A4EE6;
+    color: #fff;
+  }
+  
+  /* Red highlight for hack club links */
+  .link-hackclub {
+    @apply px-1 py-0.5 transition-all duration-200;
+    background-color: #DC2626;
+    color: #fff;
+  }
+  .link-hackclub:hover {
+    background-color: #B91C1C;
+    color: #fff;
+  }
+  .dark .link-hackclub {
+    background-color: #DC2626;
+    color: #fff;
+  }
+  .dark .link-hackclub:hover {
+    background-color: #B91C1C;
+    color: #fff;
+  }
+  
+  /* Pink highlight for hackathon link */
+  .link-hackathon {
+    @apply px-1 py-0.5 transition-all duration-200;
+    background-color: #FF8BC7;
+    color: #fff;
+  }
+  .link-hackathon:hover {
+    background-color: #E677B3;
+    color: #fff;
+  }
+  .dark .link-hackathon {
+    background-color: #FF8BC7;
+    color: #fff;
+  }
+  .dark .link-hackathon:hover {
+    background-color: #E677B3;
+    color: #fff;
+  }
+  
+  /* Blue highlight for robotics club */
+  .link-robotics {
+    @apply px-1 py-0.5 transition-all duration-200;
+    background-color: #4A9FE7;
+    color: #fff;
+  }
+  .link-robotics:hover {
+    background-color: #3B8DD1;
+    color: #fff;
+  }
+  .dark .link-robotics {
+    background-color: #4A9FE7;
+    color: #fff;
+  }
+  .dark .link-robotics:hover {
+    background-color: #3B8DD1;
+    color: #fff;
+  }
+  
+  /* Green highlight for robot olympiad */
+  .link-olympiad {
+    @apply px-1 py-0.5 transition-all duration-200;
+    background-color: #10B981;
+    color: #fff;
+  }
+  .link-olympiad:hover {
+    background-color: #059669;
+    color: #fff;
+  }
+  .dark .link-olympiad {
+    background-color: #10B981;
+    color: #fff;
+  }
+  .dark .link-olympiad:hover {
+    background-color: #059669;
+    color: #fff;
+  }
 }
