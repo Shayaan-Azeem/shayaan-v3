@@ -4,7 +4,9 @@ slug: "{{slug}}"
 date: 2025-06-21
 summary: the most important things last year has taught me
 banner: photo6.jpg
-tags: 
+tags:
+  - tag1
+  - tag2
 draft: false
 ---
 - Everything happens for a reason
