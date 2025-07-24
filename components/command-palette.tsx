@@ -234,6 +234,8 @@ export default function CommandPalette({
     } ${
       theme === 'matcha'
         ? 'bg-green-100 border-green-200 text-green-800'
+        : theme === 'reading'
+        ? 'bg-[#F2EDE7] text-[#000] border-[#DDD4C7]'
         : 'bg-muted border-muted text-muted-foreground'
     }`}>
       {children}
