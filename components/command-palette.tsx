@@ -243,7 +243,7 @@ export default function CommandPalette({
                   <span>go to about</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧A
+                  shift + a
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('experience')}>
@@ -252,7 +252,7 @@ export default function CommandPalette({
                   <span>go to experience</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧E
+                  shift + e
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('projects')}>
@@ -261,7 +261,7 @@ export default function CommandPalette({
                   <span>go to projects</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧P
+                  shift + p
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('fieldnotes')}>
@@ -270,7 +270,7 @@ export default function CommandPalette({
                   <span>go to fieldnotes</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧F
+                  shift + f
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('inspirations')}>
@@ -279,7 +279,7 @@ export default function CommandPalette({
                   <span>go to philosophy</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧M
+                  shift + m
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('content')}>
@@ -288,7 +288,7 @@ export default function CommandPalette({
                   <span>go to content</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧C
+                  shift + c
                 </kbd>
               </Command.Item>
             </Command.Group>
@@ -301,7 +301,7 @@ export default function CommandPalette({
                   <span>tensorforest</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧T
+                  shift + t
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleSelectProject('apocalypse')}>
@@ -310,7 +310,7 @@ export default function CommandPalette({
                   <span>apocalypse hacks</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧H
+                  shift + h
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://www.gptfixtsfor.me/')}>
@@ -319,7 +319,7 @@ export default function CommandPalette({
                   <span>vibetype</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧V
+                  shift + v
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')}>
@@ -328,7 +328,7 @@ export default function CommandPalette({
                   <span>shoppy wrapped</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧S
+                  shift + s
                 </kbd>
               </Command.Item>
             </Command.Group>
@@ -358,7 +358,7 @@ export default function CommandPalette({
                   <span>twitter</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧X
+                  shift + x
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://linkedin.com/in/shayaan-azeem')}>
@@ -367,7 +367,7 @@ export default function CommandPalette({
                   <span>linkedin</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧L
+                  shift + l
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/shayaanazeem1')}>
@@ -376,7 +376,7 @@ export default function CommandPalette({
                   <span>github</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  ⇧G
+                  shift + g
                 </kbd>
               </Command.Item>
               <Command.Item onSelect={handleEmail}>
