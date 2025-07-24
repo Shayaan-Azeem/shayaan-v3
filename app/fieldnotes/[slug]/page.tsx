@@ -2,7 +2,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getContentItem, getAllFieldnotes } from "@/lib/content"
 import { ModeToggle } from "@/components/mode-toggle"
-import CommandPalette from "@/components/command-palette"
+import CommandPaletteWrapper from "@/components/command-palette-wrapper"
 import MDXRenderer from "@/components/mdx-renderer"
 
 interface FieldnotePageProps {
@@ -44,21 +44,6 @@ export default async function FieldnotePage({ params }: FieldnotePageProps) {
     notFound()
   }
 
-  // Command palette handlers
-  const handleNavigation = (section: string) => {
-    window.location.href = `/#${section}`
-  }
-
-  const handleSelectFieldnote = (fieldnoteSlug: string) => {
-    window.location.href = `/fieldnotes/${fieldnoteSlug}`
-  }
-
-  const handleSelectProject = (project: string) => {
-    if (project === 'tensorforest' || project === 'apocalypse') {
-      window.location.href = `/#projects`
-    }
-  }
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Theme toggle */}
@@ -88,11 +73,8 @@ export default async function FieldnotePage({ params }: FieldnotePageProps) {
         <MDXRenderer item={item} />
 
         {/* Command Palette */}
-        <CommandPalette
+        <CommandPaletteWrapper
           fieldnotes={allFieldnotes}
-          onNavigate={handleNavigation}
-          onSelectFieldnote={handleSelectFieldnote}
-          onSelectProject={handleSelectProject}
           currentSection="fieldnotes"
           currentPage={item.title}
         />

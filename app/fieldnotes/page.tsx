@@ -98,11 +98,8 @@ export default function FieldnotesPage() {
       </div>
 
       {/* Command Palette */}
-      <CommandPalette
+      <CommandPaletteWrapper
         fieldnotes={fieldnotes}
-        onNavigate={handleNavigation}
-        onSelectFieldnote={handleSelectFieldnote}
-        onSelectProject={handleSelectProject}
         currentSection="fieldnotes"
         currentPage="Fieldnotes"
       />
