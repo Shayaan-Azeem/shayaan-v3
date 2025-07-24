@@ -13,9 +13,7 @@ import ContentWorthConsumingRenderer from "@/components/content-worth-consuming-
 import CommandPalette from "@/components/command-palette"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { ChevronDown } from "lucide-react"
+
 
 interface ClientHomeProps {
   fieldnotes: ContentItem[]
@@ -122,52 +120,63 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               <button
                 onClick={() => selectSection(section)}
                 className={cn(
-                  "block w-full text-right transition-colors duration-200",
+                  "block w-full text-right transition-colors duration-200 leading-tight",
                   activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) && !(section === "fieldnotes" && activeFieldnote) 
                     ? "text-foreground font-medium" 
                     : "text-muted-foreground/70 hover:text-muted-foreground",
                 )}
               >
-{section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
+                <span className="hidden sm:inline">
+                  {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
+                </span>
+                <span className="sm:hidden">
+                  {section === "content" ? "content" : 
+                   section === "inspirations" ? "philosophy" : 
+                   section === "experience" ? "exp" :
+                   section}
+                </span>
               </button>
               
               {/* Project sub-items */}
               {section === "projects" && activeSection === "projects" && (
-                <div className="mt-4 space-y-2">
+                <div className="mt-2 sm:mt-4 space-y-1 sm:space-y-2">
                   <button
                     onClick={selectTensorForest}
                     className={cn(
-                      "block w-full text-right text-xs transition-colors duration-200 pl-4",
+                      "block w-full text-right text-xs transition-colors duration-200 pl-2 sm:pl-4 leading-tight",
                       activeTensorForest ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
                     )}
                   >
-                    tensorforest
+                    <span className="hidden sm:inline">tensorforest</span>
+                    <span className="sm:hidden">tensor</span>
                   </button>
                   <button
                     onClick={selectApocalypseHacks}
                     className={cn(
-                      "block w-full text-right text-xs transition-colors duration-200 pl-4",
+                      "block w-full text-right text-xs transition-colors duration-200 pl-2 sm:pl-4 leading-tight",
                       activeApocalypseHacks ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
                     )}
                   >
-                    apocalypse hacks
+                    <span className="hidden sm:inline">apocalypse hacks</span>
+                    <span className="sm:hidden">apoc</span>
                   </button>
                 </div>
               )}
               
               {/* Fieldnotes sub-items */}
               {section === "fieldnotes" && activeSection === "fieldnotes" && recentFieldnotes.length > 0 && (
-                <div className="mt-4 space-y-2">
+                <div className="mt-2 sm:mt-4 space-y-1 sm:space-y-2">
                   {recentFieldnotes.map((item) => (
                     <button
                       key={item.slug}
                       onClick={() => selectFieldnote(item.slug)}
                       className={cn(
-                        "block w-full text-right text-xs transition-colors duration-200 pl-4",
+                        "block w-full text-right text-xs transition-colors duration-200 pl-2 sm:pl-4 leading-tight",
                         activeFieldnote === item.slug ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light"
                       )}
                     >
-                      {item.title}
+                      <span className="hidden sm:inline">{item.title}</span>
+                      <span className="sm:hidden">{item.title.substring(0, 8)}...</span>
                     </button>
                   ))}
                 </div>
