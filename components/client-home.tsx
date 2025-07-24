@@ -165,6 +165,52 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return activeSection
   }
 
+  // Handle scroll navigation
+  const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    const currentIndex = getCurrentItemIndex()
+    const items = getNavigationItems()
+    
+    if (e.deltaY > 0 && currentIndex < items.length - 1) {
+      // Scroll down - go to next item
+      navigateToItem(currentIndex + 1)
+    } else if (e.deltaY < 0 && currentIndex > 0) {
+      // Scroll up - go to previous item
+      navigateToItem(currentIndex - 1)
+    }
+  }
+
+  // Handle touch scroll
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientY)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientY)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isUpSwipe = distance > 50
+    const isDownSwipe = distance < -50
+    
+    const currentIndex = getCurrentItemIndex()
+    const items = getNavigationItems()
+
+    if (isUpSwipe && currentIndex < items.length - 1) {
+      navigateToItem(currentIndex + 1)
+    }
+    if (isDownSwipe && currentIndex > 0) {
+      navigateToItem(currentIndex - 1)
+    }
+  }
+
   /* ────────────────────────────────
      render
   ────────────────────────────────── */
