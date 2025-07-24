@@ -7,17 +7,18 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { cn } from "@/lib/utils"
 import type { ContentItem } from "@/lib/content"
 import MDXRenderer from "@/components/mdx-renderer"
-
+import ContentRenderer from "@/components/content-renderer"
 import AboutRenderer from "@/components/about-renderer"
 import HeroBanner from "@/components/hero-banner"
 
 interface ClientHomeProps {
   fieldnotes: ContentItem[]
   philosophy: ContentItem | null
+  contentWorthConsuming: ContentItem | null
   about: ContentItem | null
 }
 
-export default function ClientHome({ fieldnotes, philosophy, about }: ClientHomeProps) {
+export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming, about }: ClientHomeProps) {
   /* ────────────────────────────────
      section definitions
   ────────────────────────────────── */
@@ -26,7 +27,8 @@ export default function ClientHome({ fieldnotes, philosophy, about }: ClientHome
     "experience",
     "projects",
     "fieldnotes",
-    "inspirations"
+    "inspirations",
+    "content"
   ] as const
 
   type SectionKey = typeof sections[number]
@@ -101,7 +103,7 @@ export default function ClientHome({ fieldnotes, philosophy, about }: ClientHome
                     : "text-muted-foreground/70 hover:text-muted-foreground",
                 )}
               >
-{section === "inspirations" ? "my philosophy" : section}
+{section === "content" ? "content worth consuming imo" : section === "inspirations" ? "my philosophy" : section}
               </button>
               
               {/* Project sub-items */}
