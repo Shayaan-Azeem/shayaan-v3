@@ -184,34 +184,66 @@ body {
     color: hsl(0 0% 98%);
   }
   
-  /* Dark mode hover colors */
+  /* Dark mode hover colors - flipped behavior */
+  .dark .hover-dark-1 {
+    background-color: hsl(220 50% 20%);
+    color: hsl(0 0% 98%);
+  }
   .dark .hover-dark-1:hover {
     background-color: hsl(220 50% 80%);
     color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-2 {
+    background-color: hsl(280 40% 25%);
+    color: hsl(0 0% 98%);
   }
   .dark .hover-dark-2:hover {
     background-color: hsl(280 40% 75%);
     color: hsl(0 0% 15%);
   }
+  .dark .hover-dark-3 {
+    background-color: hsl(140 35% 22%);
+    color: hsl(0 0% 98%);
+  }
   .dark .hover-dark-3:hover {
     background-color: hsl(140 35% 78%);
     color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-4 {
+    background-color: hsl(15 45% 28%);
+    color: hsl(0 0% 98%);
   }
   .dark .hover-dark-4:hover {
     background-color: hsl(15 45% 72%);
     color: hsl(0 0% 15%);
   }
+  .dark .hover-dark-5 {
+    background-color: hsl(190 30% 25%);
+    color: hsl(0 0% 98%);
+  }
   .dark .hover-dark-5:hover {
     background-color: hsl(190 30% 75%);
     color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-6 {
+    background-color: hsl(30 40% 30%);
+    color: hsl(0 0% 98%);
   }
   .dark .hover-dark-6:hover {
     background-color: hsl(30 40% 70%);
     color: hsl(0 0% 15%);
   }
+  .dark .hover-dark-7 {
+    background-color: hsl(340 35% 28%);
+    color: hsl(0 0% 98%);
+  }
   .dark .hover-dark-7:hover {
     background-color: hsl(340 35% 72%);
     color: hsl(0 0% 15%);
+  }
+  .dark .hover-dark-8 {
+    background-color: hsl(60 25% 25%);
+    color: hsl(0 0% 98%);
   }
   .dark .hover-dark-8:hover {
     background-color: hsl(60 25% 75%);
@@ -329,14 +361,14 @@ body {
     color: #fff;
   }
   
-  /* Dark mode version */
+  /* Dark mode version - flipped */
   .dark .link-uwaterloo {
-    background-color: #FFF3C4;
-    color: #000;
-  }
-  .dark .link-uwaterloo:hover {
     background-color: #F59E0B;
     color: #fff;
+  }
+  .dark .link-uwaterloo:hover {
+    background-color: #FFF3C4;
+    color: #000;
   }
   
   /* Custom purple highlight for Bloomberg Philanthropies */
@@ -350,14 +382,14 @@ body {
     color: #fff;
   }
   
-  /* Dark mode version */
+  /* Dark mode version - flipped */
   .dark .link-bloomberg {
-    background-color: #E8D5F5;
-    color: #000;
-  }
-  .dark .link-bloomberg:hover {
     background-color: #7B4FAE;
     color: #fff;
+  }
+  .dark .link-bloomberg:hover {
+    background-color: #E8D5F5;
+    color: #000;
   }
   
   /* Custom bright purple highlight for preseed link */
@@ -371,14 +403,14 @@ body {
     color: #fff;
   }
   
-  /* Dark mode version */
+  /* Dark mode version - flipped */
   .dark .link-preseed {
-    background-color: #E6D9FF;
-    color: #000;
-  }
-  .dark .link-preseed:hover {
     background-color: #8B5FFF;
     color: #fff;
+  }
+  .dark .link-preseed:hover {
+    background-color: #E6D9FF;
+    color: #000;
   }
   
   /* Red highlight for hack club links */
@@ -392,12 +424,12 @@ body {
     color: #fff;
   }
   .dark .link-hackclub {
-    background-color: #FECACA;
-    color: #000;
-  }
-  .dark .link-hackclub:hover {
     background-color: #DC2626;
     color: #fff;
+  }
+  .dark .link-hackclub:hover {
+    background-color: #FECACA;
+    color: #000;
   }
   
   /* Pink highlight for hackathon link */
@@ -411,12 +443,12 @@ body {
     color: #fff;
   }
   .dark .link-hackathon {
-    background-color: #FFE1F1;
-    color: #000;
-  }
-  .dark .link-hackathon:hover {
     background-color: #FF8BC7;
     color: #fff;
+  }
+  .dark .link-hackathon:hover {
+    background-color: #FFE1F1;
+    color: #000;
   }
   
   /* Blue highlight for robotics club */
@@ -430,12 +462,12 @@ body {
     color: #fff;
   }
   .dark .link-robotics {
-    background-color: #DBEAFE;
-    color: #000;
-  }
-  .dark .link-robotics:hover {
     background-color: #4A9FE7;
     color: #fff;
+  }
+  .dark .link-robotics:hover {
+    background-color: #DBEAFE;
+    color: #000;
   }
   
   /* Green highlight for robot olympiad */
@@ -449,11 +481,11 @@ body {
     color: #fff;
   }
   .dark .link-olympiad {
-    background-color: #D1FAE5;
-    color: #000;
-  }
-  .dark .link-olympiad:hover {
     background-color: #10B981;
     color: #fff;
+  }
+  .dark .link-olympiad:hover {
+    background-color: #D1FAE5;
+    color: #000;
   }
 }
