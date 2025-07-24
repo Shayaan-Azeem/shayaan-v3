@@ -239,7 +239,11 @@ export default function CommandPalette({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
-        <DialogOverlay className="bg-black/10 dark:bg-black/20" />
+        <DialogOverlay className={
+          theme === 'dark' || theme === 'reading' || theme === 'matcha'
+            ? 'bg-black/10 dark:bg-black/20'
+            : 'bg-black/5'
+        } />
         <DialogContent className={`overflow-hidden p-0 shadow-2xl backdrop-blur-sm ${
           isMobile 
             ? 'max-w-[90vw] max-h-[85vh] m-4 w-[calc(100vw-2rem)] rounded-xl' 
@@ -466,8 +470,12 @@ export default function CommandPalette({
           </Command.List>
           
           {/* Footer Instructions */}
-          <div className={`flex items-center justify-between px-4 border-t border-white/10 text-muted-foreground ${
+          <div className={`flex items-center justify-between px-4 text-muted-foreground ${
             isMobile ? 'py-2 text-[10px] flex-col gap-1.5 sm:flex-row sm:gap-0' : 'py-3 text-xs'
+          } ${
+            theme === 'dark' || theme === 'reading' || theme === 'matcha'
+              ? 'border-t border-white/10'
+              : 'border-t border-gray-200/40'
           }`}>
             <div className="flex items-center gap-2">
               <span>type</span>
