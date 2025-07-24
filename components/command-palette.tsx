@@ -182,11 +182,11 @@ export default function CommandPalette({
     const title = sectionTitles[currentSection as keyof typeof sectionTitles] || currentPage
     const description = sectionDescriptions[currentSection as keyof typeof sectionDescriptions] || 'quick actions and navigation'
     
-    return {
-      icon: Icon,
-      title,
-      subtitle: currentPage === 'Home' ? description : `Navigate from ${title.toLowerCase()}`
-    }
+          return {
+        icon: Icon,
+        title,
+        subtitle: currentPage === 'Home' ? description : `navigate from ${title}`
+      }
   }
 
   const headerInfo = getHeaderInfo()
