@@ -263,59 +263,59 @@ body {
     color: white;
   }
   
-  /* Dark mode versions - maintain same colors and effects */
+  /* Dark mode versions for content highlights */
   .dark .link-blue {
-    background-color: hsl(var(--highlight-blue));
-    color: hsl(0 0% 15%);
+    background-color: hsl(220 70% 25%);
+    color: hsl(0 0% 98%);
   }
   .dark .link-blue:hover {
-    background-color: hsl(220 100% 55%);
-    color: white;
+    background-color: hsl(220 70% 35%);
+    color: hsl(0 0% 98%);
   }
   
   .dark .link-green {
-    background-color: hsl(var(--highlight-green));
-    color: hsl(0 0% 15%);
+    background-color: hsl(130 50% 25%);
+    color: hsl(0 0% 98%);
   }
   .dark .link-green:hover {
-    background-color: hsl(130 60% 45%);
-    color: white;
+    background-color: hsl(130 50% 35%);
+    color: hsl(0 0% 98%);
   }
   
   .dark .link-purple {
-    background-color: hsl(var(--highlight-purple));
-    color: hsl(0 0% 15%);
+    background-color: hsl(280 50% 25%);
+    color: hsl(0 0% 98%);
   }
   .dark .link-purple:hover {
-    background-color: hsl(280 60% 55%);
-    color: white;
+    background-color: hsl(280 50% 35%);
+    color: hsl(0 0% 98%);
   }
   
   .dark .link-orange {
-    background-color: hsl(var(--highlight-orange));
-    color: hsl(0 0% 15%);
+    background-color: hsl(30 70% 25%);
+    color: hsl(0 0% 98%);
   }
   .dark .link-orange:hover {
-    background-color: hsl(30 90% 55%);
-    color: white;
+    background-color: hsl(30 70% 35%);
+    color: hsl(0 0% 98%);
   }
   
   .dark .link-pink {
-    background-color: hsl(var(--highlight-pink));
-    color: hsl(0 0% 15%);
+    background-color: hsl(330 50% 25%);
+    color: hsl(0 0% 98%);
   }
   .dark .link-pink:hover {
-    background-color: hsl(330 60% 55%);
-    color: white;
+    background-color: hsl(330 50% 35%);
+    color: hsl(0 0% 98%);
   }
   
   .dark .link-teal {
-    background-color: hsl(var(--highlight-teal));
-    color: hsl(0 0% 15%);
+    background-color: hsl(180 40% 25%);
+    color: hsl(0 0% 98%);
   }
   .dark .link-teal:hover {
-    background-color: hsl(180 50% 55%);
-    color: white;
+    background-color: hsl(180 40% 35%);
+    color: hsl(0 0% 98%);
   }
   
   /* Custom golden yellow highlight for uwaterloo */
