@@ -6,11 +6,20 @@ interface ContentWorthConsumingRendererProps {
 }
 
 export default function ContentWorthConsumingRenderer({ content }: ContentWorthConsumingRendererProps) {
-  // Use random hover-dark classes like the about page
-  const getRandomHoverClass = (index: number) => {
-    // Cycle through hover-dark-1 to hover-dark-8 based on index
-    const hoverNum = (index % 8) + 1
-    return `link-blue hover-dark-${hoverNum}`
+  // Define color mapping based on content type
+  const getColorClass = (title: string, contentType: string) => {
+    const type = contentType.toLowerCase()
+    
+    // Color mapping based on content type
+    if (type.includes('tv show') || type.includes('show')) return 'link-purple'
+    if (type.includes('book')) return 'link-green'
+    if (type.includes('video') || type.includes('youtube')) return 'link-orange'
+    if (type.includes('movie') || type.includes('film')) return 'link-pink'
+    if (type.includes('essay') || type.includes('short essay')) return 'link-blue'
+    if (type.includes('blog')) return 'link-teal'
+    
+    // Default fallback
+    return 'link-blue'
   }
 
   // Parse the content and convert markdown links to styled components
@@ -29,7 +38,7 @@ export default function ContentWorthConsumingRenderer({ content }: ContentWorthC
       
       if (match) {
         const [, title, url, contentType] = match
-        const hoverClass = getRandomHoverClass(index)
+        const colorClass = getColorClass(title, contentType)
         
         return (
           <li key={index} className="tight-list-item">
@@ -37,7 +46,7 @@ export default function ContentWorthConsumingRenderer({ content }: ContentWorthC
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className={hoverClass}
+              className={colorClass}
             >
               {title}
             </Link>{" "}
