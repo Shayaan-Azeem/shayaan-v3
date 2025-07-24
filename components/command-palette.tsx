@@ -355,15 +355,15 @@ export default function CommandPalette({
                   G
                 </kbd>
               </Command.Item>
-              <Command.Item onSelect={handleEmail}>
-                <div className="flex items-center">
-                  <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>Send Email</span>
-                </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  @
-                </kbd>
-              </Command.Item>
+                             <Command.Item onSelect={handleEmail}>
+                 <div className="flex items-center">
+                   <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
+                   <span>Send Email</span>
+                 </div>
+                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                   @
+                 </kbd>
+               </Command.Item>
             </Command.Group>
 
             {/* Settings */}
