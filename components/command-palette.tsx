@@ -209,13 +209,13 @@ export default function CommandPalette({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="overflow-hidden p-0 shadow-2xl border border-white/10 bg-white/40 dark:bg-black/30 backdrop-blur-xl backdrop-saturate-150">
+      <DialogContent className="overflow-hidden p-0 shadow-2xl border border-white/10 bg-white/40 dark:bg-white/15 backdrop-blur-xl backdrop-saturate-150">
         <DialogTitle className="sr-only">
           command palette
         </DialogTitle>
         <Command className="[&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-4 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between">
           {/* Header */}
-          <div className="flex items-center gap-3 px-4 py-4 border-b border-white/5 bg-white/20 dark:bg-black/10">
+          <div className="flex items-center gap-3 px-4 py-4 border-b border-white/5 bg-white/20 dark:bg-white/10">
             <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
             <div>
               <h2 className="text-lg font-semibold">{headerInfo.title}</h2>
