@@ -83,7 +83,7 @@ export default function CommandPalette({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="overflow-hidden p-0 shadow-lg border-border">
-        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between">
           <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
             <Command.Input
               placeholder="Type a command or search..."
@@ -98,48 +98,92 @@ export default function CommandPalette({
             {/* Navigation */}
             <Command.Group heading="Navigate">
               <Command.Item onSelect={() => handleNavigate('about')}>
-                <User className="mr-2 h-4 w-4" />
-                <span>About</span>
+                <div className="flex items-center">
+                  <User className="mr-3 h-4 w-4" />
+                  <span>About</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  A
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('experience')}>
-                <Briefcase className="mr-2 h-4 w-4" />
-                <span>Experience</span>
+                <div className="flex items-center">
+                  <Briefcase className="mr-3 h-4 w-4" />
+                  <span>Experience</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  E
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('projects')}>
-                <FolderOpen className="mr-2 h-4 w-4" />
-                <span>Projects</span>
+                <div className="flex items-center">
+                  <FolderOpen className="mr-3 h-4 w-4" />
+                  <span>Projects</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  P
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('fieldnotes')}>
-                <BookOpen className="mr-2 h-4 w-4" />
-                <span>Fieldnotes</span>
+                <div className="flex items-center">
+                  <BookOpen className="mr-3 h-4 w-4" />
+                  <span>Fieldnotes</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  F
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('inspirations')}>
-                <Heart className="mr-2 h-4 w-4" />
-                <span>My Philosophy</span>
+                <div className="flex items-center">
+                  <Heart className="mr-3 h-4 w-4" />
+                  <span>My Philosophy</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  M
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('content')}>
-                <List className="mr-2 h-4 w-4" />
-                <span>Content Worth Consuming</span>
+                <div className="flex items-center">
+                  <List className="mr-3 h-4 w-4" />
+                  <span>Content Worth Consuming</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  C
+                </kbd>
               </Command.Item>
             </Command.Group>
 
             {/* Projects */}
             <Command.Group heading="Projects">
               <Command.Item onSelect={() => handleSelectProject('tensorforest')}>
-                <FolderOpen className="mr-2 h-4 w-4" />
-                <span>TensorForest</span>
+                <div className="flex items-center">
+                  <FolderOpen className="mr-3 h-4 w-4" />
+                  <span>TensorForest</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  T
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleSelectProject('apocalypse')}>
-                <FolderOpen className="mr-2 h-4 w-4" />
-                <span>Apocalypse Hacks</span>
+                <div className="flex items-center">
+                  <FolderOpen className="mr-3 h-4 w-4" />
+                  <span>Apocalypse Hacks</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  H
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://www.gptfixtsfor.me/')}>
-                <ExternalLink className="mr-2 h-4 w-4" />
-                <span>VibeType</span>
+                <div className="flex items-center">
+                  <ExternalLink className="mr-3 h-4 w-4" />
+                  <span>VibeType</span>
+                </div>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')}>
-                <ExternalLink className="mr-2 h-4 w-4" />
-                <span>Shoppy Wrapped</span>
+                <div className="flex items-center">
+                  <ExternalLink className="mr-3 h-4 w-4" />
+                  <span>Shoppy Wrapped</span>
+                </div>
               </Command.Item>
             </Command.Group>
 
@@ -148,8 +192,10 @@ export default function CommandPalette({
               <Command.Group heading="Recent Fieldnotes">
                 {fieldnotes.slice(0, 5).map((item) => (
                   <Command.Item key={item.slug} onSelect={() => handleSelectFieldnote(item.slug)}>
-                    <BookOpen className="mr-2 h-4 w-4" />
-                    <span>{item.title}</span>
+                    <div className="flex items-center">
+                      <BookOpen className="mr-3 h-4 w-4" />
+                      <span>{item.title}</span>
+                    </div>
                   </Command.Item>
                 ))}
               </Command.Group>
@@ -158,32 +204,45 @@ export default function CommandPalette({
             {/* Social & Contact */}
             <Command.Group heading="Connect">
               <Command.Item onSelect={handleEmail}>
-                <Mail className="mr-2 h-4 w-4" />
-                <span>Send Email</span>
+                <div className="flex items-center">
+                  <Mail className="mr-3 h-4 w-4" />
+                  <span>Send Email</span>
+                </div>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/shayaanazeem1')}>
-                <Github className="mr-2 h-4 w-4" />
-                <span>GitHub</span>
+                <div className="flex items-center">
+                  <Github className="mr-3 h-4 w-4" />
+                  <span>GitHub</span>
+                </div>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://twitter.com/shayaan_azeem')}>
-                <Twitter className="mr-2 h-4 w-4" />
-                <span>Twitter</span>
+                <div className="flex items-center">
+                  <Twitter className="mr-3 h-4 w-4" />
+                  <span>Twitter</span>
+                </div>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://linkedin.com/in/shayaan-azeem')}>
-                <Linkedin className="mr-2 h-4 w-4" />
-                <span>LinkedIn</span>
+                <div className="flex items-center">
+                  <Linkedin className="mr-3 h-4 w-4" />
+                  <span>LinkedIn</span>
+                </div>
               </Command.Item>
             </Command.Group>
 
             {/* Settings */}
             <Command.Group heading="Settings">
               <Command.Item onSelect={toggleTheme}>
-                {theme === 'dark' ? (
-                  <Sun className="mr-2 h-4 w-4" />
-                ) : (
-                  <Moon className="mr-2 h-4 w-4" />
-                )}
-                <span>Toggle Theme</span>
+                <div className="flex items-center">
+                  {theme === 'dark' ? (
+                    <Sun className="mr-3 h-4 w-4" />
+                  ) : (
+                    <Moon className="mr-3 h-4 w-4" />
+                  )}
+                  <span>Toggle Theme</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  D
+                </kbd>
               </Command.Item>
             </Command.Group>
           </Command.List>
