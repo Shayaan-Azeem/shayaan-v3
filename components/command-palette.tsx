@@ -229,7 +229,7 @@ export default function CommandPalette({
 
   // Reusable keyboard shortcut component
   const KbdShortcut = ({ children }: { children: React.ReactNode }) => (
-    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border border-border bg-secondary font-mono font-medium text-foreground/70 opacity-100 ${
+    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-muted font-mono font-medium text-muted-foreground opacity-100 ${
       isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
     }`}>
       {children}
@@ -240,10 +240,10 @@ export default function CommandPalette({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay className="bg-black/10 dark:bg-black/20" />
-        <DialogContent className={`overflow-hidden p-0 shadow-2xl border bg-muted/50 backdrop-blur-sm ${
+        <DialogContent className={`overflow-hidden p-0 shadow-2xl border border-white/20 bg-muted/50 backdrop-blur-sm ${
           isMobile 
-            ? 'max-w-[90vw] max-h-[85vh] m-4 w-[calc(100vw-2rem)] rounded-xl border-border/50' 
-            : 'max-w-lg rounded-lg border-border/50'
+            ? 'max-w-[90vw] max-h-[85vh] m-4 w-[calc(100vw-2rem)] rounded-xl' 
+            : 'max-w-lg rounded-lg'
         }`}>
         <DialogTitle className="sr-only">
           command palette
@@ -252,26 +252,26 @@ export default function CommandPalette({
           isMobile ? '[&_[cmdk-input]]:h-10 [&_[cmdk-item]]:py-2.5' : ''
         }`}>
           {/* Header */}
-          <div className={`flex items-center gap-3 px-4 border-b border-border/30 bg-card ${
+          <div className={`flex items-center gap-3 px-4 border-b border-white/10 ${
             isMobile ? 'py-3' : 'py-4'
           }`}>
-            <headerInfo.icon className="h-5 w-5 text-foreground/70" />
+            <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
             <div>
-              <h2 className={`font-semibold text-foreground ${isMobile ? 'text-base' : 'text-lg'}`}>{headerInfo.title}</h2>
+              <h2 className={`font-semibold ${isMobile ? 'text-base' : 'text-lg'}`}>{headerInfo.title}</h2>
               <p className={`text-muted-foreground ${isMobile ? 'text-xs' : 'text-sm'}`}>{headerInfo.subtitle}</p>
             </div>
           </div>
           
           {/* Search Input */}
-          <div className="flex items-center border-b border-border/30 px-4 bg-card" cmdk-input-wrapper="">
+          <div className="flex items-center border-b border-white/10 px-4" cmdk-input-wrapper="">
             <Command.Input
               placeholder="search for actions..."
-              className={`flex w-full rounded-md bg-transparent outline-none placeholder:text-muted-foreground text-foreground disabled:cursor-not-allowed disabled:opacity-50 ${
+              className={`flex w-full rounded-md bg-transparent outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 ${
                 isMobile ? 'h-10 py-2 text-sm' : 'h-12 py-3 text-sm'
               }`}
             />
           </div>
-          <Command.List className={`overflow-y-auto overflow-x-hidden bg-card ${
+          <Command.List className={`overflow-y-auto overflow-x-hidden ${
             isMobile ? 'max-h-[50vh]' : 'max-h-[300px]'
           }`}>
             <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
@@ -345,14 +345,18 @@ export default function CommandPalette({
                   <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>vibetype</span>
                 </div>
-                <KbdShortcut>shift + v</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + v
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')}>
                 <div className="flex items-center">
                   <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>shoppy wrapped</span>
                 </div>
-                <KbdShortcut>shift + s</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + s
+                </kbd>
               </Command.Item>
             </Command.Group>
 
@@ -365,9 +369,7 @@ export default function CommandPalette({
                       <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                       <span>{item.title.toLowerCase()}</span>
                     </div>
-                    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border border-border bg-secondary font-mono font-medium text-foreground/70 opacity-100 ${
-                      isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
-                    }`}>
+                    <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                       {index + 1}
                     </kbd>
                   </Command.Item>
@@ -382,28 +384,36 @@ export default function CommandPalette({
                   <Twitter className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>twitter</span>
                 </div>
-                <KbdShortcut>shift + x</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + x
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://linkedin.com/in/shayaan-azeem')}>
                 <div className="flex items-center">
                   <Linkedin className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>linkedin</span>
                 </div>
-                <KbdShortcut>shift + l</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + l
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/shayaanazeem1')}>
                 <div className="flex items-center">
                   <Github className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>github</span>
                 </div>
-                <KbdShortcut>shift + g</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + g
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={handleEmail}>
                 <div className="flex items-center">
                   <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>send email</span>
                 </div>
-                <KbdShortcut>@</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  @
+                </kbd>
               </Command.Item>
             </Command.Group>
 
@@ -418,7 +428,9 @@ export default function CommandPalette({
                   )}
                   <span>toggle theme</span>
                 </div>
-                <KbdShortcut>shift + d</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + d
+                </kbd>
               </Command.Item>
               
               <Command.Item onSelect={setReadingMode}>
@@ -444,12 +456,12 @@ export default function CommandPalette({
           </Command.List>
           
           {/* Footer Instructions */}
-          <div className={`flex items-center justify-between px-4 border-t border-border/30 text-muted-foreground bg-card ${
+          <div className={`flex items-center justify-between px-4 border-t border-white/10 text-muted-foreground ${
             isMobile ? 'py-2 text-[10px] flex-col gap-1.5 sm:flex-row sm:gap-0' : 'py-3 text-xs'
           }`}>
             <div className="flex items-center gap-2">
               <span>type</span>
-              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border border-border bg-secondary font-mono font-medium text-foreground/70 ${
+              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-background font-mono font-medium ${
                 isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
               }`}>
                 ↵
@@ -458,7 +470,7 @@ export default function CommandPalette({
             </div>
             <div className="flex items-center gap-2">
               <span>press</span>
-              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border border-border bg-secondary font-mono font-medium text-foreground/70 ${
+              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-background font-mono font-medium ${
                 isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
               }`}>
                 esc
