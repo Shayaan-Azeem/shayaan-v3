@@ -43,32 +43,42 @@ export default function CommandPalette({
   const [open, setOpen] = useState(false)
   const { theme, setTheme } = useTheme()
 
-  // Toggle command palette with Cmd+K / Ctrl+K and handle shortcuts
+  // Toggle command palette with Cmd+K / Ctrl+K and handle global shortcuts
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
+      // Always handle Cmd+K / Ctrl+K to toggle command palette
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
         setOpen((open) => !open)
+        return
       }
       
-      // Handle shortcuts when command palette is open, but not when typing in search
-      if (open && !e.metaKey && !e.ctrlKey && !e.altKey) {
-        // Skip shortcuts if user is typing in the search input
-        const target = e.target as HTMLElement
-        if (target.tagName === 'INPUT') {
-          return
-        }
-        
-        e.preventDefault()
-        
+      // Skip shortcuts if user is typing in an input field (except when command palette is open)
+      const target = e.target as HTMLElement
+      const isTyping = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable
+      
+      // If command palette is open, skip shortcuts only when typing in the search input
+      if (open && isTyping) {
+        return
+      }
+      
+      // If command palette is closed, skip shortcuts when typing in any input
+      if (!open && isTyping) {
+        return
+      }
+      
+      // Handle global shortcuts (work whether command palette is open or closed)
+      if (!e.metaKey && !e.ctrlKey && !e.altKey) {
         // Special case for @ key (Shift+2 on many keyboards)
         if (e.key === '@') {
+          e.preventDefault()
           handleEmail()
           return
         }
         
         // Handle Shift + letter shortcuts
         if (e.shiftKey) {
+          e.preventDefault()
           switch (e.key.toLowerCase()) {
             case 'a':
               handleNavigate('about')
@@ -123,17 +133,20 @@ export default function CommandPalette({
               break
           }
         } else {
-          // Handle number shortcuts (without shift)
-          switch (e.key) {
-            case '1':
-              if (fieldnotes[0]) handleSelectFieldnote(fieldnotes[0].slug)
-              break
-            case '2':
-              if (fieldnotes[1]) handleSelectFieldnote(fieldnotes[1].slug)
-              break
-            case '3':
-              if (fieldnotes[2]) handleSelectFieldnote(fieldnotes[2].slug)
-              break
+          // Handle number shortcuts (without shift) - only when command palette is open
+          if (open) {
+            e.preventDefault()
+            switch (e.key) {
+              case '1':
+                if (fieldnotes[0]) handleSelectFieldnote(fieldnotes[0].slug)
+                break
+              case '2':
+                if (fieldnotes[1]) handleSelectFieldnote(fieldnotes[1].slug)
+                break
+              case '3':
+                if (fieldnotes[2]) handleSelectFieldnote(fieldnotes[2].slug)
+                break
+            }
           }
         }
       }
