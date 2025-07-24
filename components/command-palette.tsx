@@ -204,7 +204,7 @@ export default function CommandPalette({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="overflow-hidden p-0 shadow-lg border-border">
-        <Command className="[&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-4 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between">
+        <Command className="[&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-4 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between">
           {/* Header */}
           <div className="flex items-center gap-3 px-4 py-4 border-b">
             <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
@@ -217,13 +217,13 @@ export default function CommandPalette({
           {/* Search Input */}
           <div className="flex items-center border-b px-4" cmdk-input-wrapper="">
             <Command.Input
-              placeholder="Search for actions..."
+              placeholder="search for actions..."
               className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
           <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden">
             <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
-              No results found.
+              no results found.
             </Command.Empty>
             
             {/* Navigation */}
@@ -382,7 +382,7 @@ export default function CommandPalette({
             </Command.Group>
 
             {/* Settings */}
-            <Command.Group heading="Settings">
+            <Command.Group heading="settings">
               <Command.Item onSelect={toggleTheme}>
                 <div className="flex items-center">
                   {theme === 'dark' ? (
@@ -390,10 +390,10 @@ export default function CommandPalette({
                   ) : (
                     <Moon className="mr-3 h-4 w-4 text-muted-foreground" />
                   )}
-                  <span>Toggle Theme</span>
+                  <span>toggle theme</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  D
+                  ⇧D
                 </kbd>
               </Command.Item>
             </Command.Group>
@@ -402,14 +402,14 @@ export default function CommandPalette({
           {/* Footer Instructions */}
           <div className="flex items-center justify-between px-4 py-3 border-t bg-muted/50 text-xs text-muted-foreground">
             <div className="flex items-center gap-2">
-              <span>Type</span>
+              <span>type</span>
               <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-[10px] font-medium">
                 ↵
               </kbd>
               <span>to select</span>
             </div>
             <div className="flex items-center gap-2">
-              <span>Press</span>
+              <span>press</span>
               <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-[10px] font-medium">
                 esc
               </kbd>
