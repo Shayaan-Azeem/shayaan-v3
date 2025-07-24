@@ -279,10 +279,16 @@ export default function CommandPalette({
               ? 'border-b border-green-200/50'
               : 'border-b border-gray-200/40'
           }`}>
-            <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
+            <headerInfo.icon className={`h-5 w-5 ${
+              theme === 'reading' ? 'text-[#3E2F1C]' : 'text-muted-foreground'
+            }`} />
             <div>
-              <h2 className={`font-semibold ${isMobile ? 'text-base' : 'text-lg'}`}>{headerInfo.title}</h2>
-              <p className={`text-muted-foreground ${isMobile ? 'text-xs' : 'text-sm'}`}>{headerInfo.subtitle}</p>
+              <h2 className={`font-semibold ${isMobile ? 'text-base' : 'text-lg'} ${
+                theme === 'reading' ? 'text-[#2C2C2C]' : ''
+              }`}>{headerInfo.title}</h2>
+              <p className={`${isMobile ? 'text-xs' : 'text-sm'} ${
+                theme === 'reading' ? 'text-[#3E2F1C]' : 'text-muted-foreground'
+              }`}>{headerInfo.subtitle}</p>
             </div>
           </div>
           
@@ -301,6 +307,8 @@ export default function CommandPalette({
               } ${
                 theme === 'matcha'
                   ? 'placeholder:text-green-500'
+                  : theme === 'reading'
+                  ? 'placeholder:text-[#8B7355]'
                   : 'placeholder:text-muted-foreground'
               }`}
             />
@@ -308,7 +316,9 @@ export default function CommandPalette({
           <Command.List className={`overflow-y-auto overflow-x-hidden ${
             isMobile ? 'max-h-[50vh]' : 'max-h-[300px]'
           }`}>
-            <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
+            <Command.Empty className={`py-6 text-center text-sm ${
+              theme === 'reading' ? 'text-[#3E2F1C]' : 'text-muted-foreground'
+            }`}>
               no results found.
             </Command.Empty>
             
@@ -494,6 +504,8 @@ export default function CommandPalette({
               } ${
                 theme === 'matcha'
                   ? 'bg-green-100 border-green-200 text-green-800'
+                  : theme === 'reading'
+                  ? 'bg-[#F2EDE7] text-[#000] border-[#DDD4C7]'
                   : 'bg-background border-border'
               }`}>
                 ↵
@@ -507,6 +519,8 @@ export default function CommandPalette({
               } ${
                 theme === 'matcha'
                   ? 'bg-green-100 border-green-200 text-green-800'
+                  : theme === 'reading'
+                  ? 'bg-[#F2EDE7] text-[#000] border-[#DDD4C7]'
                   : 'bg-background border-border'
               }`}>
                 esc
