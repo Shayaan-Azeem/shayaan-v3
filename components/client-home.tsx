@@ -14,7 +14,7 @@ import CommandPalette from "@/components/command-palette"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, User, Briefcase, Code, BookOpen, Heart, Bookmark } from "lucide-react"
+import { ChevronLeft, ChevronRight, User, Briefcase, Code, BookOpen, Heart, Bookmark, Search } from "lucide-react"
 
 
 interface ClientHomeProps {
