@@ -290,44 +290,41 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               
               {/* Project sub-items */}
               {section === "projects" && activeSection === "projects" && (
-                <div className="mt-2 sm:mt-4 space-y-1 sm:space-y-2">
+                <div className="mt-4 space-y-2">
                   <button
                     onClick={selectTensorForest}
                     className={cn(
-                      "block w-full text-right text-xs transition-colors duration-200 pl-2 sm:pl-4 leading-tight",
+                      "block w-full text-right text-xs transition-colors duration-200 pl-4",
                       activeTensorForest ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
                     )}
                   >
-                    <span className="hidden sm:inline">tensorforest</span>
-                    <span className="sm:hidden">tensor</span>
+                    tensorforest
                   </button>
                   <button
                     onClick={selectApocalypseHacks}
                     className={cn(
-                      "block w-full text-right text-xs transition-colors duration-200 pl-2 sm:pl-4 leading-tight",
+                      "block w-full text-right text-xs transition-colors duration-200 pl-4",
                       activeApocalypseHacks ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
                     )}
                   >
-                    <span className="hidden sm:inline">apocalypse hacks</span>
-                    <span className="sm:hidden">apoc</span>
+                    apocalypse hacks
                   </button>
                 </div>
               )}
               
               {/* Fieldnotes sub-items */}
               {section === "fieldnotes" && activeSection === "fieldnotes" && recentFieldnotes.length > 0 && (
-                <div className="mt-2 sm:mt-4 space-y-1 sm:space-y-2">
+                <div className="mt-4 space-y-2">
                   {recentFieldnotes.map((item) => (
                     <button
                       key={item.slug}
                       onClick={() => selectFieldnote(item.slug)}
                       className={cn(
-                        "block w-full text-right text-xs transition-colors duration-200 pl-2 sm:pl-4 leading-tight",
+                        "block w-full text-right text-xs transition-colors duration-200 pl-4",
                         activeFieldnote === item.slug ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light"
                       )}
                     >
-                      <span className="hidden sm:inline">{item.title}</span>
-                      <span className="sm:hidden">{item.title.substring(0, 8)}...</span>
+                      {item.title}
                     </button>
                   ))}
                 </div>
