@@ -16,7 +16,9 @@ import {
   Linkedin,
   Sun,
   Moon,
-  ExternalLink
+  ExternalLink,
+  BookOpenCheck,
+  Leaf
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { type ContentItem } from '@/lib/content'
@@ -109,6 +111,12 @@ export default function CommandPalette({
               break
             case 'd':
               toggleTheme()
+              break
+            case '8':
+              setReadingMode()
+              break
+            case '9':
+              setMatchaMode()
               break
             case '2':
               handleEmail() // @ key on many keyboards
@@ -204,6 +212,16 @@ export default function CommandPalette({
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
+    setOpen(false)
+  }
+
+  const setReadingMode = () => {
+    setTheme('reading')
+    setOpen(false)
+  }
+
+  const setMatchaMode = () => {
+    setTheme('matcha')
     setOpen(false)
   }
 
@@ -405,6 +423,26 @@ export default function CommandPalette({
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + d
+                </kbd>
+              </Command.Item>
+              
+              <Command.Item onSelect={setReadingMode}>
+                <div className="flex items-center">
+                  <BookOpenCheck className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>reading mode</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + 8
+                </kbd>
+              </Command.Item>
+              
+              <Command.Item onSelect={setMatchaMode}>
+                <div className="flex items-center">
+                  <Leaf className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>matcha mode</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + 9
                 </kbd>
               </Command.Item>
             </Command.Group>
