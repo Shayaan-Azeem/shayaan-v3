@@ -26,13 +26,17 @@ interface CommandPaletteProps {
   onNavigate: (section: string) => void
   onSelectFieldnote: (slug: string) => void
   onSelectProject: (project: string) => void
+  currentSection?: string
+  currentPage?: string
 }
 
 export default function CommandPalette({ 
   fieldnotes, 
   onNavigate, 
   onSelectFieldnote, 
-  onSelectProject 
+  onSelectProject,
+  currentSection = 'about',
+  currentPage = 'Home'
 }: CommandPaletteProps) {
   const [open, setOpen] = useState(false)
   const { theme, setTheme } = useTheme()
