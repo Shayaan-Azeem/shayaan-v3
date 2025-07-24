@@ -145,6 +145,9 @@ body {
     @apply px-1 py-0.5 transition-all duration-200;
     background-color: hsl(var(--highlight-blue));
   }
+  .link-blue:hover {
+    background-color: hsl(var(--highlight-blue-hover));
+  }
   
   /* Random dark hover colors */
   .hover-dark-1:hover {
