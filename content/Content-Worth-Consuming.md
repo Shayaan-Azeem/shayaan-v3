@@ -1,23 +1,3 @@
----
-
-title: "Content Worth Consuming"
-
-slug: "content-worth-consuming"
-
-date: "2024-07-23"
-
-summary: "My curated list of meaningful content"
-
-draft: false
-
----
-
-  
-
-# Content Worth Consuming IMO:
-
-  
-
 [hover-1] [the bear](https://www.fxnetworks.com/shows/the-bear) [tv show]
 
 [hover-2] [atomic habits](https://jamesclear.com/atomic-habits) – james clear [book]

@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "fieldnotes/test.md",
+                "file": "Content-Worth-Consuming.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "test"
+              "title": "Content-Worth-Consuming"
             }
           }
         ],
@@ -211,20 +211,21 @@
       "command-palette:Open command palette": false,
       "markdown-importer:Open format converter": false,
       "zk-prefixer:Create new unique note": false,
-      "random-note:Open random note": false
+      "random-note:Open random note": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "9bed441905edeec9",
   "lastOpenFiles": [
-    "Users/shayaanazeem/Documents/Shayaan Portfolio/public/Mark Zuckerberg Early Days.jpg",
+    "philosophy.md",
     "fieldnotes/test.md",
+    "Users/shayaanazeem/Documents/Shayaan Portfolio/public/Mark Zuckerberg Early Days.jpg",
     "OBSIDIAN_SETUP.md",
     "fieldnotes-template.md",
     "README.md",
     "content-worth-consuming.md",
     "about.md",
     "Untitled.md",
-    "philosophy.md",
     "templates/about-template.md",
     "Users/shayaanazeem/Documents/Shayaan Portfolio/public",
     "Users/shayaanazeem/Documents/Shayaan Portfolio",
