@@ -9,6 +9,7 @@ import type { ContentItem } from "@/lib/content"
 import MDXRenderer from "@/components/mdx-renderer"
 import ContentRenderer from "@/components/content-renderer"
 import AboutRenderer from "@/components/about-renderer"
+import ContentWorthConsumingRenderer from "@/components/content-worth-consuming-renderer"
 import HeroBanner from "@/components/hero-banner"
 
 interface ClientHomeProps {
@@ -1319,10 +1320,13 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         return (
           <div className="pt-2">
             {contentWorthConsuming ? (
-              <MDXRenderer item={contentWorthConsuming} />
+              <div>
+                <h2 className="text-4xl font-bold mb-4">{contentWorthConsuming.title}</h2>
+                <ContentWorthConsumingRenderer content={contentWorthConsuming.content} />
+              </div>
             ) : (
               <div>
-                <h2 className="text-2xl font-bold mb-4">Content Worth Consuming</h2>
+                <h2 className="text-4xl font-bold mb-4">Content Worth Consuming</h2>
                 <p className="text-muted-foreground">Content not found. Create a content-worth-consuming.md file in the content directory.</p>
               </div>
             )}
