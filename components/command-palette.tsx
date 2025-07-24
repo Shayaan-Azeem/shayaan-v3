@@ -169,13 +169,23 @@ export default function CommandPalette({
       content: 'Content Worth Consuming'
     }
 
+    const sectionDescriptions = {
+      about: 'who i am, what drives me, where i\'m headed',
+      experience: 'where i\'ve worked, what i\'ve built',
+      projects: 'things i\'ve created and shipped',
+      fieldnotes: 'my learnings, thoughts, and reflections',
+      inspirations: 'how i think and operate',
+      content: 'media that shaped my thinking'
+    }
+
     const Icon = sectionIcons[currentSection as keyof typeof sectionIcons] || FolderOpen
     const title = sectionTitles[currentSection as keyof typeof sectionTitles] || currentPage
+    const description = sectionDescriptions[currentSection as keyof typeof sectionDescriptions] || 'quick actions and navigation'
     
     return {
       icon: Icon,
       title,
-      subtitle: currentPage === 'Home' ? 'Quick actions and navigation' : `Navigate from ${title}`
+      subtitle: currentPage === 'Home' ? description : `Navigate from ${title.toLowerCase()}`
     }
   }
 
