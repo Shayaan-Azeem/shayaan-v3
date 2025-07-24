@@ -313,18 +313,14 @@ export default function CommandPalette({
                   <Heart className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to philosophy</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + m
-                </kbd>
+                <KbdShortcut>shift + m</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('content')}>
                 <div className="flex items-center">
                   <List className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to content</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + c
-                </kbd>
+                <KbdShortcut>shift + c</KbdShortcut>
               </Command.Item>
             </Command.Group>
 
@@ -335,18 +331,14 @@ export default function CommandPalette({
                   <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>tensorforest</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + t
-                </kbd>
+                <KbdShortcut>shift + t</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleSelectProject('apocalypse')}>
                 <div className="flex items-center">
                   <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>apocalypse hacks</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + h
-                </kbd>
+                <KbdShortcut>shift + h</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://www.gptfixtsfor.me/')}>
                 <div className="flex items-center">
