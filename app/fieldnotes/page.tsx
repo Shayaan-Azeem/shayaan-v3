@@ -1,9 +1,25 @@
 import Link from "next/link"
 import { getAllFieldnotes } from "@/lib/content"
 import { ModeToggle } from "@/components/mode-toggle"
+import CommandPalette from "@/components/command-palette"
 
 export default function FieldnotesPage() {
   const fieldnotes = getAllFieldnotes()
+
+  // Command palette handlers
+  const handleNavigation = (section: string) => {
+    window.location.href = `/#${section}`
+  }
+
+  const handleSelectFieldnote = (slug: string) => {
+    window.location.href = `/fieldnotes/${slug}`
+  }
+
+  const handleSelectProject = (project: string) => {
+    if (project === 'tensorforest' || project === 'apocalypse') {
+      window.location.href = `/#projects`
+    }
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
@@ -95,6 +111,14 @@ export default function FieldnotesPage() {
           </div>
         )}
       </div>
+
+      {/* Command Palette */}
+      <CommandPalette
+        fieldnotes={fieldnotes}
+        onNavigate={handleNavigation}
+        onSelectFieldnote={handleSelectFieldnote}
+        onSelectProject={handleSelectProject}
+      />
     </div>
   )
 } 
