@@ -146,7 +146,8 @@ body {
     background-color: hsl(var(--highlight-blue));
   }
   .link-blue:hover {
-    background-color: hsl(var(--highlight-blue-hover));
+    background-color: hsl(220 100% 55%);
+    color: white;
   }
   
   /* Random dark hover colors */
@@ -218,43 +219,48 @@ body {
   }
   
   .link-green {
-    @apply px-1 py-0.5 rounded-sm transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200;
     background-color: hsl(var(--highlight-green));
   }
   .link-green:hover {
-    background-color: hsl(var(--highlight-green-hover));
+    background-color: hsl(130 60% 45%);
+    color: white;
   }
   
   .link-purple {
-    @apply px-1 py-0.5 rounded-sm transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200;
     background-color: hsl(var(--highlight-purple));
   }
   .link-purple:hover {
-    background-color: hsl(var(--highlight-purple-hover));
+    background-color: hsl(280 60% 55%);
+    color: white;
   }
   
   .link-orange {
-    @apply px-1 py-0.5 rounded-sm transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200;
     background-color: hsl(var(--highlight-orange));
   }
   .link-orange:hover {
-    background-color: hsl(var(--highlight-orange-hover));
+    background-color: hsl(30 90% 55%);
+    color: white;
   }
   
   .link-pink {
-    @apply px-1 py-0.5 rounded-sm transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200;
     background-color: hsl(var(--highlight-pink));
   }
   .link-pink:hover {
-    background-color: hsl(var(--highlight-pink-hover));
+    background-color: hsl(330 60% 55%);
+    color: white;
   }
   
   .link-teal {
-    @apply px-1 py-0.5 rounded-sm transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200;
     background-color: hsl(var(--highlight-teal));
   }
   .link-teal:hover {
-    background-color: hsl(var(--highlight-teal-hover));
+    background-color: hsl(180 50% 55%);
+    color: white;
   }
   
   /* Custom golden yellow highlight for uwaterloo */
