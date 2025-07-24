@@ -108,7 +108,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
       {/* ───────────── mobile top bar ───────────── */}
-      <div className="md:hidden fixed top-4 right-4 z-50">
+      <div className="md:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
         <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1 backdrop-blur-sm">
           <Button
             variant="ghost"
