@@ -217,7 +217,7 @@ export default function CommandPalette({
         </DialogTitle>
         <Command className="[&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-4 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between">
           {/* Header */}
-          <div className="flex items-center gap-3 px-4 py-4 border-b border-white/10 bg-white/40 dark:bg-black/20">
+          <div className="flex items-center gap-3 px-4 py-4 border-b border-white/10">
             <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
             <div>
               <h2 className="text-lg font-semibold">{headerInfo.title}</h2>
@@ -411,7 +411,7 @@ export default function CommandPalette({
           </Command.List>
           
           {/* Footer Instructions */}
-          <div className="flex items-center justify-between px-4 py-3 border-t border-white/10 bg-white/20 dark:bg-black/10 text-xs text-muted-foreground">
+          <div className="flex items-center justify-between px-4 py-3 border-t border-white/10 text-xs text-muted-foreground">
             <div className="flex items-center gap-2">
               <span>type</span>
               <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-[10px] font-medium">
@@ -429,6 +429,7 @@ export default function CommandPalette({
           </div>
         </Command>
       </DialogContent>
+      </DialogPortal>
     </Dialog>
   )
 } 
