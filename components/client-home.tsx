@@ -201,6 +201,8 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         onNavigate={handleCommandNavigation}
         onSelectFieldnote={handleCommandFieldnote}
         onSelectProject={handleCommandProject}
+        currentSection={activeSection}
+        currentPage="Home"
       />
     </div>
   )

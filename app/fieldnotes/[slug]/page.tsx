@@ -93,6 +93,8 @@ export default async function FieldnotePage({ params }: FieldnotePageProps) {
           onNavigate={handleNavigation}
           onSelectFieldnote={handleSelectFieldnote}
           onSelectProject={handleSelectProject}
+          currentSection="fieldnotes"
+          currentPage={item.title}
         />
       </div>
     </div>

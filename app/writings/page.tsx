@@ -118,6 +118,8 @@ export default function WritingsPage() {
         onNavigate={handleNavigation}
         onSelectFieldnote={handleSelectFieldnote}
         onSelectProject={handleSelectProject}
+        currentSection="writings"
+        currentPage="Writings"
       />
     </div>
   )

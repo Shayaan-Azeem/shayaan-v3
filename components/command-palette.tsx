@@ -41,18 +41,79 @@ export default function CommandPalette({
   const [open, setOpen] = useState(false)
   const { theme, setTheme } = useTheme()
 
-  // Toggle command palette with Cmd+K / Ctrl+K
+  // Toggle command palette with Cmd+K / Ctrl+K and handle shortcuts
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
         setOpen((open) => !open)
       }
+      
+      // Handle shortcuts when command palette is open
+      if (open && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        e.preventDefault()
+        switch (e.key.toLowerCase()) {
+          case 'a':
+            handleNavigate('about')
+            break
+          case 'e':
+            handleNavigate('experience')
+            break
+          case 'p':
+            handleNavigate('projects')
+            break
+          case 'f':
+            handleNavigate('fieldnotes')
+            break
+          case 'm':
+            handleNavigate('inspirations')
+            break
+          case 'c':
+            handleNavigate('content')
+            break
+          case 't':
+            handleSelectProject('tensorforest')
+            break
+          case 'h':
+            handleSelectProject('apocalypse')
+            break
+          case 'v':
+            handleExternalLink('https://www.gptfixtsfor.me/')
+            break
+          case 's':
+            handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')
+            break
+          case 'x':
+            handleExternalLink('https://twitter.com/shayaan_azeem')
+            break
+          case 'l':
+            handleExternalLink('https://linkedin.com/in/shayaan-azeem')
+            break
+          case 'g':
+            handleExternalLink('https://github.com/shayaanazeem1')
+            break
+          case '@':
+            handleEmail()
+            break
+          case 'd':
+            toggleTheme()
+            break
+          case '1':
+            if (fieldnotes[0]) handleSelectFieldnote(fieldnotes[0].slug)
+            break
+          case '2':
+            if (fieldnotes[1]) handleSelectFieldnote(fieldnotes[1].slug)
+            break
+          case '3':
+            if (fieldnotes[2]) handleSelectFieldnote(fieldnotes[2].slug)
+            break
+        }
+      }
     }
 
     document.addEventListener('keydown', down)
     return () => document.removeEventListener('keydown', down)
-  }, [])
+  }, [open, fieldnotes])
 
   const handleNavigate = (section: string) => {
     onNavigate(section)
@@ -79,6 +140,38 @@ export default function CommandPalette({
     setOpen(false)
   }
 
+  // Get dynamic header info based on current page
+  const getHeaderInfo = () => {
+    const sectionIcons = {
+      about: User,
+      experience: Briefcase,
+      projects: FolderOpen,
+      fieldnotes: BookOpen,
+      inspirations: Heart,
+      content: List
+    }
+
+    const sectionTitles = {
+      about: 'About',
+      experience: 'Experience', 
+      projects: 'Projects',
+      fieldnotes: 'Fieldnotes',
+      inspirations: 'Philosophy',
+      content: 'Content Worth Consuming'
+    }
+
+    const Icon = sectionIcons[currentSection as keyof typeof sectionIcons] || FolderOpen
+    const title = sectionTitles[currentSection as keyof typeof sectionTitles] || currentPage
+    
+    return {
+      icon: Icon,
+      title,
+      subtitle: currentPage === 'Home' ? 'Quick actions and navigation' : `Navigate from ${title}`
+    }
+  }
+
+  const headerInfo = getHeaderInfo()
+
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
     setOpen(false)
@@ -90,10 +183,10 @@ export default function CommandPalette({
         <Command className="[&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-4 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between">
           {/* Header */}
           <div className="flex items-center gap-3 px-4 py-4 border-b">
-            <FolderOpen className="h-5 w-5 text-muted-foreground" />
+            <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
             <div>
-              <h2 className="text-lg font-semibold">Command Palette</h2>
-              <p className="text-sm text-muted-foreground">Quick actions and navigation</p>
+              <h2 className="text-lg font-semibold">{headerInfo.title}</h2>
+              <p className="text-sm text-muted-foreground">{headerInfo.subtitle}</p>
             </div>
           </div>
           
