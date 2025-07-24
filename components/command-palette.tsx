@@ -316,7 +316,7 @@ export default function CommandPalette({
                 theme === 'matcha'
                   ? 'placeholder:text-green-500'
                   : theme === 'reading'
-                  ? 'placeholder:text-[#8B7355]'
+                  ? 'placeholder:text-[#A0917D]'
                   : 'placeholder:text-muted-foreground'
               }`}
             />
