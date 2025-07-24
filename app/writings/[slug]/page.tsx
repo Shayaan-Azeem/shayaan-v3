@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { getContentItem, getAllWritings } from "@/lib/content"
+import { getContentItem, getAllWritings, getAllFieldnotes } from "@/lib/content"
 import { ModeToggle } from "@/components/mode-toggle"
+import CommandPalette from "@/components/command-palette"
 import MDXRenderer from "@/components/mdx-renderer"
 
 interface WritingPageProps {
@@ -37,9 +38,25 @@ export async function generateMetadata({ params }: WritingPageProps) {
 export default async function WritingPage({ params }: WritingPageProps) {
   const { slug } = await params
   const item = getContentItem('writings', slug)
+  const allFieldnotes = getAllFieldnotes()
 
   if (!item) {
     notFound()
+  }
+
+  // Command palette handlers
+  const handleNavigation = (section: string) => {
+    window.location.href = `/#${section}`
+  }
+
+  const handleSelectFieldnote = (fieldnoteSlug: string) => {
+    window.location.href = `/fieldnotes/${fieldnoteSlug}`
+  }
+
+  const handleSelectProject = (project: string) => {
+    if (project === 'tensorforest' || project === 'apocalypse') {
+      window.location.href = `/#projects`
+    }
   }
 
   return (
@@ -69,6 +86,14 @@ export default async function WritingPage({ params }: WritingPageProps) {
 
         {/* Content */}
         <MDXRenderer item={item} />
+
+        {/* Command Palette */}
+        <CommandPalette
+          fieldnotes={allFieldnotes}
+          onNavigate={handleNavigation}
+          onSelectFieldnote={handleSelectFieldnote}
+          onSelectProject={handleSelectProject}
+        />
       </div>
     </div>
   )
