@@ -382,36 +382,28 @@ export default function CommandPalette({
                   <Twitter className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>twitter</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + x
-                </kbd>
+                <KbdShortcut>shift + x</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://linkedin.com/in/shayaan-azeem')}>
                 <div className="flex items-center">
                   <Linkedin className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>linkedin</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + l
-                </kbd>
+                <KbdShortcut>shift + l</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/shayaanazeem1')}>
                 <div className="flex items-center">
                   <Github className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>github</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + g
-                </kbd>
+                <KbdShortcut>shift + g</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={handleEmail}>
                 <div className="flex items-center">
                   <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>send email</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  @
-                </kbd>
+                <KbdShortcut>@</KbdShortcut>
               </Command.Item>
             </Command.Group>
 
