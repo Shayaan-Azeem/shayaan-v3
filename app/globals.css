@@ -295,59 +295,59 @@ body {
     color: white;
   }
   
-  /* Dark mode versions for content highlights - flipped behavior */
+  /* Dark mode versions for content highlights - matching about page behavior */
   .dark .link-blue {
-    background-color: hsl(220 50% 80%);
-    color: hsl(0 0% 15%);
-  }
-  .dark .link-blue:hover {
     background-color: hsl(220 70% 25%);
     color: hsl(0 0% 98%);
   }
-  
-  .dark .link-green {
-    background-color: hsl(140 35% 78%);
+  .dark .link-blue:hover {
+    background-color: hsl(220 50% 80%);
     color: hsl(0 0% 15%);
   }
-  .dark .link-green:hover {
+  
+  .dark .link-green {
     background-color: hsl(130 50% 25%);
     color: hsl(0 0% 98%);
   }
-  
-  .dark .link-purple {
-    background-color: hsl(280 40% 75%);
+  .dark .link-green:hover {
+    background-color: hsl(140 35% 78%);
     color: hsl(0 0% 15%);
   }
-  .dark .link-purple:hover {
+  
+  .dark .link-purple {
     background-color: hsl(280 50% 25%);
     color: hsl(0 0% 98%);
   }
-  
-  .dark .link-orange {
-    background-color: hsl(30 40% 70%);
+  .dark .link-purple:hover {
+    background-color: hsl(280 40% 75%);
     color: hsl(0 0% 15%);
   }
-  .dark .link-orange:hover {
+  
+  .dark .link-orange {
     background-color: hsl(30 70% 25%);
     color: hsl(0 0% 98%);
   }
-  
-  .dark .link-pink {
-    background-color: hsl(340 35% 72%);
+  .dark .link-orange:hover {
+    background-color: hsl(30 40% 70%);
     color: hsl(0 0% 15%);
   }
-  .dark .link-pink:hover {
+  
+  .dark .link-pink {
     background-color: hsl(330 50% 25%);
     color: hsl(0 0% 98%);
   }
-  
-  .dark .link-teal {
-    background-color: hsl(190 30% 75%);
+  .dark .link-pink:hover {
+    background-color: hsl(340 35% 72%);
     color: hsl(0 0% 15%);
   }
-  .dark .link-teal:hover {
+  
+  .dark .link-teal {
     background-color: hsl(180 40% 25%);
     color: hsl(0 0% 98%);
+  }
+  .dark .link-teal:hover {
+    background-color: hsl(190 30% 75%);
+    color: hsl(0 0% 15%);
   }
   
   /* Custom golden yellow highlight for uwaterloo */
