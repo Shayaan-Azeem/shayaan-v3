@@ -814,14 +814,14 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       "how i started:",
       "some cool things i've done in the past:",
       "where do i see myself in 10 years:",
-      "projects:",
+      "projects",
       "content worth consuming imo:",
       "my philosophy:"
     ]
 
     const renderWithHeading = (title: string, content: React.ReactNode) => (
       <div className="pt-2">
-        <h2 className={cn("mb-2", boldHeadings.includes(title) && "font-bold")}>
+        <h2 className={cn("text-4xl font-bold mb-4", boldHeadings.includes(title) && "font-bold")}>
           {title}
         </h2>
         {content}
@@ -1112,7 +1112,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         )
 
       case "projects":
-        return renderWithHeading("projects:", (
+        return renderWithHeading("projects", (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
             {/* vibetype */}
             <div className="rounded-lg p-3 bg-card transition-all duration-200 group ">
