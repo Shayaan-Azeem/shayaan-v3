@@ -65,7 +65,7 @@ export default function MDXRenderer({ item }: MDXRendererProps) {
         <HeroBanner
           title={item.title}
           subtitle={item.summary}
-          date={item.date}
+          date={item.slug !== 'philosophy' && item.slug !== 'content-worth-consuming' ? item.date : undefined}
           tags={item.tags}
           backgroundImage={item.banner}
         />
