@@ -1,3 +1,11 @@
+---
+title: "Content Worth Consuming"
+slug: "content-worth-consuming"
+date: "2024-01-01"
+summary: "A curated list of books, movies, essays, and videos that are worth your time"
+draft: false
+---
+
 [hover-1] [the bear](https://www.fxnetworks.com/shows/the-bear) [tv show]
 
 [hover-2] [atomic habits](https://jamesclear.com/atomic-habits) – james clear [book]
