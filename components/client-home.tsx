@@ -13,6 +13,9 @@ import ContentWorthConsumingRenderer from "@/components/content-worth-consuming-
 import CommandPalette from "@/components/command-palette"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
+import { ChevronDown } from "lucide-react"
 
 interface ClientHomeProps {
   fieldnotes: ContentItem[]
@@ -111,8 +114,86 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       </div>
 
       <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
-        {/* ───────────── sidebar ───────────── */}
-        <nav className="md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
+        {/* ───────────── mobile dropdown navigation ───────────── */}
+        <div className="md:hidden mb-6">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="w-full justify-between">
+              <span className="font-medium">
+                {activeTensorForest ? "tensorforest" :
+                 activeApocalypseHacks ? "apocalypse hacks" :
+                 activeFieldnote ? fieldnotes.find(f => f.slug === activeFieldnote)?.title :
+                 activeSection === "content" ? "content worth consuming" :
+                 activeSection === "inspirations" ? "my philosophy" :
+                 activeSection}
+              </span>
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-full">
+              {sections.map((section) => (
+                <div key={section}>
+                  <DropdownMenuItem 
+                    onClick={() => selectSection(section)}
+                    className={cn(
+                      "cursor-pointer",
+                      activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) && !(section === "fieldnotes" && activeFieldnote) 
+                        ? "bg-accent text-accent-foreground font-medium" 
+                        : ""
+                    )}
+                  >
+                    {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
+                  </DropdownMenuItem>
+                  
+                  {/* Project sub-items */}
+                  {section === "projects" && activeSection === "projects" && (
+                    <>
+                      <DropdownMenuItem 
+                        onClick={selectTensorForest}
+                        className={cn(
+                          "cursor-pointer pl-6 text-sm",
+                          activeTensorForest ? "bg-accent text-accent-foreground font-medium" : ""
+                        )}
+                      >
+                        tensorforest
+                      </DropdownMenuItem>
+                      <DropdownMenuItem 
+                        onClick={selectApocalypseHacks}
+                        className={cn(
+                          "cursor-pointer pl-6 text-sm",
+                          activeApocalypseHacks ? "bg-accent text-accent-foreground font-medium" : ""
+                        )}
+                      >
+                        apocalypse hacks
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                  
+                  {/* Fieldnotes sub-items */}
+                  {section === "fieldnotes" && activeSection === "fieldnotes" && recentFieldnotes.length > 0 && (
+                    <>
+                      {recentFieldnotes.map((item) => (
+                        <DropdownMenuItem 
+                          key={item.slug}
+                          onClick={() => selectFieldnote(item.slug)}
+                          className={cn(
+                            "cursor-pointer pl-6 text-sm",
+                            activeFieldnote === item.slug ? "bg-accent text-accent-foreground font-medium" : ""
+                          )}
+                        >
+                          {item.title}
+                        </DropdownMenuItem>
+                      ))}
+                    </>
+                  )}
+                </div>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
+        {/* ───────────── desktop sidebar ───────────── */}
+        <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
           {sections.map((section) => (
             <div key={section}>
               {/* Main section button */}
