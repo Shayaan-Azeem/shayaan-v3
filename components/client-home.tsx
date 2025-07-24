@@ -103,7 +103,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                     : "text-muted-foreground/70 hover:text-muted-foreground",
                 )}
               >
-{section === "content" ? "content worth consuming imo" : section === "inspirations" ? "my philosophy" : section}
+{section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
               </button>
               
               {/* Project sub-items */}
