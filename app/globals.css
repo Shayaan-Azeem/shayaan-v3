@@ -14,76 +14,6 @@ body {
   }
 }
 
-/* Matcha theme specific styles */
-.matcha .command-palette-content {
-  background-color: rgba(240, 253, 244, 0.9); /* Light matcha green with transparency */
-  border-color: rgba(134, 239, 172, 0.3); /* Soft green border */
-}
-
-/* Matcha theme link colors */
-.matcha .link-blue {
-  background-color: hsl(110 30% 80%);
-  color: hsl(120 30% 20%);
-}
-.matcha .link-blue:hover {
-  background-color: hsl(110 40% 70%);
-  color: hsl(120 30% 15%);
-}
-
-.matcha .link-green {
-  background-color: hsl(120 40% 82%);
-  color: hsl(120 30% 20%);
-}
-.matcha .link-green:hover {
-  background-color: hsl(120 50% 72%);
-  color: hsl(120 30% 15%);
-}
-
-.matcha .link-purple {
-  background-color: hsl(130 35% 80%);
-  color: hsl(120 30% 20%);
-}
-.matcha .link-purple:hover {
-  background-color: hsl(130 45% 70%);
-  color: hsl(120 30% 15%);
-}
-
-.matcha .link-orange {
-  background-color: hsl(100 45% 82%);
-  color: hsl(120 30% 20%);
-}
-.matcha .link-orange:hover {
-  background-color: hsl(100 55% 72%);
-  color: hsl(120 30% 15%);
-}
-
-.matcha .link-pink {
-  background-color: hsl(115 40% 82%);
-  color: hsl(120 30% 20%);
-}
-.matcha .link-pink:hover {
-  background-color: hsl(115 50% 72%);
-  color: hsl(120 30% 15%);
-}
-
-.matcha .link-teal {
-  background-color: hsl(125 35% 80%);
-  color: hsl(120 30% 20%);
-}
-.matcha .link-teal:hover {
-  background-color: hsl(125 45% 70%);
-  color: hsl(120 30% 15%);
-}
-
-.matcha .footer-email {
-  background-color: hsl(120 40% 82%);
-  color: hsl(120 30% 20%);
-}
-.matcha .footer-email:hover {
-  background-color: hsl(120 30% 25%);
-  color: hsl(80 20% 97%);
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%; /* Pure white background */
@@ -187,55 +117,108 @@ body {
     --sidebar-ring: 240 5% 65%;
   }
 
-  .matcha {
-    --background: 80 20% 97%; /* Soft cream background with slight green tint */
-    --foreground: 120 30% 20%; /* Dark forest green text */
-    --muted-foreground: 90 15% 45%; /* Muted earthy green */
-    --highlight-bg: 120 40% 85%; /* Light matcha highlight */
+  /* Reading Mode - Warm yellow/sepia tones for comfortable reading */
+  .reading {
+    --background: 48 100% 96%; /* Warm off-white */
+    --foreground: 25 25% 15%; /* Dark brown text */
+    --muted-foreground: 25 15% 45%; /* Medium brown for muted text */
+    --highlight-bg: 45 100% 85%; /* Warm yellow highlight */
     
-    /* Matcha theme highlight colors - all in matcha green family */
-    --highlight-blue: 110 30% 80%;
-    --highlight-blue-hover: 110 40% 70%;
-    --highlight-green: 120 40% 82%;
-    --highlight-green-hover: 120 50% 72%;
-    --highlight-purple: 130 35% 80%;
-    --highlight-purple-hover: 130 45% 70%;
-    --highlight-orange: 100 45% 82%;
-    --highlight-orange-hover: 100 55% 72%;
-    --highlight-pink: 115 40% 82%;
-    --highlight-pink-hover: 115 50% 72%;
-    --highlight-teal: 125 35% 80%;
-    --highlight-teal-hover: 125 45% 70%;
+    /* Reading mode highlight colors - warmer tones */
+    --highlight-blue: 200 40% 80%;
+    --highlight-blue-hover: 200 40% 70%;
+    --highlight-green: 110 30% 80%;
+    --highlight-green-hover: 110 30% 70%;
+    --highlight-purple: 270 30% 80%;
+    --highlight-purple-hover: 270 30% 70%;
+    --highlight-orange: 35 60% 80%;
+    --highlight-orange-hover: 35 60% 70%;
+    --highlight-pink: 320 30% 80%;
+    --highlight-pink-hover: 320 30% 70%;
+    --highlight-teal: 170 25% 80%;
+    --highlight-teal-hover: 170 25% 70%;
 
-    --card: 80 20% 97%;
-    --card-foreground: 120 30% 20%;
-    --popover: 80 20% 97%;
-    --popover-foreground: 120 30% 20%;
-    --primary: 120 30% 25%; /* Deep matcha green for primary elements */
-    --primary-foreground: 80 20% 97%; /* Cream text on green */
-    --secondary: 90 20% 92%; /* Light sage secondary */
-    --secondary-foreground: 120 30% 20%;
-    --muted: 90 20% 92%;
-    --accent: 90 20% 92%;
-    --accent-foreground: 120 30% 20%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 90 15% 85%; /* Soft green-tinted borders */
-    --input: 90 15% 85%;
-    --ring: 120 30% 25%; /* Deep matcha focus ring */
-    --chart-1: 120 50% 50%;
-    --chart-2: 100 45% 45%;
-    --chart-3: 140 40% 40%;
-    --chart-4: 80 60% 55%;
-    --chart-5: 160 35% 45%;
-    --sidebar-background: 85 20% 95%; /* Very light matcha sidebar */
-    --sidebar-foreground: 120 30% 20%;
-    --sidebar-primary: 120 30% 25%;
-    --sidebar-primary-foreground: 80 20% 97%;
-    --sidebar-accent: 90 20% 90%;
-    --sidebar-accent-foreground: 120 30% 20%;
-    --sidebar-border: 90 15% 82%;
-    --sidebar-ring: 120 30% 25%;
+    --card: 48 100% 96%;
+    --card-foreground: 25 25% 15%;
+    --popover: 48 100% 96%;
+    --popover-foreground: 25 25% 15%;
+    --primary: 25 25% 15%;
+    --primary-foreground: 48 100% 96%;
+    --secondary: 45 30% 92%;
+    --secondary-foreground: 25 25% 15%;
+    --muted: 45 30% 92%;
+    --accent: 45 30% 92%;
+    --accent-foreground: 25 25% 15%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 48 100% 96%;
+    --border: 40 20% 85%;
+    --input: 40 20% 85%;
+    --ring: 25 25% 15%;
+    --chart-1: 35 70% 55%;
+    --chart-2: 25 60% 45%;
+    --chart-3: 15 50% 35%;
+    --chart-4: 45 80% 60%;
+    --chart-5: 55 75% 65%;
+    --sidebar-background: 46 50% 94%;
+    --sidebar-foreground: 25 25% 15%;
+    --sidebar-primary: 25 25% 15%;
+    --sidebar-primary-foreground: 46 50% 94%;
+    --sidebar-accent: 45 30% 90%;
+    --sidebar-accent-foreground: 25 25% 15%;
+    --sidebar-border: 40 20% 85%;
+    --sidebar-ring: 25 25% 15%;
+  }
+
+  /* Matcha Mode - Green tones inspired by matcha */
+  .matcha {
+    --background: 120 25% 96%; /* Very light green */
+    --foreground: 120 15% 15%; /* Dark green-grey text */
+    --muted-foreground: 120 10% 45%; /* Medium green-grey for muted text */
+    --highlight-bg: 110 40% 85%; /* Matcha green highlight */
+    
+    /* Matcha mode highlight colors - green variations */
+    --highlight-blue: 180 30% 80%;
+    --highlight-blue-hover: 180 30% 70%;
+    --highlight-green: 120 40% 80%;
+    --highlight-green-hover: 120 40% 70%;
+    --highlight-purple: 140 25% 80%;
+    --highlight-purple-hover: 140 25% 70%;
+    --highlight-orange: 80 35% 80%;
+    --highlight-orange-hover: 80 35% 70%;
+    --highlight-pink: 100 25% 80%;
+    --highlight-pink-hover: 100 25% 70%;
+    --highlight-teal: 160 35% 80%;
+    --highlight-teal-hover: 160 35% 70%;
+
+    --card: 120 25% 96%;
+    --card-foreground: 120 15% 15%;
+    --popover: 120 25% 96%;
+    --popover-foreground: 120 15% 15%;
+    --primary: 120 15% 15%;
+    --primary-foreground: 120 25% 96%;
+    --secondary: 115 20% 92%;
+    --secondary-foreground: 120 15% 15%;
+    --muted: 115 20% 92%;
+    --accent: 115 20% 92%;
+    --accent-foreground: 120 15% 15%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 120 25% 96%;
+    --border: 110 15% 85%;
+    --input: 110 15% 85%;
+    --ring: 120 15% 15%;
+    --chart-1: 120 50% 55%;
+    --chart-2: 140 45% 45%;
+    --chart-3: 100 40% 35%;
+    --chart-4: 160 55% 60%;
+    --chart-5: 80 60% 65%;
+    --sidebar-background: 118 30% 94%;
+    --sidebar-foreground: 120 15% 15%;
+    --sidebar-primary: 120 15% 15%;
+    --sidebar-primary-foreground: 118 30% 94%;
+    --sidebar-accent: 115 20% 90%;
+    --sidebar-accent-foreground: 120 15% 15%;
+    --sidebar-border: 110 15% 85%;
+    --sidebar-ring: 120 15% 15%;
   }
 }
 
