@@ -16,6 +16,7 @@ import {
   Linkedin,
   Sun,
   Moon,
+  Leaf,
   ExternalLink
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
@@ -203,15 +204,35 @@ export default function CommandPalette({
   const headerInfo = getHeaderInfo()
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    if (theme === 'light') {
+      setTheme('dark')
+    } else if (theme === 'dark') {
+      setTheme('matcha')
+    } else {
+      setTheme('light')
+    }
     setOpen(false)
   }
+
+  // Get theme icon and text
+  const getThemeInfo = () => {
+    switch (theme) {
+      case 'dark':
+        return { icon: Sun, text: 'switch to matcha mode' }
+      case 'matcha':
+        return { icon: Moon, text: 'switch to light mode' }
+      default:
+        return { icon: Leaf, text: 'switch to dark mode' }
+    }
+  }
+
+  const themeInfo = getThemeInfo()
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay className="bg-transparent" />
-        <DialogContent className="overflow-hidden p-0 shadow-2xl border border-white/20 bg-white/80 dark:bg-black/60 backdrop-blur-xl backdrop-saturate-150">
+        <DialogContent className="overflow-hidden p-0 shadow-2xl border border-white/20 bg-white/80 dark:bg-black/60 matcha:bg-green-50/90 backdrop-blur-xl backdrop-saturate-150">
         <DialogTitle className="sr-only">
           command palette
         </DialogTitle>
@@ -396,12 +417,8 @@ export default function CommandPalette({
             <Command.Group heading="settings">
               <Command.Item onSelect={toggleTheme}>
                 <div className="flex items-center">
-                  {theme === 'dark' ? (
-                    <Sun className="mr-3 h-4 w-4 text-muted-foreground" />
-                  ) : (
-                    <Moon className="mr-3 h-4 w-4 text-muted-foreground" />
-                  )}
-                  <span>toggle theme</span>
+                  <themeInfo.icon className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>{themeInfo.text}</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + d

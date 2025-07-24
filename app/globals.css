@@ -116,6 +116,57 @@ body {
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 240 5% 65%;
   }
+
+  .matcha {
+    --background: 80 20% 97%; /* Soft cream background with slight green tint */
+    --foreground: 120 30% 20%; /* Dark forest green text */
+    --muted-foreground: 90 15% 45%; /* Muted earthy green */
+    --highlight-bg: 120 40% 85%; /* Light matcha highlight */
+    
+    /* Matcha theme highlight colors - all in matcha green family */
+    --highlight-blue: 110 30% 80%;
+    --highlight-blue-hover: 110 40% 70%;
+    --highlight-green: 120 40% 82%;
+    --highlight-green-hover: 120 50% 72%;
+    --highlight-purple: 130 35% 80%;
+    --highlight-purple-hover: 130 45% 70%;
+    --highlight-orange: 100 45% 82%;
+    --highlight-orange-hover: 100 55% 72%;
+    --highlight-pink: 115 40% 82%;
+    --highlight-pink-hover: 115 50% 72%;
+    --highlight-teal: 125 35% 80%;
+    --highlight-teal-hover: 125 45% 70%;
+
+    --card: 80 20% 97%;
+    --card-foreground: 120 30% 20%;
+    --popover: 80 20% 97%;
+    --popover-foreground: 120 30% 20%;
+    --primary: 120 30% 25%; /* Deep matcha green for primary elements */
+    --primary-foreground: 80 20% 97%; /* Cream text on green */
+    --secondary: 90 20% 92%; /* Light sage secondary */
+    --secondary-foreground: 120 30% 20%;
+    --muted: 90 20% 92%;
+    --accent: 90 20% 92%;
+    --accent-foreground: 120 30% 20%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 90 15% 85%; /* Soft green-tinted borders */
+    --input: 90 15% 85%;
+    --ring: 120 30% 25%; /* Deep matcha focus ring */
+    --chart-1: 120 50% 50%;
+    --chart-2: 100 45% 45%;
+    --chart-3: 140 40% 40%;
+    --chart-4: 80 60% 55%;
+    --chart-5: 160 35% 45%;
+    --sidebar-background: 85 20% 95%; /* Very light matcha sidebar */
+    --sidebar-foreground: 120 30% 20%;
+    --sidebar-primary: 120 30% 25%;
+    --sidebar-primary-foreground: 80 20% 97%;
+    --sidebar-accent: 90 20% 90%;
+    --sidebar-accent-foreground: 120 30% 20%;
+    --sidebar-border: 90 15% 82%;
+    --sidebar-ring: 120 30% 25%;
+  }
 }
 
 @layer base {
