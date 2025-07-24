@@ -120,8 +120,8 @@ body {
   /* Reading Mode - Warm yellow/sepia tones for comfortable reading */
   .reading {
     --background: 48 100% 96%; /* Warm off-white */
-    --foreground: 25 25% 15%; /* Dark brown text */
-    --muted-foreground: 25 15% 45%; /* Medium brown for muted text */
+    --foreground: 30 40% 12%; /* Warm dark brown text */
+    --muted-foreground: 30 25% 40%; /* Medium warm brown for muted text */
     --highlight-bg: 45 100% 85%; /* Warm yellow highlight */
     
     /* Reading mode highlight colors - warmer tones */
@@ -139,41 +139,41 @@ body {
     --highlight-teal-hover: 170 25% 70%;
 
     --card: 48 100% 96%;
-    --card-foreground: 25 25% 15%;
+    --card-foreground: 30 40% 12%;
     --popover: 48 100% 96%;
-    --popover-foreground: 25 25% 15%;
-    --primary: 25 25% 15%;
+    --popover-foreground: 30 40% 12%;
+    --primary: 35 45% 25%; /* Warm brown for buttons */
     --primary-foreground: 48 100% 96%;
-    --secondary: 45 30% 92%;
-    --secondary-foreground: 25 25% 15%;
-    --muted: 45 30% 92%;
-    --accent: 45 30% 92%;
-    --accent-foreground: 25 25% 15%;
+    --secondary: 42 35% 88%; /* Warm beige for secondary buttons */
+    --secondary-foreground: 30 40% 12%;
+    --muted: 42 35% 88%;
+    --accent: 40 40% 85%; /* Warm accent for tags */
+    --accent-foreground: 30 40% 12%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 48 100% 96%;
-    --border: 40 20% 85%;
-    --input: 40 20% 85%;
-    --ring: 25 25% 15%;
+    --border: 38 25% 82%;
+    --input: 38 25% 82%;
+    --ring: 30 40% 12%;
     --chart-1: 35 70% 55%;
     --chart-2: 25 60% 45%;
     --chart-3: 15 50% 35%;
     --chart-4: 45 80% 60%;
     --chart-5: 55 75% 65%;
-    --sidebar-background: 46 50% 94%;
-    --sidebar-foreground: 25 25% 15%;
-    --sidebar-primary: 25 25% 15%;
-    --sidebar-primary-foreground: 46 50% 94%;
-    --sidebar-accent: 45 30% 90%;
-    --sidebar-accent-foreground: 25 25% 15%;
-    --sidebar-border: 40 20% 85%;
-    --sidebar-ring: 25 25% 15%;
+    --sidebar-background: 46 45% 92%;
+    --sidebar-foreground: 30 40% 12%;
+    --sidebar-primary: 30 40% 12%;
+    --sidebar-primary-foreground: 46 45% 92%;
+    --sidebar-accent: 42 35% 88%;
+    --sidebar-accent-foreground: 30 40% 12%;
+    --sidebar-border: 38 25% 82%;
+    --sidebar-ring: 30 40% 12%;
   }
 
   /* Matcha Mode - Green tones inspired by matcha */
   .matcha {
     --background: 120 25% 96%; /* Very light green */
-    --foreground: 120 15% 15%; /* Dark green-grey text */
-    --muted-foreground: 120 10% 45%; /* Medium green-grey for muted text */
+    --foreground: 130 35% 18%; /* Dark sage green text */
+    --muted-foreground: 125 25% 40%; /* Medium sage green for muted text */
     --highlight-bg: 110 40% 85%; /* Matcha green highlight */
     
     /* Matcha mode highlight colors - green variations */
@@ -191,34 +191,34 @@ body {
     --highlight-teal-hover: 160 35% 70%;
 
     --card: 120 25% 96%;
-    --card-foreground: 120 15% 15%;
+    --card-foreground: 130 35% 18%;
     --popover: 120 25% 96%;
-    --popover-foreground: 120 15% 15%;
-    --primary: 120 15% 15%;
+    --popover-foreground: 130 35% 18%;
+    --primary: 125 40% 25%; /* Sage green for buttons */
     --primary-foreground: 120 25% 96%;
-    --secondary: 115 20% 92%;
-    --secondary-foreground: 120 15% 15%;
-    --muted: 115 20% 92%;
-    --accent: 115 20% 92%;
-    --accent-foreground: 120 15% 15%;
+    --secondary: 115 25% 88%; /* Light sage for secondary buttons */
+    --secondary-foreground: 130 35% 18%;
+    --muted: 115 25% 88%;
+    --accent: 118 30% 85%; /* Sage accent for tags */
+    --accent-foreground: 130 35% 18%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 120 25% 96%;
-    --border: 110 15% 85%;
-    --input: 110 15% 85%;
-    --ring: 120 15% 15%;
+    --border: 112 20% 82%;
+    --input: 112 20% 82%;
+    --ring: 130 35% 18%;
     --chart-1: 120 50% 55%;
     --chart-2: 140 45% 45%;
     --chart-3: 100 40% 35%;
     --chart-4: 160 55% 60%;
     --chart-5: 80 60% 65%;
-    --sidebar-background: 118 30% 94%;
-    --sidebar-foreground: 120 15% 15%;
-    --sidebar-primary: 120 15% 15%;
-    --sidebar-primary-foreground: 118 30% 94%;
-    --sidebar-accent: 115 20% 90%;
-    --sidebar-accent-foreground: 120 15% 15%;
-    --sidebar-border: 110 15% 85%;
-    --sidebar-ring: 120 15% 15%;
+    --sidebar-background: 118 28% 92%;
+    --sidebar-foreground: 130 35% 18%;
+    --sidebar-primary: 130 35% 18%;
+    --sidebar-primary-foreground: 118 28% 92%;
+    --sidebar-accent: 115 25% 88%;
+    --sidebar-accent-foreground: 130 35% 18%;
+    --sidebar-border: 112 20% 82%;
+    --sidebar-ring: 130 35% 18%;
   }
 }
 
