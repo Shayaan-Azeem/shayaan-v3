@@ -119,6 +119,23 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       <div className="flex items-center justify-center">
         <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1">
           <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              // Trigger command palette by simulating Cmd+K
+              const event = new KeyboardEvent('keydown', {
+                key: 'k',
+                metaKey: true,
+                bubbles: true
+              })
+              document.dispatchEvent(event)
+            }}
+            className="h-8 w-8 p-0 rounded-full"
+          >
+            <Search className="h-4 w-4" />
+          </Button>
+          <div className="w-px h-4 bg-border" />
+          <Button
             variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
             size="sm"
             onClick={() => selectSection('about')}
