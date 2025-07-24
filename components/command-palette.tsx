@@ -240,10 +240,10 @@ export default function CommandPalette({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay className="bg-black/10 dark:bg-black/20" />
-        <DialogContent className={`overflow-hidden p-0 shadow-2xl border border-white/20 bg-muted/50 backdrop-blur-sm ${
+        <DialogContent className={`overflow-hidden p-0 shadow-2xl border bg-card backdrop-blur-sm ${
           isMobile 
-            ? 'max-w-[90vw] max-h-[85vh] m-4 w-[calc(100vw-2rem)] rounded-xl' 
-            : 'max-w-lg rounded-lg'
+            ? 'max-w-[90vw] max-h-[85vh] m-4 w-[calc(100vw-2rem)] rounded-xl border-border/50' 
+            : 'max-w-lg rounded-lg border-border/50'
         }`}>
         <DialogTitle className="sr-only">
           command palette
@@ -252,21 +252,21 @@ export default function CommandPalette({
           isMobile ? '[&_[cmdk-input]]:h-10 [&_[cmdk-item]]:py-2.5' : ''
         }`}>
           {/* Header */}
-          <div className={`flex items-center gap-3 px-4 border-b border-white/10 ${
+          <div className={`flex items-center gap-3 px-4 border-b border-border/30 bg-card ${
             isMobile ? 'py-3' : 'py-4'
           }`}>
-            <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
+            <headerInfo.icon className="h-5 w-5 text-foreground/70" />
             <div>
-              <h2 className={`font-semibold ${isMobile ? 'text-base' : 'text-lg'}`}>{headerInfo.title}</h2>
+              <h2 className={`font-semibold text-foreground ${isMobile ? 'text-base' : 'text-lg'}`}>{headerInfo.title}</h2>
               <p className={`text-muted-foreground ${isMobile ? 'text-xs' : 'text-sm'}`}>{headerInfo.subtitle}</p>
             </div>
           </div>
           
           {/* Search Input */}
-          <div className="flex items-center border-b border-white/10 px-4" cmdk-input-wrapper="">
+          <div className="flex items-center border-b border-border/30 px-4 bg-card" cmdk-input-wrapper="">
             <Command.Input
               placeholder="search for actions..."
-              className={`flex w-full rounded-md bg-transparent outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 ${
+              className={`flex w-full rounded-md bg-transparent outline-none placeholder:text-muted-foreground text-foreground disabled:cursor-not-allowed disabled:opacity-50 ${
                 isMobile ? 'h-10 py-2 text-sm' : 'h-12 py-3 text-sm'
               }`}
             />
