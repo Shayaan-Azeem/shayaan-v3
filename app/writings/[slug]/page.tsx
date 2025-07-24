@@ -93,6 +93,8 @@ export default async function WritingPage({ params }: WritingPageProps) {
           onNavigate={handleNavigation}
           onSelectFieldnote={handleSelectFieldnote}
           onSelectProject={handleSelectProject}
+          currentSection="writings"
+          currentPage={item.title}
         />
       </div>
     </div>

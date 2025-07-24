@@ -52,6 +52,13 @@ export default function CommandPalette({
       // Handle shortcuts when command palette is open
       if (open && !e.metaKey && !e.ctrlKey && !e.altKey) {
         e.preventDefault()
+        
+        // Special case for @ key (Shift+2 on many keyboards)
+        if (e.key === '@') {
+          handleEmail()
+          return
+        }
+        
         switch (e.key.toLowerCase()) {
           case 'a':
             handleNavigate('about')
@@ -92,9 +99,7 @@ export default function CommandPalette({
           case 'g':
             handleExternalLink('https://github.com/shayaanazeem1')
             break
-          case '@':
-            handleEmail()
-            break
+
           case 'd':
             toggleTheme()
             break
@@ -102,7 +107,11 @@ export default function CommandPalette({
             if (fieldnotes[0]) handleSelectFieldnote(fieldnotes[0].slug)
             break
           case '2':
-            if (fieldnotes[1]) handleSelectFieldnote(fieldnotes[1].slug)
+            if (e.shiftKey) {
+              handleEmail() // @ key on many keyboards
+            } else if (fieldnotes[1]) {
+              handleSelectFieldnote(fieldnotes[1].slug)
+            }
             break
           case '3':
             if (fieldnotes[2]) handleSelectFieldnote(fieldnotes[2].slug)
