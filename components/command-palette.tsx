@@ -302,7 +302,6 @@ export default function CommandPalette({
                   : 'placeholder:text-muted-foreground'
               }`}
             />
-            />
           </div>
           <Command.List className={`overflow-y-auto overflow-x-hidden ${
             isMobile ? 'max-h-[50vh]' : 'max-h-[300px]'
@@ -419,36 +418,28 @@ export default function CommandPalette({
                   <Twitter className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>twitter</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + x
-                </kbd>
+                <KbdShortcut>shift + x</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://linkedin.com/in/shayaan-azeem')}>
                 <div className="flex items-center">
                   <Linkedin className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>linkedin</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + l
-                </kbd>
+                <KbdShortcut>shift + l</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/shayaanazeem1')}>
                 <div className="flex items-center">
                   <Github className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>github</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + g
-                </kbd>
+                <KbdShortcut>shift + g</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={handleEmail}>
                 <div className="flex items-center">
                   <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>send email</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  @
-                </kbd>
+                <KbdShortcut>@</KbdShortcut>
               </Command.Item>
             </Command.Group>
 
@@ -463,9 +454,7 @@ export default function CommandPalette({
                   )}
                   <span>toggle theme</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + d
-                </kbd>
+                <KbdShortcut>shift + d</KbdShortcut>
               </Command.Item>
               
               <Command.Item onSelect={setReadingMode}>
@@ -473,9 +462,7 @@ export default function CommandPalette({
                   <BookOpenCheck className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>reading mode</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + 8
-                </kbd>
+                <KbdShortcut>shift + 8</KbdShortcut>
               </Command.Item>
               
               <Command.Item onSelect={setMatchaMode}>
@@ -483,9 +470,7 @@ export default function CommandPalette({
                   <Leaf className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>matcha mode</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + 9
-                </kbd>
+                <KbdShortcut>shift + 9</KbdShortcut>
               </Command.Item>
             </Command.Group>
           </Command.List>
@@ -502,8 +487,12 @@ export default function CommandPalette({
           }`}>
             <div className="flex items-center gap-2">
               <span>type</span>
-              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-background font-mono font-medium ${
+              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border font-mono font-medium ${
                 isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
+              } ${
+                theme === 'matcha'
+                  ? 'bg-green-100 border-green-200 text-green-800'
+                  : 'bg-background border-border'
               }`}>
                 ↵
               </kbd>
@@ -511,8 +500,12 @@ export default function CommandPalette({
             </div>
             <div className="flex items-center gap-2">
               <span>press</span>
-              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-background font-mono font-medium ${
+              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border font-mono font-medium ${
                 isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
+              } ${
+                theme === 'matcha'
+                  ? 'bg-green-100 border-green-200 text-green-800'
+                  : 'bg-background border-border'
               }`}>
                 esc
               </kbd>
