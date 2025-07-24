@@ -14,6 +14,76 @@ body {
   }
 }
 
+/* Matcha theme specific styles */
+.matcha .command-palette-content {
+  background-color: rgba(240, 253, 244, 0.9); /* Light matcha green with transparency */
+  border-color: rgba(134, 239, 172, 0.3); /* Soft green border */
+}
+
+/* Matcha theme link colors */
+.matcha .link-blue {
+  background-color: hsl(110 30% 80%);
+  color: hsl(120 30% 20%);
+}
+.matcha .link-blue:hover {
+  background-color: hsl(110 40% 70%);
+  color: hsl(120 30% 15%);
+}
+
+.matcha .link-green {
+  background-color: hsl(120 40% 82%);
+  color: hsl(120 30% 20%);
+}
+.matcha .link-green:hover {
+  background-color: hsl(120 50% 72%);
+  color: hsl(120 30% 15%);
+}
+
+.matcha .link-purple {
+  background-color: hsl(130 35% 80%);
+  color: hsl(120 30% 20%);
+}
+.matcha .link-purple:hover {
+  background-color: hsl(130 45% 70%);
+  color: hsl(120 30% 15%);
+}
+
+.matcha .link-orange {
+  background-color: hsl(100 45% 82%);
+  color: hsl(120 30% 20%);
+}
+.matcha .link-orange:hover {
+  background-color: hsl(100 55% 72%);
+  color: hsl(120 30% 15%);
+}
+
+.matcha .link-pink {
+  background-color: hsl(115 40% 82%);
+  color: hsl(120 30% 20%);
+}
+.matcha .link-pink:hover {
+  background-color: hsl(115 50% 72%);
+  color: hsl(120 30% 15%);
+}
+
+.matcha .link-teal {
+  background-color: hsl(125 35% 80%);
+  color: hsl(120 30% 20%);
+}
+.matcha .link-teal:hover {
+  background-color: hsl(125 45% 70%);
+  color: hsl(120 30% 15%);
+}
+
+.matcha .footer-email {
+  background-color: hsl(120 40% 82%);
+  color: hsl(120 30% 20%);
+}
+.matcha .footer-email:hover {
+  background-color: hsl(120 30% 25%);
+  color: hsl(80 20% 97%);
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%; /* Pure white background */
