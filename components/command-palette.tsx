@@ -43,6 +43,7 @@ export default function CommandPalette({
 }: CommandPaletteProps) {
   const [open, setOpen] = useState(false)
   const { theme, setTheme } = useTheme()
+  const isMobile = useIsMobile()
 
   // Toggle command palette with Cmd+K / Ctrl+K and handle shortcuts
   useEffect(() => {
@@ -226,21 +227,38 @@ export default function CommandPalette({
     setOpen(false)
   }
 
+  // Reusable keyboard shortcut component
+  const KbdShortcut = ({ children }: { children: React.ReactNode }) => (
+    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-muted font-mono font-medium text-muted-foreground opacity-100 ${
+      isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
+    }`}>
+      {children}
+    </kbd>
+  )
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay className="bg-black/10 dark:bg-black/20" />
-        <DialogContent className="overflow-hidden p-0 shadow-2xl border border-white/20 bg-muted/50 backdrop-blur-sm">
+        <DialogContent className={`overflow-hidden p-0 shadow-2xl border border-white/20 bg-muted/50 backdrop-blur-sm ${
+          isMobile 
+            ? 'max-w-[90vw] max-h-[85vh] m-4 w-[calc(100vw-2rem)] rounded-xl' 
+            : 'max-w-lg rounded-lg'
+        }`}>
         <DialogTitle className="sr-only">
           command palette
         </DialogTitle>
-        <Command className="[&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-4 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between">
+        <Command className={`[&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-4 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between ${
+          isMobile ? '[&_[cmdk-input]]:h-10 [&_[cmdk-item]]:py-2.5' : ''
+        }`}>
           {/* Header */}
-          <div className="flex items-center gap-3 px-4 py-4 border-b border-white/10">
+          <div className={`flex items-center gap-3 px-4 border-b border-white/10 ${
+            isMobile ? 'py-3' : 'py-4'
+          }`}>
             <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
             <div>
-              <h2 className="text-lg font-semibold">{headerInfo.title}</h2>
-              <p className="text-sm text-muted-foreground">{headerInfo.subtitle}</p>
+              <h2 className={`font-semibold ${isMobile ? 'text-base' : 'text-lg'}`}>{headerInfo.title}</h2>
+              <p className={`text-muted-foreground ${isMobile ? 'text-xs' : 'text-sm'}`}>{headerInfo.subtitle}</p>
             </div>
           </div>
           
@@ -248,10 +266,14 @@ export default function CommandPalette({
           <div className="flex items-center border-b border-white/10 px-4" cmdk-input-wrapper="">
             <Command.Input
               placeholder="search for actions..."
-              className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+              className={`flex w-full rounded-md bg-transparent outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 ${
+                isMobile ? 'h-10 py-2 text-sm' : 'h-12 py-3 text-sm'
+              }`}
             />
           </div>
-          <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden">
+          <Command.List className={`overflow-y-auto overflow-x-hidden ${
+            isMobile ? 'max-h-[50vh]' : 'max-h-[300px]'
+          }`}>
             <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
               no results found.
             </Command.Empty>
@@ -450,17 +472,23 @@ export default function CommandPalette({
           </Command.List>
           
           {/* Footer Instructions */}
-          <div className="flex items-center justify-between px-4 py-3 border-t border-white/10 text-xs text-muted-foreground">
+          <div className={`flex items-center justify-between px-4 border-t border-white/10 text-muted-foreground ${
+            isMobile ? 'py-2 text-[10px] flex-col gap-1.5 sm:flex-row sm:gap-0' : 'py-3 text-xs'
+          }`}>
             <div className="flex items-center gap-2">
               <span>type</span>
-              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-[10px] font-medium">
+              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-background font-mono font-medium ${
+                isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
+              }`}>
                 ↵
               </kbd>
               <span>to select</span>
             </div>
             <div className="flex items-center gap-2">
               <span>press</span>
-              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-[10px] font-medium">
+              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-background font-mono font-medium ${
+                isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
+              }`}>
                 esc
               </kbd>
               <span>to close</span>
