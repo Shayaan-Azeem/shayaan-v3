@@ -251,7 +251,7 @@ export default function CommandPalette({
         } ${
           theme === 'dark' || theme === 'reading' || theme === 'matcha'
             ? 'border border-white/20 bg-muted/50'
-            : 'border border-gray-200/60 bg-white/80'
+            : 'border border-gray-200/60 bg-white/70'
         }`}>
         <DialogTitle className="sr-only">
           command palette
