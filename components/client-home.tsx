@@ -13,6 +13,9 @@ import ContentWorthConsumingRenderer from "@/components/content-worth-consuming-
 import CommandPalette from "@/components/command-palette"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react"
 
 
 interface ClientHomeProps {
@@ -100,6 +103,69 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   // Get recent fieldnotes for sidebar (first 3)
   const recentFieldnotes = fieldnotes.slice(0, 3)
 
+  // Navigation order for arrow controls
+  const getNavigationItems = () => {
+    const items = [
+      { type: 'section', id: 'about', label: 'about' },
+      { type: 'section', id: 'experience', label: 'experience' },
+      { type: 'section', id: 'projects', label: 'projects' },
+      { type: 'project', id: 'tensorforest', label: 'tensorforest' },
+      { type: 'project', id: 'apocalypse', label: 'apocalypse hacks' },
+      { type: 'section', id: 'fieldnotes', label: 'fieldnotes' },
+      ...recentFieldnotes.map(f => ({ type: 'fieldnote', id: f.slug, label: f.title })),
+      { type: 'section', id: 'inspirations', label: 'my philosophy' },
+      { type: 'section', id: 'content', label: 'content worth consuming' },
+    ]
+    return items
+  }
+
+  const getCurrentItemIndex = () => {
+    const items = getNavigationItems()
+    if (activeTensorForest) return items.findIndex(item => item.id === 'tensorforest')
+    if (activeApocalypseHacks) return items.findIndex(item => item.id === 'apocalypse')
+    if (activeFieldnote) return items.findIndex(item => item.id === activeFieldnote)
+    return items.findIndex(item => item.id === activeSection)
+  }
+
+  const navigateToItem = (index: number) => {
+    const items = getNavigationItems()
+    const item = items[index]
+    if (!item) return
+
+    if (item.type === 'section') {
+      selectSection(item.id as SectionKey)
+    } else if (item.type === 'project') {
+      if (item.id === 'tensorforest') selectTensorForest()
+      else if (item.id === 'apocalypse') selectApocalypseHacks()
+    } else if (item.type === 'fieldnote') {
+      selectFieldnote(item.id)
+    }
+  }
+
+  const navigatePrevious = () => {
+    const currentIndex = getCurrentItemIndex()
+    if (currentIndex > 0) {
+      navigateToItem(currentIndex - 1)
+    }
+  }
+
+  const navigateNext = () => {
+    const currentIndex = getCurrentItemIndex()
+    const items = getNavigationItems()
+    if (currentIndex < items.length - 1) {
+      navigateToItem(currentIndex + 1)
+    }
+  }
+
+  const getCurrentLabel = () => {
+    if (activeTensorForest) return "tensorforest"
+    if (activeApocalypseHacks) return "apocalypse hacks"
+    if (activeFieldnote) return fieldnotes.find(f => f.slug === activeFieldnote)?.title || "fieldnote"
+    if (activeSection === "content") return "content worth consuming"
+    if (activeSection === "inspirations") return "my philosophy"
+    return activeSection
+  }
+
   /* ────────────────────────────────
      render
   ────────────────────────────────── */
@@ -111,30 +177,115 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         <ModeToggle />
       </div>
 
-            <div className="max-w-3xl w-full grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr] md:grid-cols-[120px_1fr] gap-4 sm:gap-6 md:gap-8 lg:gap-12">
-        {/* ───────────── compact sidebar (all screens) ───────────── */}
-        <nav className="text-right space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-12 text-xs sm:text-sm text-muted-foreground sticky top-12 self-start">
+            <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
+        {/* ───────────── mobile navigation ───────────── */}
+        <div className="md:hidden mb-6">
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={navigatePrevious}
+              disabled={getCurrentItemIndex() === 0}
+              className="p-2 h-10 w-10 shrink-0 disabled:opacity-30"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="flex-1 justify-between">
+                  <span className="font-medium truncate">{getCurrentLabel()}</span>
+                  <ChevronDown className="h-4 w-4 shrink-0 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-64">
+                {sections.map((section) => (
+                  <div key={section}>
+                    <DropdownMenuItem 
+                      onClick={() => selectSection(section)}
+                      className={cn(
+                        "cursor-pointer",
+                        activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) && !(section === "fieldnotes" && activeFieldnote) 
+                          ? "bg-accent text-accent-foreground font-medium" 
+                          : ""
+                      )}
+                    >
+                      {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
+                    </DropdownMenuItem>
+                    
+                    {/* Project sub-items */}
+                    {section === "projects" && activeSection === "projects" && (
+                      <>
+                        <DropdownMenuItem 
+                          onClick={selectTensorForest}
+                          className={cn(
+                            "cursor-pointer pl-6 text-sm",
+                            activeTensorForest ? "bg-accent text-accent-foreground font-medium" : ""
+                          )}
+                        >
+                          tensorforest
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={selectApocalypseHacks}
+                          className={cn(
+                            "cursor-pointer pl-6 text-sm",
+                            activeApocalypseHacks ? "bg-accent text-accent-foreground font-medium" : ""
+                          )}
+                        >
+                          apocalypse hacks
+                        </DropdownMenuItem>
+                      </>
+                    )}
+                    
+                    {/* Fieldnotes sub-items */}
+                    {section === "fieldnotes" && activeSection === "fieldnotes" && recentFieldnotes.length > 0 && (
+                      <>
+                        {recentFieldnotes.map((item) => (
+                          <DropdownMenuItem 
+                            key={item.slug}
+                            onClick={() => selectFieldnote(item.slug)}
+                            className={cn(
+                              "cursor-pointer pl-6 text-sm",
+                              activeFieldnote === item.slug ? "bg-accent text-accent-foreground font-medium" : ""
+                            )}
+                          >
+                            {item.title}
+                          </DropdownMenuItem>
+                        ))}
+                      </>
+                    )}
+                  </div>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={navigateNext}
+              disabled={getCurrentItemIndex() === getNavigationItems().length - 1}
+              className="p-2 h-10 w-10 shrink-0 disabled:opacity-30"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* ───────────── desktop sidebar ───────────── */}
+        <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
           {sections.map((section) => (
             <div key={section}>
               {/* Main section button */}
               <button
                 onClick={() => selectSection(section)}
                 className={cn(
-                  "block w-full text-right transition-colors duration-200 leading-tight",
+                  "block w-full text-right transition-colors duration-200",
                   activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) && !(section === "fieldnotes" && activeFieldnote) 
                     ? "text-foreground font-medium" 
                     : "text-muted-foreground/70 hover:text-muted-foreground",
                 )}
               >
-                <span className="hidden sm:inline">
-                  {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
-                </span>
-                <span className="sm:hidden">
-                  {section === "content" ? "content" : 
-                   section === "inspirations" ? "philosophy" : 
-                   section === "experience" ? "exp" :
-                   section}
-                </span>
+                {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
               </button>
               
               {/* Project sub-items */}
