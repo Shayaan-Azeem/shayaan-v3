@@ -83,11 +83,21 @@ export default function CommandPalette({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="overflow-hidden p-0 shadow-lg border-border">
-        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between">
-          <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
+        <Command className="[&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-4 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between">
+          {/* Header */}
+          <div className="flex items-center gap-3 px-4 py-4 border-b">
+            <FolderOpen className="h-5 w-5 text-muted-foreground" />
+            <div>
+              <h2 className="text-lg font-semibold">Command Palette</h2>
+              <p className="text-sm text-muted-foreground">Quick actions and navigation</p>
+            </div>
+          </div>
+          
+          {/* Search Input */}
+          <div className="flex items-center border-b px-4" cmdk-input-wrapper="">
             <Command.Input
-              placeholder="Type a command or search..."
-              className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="Search for actions..."
+              className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
           <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden">
@@ -96,11 +106,11 @@ export default function CommandPalette({
             </Command.Empty>
             
             {/* Navigation */}
-            <Command.Group heading="Navigate">
+            <Command.Group heading="Navigation">
               <Command.Item onSelect={() => handleNavigate('about')}>
                 <div className="flex items-center">
-                  <User className="mr-3 h-4 w-4" />
-                  <span>About</span>
+                  <User className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>Go to About</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   A
@@ -108,8 +118,8 @@ export default function CommandPalette({
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('experience')}>
                 <div className="flex items-center">
-                  <Briefcase className="mr-3 h-4 w-4" />
-                  <span>Experience</span>
+                  <Briefcase className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>Go to Experience</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   E
@@ -117,8 +127,8 @@ export default function CommandPalette({
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('projects')}>
                 <div className="flex items-center">
-                  <FolderOpen className="mr-3 h-4 w-4" />
-                  <span>Projects</span>
+                  <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>Go to Projects</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   P
@@ -126,8 +136,8 @@ export default function CommandPalette({
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('fieldnotes')}>
                 <div className="flex items-center">
-                  <BookOpen className="mr-3 h-4 w-4" />
-                  <span>Fieldnotes</span>
+                  <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>Go to Fieldnotes</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   F
@@ -135,8 +145,8 @@ export default function CommandPalette({
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('inspirations')}>
                 <div className="flex items-center">
-                  <Heart className="mr-3 h-4 w-4" />
-                  <span>My Philosophy</span>
+                  <Heart className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>Go to Philosophy</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   M
@@ -144,8 +154,8 @@ export default function CommandPalette({
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('content')}>
                 <div className="flex items-center">
-                  <List className="mr-3 h-4 w-4" />
-                  <span>Content Worth Consuming</span>
+                  <List className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>Go to Content</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   C
@@ -157,7 +167,7 @@ export default function CommandPalette({
             <Command.Group heading="Projects">
               <Command.Item onSelect={() => handleSelectProject('tensorforest')}>
                 <div className="flex items-center">
-                  <FolderOpen className="mr-3 h-4 w-4" />
+                  <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>TensorForest</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
@@ -166,7 +176,7 @@ export default function CommandPalette({
               </Command.Item>
               <Command.Item onSelect={() => handleSelectProject('apocalypse')}>
                 <div className="flex items-center">
-                  <FolderOpen className="mr-3 h-4 w-4" />
+                  <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>Apocalypse Hacks</span>
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
@@ -175,57 +185,78 @@ export default function CommandPalette({
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://www.gptfixtsfor.me/')}>
                 <div className="flex items-center">
-                  <ExternalLink className="mr-3 h-4 w-4" />
+                  <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>VibeType</span>
                 </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  V
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')}>
                 <div className="flex items-center">
-                  <ExternalLink className="mr-3 h-4 w-4" />
+                  <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>Shoppy Wrapped</span>
                 </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  S
+                </kbd>
               </Command.Item>
             </Command.Group>
 
             {/* Recent Fieldnotes */}
             {fieldnotes.length > 0 && (
               <Command.Group heading="Recent Fieldnotes">
-                {fieldnotes.slice(0, 5).map((item) => (
+                {fieldnotes.slice(0, 3).map((item, index) => (
                   <Command.Item key={item.slug} onSelect={() => handleSelectFieldnote(item.slug)}>
                     <div className="flex items-center">
-                      <BookOpen className="mr-3 h-4 w-4" />
+                      <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                       <span>{item.title}</span>
                     </div>
+                    <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                      {index + 1}
+                    </kbd>
                   </Command.Item>
                 ))}
               </Command.Group>
             )}
 
-            {/* Social & Contact */}
-            <Command.Group heading="Connect">
-              <Command.Item onSelect={handleEmail}>
-                <div className="flex items-center">
-                  <Mail className="mr-3 h-4 w-4" />
-                  <span>Send Email</span>
-                </div>
-              </Command.Item>
-              <Command.Item onSelect={() => handleExternalLink('https://github.com/shayaanazeem1')}>
-                <div className="flex items-center">
-                  <Github className="mr-3 h-4 w-4" />
-                  <span>GitHub</span>
-                </div>
-              </Command.Item>
+            {/* Links */}
+            <Command.Group heading="Links">
               <Command.Item onSelect={() => handleExternalLink('https://twitter.com/shayaan_azeem')}>
                 <div className="flex items-center">
-                  <Twitter className="mr-3 h-4 w-4" />
-                  <span>Twitter</span>
+                  <Twitter className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>X Profile</span>
                 </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  X
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://linkedin.com/in/shayaan-azeem')}>
                 <div className="flex items-center">
-                  <Linkedin className="mr-3 h-4 w-4" />
-                  <span>LinkedIn</span>
+                  <Linkedin className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>LinkedIn Profile</span>
                 </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  L
+                </kbd>
+              </Command.Item>
+              <Command.Item onSelect={() => handleExternalLink('https://github.com/shayaanazeem1')}>
+                <div className="flex items-center">
+                  <Github className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>GitHub Profile</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  G
+                </kbd>
+              </Command.Item>
+              <Command.Item onSelect={handleEmail}>
+                <div className="flex items-center">
+                  <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>Send Email</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  @
+                </kbd>
               </Command.Item>
             </Command.Group>
 
