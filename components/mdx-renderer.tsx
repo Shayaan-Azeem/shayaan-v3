@@ -75,24 +75,37 @@ export default function MDXRenderer({ item }: MDXRendererProps) {
       {!item.banner && (
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-4">{item.title}</h1>
-          <div className="flex items-center gap-4 text-muted-foreground text-sm">
-            <time dateTime={item.date}>
-              {new Date(item.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-            {item.tags.length > 0 && (
-              <div className="flex gap-2">
-                {item.tags.map((tag) => (
-                  <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Hide date for philosophy and content-worth-consuming pages */}
+          {item.slug !== 'philosophy' && item.slug !== 'content-worth-consuming' && (
+            <div className="flex items-center gap-4 text-muted-foreground text-sm">
+              <time dateTime={item.date}>
+                {new Date(item.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+              {item.tags.length > 0 && (
+                <div className="flex gap-2">
+                  {item.tags.map((tag) => (
+                    <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+          {/* Show tags separately for pages without dates */}
+          {(item.slug === 'philosophy' || item.slug === 'content-worth-consuming') && item.tags.length > 0 && (
+            <div className="flex gap-2 mb-4">
+              {item.tags.map((tag) => (
+                <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
           {item.summary && (
             <p className="text-lg text-muted-foreground mt-4">{item.summary}</p>
           )}
