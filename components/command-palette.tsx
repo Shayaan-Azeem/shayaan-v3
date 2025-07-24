@@ -365,7 +365,9 @@ export default function CommandPalette({
                       <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                       <span>{item.title.toLowerCase()}</span>
                     </div>
-                    <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border border-border bg-secondary font-mono font-medium text-foreground/70 opacity-100 ${
+                      isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
+                    }`}>
                       {index + 1}
                     </kbd>
                   </Command.Item>
