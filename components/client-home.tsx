@@ -236,32 +236,39 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               <ChevronLeft className="h-4 w-4" />
             </Button>
             
-            <div className="flex-1 h-24 overflow-hidden">
+            <div 
+              className="flex-1 h-24 overflow-hidden cursor-grab active:cursor-grabbing"
+              onWheel={handleScroll}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
               <div 
                 className="flex flex-col h-full justify-center relative"
                 style={{
-                  transform: `translateY(${-getCurrentItemIndex() * 32}px)`,
+                  transform: `translateY(${-getCurrentItemIndex() * 32 + 48}px)`,
                   transition: 'transform 0.3s ease-out'
                 }}
               >
                 {getNavigationItems().map((item, index) => {
                   const currentIndex = getCurrentItemIndex()
                   const isActive = index === currentIndex
-                  const isAdjacent = Math.abs(index - currentIndex) === 1
-                  const isVisible = Math.abs(index - currentIndex) <= 1
-                  
-                  if (!isVisible) return null
+                  const distance = Math.abs(index - currentIndex)
                   
                   return (
                     <button
                       key={`${item.type}-${item.id}`}
                       onClick={() => navigateToItem(index)}
                       className={cn(
-                        "h-8 flex items-center justify-center transition-all duration-300 px-3 rounded-md text-sm",
-                        isActive && "bg-accent text-accent-foreground font-medium",
-                        isAdjacent && "text-muted-foreground/60 hover:text-muted-foreground",
-                        !isActive && !isAdjacent && "text-muted-foreground/30"
+                        "h-8 flex items-center justify-center transition-all duration-300 px-3 rounded-md text-sm flex-shrink-0",
+                        isActive && "bg-accent text-accent-foreground font-medium scale-105",
+                        distance === 1 && "text-muted-foreground/70 hover:text-muted-foreground",
+                        distance === 2 && "text-muted-foreground/40",
+                        distance >= 3 && "text-muted-foreground/20"
                       )}
+                      style={{
+                        opacity: distance <= 3 ? 1 - (distance * 0.2) : 0.2
+                      }}
                     >
                       <span className="truncate">{item.label}</span>
                     </button>
