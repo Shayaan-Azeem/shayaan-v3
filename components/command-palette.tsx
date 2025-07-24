@@ -285,36 +285,28 @@ export default function CommandPalette({
                   <User className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to about</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + a
-                </kbd>
+                <KbdShortcut>shift + a</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('experience')}>
                 <div className="flex items-center">
                   <Briefcase className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to experience</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + e
-                </kbd>
+                <KbdShortcut>shift + e</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('projects')}>
                 <div className="flex items-center">
                   <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to projects</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + p
-                </kbd>
+                <KbdShortcut>shift + p</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('fieldnotes')}>
                 <div className="flex items-center">
                   <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to fieldnotes</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + f
-                </kbd>
+                <KbdShortcut>shift + f</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('inspirations')}>
                 <div className="flex items-center">
