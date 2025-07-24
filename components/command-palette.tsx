@@ -161,12 +161,12 @@ export default function CommandPalette({
     }
 
     const sectionTitles = {
-      about: 'About',
-      experience: 'Experience', 
-      projects: 'Projects',
-      fieldnotes: 'Fieldnotes',
-      inspirations: 'Philosophy',
-      content: 'Content Worth Consuming'
+      about: 'about',
+      experience: 'experience', 
+      projects: 'projects',
+      fieldnotes: 'fieldnotes',
+      inspirations: 'philosophy',
+      content: 'content worth consuming'
     }
 
     const sectionDescriptions = {
