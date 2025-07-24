@@ -14,7 +14,7 @@ import CommandPalette from "@/components/command-palette"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, User, Briefcase, Code, BookOpen, Heart, Bookmark } from "lucide-react"
 
 
 interface ClientHomeProps {
@@ -223,71 +223,61 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       </div>
 
             <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
-        {/* ───────────── mobile navigation ───────────── */}
-        <div className="md:hidden mb-6">
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={navigatePrevious}
-              disabled={getCurrentItemIndex() === 0}
-              className="p-2 h-10 w-10 shrink-0 disabled:opacity-30"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            
-                                    <div
-                          className="flex-1 h-20 overflow-hidden cursor-grab active:cursor-grabbing relative"
-                          onWheel={handleScroll}
-                          onTouchStart={handleTouchStart}
-                          onTouchMove={handleTouchMove}
-                          onTouchEnd={handleTouchEnd}
-                        >
-                          <div
-                            className="flex flex-col h-full justify-center relative"
-                            style={{
-                              transform: `translateY(${-getCurrentItemIndex() * 40 + 40}px)`,
-                              transition: 'transform 0.3s ease-out'
-                            }}
-                          >
-                            {getNavigationItems().map((item, index) => {
-                              const currentIndex = getCurrentItemIndex()
-                              const isActive = index === currentIndex
-                              const distance = Math.abs(index - currentIndex)
-                              
-                              return (
-                                <button
-                                  key={`${item.type}-${item.id}`}
-                                  onClick={() => navigateToItem(index)}
-                                  className={cn(
-                                    "h-10 flex items-center justify-center transition-all duration-300 px-4 text-sm flex-shrink-0 relative",
-                                    isActive && "text-foreground font-bold scale-110",
-                                    distance === 1 && "text-muted-foreground font-medium scale-95",
-                                    distance === 2 && "text-muted-foreground/60 font-normal scale-90",
-                                    distance >= 3 && "text-muted-foreground/30 font-normal scale-85"
-                                  )}
-                                  style={{
-                                    opacity: isActive ? 1 : Math.max(0.3, 1 - (distance * 0.25))
-                                  }}
-                                >
-                                  <span className="truncate">{item.label}</span>
-                                </button>
-                              )
-                            })}
-                          </div>
-                        </div>
-
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={navigateNext}
-              disabled={getCurrentItemIndex() === getNavigationItems().length - 1}
-              className="p-2 h-10 w-10 shrink-0 disabled:opacity-30"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
+            {/* ───────────── mobile navigation ───────────── */}
+    <div className="md:hidden mb-6">
+      <div className="flex items-center justify-center">
+        <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1">
+          <Button
+            variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+            size="sm"
+            onClick={() => selectSection('about')}
+            className="h-8 w-8 p-0 rounded-full"
+          >
+            <User className="h-4 w-4" />
+          </Button>
+          <Button
+            variant={activeSection === 'experience' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+            size="sm"
+            onClick={() => selectSection('experience')}
+            className="h-8 w-8 p-0 rounded-full"
+          >
+            <Briefcase className="h-4 w-4" />
+          </Button>
+          <Button
+            variant={activeSection === 'projects' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+            size="sm"
+            onClick={() => selectSection('projects')}
+            className="h-8 w-8 p-0 rounded-full"
+          >
+            <Code className="h-4 w-4" />
+          </Button>
+          <Button
+            variant={activeSection === 'fieldnotes' && !activeFieldnote ? "default" : "ghost"}
+            size="sm"
+            onClick={() => selectSection('fieldnotes')}
+            className="h-8 w-8 p-0 rounded-full"
+          >
+            <BookOpen className="h-4 w-4" />
+          </Button>
+          <Button
+            variant={activeSection === 'inspirations' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+            size="sm"
+            onClick={() => selectSection('inspirations')}
+            className="h-8 w-8 p-0 rounded-full"
+          >
+            <Heart className="h-4 w-4" />
+          </Button>
+          <Button
+            variant={activeSection === 'content' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+            size="sm"
+            onClick={() => selectSection('content')}
+            className="h-8 w-8 p-0 rounded-full"
+          >
+            <Bookmark className="h-4 w-4" />
+          </Button>
         </div>
+      </div>
+    </div>
 
         {/* ───────────── desktop sidebar ───────────── */}
         <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
