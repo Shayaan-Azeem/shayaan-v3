@@ -1173,7 +1173,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                   href="https://devpost.com/software/vibetype"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-gray-100 hover:bg-gray-200 dark:bg-secondary dark:hover:bg-secondary/80 rounded-md transition-colors"
+                  className="p-2 bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -1195,11 +1195,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 an AI writing sidekick that lives in your browser. highlight text to rewrite, expand, or clean it up instantly. open the sidebar to pull context from your tabs and draft smarter, faster.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">html</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">css</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">javascript</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">inbound vc interest</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">offered spot in spur accelerator</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">html</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">css</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">javascript</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">inbound vc interest</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">offered spot in spur accelerator</span>
               </div>
             </div>
 
@@ -1238,10 +1238,10 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 spotify wrapped, but for your shopping. built with Shopify's Shop Mini framework. shows your top shops, spend, orders, and shopping style in a smooth stories-style recap.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">typescript</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">tailwind</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">shopify</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">won the Shopify Toronto Tech Week hackathon</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">typescript</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">tailwind</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">shopify</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">won the Shopify Toronto Tech Week hackathon</span>
               </div>
             </div>
 
@@ -1324,11 +1324,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 founded canada's largest high school hackathon with 150 attendees and 40+ projects shipped. raised $50k from sponsors like shopify and doordash.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">event organizing</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">fundraising</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">project management</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">raised $50k</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">150 attendees</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">event organizing</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">fundraising</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">project management</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">raised $50k</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">150 attendees</span>
                 </div>
               </div>
             </div>
