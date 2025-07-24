@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { Command } from 'cmdk'
 import { Dialog, DialogContent, DialogTitle, DialogOverlay, DialogPortal } from '@/components/ui/dialog'
-import { useIsMobile } from '@/components/ui/use-mobile'
 import { 
   User, 
   Briefcase, 
@@ -43,7 +42,6 @@ export default function CommandPalette({
 }: CommandPaletteProps) {
   const [open, setOpen] = useState(false)
   const { theme, setTheme } = useTheme()
-  const isMobile = useIsMobile()
 
   // Toggle command palette with Cmd+K / Ctrl+K and handle shortcuts
   useEffect(() => {
@@ -227,106 +225,33 @@ export default function CommandPalette({
     setOpen(false)
   }
 
-  // Reusable keyboard shortcut component
-  const KbdShortcut = ({ children }: { children: React.ReactNode }) => (
-    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border font-mono font-medium opacity-100 ${
-      isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
-    } ${
-      theme === 'matcha'
-        ? 'bg-green-100 border-green-200 text-green-800'
-        : theme === 'reading'
-        ? 'bg-[#F2EDE7] text-[#000] border-[#DDD4C7]'
-        : 'bg-muted border-muted text-muted-foreground'
-    }`}>
-      {children}
-    </kbd>
-  )
-
-  // Helper for icon styling
-  const iconClassName = `mr-3 h-4 w-4 ${
-    theme === 'reading' ? 'text-[#3E2F1C]' : 'text-muted-foreground'
-  }`
-
-  // Helper for span text styling  
-  const spanClassName = theme === 'reading' ? 'text-[#2C2C2C]' : ''
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
-        <DialogOverlay className={
-          theme === 'dark' || theme === 'reading'
-            ? 'bg-black/10 dark:bg-black/20'
-            : theme === 'matcha'
-            ? 'bg-black/5'
-            : 'bg-black/5'
-        } />
-        <DialogContent className={`overflow-hidden p-0 shadow-2xl backdrop-blur-sm ${
-          isMobile 
-            ? 'max-w-[90vw] max-h-[85vh] m-4 w-[calc(100vw-2rem)] rounded-xl' 
-            : 'max-w-lg rounded-lg'
-        } ${
-          theme === 'dark' || theme === 'reading'
-            ? 'border border-white/20 bg-muted/50'
-            : theme === 'matcha'
-            ? 'border border-green-200/60 bg-green-50/85 text-green-900'
-            : 'border border-gray-200/60 bg-white/70'
-        }`}>
+        <DialogOverlay className="bg-black/10 dark:bg-black/20" />
+        <DialogContent className="overflow-hidden p-0 shadow-2xl border border-white/20 bg-muted/50 backdrop-blur-sm">
         <DialogTitle className="sr-only">
           command palette
         </DialogTitle>
-        <Command className={`[&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-4 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between ${
-          isMobile ? '[&_[cmdk-input]]:h-10 [&_[cmdk-item]]:py-2.5' : ''
-        }`}>
+        <Command className="[&_[cmdk-group-heading]]:px-4 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-4 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4 [&_[cmdk-item]]:flex [&_[cmdk-item]]:items-center [&_[cmdk-item]]:justify-between">
           {/* Header */}
-          <div className={`flex items-center gap-3 px-4 ${
-            isMobile ? 'py-3' : 'py-4'
-          } ${
-            theme === 'dark' || theme === 'reading'
-              ? 'border-b border-white/10'
-              : theme === 'matcha'
-              ? 'border-b border-green-200/50'
-              : 'border-b border-gray-200/40'
-          }`}>
-            <headerInfo.icon className={`h-5 w-5 ${
-              theme === 'reading' ? 'text-[#3E2F1C]' : 'text-muted-foreground'
-            }`} />
+          <div className="flex items-center gap-3 px-4 py-4 border-b border-white/10">
+            <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
             <div>
-              <h2 className={`font-semibold ${isMobile ? 'text-base' : 'text-lg'} ${
-                theme === 'reading' ? 'text-[#2C2C2C]' : ''
-              }`}>{headerInfo.title}</h2>
-              <p className={`${isMobile ? 'text-xs' : 'text-sm'} ${
-                theme === 'reading' ? 'text-[#3E2F1C]' : 'text-muted-foreground'
-              }`}>{headerInfo.subtitle}</p>
+              <h2 className="text-lg font-semibold">{headerInfo.title}</h2>
+              <p className="text-sm text-muted-foreground">{headerInfo.subtitle}</p>
             </div>
           </div>
           
           {/* Search Input */}
-          <div className={`flex items-center px-4 ${
-            theme === 'dark' || theme === 'reading'
-              ? 'border-b border-white/10'
-              : theme === 'matcha'
-              ? 'border-b border-green-200/50'
-              : 'border-b border-gray-200/40'
-          }`} cmdk-input-wrapper="">
+          <div className="flex items-center border-b border-white/10 px-4" cmdk-input-wrapper="">
             <Command.Input
               placeholder="search for actions..."
-              className={`flex w-full rounded-md bg-transparent outline-none disabled:cursor-not-allowed disabled:opacity-50 ${
-                isMobile ? 'h-10 py-2 text-sm' : 'h-12 py-3 text-sm'
-              } ${
-                theme === 'matcha'
-                  ? 'placeholder:text-green-500'
-                  : theme === 'reading'
-                  ? 'placeholder:text-[#A0917D]'
-                  : 'placeholder:text-muted-foreground'
-              }`}
+              className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
-          <Command.List className={`overflow-y-auto overflow-x-hidden ${
-            isMobile ? 'max-h-[50vh]' : 'max-h-[300px]'
-          }`}>
-            <Command.Empty className={`py-6 text-center text-sm ${
-              theme === 'reading' ? 'text-[#3E2F1C]' : 'text-muted-foreground'
-            }`}>
+          <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden">
+            <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
               no results found.
             </Command.Empty>
             
@@ -334,45 +259,57 @@ export default function CommandPalette({
             <Command.Group heading="navigation">
               <Command.Item onSelect={() => handleNavigate('about')}>
                 <div className="flex items-center">
-                  <User className={iconClassName} />
-                  <span className={spanClassName}>go to about</span>
+                  <User className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>go to about</span>
                 </div>
-                <KbdShortcut>shift + a</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + a
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('experience')}>
                 <div className="flex items-center">
-                  <Briefcase className={iconClassName} />
-                  <span className={spanClassName}>go to experience</span>
+                  <Briefcase className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>go to experience</span>
                 </div>
-                <KbdShortcut>shift + e</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + e
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('projects')}>
                 <div className="flex items-center">
-                  <FolderOpen className={iconClassName} />
-                  <span className={spanClassName}>go to projects</span>
+                  <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>go to projects</span>
                 </div>
-                <KbdShortcut>shift + p</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + p
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('fieldnotes')}>
                 <div className="flex items-center">
-                  <BookOpen className={iconClassName} />
-                  <span className={spanClassName}>go to fieldnotes</span>
+                  <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>go to fieldnotes</span>
                 </div>
-                <KbdShortcut>shift + f</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + f
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('inspirations')}>
                 <div className="flex items-center">
-                  <Heart className={iconClassName} />
-                  <span className={spanClassName}>go to philosophy</span>
+                  <Heart className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>go to philosophy</span>
                 </div>
-                <KbdShortcut>shift + m</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + m
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleNavigate('content')}>
                 <div className="flex items-center">
-                  <List className={iconClassName} />
-                  <span className={spanClassName}>go to content</span>
+                  <List className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>go to content</span>
                 </div>
-                <KbdShortcut>shift + c</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + c
+                </kbd>
               </Command.Item>
             </Command.Group>
 
@@ -380,31 +317,39 @@ export default function CommandPalette({
             <Command.Group heading="projects">
               <Command.Item onSelect={() => handleSelectProject('tensorforest')}>
                 <div className="flex items-center">
-                  <FolderOpen className={iconClassName} />
-                  <span className={spanClassName}>tensorforest</span>
+                  <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>tensorforest</span>
                 </div>
-                <KbdShortcut>shift + t</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + t
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleSelectProject('apocalypse')}>
                 <div className="flex items-center">
-                  <FolderOpen className={iconClassName} />
-                  <span className={spanClassName}>apocalypse hacks</span>
+                  <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>apocalypse hacks</span>
                 </div>
-                <KbdShortcut>shift + h</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + h
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://www.gptfixtsfor.me/')}>
                 <div className="flex items-center">
-                  <ExternalLink className={iconClassName} />
-                  <span className={spanClassName}>vibetype</span>
+                  <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>vibetype</span>
                 </div>
-                <KbdShortcut>shift + v</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + v
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')}>
                 <div className="flex items-center">
-                  <ExternalLink className={iconClassName} />
-                  <span className={spanClassName}>shoppy wrapped</span>
+                  <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>shoppy wrapped</span>
                 </div>
-                <KbdShortcut>shift + s</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + s
+                </kbd>
               </Command.Item>
             </Command.Group>
 
@@ -414,10 +359,12 @@ export default function CommandPalette({
                 {fieldnotes.slice(0, 3).map((item, index) => (
                   <Command.Item key={item.slug} onSelect={() => handleSelectFieldnote(item.slug)}>
                     <div className="flex items-center">
-                      <BookOpen className={iconClassName} />
-                      <span className={spanClassName}>{item.title.toLowerCase()}</span>
+                      <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
+                      <span>{item.title.toLowerCase()}</span>
                     </div>
-                    <KbdShortcut>{index + 1}</KbdShortcut>
+                    <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                      {index + 1}
+                    </kbd>
                   </Command.Item>
                 ))}
               </Command.Group>
@@ -427,31 +374,39 @@ export default function CommandPalette({
             <Command.Group heading="links">
               <Command.Item onSelect={() => handleExternalLink('https://twitter.com/shayaan_azeem')}>
                 <div className="flex items-center">
-                  <Twitter className={iconClassName} />
-                  <span className={spanClassName}>twitter</span>
+                  <Twitter className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>twitter</span>
                 </div>
-                <KbdShortcut>shift + x</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + x
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://linkedin.com/in/shayaan-azeem')}>
                 <div className="flex items-center">
-                  <Linkedin className={iconClassName} />
-                  <span className={spanClassName}>linkedin</span>
+                  <Linkedin className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>linkedin</span>
                 </div>
-                <KbdShortcut>shift + l</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + l
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/shayaanazeem1')}>
                 <div className="flex items-center">
-                  <Github className={iconClassName} />
-                  <span className={spanClassName}>github</span>
+                  <Github className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>github</span>
                 </div>
-                <KbdShortcut>shift + g</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + g
+                </kbd>
               </Command.Item>
               <Command.Item onSelect={handleEmail}>
                 <div className="flex items-center">
-                  <Mail className={iconClassName} />
-                  <span className={spanClassName}>send email</span>
+                  <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>send email</span>
                 </div>
-                <KbdShortcut>@</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  @
+                </kbd>
               </Command.Item>
             </Command.Group>
 
@@ -460,71 +415,51 @@ export default function CommandPalette({
               <Command.Item onSelect={toggleTheme}>
                 <div className="flex items-center">
                   {theme === 'dark' ? (
-                    <Sun className={iconClassName} />
+                    <Sun className="mr-3 h-4 w-4 text-muted-foreground" />
                   ) : (
-                    <Moon className={iconClassName} />
+                    <Moon className="mr-3 h-4 w-4 text-muted-foreground" />
                   )}
-                  <span className={spanClassName}>toggle theme</span>
+                  <span>toggle theme</span>
                 </div>
-                <KbdShortcut>shift + d</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + d
+                </kbd>
               </Command.Item>
               
               <Command.Item onSelect={setReadingMode}>
                 <div className="flex items-center">
-                  <BookOpenCheck className={iconClassName} />
-                  <span className={spanClassName}>reading mode</span>
+                  <BookOpenCheck className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>reading mode</span>
                 </div>
-                <KbdShortcut>shift + 8</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + 8
+                </kbd>
               </Command.Item>
               
               <Command.Item onSelect={setMatchaMode}>
                 <div className="flex items-center">
-                  <Leaf className={iconClassName} />
-                  <span className={spanClassName}>matcha mode</span>
+                  <Leaf className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>matcha mode</span>
                 </div>
-                <KbdShortcut>shift + 9</KbdShortcut>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + 9
+                </kbd>
               </Command.Item>
             </Command.Group>
           </Command.List>
           
           {/* Footer Instructions */}
-          <div className={`flex items-center justify-between px-4 ${
-            isMobile ? 'py-2 text-[10px] flex-col gap-1.5 sm:flex-row sm:gap-0' : 'py-3 text-xs'
-          } ${
-            theme === 'dark' || theme === 'reading'
-              ? 'border-t border-white/10'
-              : theme === 'matcha'
-              ? 'border-t border-green-200/50'
-              : 'border-t border-gray-200/40'
-          } ${
-            theme === 'reading' ? 'text-[#3E2F1C]' : 'text-muted-foreground'
-          }`}>
+          <div className="flex items-center justify-between px-4 py-3 border-t border-white/10 text-xs text-muted-foreground">
             <div className="flex items-center gap-2">
               <span>type</span>
-              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border font-mono font-medium ${
-                isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
-              } ${
-                theme === 'matcha'
-                  ? 'bg-green-100 border-green-200 text-green-800'
-                  : theme === 'reading'
-                  ? 'bg-[#F2EDE7] text-[#000] border-[#DDD4C7]'
-                  : 'bg-background border-border'
-              }`}>
+              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-[10px] font-medium">
                 ↵
               </kbd>
               <span>to select</span>
             </div>
             <div className="flex items-center gap-2">
               <span>press</span>
-              <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border font-mono font-medium ${
-                isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
-              } ${
-                theme === 'matcha'
-                  ? 'bg-green-100 border-green-200 text-green-800'
-                  : theme === 'reading'
-                  ? 'bg-[#F2EDE7] text-[#000] border-[#DDD4C7]'
-                  : 'bg-background border-border'
-              }`}>
+              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-[10px] font-medium">
                 esc
               </kbd>
               <span>to close</span>
