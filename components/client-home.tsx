@@ -983,8 +983,12 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               {/* Electrathon Team */}
               <div className="relative flex gap-4">
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-lg">⚡</span>
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    <img 
+                      src="/eleclogo.jpg" 
+                      alt="WOSS Electrathon Team logo" 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="w-px bg-border h-full mt-4"></div>
                 </div>
