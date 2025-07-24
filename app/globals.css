@@ -488,4 +488,24 @@ body {
     background-color: #D1FAE5;
     color: #000;
   }
+  
+  /* Footer email link styling */
+  .footer-email {
+    @apply px-1 py-0.5 transition-all duration-200;
+    background-color: hsl(var(--highlight-blue));
+  }
+  .footer-email:hover {
+    background-color: hsl(0 0% 0%);
+    color: hsl(0 0% 100%);
+  }
+  
+  /* Dark mode version for footer email */
+  .dark .footer-email {
+    background-color: hsl(220 70% 25%);
+    color: hsl(0 0% 98%);
+  }
+  .dark .footer-email:hover {
+    background-color: hsl(0 0% 0%);
+    color: hsl(0 0% 100%);
+  }
 }

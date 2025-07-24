@@ -165,7 +165,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               email me at{" "}
               <Link
                 href="mailto:shayaan.azeem@uwaterloo.ca"
-                className="link-blue hover-dark-7"
+                className="footer-email"
               >
                 shayaan.azeem@uwaterloo.ca
               </Link>
