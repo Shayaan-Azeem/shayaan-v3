@@ -7,17 +7,8 @@ import { useIsMobile } from '@/components/ui/use-mobile'
 import { 
   User, 
   Briefcase, 
-  Fold            <Command.Input
-              placeholder="search for actions..."
-              className={`flex w-full rounded-md bg-transparent outline-none disabled:cursor-not-allowed disabled:opacity-50 ${
-                isMobile ? 'h-10 py-2 text-sm' : 'h-12 py-3 text-sm'
-              } ${
-                theme === 'matcha'
-                  ? 'placeholder:text-green-500'
-                  : 'placeholder:text-muted-foreground'
-              }`}
-            />
-          </div>BookOpen, 
+  FolderOpen, 
+  BookOpen, 
   Heart, 
   List,
   Mail,
@@ -238,8 +229,12 @@ export default function CommandPalette({
 
   // Reusable keyboard shortcut component
   const KbdShortcut = ({ children }: { children: React.ReactNode }) => (
-    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border bg-muted font-mono font-medium text-muted-foreground opacity-100 ${
+    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border font-mono font-medium opacity-100 ${
       isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
+    } ${
+      theme === 'matcha'
+        ? 'bg-green-100 border-green-200 text-green-800'
+        : 'bg-muted border-muted text-muted-foreground'
     }`}>
       {children}
     </kbd>
@@ -390,9 +385,7 @@ export default function CommandPalette({
                   <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>shoppy wrapped</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + s
-                </kbd>
+                <KbdShortcut>shift + s</KbdShortcut>
               </Command.Item>
             </Command.Group>
 
@@ -405,7 +398,13 @@ export default function CommandPalette({
                       <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                       <span>{item.title.toLowerCase()}</span>
                     </div>
-                    <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border font-mono font-medium opacity-100 ${
+                      isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
+                    } ${
+                      theme === 'matcha'
+                        ? 'bg-green-100 border-green-200 text-green-800'
+                        : 'bg-muted border-muted text-muted-foreground'
+                    }`}>
                       {index + 1}
                     </kbd>
                   </Command.Item>
@@ -495,8 +494,10 @@ export default function CommandPalette({
           <div className={`flex items-center justify-between px-4 text-muted-foreground ${
             isMobile ? 'py-2 text-[10px] flex-col gap-1.5 sm:flex-row sm:gap-0' : 'py-3 text-xs'
           } ${
-            theme === 'dark' || theme === 'reading' || theme === 'matcha'
+            theme === 'dark' || theme === 'reading'
               ? 'border-t border-white/10'
+              : theme === 'matcha'
+              ? 'border-t border-green-200/50'
               : 'border-t border-gray-200/40'
           }`}>
             <div className="flex items-center gap-2">
