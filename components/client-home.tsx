@@ -911,7 +911,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                       <h3 className="font-semibold text-lg">Content/Growth Intern</h3>
                       <p className="text-muted-foreground">Hack Club</p>
                     </div>
-                    <span className="text-sm text-muted-foreground">jul 2024 - present</span>
+                    <span className="text-sm text-muted-foreground">jul 2024 - jun 2025</span>
                   </div>
                   <p className="mb-4">grew @starthackclub to 100k followers</p>
                   <div className="flex flex-wrap gap-2">
@@ -940,7 +940,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                       <h3 className="font-semibold text-lg">President/Founder</h3>
                       <p className="text-muted-foreground">White Oaks Robotics Club</p>
                     </div>
-                    <span className="text-sm text-muted-foreground">sep 2023 - present</span>
+                    <span className="text-sm text-muted-foreground">sep 2023 - jun 2025</span>
                   </div>
                   <p className="mb-4">started the robotics club at my school, grew it to 100+ members, top 100 teams in the world, qualified for vex worlds, won 8 regional/provincial awards, garnered $7500+ in funds</p>
                   <div className="flex flex-wrap gap-2">
