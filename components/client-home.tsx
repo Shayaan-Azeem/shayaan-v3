@@ -1101,6 +1101,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       case "experience":
         return (
           <div className="pt-2">
+            <h2 className="text-4xl font-bold mb-4">experience</h2>
             <div className="space-y-8">
               {/* Hack Club */}
               <div className="relative flex gap-4">
