@@ -1031,7 +1031,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
 
     const renderWithHeading = (title: string, content: React.ReactNode) => (
       <div className="pt-2">
-        <h2 className={cn("text-4xl font-bold mb-4", boldHeadings.includes(title) && "font-bold")}>
+        <h2 className={cn("text-4xl font-bold mb-8", boldHeadings.includes(title) && "font-bold")}>
           {title}
         </h2>
         {content}
