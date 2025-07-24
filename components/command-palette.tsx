@@ -401,8 +401,8 @@ export default function CommandPalette({
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')}>
                 <div className="flex items-center">
-                  <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
-                  <span>shoppy wrapped</span>
+                  <ExternalLink className={iconClassName} />
+                  <span className={spanClassName}>shoppy wrapped</span>
                 </div>
                 <KbdShortcut>shift + s</KbdShortcut>
               </Command.Item>
@@ -414,18 +414,10 @@ export default function CommandPalette({
                 {fieldnotes.slice(0, 3).map((item, index) => (
                   <Command.Item key={item.slug} onSelect={() => handleSelectFieldnote(item.slug)}>
                     <div className="flex items-center">
-                      <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
-                      <span>{item.title.toLowerCase()}</span>
+                      <BookOpen className={iconClassName} />
+                      <span className={spanClassName}>{item.title.toLowerCase()}</span>
                     </div>
-                    <kbd className={`pointer-events-none inline-flex select-none items-center gap-1 rounded border font-mono font-medium opacity-100 ${
-                      isMobile ? 'h-4 px-1 text-[9px]' : 'h-5 px-1.5 text-[10px]'
-                    } ${
-                      theme === 'matcha'
-                        ? 'bg-green-100 border-green-200 text-green-800'
-                        : 'bg-muted border-muted text-muted-foreground'
-                    }`}>
-                      {index + 1}
-                    </kbd>
+                    <KbdShortcut>{index + 1}</KbdShortcut>
                   </Command.Item>
                 ))}
               </Command.Group>
