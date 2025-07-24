@@ -132,52 +132,7 @@ export function getPhilosophy(): ContentItem | null {
   }
 }
 
-export function getContentWorthConsuming(): ContentItem | null {
-  try {
-    // Try .md first, then .mdx
-    let fullPath = path.join(contentDirectory, "content-worth-consuming.md")
-    
-    // Debug logging for Vercel
-    console.log("🔍 Debug: Looking for content-worth-consuming.md at:", fullPath)
-    console.log("🔍 Debug: File exists?", fs.existsSync(fullPath))
-    
-    if (!fs.existsSync(fullPath)) {
-      fullPath = path.join(contentDirectory, "content-worth-consuming.mdx")
-      console.log("🔍 Debug: Trying .mdx at:", fullPath)
-      console.log("🔍 Debug: .mdx exists?", fs.existsSync(fullPath))
-    }
-    if (!fs.existsSync(fullPath)) {
-      console.log("❌ Debug: No content-worth-consuming file found!")
-      console.log("🔍 Debug: Content directory contents:", fs.readdirSync(contentDirectory))
-      return null
-    }
-    
-    const fileContents = fs.readFileSync(fullPath, "utf8")
-    console.log("🔍 Debug: File content length:", fileContents.length)
-    console.log("🔍 Debug: First 200 chars:", fileContents.substring(0, 200))
-    
-    const { data, content } = matter(fileContents)
-    console.log("🔍 Debug: Parsed frontmatter:", data)
-    console.log("🔍 Debug: Content length after parsing:", content.length)
 
-    const result = {
-      slug: "content-worth-consuming",
-      title: data.title || "Content Worth Consuming",
-      date: data.date || new Date().toISOString().split("T")[0],
-      summary: data.summary || "",
-      banner: data.banner || null,
-      tags: data.tags || [],
-      draft: data.draft || false,
-      content,
-    }
-    
-    console.log("✅ Debug: Returning content item:", { ...result, content: `[${result.content.length} chars]` })
-    return result
-  } catch (error) {
-    console.error("❌ Debug: Error in getContentWorthConsuming:", error)
-    return null
-  }
-}
 
 export function getAbout(): ContentItem | null {
   try {

@@ -7,18 +7,17 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { cn } from "@/lib/utils"
 import type { ContentItem } from "@/lib/content"
 import MDXRenderer from "@/components/mdx-renderer"
-import ContentRenderer from "@/components/content-renderer"
+
 import AboutRenderer from "@/components/about-renderer"
 import HeroBanner from "@/components/hero-banner"
 
 interface ClientHomeProps {
   fieldnotes: ContentItem[]
   philosophy: ContentItem | null
-  contentWorthConsuming: ContentItem | null
   about: ContentItem | null
 }
 
-export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming, about }: ClientHomeProps) {
+export default function ClientHome({ fieldnotes, philosophy, about }: ClientHomeProps) {
   /* ────────────────────────────────
      section definitions
   ────────────────────────────────── */
@@ -27,8 +26,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     "experience",
     "projects",
     "fieldnotes",
-    "inspirations",
-    "content"
+    "inspirations"
   ] as const
 
   type SectionKey = typeof sections[number]
@@ -103,7 +101,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                     : "text-muted-foreground/70 hover:text-muted-foreground",
                 )}
               >
-                {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
+{section === "inspirations" ? "my philosophy" : section}
               </button>
               
               {/* Project sub-items */}
@@ -1311,14 +1309,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             )}
           </div>
         )
-      case "content":
-        return renderWithHeading("content worth consuming imo:", (
-          contentWorthConsuming ? (
-            <ContentRenderer content={contentWorthConsuming.content} />
-          ) : (
-            <p className="text-muted-foreground">No content available.</p>
-          )
-        ))
+
 
       default:
         return null
