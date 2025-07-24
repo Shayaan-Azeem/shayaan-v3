@@ -49,8 +49,14 @@ export default function CommandPalette({
         setOpen((open) => !open)
       }
       
-      // Handle shortcuts when command palette is open
+      // Handle shortcuts when command palette is open, but not when typing in search
       if (open && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        // Skip shortcuts if user is typing in the search input
+        const target = e.target as HTMLElement
+        if (target.tagName === 'INPUT') {
+          return
+        }
+        
         e.preventDefault()
         
         // Special case for @ key (Shift+2 on many keyboards)
