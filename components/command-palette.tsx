@@ -240,10 +240,14 @@ export default function CommandPalette({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay className="bg-black/10 dark:bg-black/20" />
-        <DialogContent className={`overflow-hidden p-0 shadow-2xl border border-white/20 bg-muted/50 backdrop-blur-sm ${
+        <DialogContent className={`overflow-hidden p-0 shadow-2xl backdrop-blur-sm ${
           isMobile 
             ? 'max-w-[90vw] max-h-[85vh] m-4 w-[calc(100vw-2rem)] rounded-xl' 
             : 'max-w-lg rounded-lg'
+        } ${
+          theme === 'dark' || theme === 'reading' || theme === 'matcha'
+            ? 'border border-white/20 bg-muted/50'
+            : 'border border-gray-200/60 bg-white/80'
         }`}>
         <DialogTitle className="sr-only">
           command palette
@@ -252,8 +256,12 @@ export default function CommandPalette({
           isMobile ? '[&_[cmdk-input]]:h-10 [&_[cmdk-item]]:py-2.5' : ''
         }`}>
           {/* Header */}
-          <div className={`flex items-center gap-3 px-4 border-b border-white/10 ${
+          <div className={`flex items-center gap-3 px-4 ${
             isMobile ? 'py-3' : 'py-4'
+          } ${
+            theme === 'dark' || theme === 'reading' || theme === 'matcha'
+              ? 'border-b border-white/10'
+              : 'border-b border-gray-200/40'
           }`}>
             <headerInfo.icon className="h-5 w-5 text-muted-foreground" />
             <div>
@@ -263,7 +271,11 @@ export default function CommandPalette({
           </div>
           
           {/* Search Input */}
-          <div className="flex items-center border-b border-white/10 px-4" cmdk-input-wrapper="">
+          <div className={`flex items-center px-4 ${
+            theme === 'dark' || theme === 'reading' || theme === 'matcha'
+              ? 'border-b border-white/10'
+              : 'border-b border-gray-200/40'
+          }`} cmdk-input-wrapper="">
             <Command.Input
               placeholder="search for actions..."
               className={`flex w-full rounded-md bg-transparent outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 ${
@@ -345,9 +357,7 @@ export default function CommandPalette({
                   <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>vibetype</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                  shift + v
-                </kbd>
+                <KbdShortcut>shift + v</KbdShortcut>
               </Command.Item>
               <Command.Item onSelect={() => handleExternalLink('https://github.com/ultratrikx/shoppy-wrapped/pulls')}>
                 <div className="flex items-center">
