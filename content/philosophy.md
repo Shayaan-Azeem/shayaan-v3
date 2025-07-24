@@ -1,5 +1,5 @@
 ---
-title: My Philosophy
+title: my philosophy
 slug: philosophy
 date: ""
 summary: 

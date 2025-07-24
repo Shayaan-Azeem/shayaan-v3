@@ -1,5 +1,5 @@
 ---
-title: Content Worth Consuming
+title: content worth consuming
 slug: content-worth-consuming
 date: ""
 summary: 
