@@ -265,9 +265,9 @@ export default function CommandPalette({
               <Command.Item onSelect={toggleTheme}>
                 <div className="flex items-center">
                   {theme === 'dark' ? (
-                    <Sun className="mr-3 h-4 w-4" />
+                    <Sun className="mr-3 h-4 w-4 text-muted-foreground" />
                   ) : (
-                    <Moon className="mr-3 h-4 w-4" />
+                    <Moon className="mr-3 h-4 w-4 text-muted-foreground" />
                   )}
                   <span>Toggle Theme</span>
                 </div>
@@ -277,6 +277,24 @@ export default function CommandPalette({
               </Command.Item>
             </Command.Group>
           </Command.List>
+          
+          {/* Footer Instructions */}
+          <div className="flex items-center justify-between px-4 py-3 border-t bg-muted/50 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <span>Type</span>
+              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-[10px] font-medium">
+                ↵
+              </kbd>
+              <span>to select</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>Press</span>
+              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono text-[10px] font-medium">
+                esc
+              </kbd>
+              <span>to close</span>
+            </div>
+          </div>
         </Command>
       </DialogContent>
     </Dialog>
