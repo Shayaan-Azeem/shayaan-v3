@@ -13,7 +13,9 @@ import ContentWorthConsumingRenderer from "@/components/content-worth-consuming-
 import CommandPalette from "@/components/command-palette"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
-import FocusRingSelector from "@/components/focus-ring-selector"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
+import { ChevronDown } from "lucide-react"
 
 interface ClientHomeProps {
   fieldnotes: ContentItem[]
@@ -111,11 +113,9 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         <ModeToggle />
       </div>
 
-      <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
-
-
-        {/* ───────────── desktop sidebar ───────────── */}
-        <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
+            <div className="max-w-3xl w-full grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr] md:grid-cols-[120px_1fr] gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+        {/* ───────────── compact sidebar (all screens) ───────────── */}
+        <nav className="text-right space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-12 text-xs sm:text-sm text-muted-foreground sticky top-12 self-start">
           {sections.map((section) => (
             <div key={section}>
               {/* Main section button */}
@@ -871,21 +871,8 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             <div className="pt-2 flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4 sm:gap-0">
               <h1 className="text-2xl font-bold">shayaan azeem</h1>
               
-              {/* Mobile Focus Ring Selector - visible on mobile only */}
-              <div className="md:hidden order-first sm:order-last">
-                <FocusRingSelector
-                  sections={sections}
-                  activeSection={activeSection}
-                  onSectionChange={selectSection}
-                  activeTensorForest={activeTensorForest}
-                  activeApocalypseHacks={activeApocalypseHacks}
-                  activeFieldnote={activeFieldnote}
-                  fieldnotes={fieldnotes}
-                />
-              </div>
-
               {/* Social icons */}
-              <div className="hidden sm:flex gap-3 sm:gap-4">
+              <div className="flex gap-3 sm:gap-4">
                 <Link
                   href="https://twitter.com/shayaan_azeem"
                   target="_blank"
