@@ -1,6 +1,6 @@
 ---
 title: my test article
-slug: "{{test}}"
+slug: "test"
 date: 2025-07-23
 summary: banana banana minions
 banner: Mark Zuckerberg Early Days.jpg

@@ -1,12 +1,14 @@
 ---
-title: 17 lessons from 17
-slug: "{{slug}}"
+title: 17 l- Put yourself in situations to be in the right place at the right time
+- Seek discomfort (as cliché as this sounds - shoutout yestheory)
+- Self-doubt is the enemy of progress: the second you stop believing in yourself the battle has already been lost because if you don't have conviction in yourself, there is no point in doing thingsSeek discomfort (as cliché as this sounds - shoutout yestheory)sons from 17
+slug: "17-lessons-from-17"
 date: 2025-06-21
 summary: the most important things last year has taught me
 banner: photo6.jpg
 tags:
-  - tag1
-  - tag2
+  - personal
+  - lessons
 draft: false
 ---
 - Everything happens for a reason
