@@ -263,7 +263,7 @@ export default function CommandPalette({
               className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
-          <Command.List className="max-h-[200px] sm:max-h-[300px] overflow-y-auto overflow-x-hidden">
+          <Command.List className="max-h-[160px] sm:max-h-[300px] overflow-y-auto overflow-x-hidden">
             <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
               no results found.
             </Command.Empty>
