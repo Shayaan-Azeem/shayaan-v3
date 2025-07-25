@@ -1309,7 +1309,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         return renderWithHeading("projects", (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
             {/* vibetype */}
-            <div className="rounded-lg p-3 bg-card transition-all duration-200 group ">
+            <div className="rounded-lg p-3 bg-card/80 backdrop-blur-sm transition-all duration-200 group ">
               <Link
                 href="https://www.gptfixtsfor.me/"
                 target="_blank"
@@ -1362,7 +1362,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             </div>
 
             {/* shoppy wrapped */}
-            <div className="rounded-lg p-3 bg-card transition-all duration-200 group ">
+            <div className="rounded-lg p-3 bg-card/80 backdrop-blur-sm transition-all duration-200 group ">
               <Link
                 href="https://github.com/ultratrikx/shoppy-wrapped/pulls"
                 target="_blank"
@@ -1404,7 +1404,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             </div>
 
             {/* tensorforest */}
-            <div className="rounded-lg p-4 bg-card transition-all duration-200 group ">
+            <div className="rounded-lg p-4 bg-card/80 backdrop-blur-sm transition-all duration-200 group ">
                 <button
                   onClick={selectTensorForest}
                   className="block w-full"
@@ -1442,7 +1442,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               </div>
 
             {/* apocalypse hacks */}
-            <div className="rounded-lg p-4 bg-card transition-all duration-200 group ">
+            <div className="rounded-lg p-4 bg-card/80 backdrop-blur-sm transition-all duration-200 group ">
                             <button
                 onClick={selectApocalypseHacks}
                 className="block w-full"
