@@ -1396,10 +1396,10 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 spotify wrapped, but for your shopping. built with Shopify's Shop Mini framework. shows your top shops, spend, orders, and shopping style in a smooth stories-style recap.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">typescript</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">tailwind</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">shopify</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">won the Shopify Toronto Tech Week hackathon</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">typescript</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">tailwind</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">shopify</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">won the Shopify Toronto Tech Week hackathon</span>
               </div>
             </div>
 
@@ -1482,11 +1482,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 founded canada's largest high school hackathon with 150 attendees and 40+ projects shipped. raised $50k from sponsors like shopify and doordash.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">event organizing</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">fundraising</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">project management</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">raised $50k</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">150 attendees</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">event organizing</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">fundraising</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">project management</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">raised $50k</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">150 attendees</span>
                 </div>
               </div>
             </div>
