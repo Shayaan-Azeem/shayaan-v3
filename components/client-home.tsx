@@ -210,56 +210,58 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
 
         {/* ───────────── desktop sidebar ───────────── */}
         {iconBarMode ? (
-          /* Icon-only sidebar */
-          <nav className="hidden md:flex flex-col items-center space-y-4 text-sm text-muted-foreground sticky top-12 self-start">
-            <Button
-              variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('about')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <User className="h-5 w-5" />
-            </Button>
-            <Button
-              variant={activeSection === 'experience' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('experience')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <Briefcase className="h-5 w-5" />
-            </Button>
-            <Button
-              variant={activeSection === 'projects' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('projects')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <Code className="h-5 w-5" />
-            </Button>
-            <Button
-              variant={activeSection === 'fieldnotes' && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('fieldnotes')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <BookOpen className="h-5 w-5" />
-            </Button>
-            <Button
-              variant={activeSection === 'inspirations' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('inspirations')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <Heart className="h-5 w-5" />
-            </Button>
-            <Button
-              variant={activeSection === 'content' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('content')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <Bookmark className="h-5 w-5" />
-            </Button>
+          /* Icon-only sidebar with glass effect */
+          <nav className="hidden md:flex flex-col items-center space-y-3 text-sm text-muted-foreground sticky top-12 self-start">
+            <div className="flex flex-col gap-3 bg-muted/50 backdrop-blur-sm rounded-2xl p-3">
+              <Button
+                variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+                size="sm"
+                onClick={() => selectSection('about')}
+                className="h-10 w-10 p-0 rounded-full"
+              >
+                <User className="h-5 w-5" />
+              </Button>
+              <Button
+                variant={activeSection === 'experience' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+                size="sm"
+                onClick={() => selectSection('experience')}
+                className="h-10 w-10 p-0 rounded-full"
+              >
+                <Briefcase className="h-5 w-5" />
+              </Button>
+              <Button
+                variant={activeSection === 'projects' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+                size="sm"
+                onClick={() => selectSection('projects')}
+                className="h-10 w-10 p-0 rounded-full"
+              >
+                <Code className="h-5 w-5" />
+              </Button>
+              <Button
+                variant={activeSection === 'fieldnotes' && !activeFieldnote ? "default" : "ghost"}
+                size="sm"
+                onClick={() => selectSection('fieldnotes')}
+                className="h-10 w-10 p-0 rounded-full"
+              >
+                <BookOpen className="h-5 w-5" />
+              </Button>
+              <Button
+                variant={activeSection === 'inspirations' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+                size="sm"
+                onClick={() => selectSection('inspirations')}
+                className="h-10 w-10 p-0 rounded-full"
+              >
+                <Heart className="h-5 w-5" />
+              </Button>
+              <Button
+                variant={activeSection === 'content' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+                size="sm"
+                onClick={() => selectSection('content')}
+                className="h-10 w-10 p-0 rounded-full"
+              >
+                <Bookmark className="h-5 w-5" />
+              </Button>
+            </div>
           </nav>
         ) : (
           /* Text-based sidebar */
