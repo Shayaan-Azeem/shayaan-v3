@@ -47,6 +47,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   const [activeTensorForest, setActiveTensorForest] = useState(false)
   const [activeApocalypseHacks, setActiveApocalypseHacks] = useState(false)
   const [activeFieldnote, setActiveFieldnote] = useState<string | null>(null)
+  const [iconBarMode, setIconBarMode] = useState(false)
 
   /* ────────────────────────────────
      helpers
