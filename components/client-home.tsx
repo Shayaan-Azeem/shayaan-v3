@@ -186,10 +186,10 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         <ModeToggle />
       </div>
 
-      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-[160px_1fr] gap-8 lg:gap-20 safe-container">
+      <div className="max-w-3xl w-full grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-6 lg:gap-10 safe-container">
 
         {/* ───────────── desktop sidebar ───────────── */}
-        <nav className="hidden lg:block lg:text-right space-y-8 lg:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
+        <nav className="hidden lg:block lg:text-right space-y-6 text-sm text-muted-foreground sticky top-12 self-start">
           {sections.map((section) => (
             <div key={section}>
               {/* Main section button */}
