@@ -108,7 +108,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-12 xl:px-16 overflow-x-hidden safe-container">
       {/* ───────────── mobile top bar ───────────── */}
-      <div className="md:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+      <div className="lg:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
         <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1 backdrop-blur-sm">
           <Button
             variant="ghost"
@@ -181,7 +181,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       </div>
 
       {/* desktop theme toggle and command palette hint */}
-      <div className="hidden md:flex absolute top-4 right-4 items-center gap-3">
+      <div className="hidden lg:flex absolute top-4 right-4 items-center gap-3">
         <KeyboardHint />
         <ModeToggle />
       </div>
