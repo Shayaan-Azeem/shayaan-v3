@@ -113,8 +113,18 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
       {/* ───────────── mobile top bar ───────────── */}
-      <div className="md:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-        <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1 backdrop-blur-sm">
+      <div className={cn(
+        "md:hidden fixed z-50",
+        iconBarMode
+          ? "top-4 left-4 flex-col"
+          : "top-4 left-1/2 transform -translate-x-1/2"
+      )}>
+        <div className={cn(
+          "gap-1 bg-muted/50 backdrop-blur-sm p-1",
+          iconBarMode
+            ? "flex flex-col rounded-2xl"
+            : "flex items-center rounded-full"
+        )}>
           <Button
             variant="ghost"
             size="sm"
@@ -131,7 +141,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           >
             <Search className="h-4 w-4" />
           </Button>
-          <div className="w-px h-4 bg-border" />
+          <div className={iconBarMode ? "h-px w-4 bg-border mx-2" : "w-px h-4 bg-border"} />
           <Button
             variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
             size="sm"
@@ -180,7 +190,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           >
             <Bookmark className="h-4 w-4" />
           </Button>
-          <div className="w-px h-4 bg-border" />
+          <div className={iconBarMode ? "h-px w-4 bg-border mx-2" : "w-px h-4 bg-border"} />
           <ModeToggle />
         </div>
       </div>
