@@ -144,12 +144,12 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
 
       {/* Photo section */}
       {sections.photo && (
-        <div className="mt-8 flex justify-center px-4">
+        <div className="mt-8 flex justify-center">
           <img 
             src="/000129720010.JPG" 
             alt="Shayaan in workshop" 
-            className="shadow-md w-full h-auto rounded-lg"
-            style={{ maxWidth: 'min(600px, calc(100vw - 2rem))' }}
+            className="shadow-md max-w-full h-auto"
+            style={{ maxWidth: '600px' }}
           />
         </div>
       )}

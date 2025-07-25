@@ -106,9 +106,9 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
      render
   ────────────────────────────────── */
     return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-12 xl:px-16 overflow-x-hidden safe-container">
+    <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
       {/* ───────────── mobile top bar ───────────── */}
-      <div className="lg:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+      <div className="md:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
         <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1 backdrop-blur-sm">
           <Button
             variant="ghost"
@@ -181,15 +181,15 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       </div>
 
       {/* desktop theme toggle and command palette hint */}
-      <div className="hidden lg:flex absolute top-4 right-4 items-center gap-3">
+      <div className="hidden md:flex absolute top-4 right-4 items-center gap-3">
         <KeyboardHint />
         <ModeToggle />
       </div>
 
-      <div className="max-w-3xl w-full grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-6 lg:gap-10 safe-container">
+      <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
 
         {/* ───────────── desktop sidebar ───────────── */}
-        <nav className="hidden lg:block lg:text-right space-y-6 text-sm text-muted-foreground sticky top-12 self-start">
+        <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
           {sections.map((section) => (
             <div key={section}>
               {/* Main section button */}
