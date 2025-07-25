@@ -88,7 +88,7 @@ export default function MDXRenderer({ item }: MDXRendererProps) {
               {item.tags.length > 0 && (
                 <div className="flex gap-2">
                   {item.tags.map((tag) => (
-                    <span key={tag} className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">
+                    <span key={tag} className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">
                       {tag}
                     </span>
                   ))}
@@ -100,7 +100,7 @@ export default function MDXRenderer({ item }: MDXRendererProps) {
           {(item.slug === 'philosophy' || item.slug === 'content-worth-consuming') && item.tags.length > 0 && (
             <div className="flex gap-2 mb-4">
               {item.tags.map((tag) => (
-                <span key={tag} className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">
+                <span key={tag} className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">
                   {tag}
                 </span>
               ))}

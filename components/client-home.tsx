@@ -47,7 +47,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   const [activeTensorForest, setActiveTensorForest] = useState(false)
   const [activeApocalypseHacks, setActiveApocalypseHacks] = useState(false)
   const [activeFieldnote, setActiveFieldnote] = useState<string | null>(null)
-  const [iconBarMode, setIconBarMode] = useState(false)
 
   /* ────────────────────────────────
      helpers
@@ -100,10 +99,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     }
   }
 
-  const handleToggleIconBar = () => {
-    setIconBarMode(!iconBarMode)
-  }
-
   // Get recent fieldnotes for sidebar (first 3)
   const recentFieldnotes = fieldnotes.slice(0, 3)
 
@@ -113,18 +108,8 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
       {/* ───────────── mobile top bar ───────────── */}
-      <div className={cn(
-        "md:hidden fixed z-50",
-        iconBarMode
-          ? "top-4 left-4 flex-col"
-          : "top-4 left-1/2 transform -translate-x-1/2"
-      )}>
-        <div className={cn(
-          "gap-1 bg-muted/50 backdrop-blur-sm p-1",
-          iconBarMode
-            ? "flex flex-col rounded-2xl"
-            : "flex items-center rounded-full"
-        )}>
+      <div className="md:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+        <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1 backdrop-blur-sm">
           <Button
             variant="ghost"
             size="sm"
@@ -141,7 +126,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           >
             <Search className="h-4 w-4" />
           </Button>
-          <div className={iconBarMode ? "h-px w-4 bg-border mx-2" : "w-px h-4 bg-border"} />
+          <div className="w-px h-4 bg-border" />
           <Button
             variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
             size="sm"
@@ -190,144 +175,80 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           >
             <Bookmark className="h-4 w-4" />
           </Button>
-          <div className={iconBarMode ? "h-px w-4 bg-border mx-2" : "w-px h-4 bg-border"} />
+          <div className="w-px h-4 bg-border" />
           <ModeToggle />
         </div>
       </div>
 
       {/* desktop theme toggle and command palette hint */}
-      <div className="hidden md:flex absolute top-4 right-4">
-        <div className="flex items-center gap-3 bg-muted/50 backdrop-blur-sm rounded-xl px-3 py-2">
-          <KeyboardHint />
-          <ModeToggle />
-        </div>
+      <div className="hidden md:flex absolute top-4 right-4 items-center gap-3">
+        <KeyboardHint />
+        <ModeToggle />
       </div>
 
-      <div className={cn(
-        "max-w-3xl w-full grid gap-8 md:gap-12",
-        iconBarMode 
-          ? "grid-cols-1 md:grid-cols-[60px_1fr]" 
-          : "grid-cols-1 md:grid-cols-[120px_1fr]"
-      )}>
+      <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
 
         {/* ───────────── desktop sidebar ───────────── */}
-        {iconBarMode ? (
-          /* Icon-only sidebar with glass effect */
-          <nav className="hidden md:flex flex-col items-center space-y-3 text-sm text-muted-foreground sticky top-12 self-start">
-            <div className="flex flex-col gap-3 bg-muted/50 backdrop-blur-sm rounded-2xl p-3">
-              <Button
-                variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-                size="sm"
-                onClick={() => selectSection('about')}
-                className="h-10 w-10 p-0 rounded-full"
+        <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
+          {sections.map((section) => (
+            <div key={section}>
+              {/* Main section button */}
+              <button
+                onClick={() => selectSection(section)}
+                className={cn(
+                  "block w-full text-right transition-colors duration-200",
+                  activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) && !(section === "fieldnotes" && activeFieldnote) 
+                    ? "text-foreground font-medium" 
+                    : "text-muted-foreground/70 hover:text-muted-foreground",
+                )}
               >
-                <User className="h-5 w-5" />
-              </Button>
-              <Button
-                variant={activeSection === 'experience' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-                size="sm"
-                onClick={() => selectSection('experience')}
-                className="h-10 w-10 p-0 rounded-full"
-              >
-                <Briefcase className="h-5 w-5" />
-              </Button>
-              <Button
-                variant={activeSection === 'projects' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-                size="sm"
-                onClick={() => selectSection('projects')}
-                className="h-10 w-10 p-0 rounded-full"
-              >
-                <Code className="h-5 w-5" />
-              </Button>
-              <Button
-                variant={activeSection === 'fieldnotes' && !activeFieldnote ? "default" : "ghost"}
-                size="sm"
-                onClick={() => selectSection('fieldnotes')}
-                className="h-10 w-10 p-0 rounded-full"
-              >
-                <BookOpen className="h-5 w-5" />
-              </Button>
-              <Button
-                variant={activeSection === 'inspirations' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-                size="sm"
-                onClick={() => selectSection('inspirations')}
-                className="h-10 w-10 p-0 rounded-full"
-              >
-                <Heart className="h-5 w-5" />
-              </Button>
-              <Button
-                variant={activeSection === 'content' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-                size="sm"
-                onClick={() => selectSection('content')}
-                className="h-10 w-10 p-0 rounded-full"
-              >
-                <Bookmark className="h-5 w-5" />
-              </Button>
+                {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
+              </button>
+              
+              {/* Project sub-items */}
+              {section === "projects" && activeSection === "projects" && (
+                <div className="mt-4 space-y-2">
+                  <button
+                    onClick={selectTensorForest}
+                    className={cn(
+                      "block w-full text-right text-xs transition-colors duration-200 pl-4",
+                      activeTensorForest ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
+                    )}
+                  >
+                    tensorforest
+                  </button>
+                  <button
+                    onClick={selectApocalypseHacks}
+                    className={cn(
+                      "block w-full text-right text-xs transition-colors duration-200 pl-4",
+                      activeApocalypseHacks ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
+                    )}
+                  >
+                    apocalypse hacks
+                  </button>
+                </div>
+              )}
+              
+              {/* Fieldnotes sub-items */}
+              {section === "fieldnotes" && activeSection === "fieldnotes" && recentFieldnotes.length > 0 && (
+                <div className="mt-4 space-y-2">
+                  {recentFieldnotes.map((item) => (
+                    <button
+                      key={item.slug}
+                      onClick={() => selectFieldnote(item.slug)}
+                      className={cn(
+                        "block w-full text-right text-xs transition-colors duration-200 pl-4",
+                        activeFieldnote === item.slug ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light"
+                      )}
+                    >
+                      {item.title}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-          </nav>
-        ) : (
-          /* Text-based sidebar */
-          <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
-            {sections.map((section) => (
-              <div key={section}>
-                {/* Main section button */}
-                <button
-                  onClick={() => selectSection(section)}
-                  className={cn(
-                    "block w-full text-right transition-colors duration-200",
-                    activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) && !(section === "fieldnotes" && activeFieldnote) 
-                      ? "text-foreground font-medium" 
-                      : "text-muted-foreground/70 hover:text-muted-foreground",
-                  )}
-                >
-                  {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
-                </button>
-                
-                {/* Project sub-items */}
-                {section === "projects" && activeSection === "projects" && (
-                  <div className="mt-4 space-y-2">
-                    <button
-                      onClick={selectTensorForest}
-                      className={cn(
-                        "block w-full text-right text-xs transition-colors duration-200 pl-4",
-                        activeTensorForest ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
-                      )}
-                    >
-                      tensorforest
-                    </button>
-                    <button
-                      onClick={selectApocalypseHacks}
-                      className={cn(
-                        "block w-full text-right text-xs transition-colors duration-200 pl-4",
-                        activeApocalypseHacks ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
-                      )}
-                    >
-                      apocalypse hacks
-                    </button>
-                  </div>
-                )}
-                
-                {/* Fieldnotes sub-items */}
-                {section === "fieldnotes" && activeSection === "fieldnotes" && recentFieldnotes.length > 0 && (
-                  <div className="mt-4 space-y-2">
-                    {recentFieldnotes.map((item) => (
-                      <button
-                        key={item.slug}
-                        onClick={() => selectFieldnote(item.slug)}
-                        className={cn(
-                          "block w-full text-right text-xs transition-colors duration-200 pl-4",
-                          activeFieldnote === item.slug ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light"
-                        )}
-                      >
-                        {item.title}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        )}
+          ))}
+        </nav>
 
         {/* ───────────── main content ───────────── */}
         <div className="text-base leading-relaxed">
@@ -357,7 +278,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         onNavigate={handleCommandNavigation}
         onSelectFieldnote={handleCommandFieldnote}
         onSelectProject={handleCommandProject}
-        onToggleIconBar={handleToggleIconBar}
         currentSection={activeSection}
         currentPage="Home"
       />
@@ -1043,8 +963,8 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                   </svg>
                 </Link>
                 <Link
@@ -1309,7 +1229,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         return renderWithHeading("projects", (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
             {/* vibetype */}
-            <div className="rounded-lg p-3 bg-card/80 backdrop-blur-sm transition-all duration-200 group ">
+            <div className="rounded-lg p-3 bg-card transition-all duration-200 group ">
               <Link
                 href="https://www.gptfixtsfor.me/"
                 target="_blank"
@@ -1353,16 +1273,16 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 an AI writing sidekick that lives in your browser. highlight text to rewrite, expand, or clean it up instantly. open the sidebar to pull context from your tabs and draft smarter, faster.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">html</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">css</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">javascript</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">inbound vc interest</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">offered spot in spur accelerator</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">html</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">css</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">javascript</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">inbound vc interest</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">offered spot in spur accelerator</span>
               </div>
             </div>
 
             {/* shoppy wrapped */}
-            <div className="rounded-lg p-3 bg-card/80 backdrop-blur-sm transition-all duration-200 group ">
+            <div className="rounded-lg p-3 bg-card transition-all duration-200 group ">
               <Link
                 href="https://github.com/ultratrikx/shoppy-wrapped/pulls"
                 target="_blank"
@@ -1396,15 +1316,15 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 spotify wrapped, but for your shopping. built with Shopify's Shop Mini framework. shows your top shops, spend, orders, and shopping style in a smooth stories-style recap.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">typescript</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">tailwind</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">shopify</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">won the Shopify Toronto Tech Week hackathon</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">typescript</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">tailwind</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">shopify</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">won the Shopify Toronto Tech Week hackathon</span>
               </div>
             </div>
 
             {/* tensorforest */}
-            <div className="rounded-lg p-4 bg-card/80 backdrop-blur-sm transition-all duration-200 group ">
+            <div className="rounded-lg p-4 bg-card transition-all duration-200 group ">
                 <button
                   onClick={selectTensorForest}
                   className="block w-full"
@@ -1442,7 +1362,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               </div>
 
             {/* apocalypse hacks */}
-            <div className="rounded-lg p-4 bg-card/80 backdrop-blur-sm transition-all duration-200 group ">
+            <div className="rounded-lg p-4 bg-card transition-all duration-200 group ">
                             <button
                 onClick={selectApocalypseHacks}
                 className="block w-full"
@@ -1482,11 +1402,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 founded canada's largest high school hackathon with 150 attendees and 40+ projects shipped. raised $50k from sponsors like shopify and doordash.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">event organizing</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">fundraising</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">project management</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">raised $50k</span>
-                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">150 attendees</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">event organizing</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">fundraising</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">project management</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">raised $50k</span>
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">150 attendees</span>
                 </div>
               </div>
             </div>
@@ -1526,4 +1446,4 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         return null
     }
   }
-}
+} 

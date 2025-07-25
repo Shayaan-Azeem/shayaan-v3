@@ -18,8 +18,7 @@ import {
   Moon,
   ExternalLink,
   BookOpenCheck,
-  Leaf,
-  Layout
+  Leaf
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { type ContentItem } from '@/lib/content'
@@ -29,7 +28,6 @@ interface CommandPaletteProps {
   onNavigate: (section: string) => void
   onSelectFieldnote: (slug: string) => void
   onSelectProject: (project: string) => void
-  onToggleIconBar?: () => void
   currentSection?: string
   currentPage?: string
 }
@@ -39,7 +37,6 @@ export default function CommandPalette({
   onNavigate, 
   onSelectFieldnote, 
   onSelectProject,
-  onToggleIconBar,
   currentSection = 'about',
   currentPage = 'Home'
 }: CommandPaletteProps) {
@@ -131,9 +128,6 @@ export default function CommandPalette({
             case '9':
               setMatchaMode()
               break
-            case 'i':
-              handleToggleIconBar()
-              break
             case '2':
               handleEmail() // @ key on many keyboards
               break
@@ -179,13 +173,6 @@ export default function CommandPalette({
 
   const handleExternalLink = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer')
-    setOpen(false)
-  }
-
-  const handleToggleIconBar = () => {
-    if (onToggleIconBar) {
-      onToggleIconBar()
-    }
     setOpen(false)
   }
 
@@ -288,7 +275,7 @@ export default function CommandPalette({
                   <User className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to about</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + a
                 </kbd>
               </Command.Item>
@@ -297,7 +284,7 @@ export default function CommandPalette({
                   <Briefcase className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to experience</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + e
                 </kbd>
               </Command.Item>
@@ -306,7 +293,7 @@ export default function CommandPalette({
                   <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to projects</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + p
                 </kbd>
               </Command.Item>
@@ -315,7 +302,7 @@ export default function CommandPalette({
                   <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to fieldnotes</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + f
                 </kbd>
               </Command.Item>
@@ -324,7 +311,7 @@ export default function CommandPalette({
                   <Heart className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to philosophy</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + m
                 </kbd>
               </Command.Item>
@@ -333,7 +320,7 @@ export default function CommandPalette({
                   <List className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>go to content</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + c
                 </kbd>
               </Command.Item>
@@ -346,7 +333,7 @@ export default function CommandPalette({
                   <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>tensorforest</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + t
                 </kbd>
               </Command.Item>
@@ -355,7 +342,7 @@ export default function CommandPalette({
                   <FolderOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>apocalypse hacks</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + h
                 </kbd>
               </Command.Item>
@@ -364,7 +351,7 @@ export default function CommandPalette({
                   <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>vibetype</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + v
                 </kbd>
               </Command.Item>
@@ -373,7 +360,7 @@ export default function CommandPalette({
                   <ExternalLink className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>shoppy wrapped</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + s
                 </kbd>
               </Command.Item>
@@ -388,7 +375,7 @@ export default function CommandPalette({
                       <BookOpen className="mr-3 h-4 w-4 text-muted-foreground" />
                       <span>{item.title.toLowerCase()}</span>
                     </div>
-                    <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                    <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                       {index + 1}
                     </kbd>
                   </Command.Item>
@@ -403,7 +390,7 @@ export default function CommandPalette({
                   <Twitter className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>twitter</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + x
                 </kbd>
               </Command.Item>
@@ -412,7 +399,7 @@ export default function CommandPalette({
                   <Linkedin className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>linkedin</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + l
                 </kbd>
               </Command.Item>
@@ -421,7 +408,7 @@ export default function CommandPalette({
                   <Github className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>github</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + g
                 </kbd>
               </Command.Item>
@@ -430,7 +417,7 @@ export default function CommandPalette({
                   <Mail className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>send email</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   @
                 </kbd>
               </Command.Item>
@@ -447,7 +434,7 @@ export default function CommandPalette({
                   )}
                   <span>toggle theme</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + d
                 </kbd>
               </Command.Item>
@@ -457,7 +444,7 @@ export default function CommandPalette({
                   <BookOpenCheck className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>reading mode</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + 8
                 </kbd>
               </Command.Item>
@@ -467,22 +454,10 @@ export default function CommandPalette({
                   <Leaf className="mr-3 h-4 w-4 text-muted-foreground" />
                   <span>matcha mode</span>
                 </div>
-                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + 9
                 </kbd>
               </Command.Item>
-              
-              {onToggleIconBar && (
-                <Command.Item onSelect={handleToggleIconBar}>
-                  <div className="flex items-center">
-                    <Layout className="mr-3 h-4 w-4 text-muted-foreground" />
-                    <span>toggle icon bar</span>
-                  </div>
-                  <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted/50 backdrop-blur-sm px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                    shift + i
-                  </kbd>
-                </Command.Item>
-              )}
             </Command.Group>
           </Command.List>
           
@@ -508,4 +483,4 @@ export default function CommandPalette({
       </DialogPortal>
     </Dialog>
   )
-}
+} 
