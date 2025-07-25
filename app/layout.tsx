@@ -4,7 +4,12 @@ import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata = {
   title: "Shayaan Azeem",
-  description: "Personal website of Shayaan Azeem"
+  description: "Personal website of Shayaan Azeem",
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
