@@ -11,7 +11,7 @@ import {
   Heart, 
   List,
   Mail,
-  Github,
+  Github as GitHubIcon,
   Twitter,
   Linkedin,
   Sun,
