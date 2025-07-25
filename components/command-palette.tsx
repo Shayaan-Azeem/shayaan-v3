@@ -242,7 +242,7 @@ export default function CommandPalette({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay className="bg-black/10 dark:bg-black/20" />
-        <DialogContent className="overflow-hidden p-0 shadow-2xl border border-white/20 bg-muted/50 backdrop-blur-sm w-[95vw] max-w-[600px] h-[85vh] max-h-[600px] sm:w-full sm:h-auto">
+        <DialogContent className="overflow-hidden p-0 shadow-2xl border border-white/20 bg-muted/50 backdrop-blur-sm w-[92vw] max-w-[600px] h-[80vh] max-h-[500px] sm:w-full sm:h-auto sm:max-h-[600px]">
         <DialogTitle className="sr-only">
           command palette
         </DialogTitle>
@@ -263,7 +263,7 @@ export default function CommandPalette({
               className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
-          <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden">
+          <Command.List className="max-h-[200px] sm:max-h-[300px] overflow-y-auto overflow-x-hidden">
             <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
               no results found.
             </Command.Empty>
