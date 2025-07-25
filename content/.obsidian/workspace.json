@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "fieldnotes/17 lessons from 17.md",
+                "file": "OBSIDIAN_SETUP.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "17 lessons from 17"
+              "title": "OBSIDIAN_SETUP"
             }
           }
         ],
@@ -111,7 +111,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical",
+                "sortOrder": "byModifiedTimeReverse",
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
@@ -243,16 +243,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "557e779eb8571997",
+  "active": "7bfa39fa41aae5ac",
   "lastOpenFiles": [
-    "fieldnotes/everything happens for a reason.md",
+    "content-worth-consuming.md",
     "fieldnotes/17 lessons from 17.md",
+    "fieldnotes/everything happens for a reason.md",
     "fieldnotes/test.md",
     "about.md",
     "fieldnotes-template.md",
     "philosophy.md",
     "README.md",
-    "content-worth-consuming.md",
     "Content-Worth-Consuming.md",
     "Users/shayaanazeem/Documents/Shayaan Portfolio/public/Mark Zuckerberg Early Days.jpg",
     "OBSIDIAN_SETUP.md",
