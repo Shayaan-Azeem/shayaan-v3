@@ -196,9 +196,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       </div>
 
       {/* desktop theme toggle and command palette hint */}
-      <div className="hidden md:flex absolute top-4 right-4 items-center gap-3">
-        <KeyboardHint />
-        <ModeToggle />
+      <div className="hidden md:flex absolute top-4 right-4">
+        <div className="flex items-center gap-3 bg-muted/50 backdrop-blur-sm rounded-xl px-3 py-2">
+          <KeyboardHint />
+          <ModeToggle />
+        </div>
       </div>
 
       <div className={cn(
@@ -1351,11 +1353,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 an AI writing sidekick that lives in your browser. highlight text to rewrite, expand, or clean it up instantly. open the sidebar to pull context from your tabs and draft smarter, faster.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">html</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">css</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">javascript</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">inbound vc interest</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">offered spot in spur accelerator</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">html</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">css</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">javascript</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">inbound vc interest</span>
+                <span className="px-2 py-1 bg-accent/50 backdrop-blur-sm text-accent-foreground rounded-md text-xs">offered spot in spur accelerator</span>
               </div>
             </div>
 
