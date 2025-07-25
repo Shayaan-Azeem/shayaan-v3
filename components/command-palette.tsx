@@ -18,7 +18,8 @@ import {
   Moon,
   ExternalLink,
   BookOpenCheck,
-  Leaf
+  Leaf,
+  Layout
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { type ContentItem } from '@/lib/content'
@@ -28,6 +29,7 @@ interface CommandPaletteProps {
   onNavigate: (section: string) => void
   onSelectFieldnote: (slug: string) => void
   onSelectProject: (project: string) => void
+  onToggleIconBar?: () => void
   currentSection?: string
   currentPage?: string
 }
@@ -37,6 +39,7 @@ export default function CommandPalette({
   onNavigate, 
   onSelectFieldnote, 
   onSelectProject,
+  onToggleIconBar,
   currentSection = 'about',
   currentPage = 'Home'
 }: CommandPaletteProps) {
@@ -128,6 +131,9 @@ export default function CommandPalette({
             case '9':
               setMatchaMode()
               break
+            case 'i':
+              handleToggleIconBar()
+              break
             case '2':
               handleEmail() // @ key on many keyboards
               break
@@ -173,6 +179,13 @@ export default function CommandPalette({
 
   const handleExternalLink = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer')
+    setOpen(false)
+  }
+
+  const handleToggleIconBar = () => {
+    if (onToggleIconBar) {
+      onToggleIconBar()
+    }
     setOpen(false)
   }
 
@@ -458,6 +471,18 @@ export default function CommandPalette({
                   shift + 9
                 </kbd>
               </Command.Item>
+              
+              {onToggleIconBar && (
+                <Command.Item onSelect={handleToggleIconBar}>
+                  <div className="flex items-center">
+                    <Layout className="mr-3 h-4 w-4 text-muted-foreground" />
+                    <span>toggle icon bar</span>
+                  </div>
+                  <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                    shift + i
+                  </kbd>
+                </Command.Item>
+              )}
             </Command.Group>
           </Command.List>
           
@@ -483,4 +508,4 @@ export default function CommandPalette({
       </DialogPortal>
     </Dialog>
   )
-} 
+}
