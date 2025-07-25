@@ -106,7 +106,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
      render
   ────────────────────────────────── */
     return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 overflow-x-hidden safe-container">
       {/* ───────────── mobile top bar ───────────── */}
       <div className="md:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
         <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1 backdrop-blur-sm">
@@ -186,7 +186,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         <ModeToggle />
       </div>
 
-      <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
+      <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12 safe-container">
 
         {/* ───────────── desktop sidebar ───────────── */}
         <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">

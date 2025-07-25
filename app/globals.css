@@ -6,11 +6,29 @@ body {
   /* Modern sans-serif font stack to match the screenshot */
   font-family:
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  /* Prevent horizontal overflow */
+  .prevent-overflow {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Responsive container that prevents overflow */
+  .safe-container {
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
   }
 }
 
