@@ -18,7 +18,8 @@ import {
   Moon,
   ExternalLink,
   BookOpenCheck,
-  Leaf
+  Leaf,
+  Layout
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { type ContentItem } from '@/lib/content'
@@ -28,6 +29,7 @@ interface CommandPaletteProps {
   onNavigate: (section: string) => void
   onSelectFieldnote: (slug: string) => void
   onSelectProject: (project: string) => void
+  onToggleIconBar?: () => void
   currentSection?: string
   currentPage?: string
 }
