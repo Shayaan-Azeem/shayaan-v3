@@ -1,6 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: "Shayaan Azeem",
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           themes={['light', 'dark', 'reading', 'matcha']}
         >
           {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
