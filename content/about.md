@@ -12,9 +12,9 @@ i'm an 18 years old, from toronto, and i like to build things.
 
 incoming student studying applied math and ml at [hover-1] [@uwaterloo](https://uwaterloo.ca/). 
 ## what i'm up to lately:
-- building a community for [hover-9] [cracked/ambitious teenagers building cool sh*t](https://www.teenbuilders.club/)
-- started my own [hover-10] [summer camp to teach kids how to code](https://www.thecodecamp.ca/)
-- building a [hover-11] [chrome extension for google docs](https://x.com/shayaan_azeem/status/1914686941573861797)
+- building a [hover-9] [community](https://www.teenbuilders.club/) for cracked/ambitious teenagers building cool sh*t
+- started my own [hover-10] [summer camp](https://www.thecodecamp.ca/) to teach kids how to code
+- building a [hover-11] [chrome extension](https://x.com/shayaan_azeem/status/1914686941573861797) for google docs
 ## some cool things i've done in the past:
 
 - spent a year building autonomous drones to predict forest fires  

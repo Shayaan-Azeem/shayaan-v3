@@ -54,15 +54,15 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-olympiad">${title}</a>`
       }
       // Special handling for teen builders club link (orange)
-      if (title.toLowerCase().includes('cracked/ambitious teenagers') || url.includes('teenbuilders.club')) {
+      if (title.toLowerCase() === 'community' || url.includes('teenbuilders.club')) {
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-teenbuilders">${title}</a>`
       }
       // Special handling for code camp link (blue)
-      if (title.toLowerCase().includes('summer camp to teach kids') || url.includes('thecodecamp.ca')) {
+      if (title.toLowerCase() === 'summer camp' || url.includes('thecodecamp.ca')) {
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-codecamp">${title}</a>`
       }
       // Special handling for chrome extension link (black/white)
-      if (title.toLowerCase().includes('chrome extension') || url.includes('x.com/shayaan_azeem')) {
+      if (title.toLowerCase() === 'chrome extension' || url.includes('x.com/shayaan_azeem')) {
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-chrome">${title}</a>`
       }
       return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-blue hover-dark-${hoverNum}">${title}</a>`
