@@ -89,6 +89,14 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
         </div>
       )}
 
+      {/* What I'm up to lately section */}
+      {sections["what i'm up to lately:"] && (
+        <div className="pt-2">
+          <h2 className="mb-2 font-bold">what i'm up to lately:</h2>
+          <p>{parseBulletPoints(sections["what i'm up to lately:"])}</p>
+        </div>
+      )}
+
       {/* Some cool things section */}
       {sections["some cool things i've done in the past:"] && (
         <div className="pt-2">
