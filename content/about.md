@@ -13,6 +13,9 @@ i'm an 18 years old, from toronto, and i like to build things.
 incoming student studying applied math and ml at [hover-1] [@uwaterloo](https://uwaterloo.ca/). 
 ## what i'm up to lately:
 - building a community for cracked/ambitious teenagers building cool sh*t 
+- started my own summer camp to teach kids how to code
+- building a chrome extension for google docs
+- 
 ## some cool things i've done in the past:
 
 - spent a year building autonomous drones to predict forest fires  
