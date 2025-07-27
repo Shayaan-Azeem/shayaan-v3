@@ -53,6 +53,18 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
       if (title.toLowerCase().includes('robot olympiad') || url.includes('wro-association.org')) {
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-olympiad">${title}</a>`
       }
+      // Special handling for teen builders club link (orange)
+      if (title.toLowerCase().includes('cracked/ambitious teenagers') || url.includes('teenbuilders.club')) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-teenbuilders">${title}</a>`
+      }
+      // Special handling for code camp link (blue)
+      if (title.toLowerCase().includes('summer camp to teach kids') || url.includes('thecodecamp.ca')) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-codecamp">${title}</a>`
+      }
+      // Special handling for chrome extension link (black/white)
+      if (title.toLowerCase().includes('chrome extension') || url.includes('x.com/shayaan_azeem')) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-chrome">${title}</a>`
+      }
       return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-blue hover-dark-${hoverNum}">${title}</a>`
     })
   }
@@ -93,7 +105,15 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
       {sections["what i'm up to lately:"] && (
         <div className="pt-2">
           <h2 className="mb-2 font-bold">what i'm up to lately:</h2>
-          <p>{parseBulletPoints(sections["what i'm up to lately:"])}</p>
+          <ul className="list-none space-y-2">
+            {sections["what i'm up to lately:"]
+              .split('\n- ')
+              .filter(item => item.trim())
+              .map((item, index) => {
+                const cleanItem = item.replace(/^- /, '').trim()
+                return parseBulletPoints(cleanItem, true)
+              })}
+          </ul>
         </div>
       )}
 
