@@ -2,7 +2,7 @@
 title: no regrets
 slug: no regrets
 date: 2025-07-28
-summary: 
+summary: everything i'm not made me everything i am
 banner: supernova.png
 tags:
   - lessons
