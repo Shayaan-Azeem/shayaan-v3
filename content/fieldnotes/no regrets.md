@@ -3,7 +3,7 @@ title: no regrets
 slug: no-regrets
 date: 2025-07-28
 summary: Brief description of this fieldnote
-banner: 
+banner: supernova.png
 tags:
   - lessons
 draft: false
