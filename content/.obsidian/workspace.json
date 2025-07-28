@@ -97,12 +97,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "fieldnotes-template.md",
+                "file": "fieldnotes/no regrets.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "fieldnotes-template"
+              "title": "no regrets"
             }
           }
         ],
@@ -259,16 +259,16 @@
   },
   "active": "143be25c6abcb330",
   "lastOpenFiles": [
+    "fieldnotes/17 lessons from 17.md",
+    "fieldnotes-template.md",
     "fieldnotes/no regrets.md",
     "about.md",
     "README.md",
     "philosophy.md",
     "fieldnotes/test.md",
-    "fieldnotes/17 lessons from 17.md",
     "content-worth-consuming.md",
     "OBSIDIAN_SETUP.md",
     "fieldnotes/everything happens for a reason.md",
-    "fieldnotes-template.md",
     "Content-Worth-Consuming.md",
     "Users/shayaanazeem/Documents/Shayaan Portfolio/public/Mark Zuckerberg Early Days.jpg",
     "templates/about-template.md",

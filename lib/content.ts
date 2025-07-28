@@ -74,30 +74,76 @@ export function getAllWritings(): ContentItem[] {
 
 export function getContentItem(type: 'fieldnotes' | 'writings', slug: string): ContentItem | null {
   try {
-    // Try .mdx first, then .md
-    let fullPath = path.join(contentDirectory, type, `${slug}.mdx`)
-    if (!fs.existsSync(fullPath)) {
-      fullPath = path.join(contentDirectory, type, `${slug}.md`)
-    }
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
-    const { data, content } = matter(fileContents)
-
-    // Auto-prepend /fieldnotes/ to banner if it's just a filename
-    let banner = data.banner || null
-    if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
-      banner = `/fieldnotes/${banner}`
+    const contentPath = path.join(contentDirectory, type)
+    
+    // Check if directory exists
+    if (!fs.existsSync(contentPath)) {
+      return null
     }
 
-    return {
-      slug,
-      title: data.title || slug,
-      date: data.date || new Date().toISOString().split('T')[0],
-      summary: data.summary || '',
-      banner,
-      tags: data.tags || [],
-      draft: data.draft || false,
-      content,
+    const fileNames = fs.readdirSync(contentPath)
+    
+    // First, try to find by filename (for backwards compatibility)
+    for (const fileName of fileNames) {
+      if (!fileName.endsWith('.mdx') && !fileName.endsWith('.md')) continue
+      
+      const fileSlug = fileName.replace(/\.(mdx|md)$/, '')
+      if (fileSlug === slug) {
+        const fullPath = path.join(contentPath, fileName)
+        const fileContents = fs.readFileSync(fullPath, 'utf8')
+        const { data, content } = matter(fileContents)
+
+        // Use frontmatter slug if it exists, otherwise use filename-based slug
+        const actualSlug = data.slug || fileSlug
+
+        // Auto-prepend /fieldnotes/ to banner if it's just a filename
+        let banner = data.banner || null
+        if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
+          banner = `/fieldnotes/${banner}`
+        }
+
+        return {
+          slug: actualSlug,
+          title: data.title || actualSlug,
+          date: data.date || new Date().toISOString().split('T')[0],
+          summary: data.summary || '',
+          banner,
+          tags: data.tags || [],
+          draft: data.draft || false,
+          content,
+        }
+      }
     }
+    
+    // Then, try to find by frontmatter slug
+    for (const fileName of fileNames) {
+      if (!fileName.endsWith('.mdx') && !fileName.endsWith('.md')) continue
+      
+      const fullPath = path.join(contentPath, fileName)
+      const fileContents = fs.readFileSync(fullPath, 'utf8')
+      const { data, content } = matter(fileContents)
+      
+      if (data.slug === slug) {
+        // Auto-prepend /fieldnotes/ to banner if it's just a filename
+        let banner = data.banner || null
+        if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
+          banner = `/fieldnotes/${banner}`
+        }
+
+        return {
+          slug: data.slug,
+          title: data.title || slug,
+          date: data.date || new Date().toISOString().split('T')[0],
+          summary: data.summary || '',
+          banner,
+          tags: data.tags || [],
+          draft: data.draft || false,
+          content,
+        }
+      }
+    }
+    
+    return null
   } catch {
     return null
   }
