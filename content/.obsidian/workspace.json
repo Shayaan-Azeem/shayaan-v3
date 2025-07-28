@@ -97,12 +97,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "fieldnotes/no regrets.md",
+                "file": "about.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "no regrets"
+              "title": "about"
             }
           }
         ],
@@ -259,9 +259,9 @@
   },
   "active": "143be25c6abcb330",
   "lastOpenFiles": [
+    "fieldnotes/no regrets.md",
     "fieldnotes/test.md",
     "fieldnotes/17 lessons from 17.md",
-    "fieldnotes/no regrets.md",
     "fieldnotes-template.md",
     "about.md",
     "README.md",
