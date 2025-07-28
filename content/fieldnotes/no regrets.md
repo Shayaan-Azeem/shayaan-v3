@@ -1,10 +1,11 @@
 ---
 title: no regrets
-slug: "}}"
+slug: no-regrets
 date: 2025-07-28
 summary: Brief description of this fieldnote
-banner: ""
-tags: 
+banner: 
+tags:
+  - lessons
 draft: false
 ---
 a few weeks ago, me and my friend were have a late night conversation that was quite deep lol, the premise being the idea of regretting things, he asked me if I had any regrets from high school and at the time quite frustrated with m y circumstances, situation and awaiting university decisions, I gave a him a huge list of things id do differently, but he heard me , took a pause and promptly replied to me saying that if those things had happend or been done differently you wouldn’t be the same person you are today, you wouldn’t have the same experiences, you wouldn’t have done the thing that make you so much of who you are 
