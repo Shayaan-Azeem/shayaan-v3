@@ -97,12 +97,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "fieldnotes/no regrets.md",
+                "file": "fieldnotes-template.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "no regrets"
+              "title": "fieldnotes-template"
             }
           }
         ],
@@ -257,14 +257,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7bfa39fa41aae5ac",
+  "active": "143be25c6abcb330",
   "lastOpenFiles": [
+    "fieldnotes/no regrets.md",
     "about.md",
     "README.md",
     "philosophy.md",
     "fieldnotes/test.md",
     "fieldnotes/17 lessons from 17.md",
-    "fieldnotes/no regrets.md",
     "content-worth-consuming.md",
     "OBSIDIAN_SETUP.md",
     "fieldnotes/everything happens for a reason.md",

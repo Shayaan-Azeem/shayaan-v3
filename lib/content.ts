@@ -32,10 +32,13 @@ function getContentItems(type: 'fieldnotes' | 'writings'): ContentItem[] {
   const items = fileNames
     .filter((fileName) => fileName.endsWith('.mdx') || fileName.endsWith('.md'))
           .map((fileName) => {
-        const slug = fileName.replace(/\.(mdx|md)$/, '')
+        const defaultSlug = fileName.replace(/\.(mdx|md)$/, '')
       const fullPath = path.join(contentPath, fileName)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
+
+      // Use frontmatter slug if it exists, otherwise use filename-based slug
+      const slug = data.slug || defaultSlug
 
       // Auto-prepend /fieldnotes/ to banner if it's just a filename
       let banner = data.banner || null
