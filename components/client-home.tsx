@@ -73,7 +73,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       setActiveTensorForest(false)
       setActiveApocalypseHacks(false)
       setActiveFieldnote(null)
-    } else if (pathname.startsWith("/projects/tensorforest")) {
+    } else if (pathname.startsWith("/projects/tensorforest") || pathname.startsWith("/tensorforest")) {
       setActiveSection("projects")
       setActiveTensorForest(true)
       setActiveApocalypseHacks(false)
@@ -141,7 +141,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveTensorForest(true)
     setActiveApocalypseHacks(false)
     setActiveFieldnote(null)
-    router.push("/projects/tensorforest")
+    router.push("/tensorforest")
   }
 
   const selectApocalypseHacks = () => {
