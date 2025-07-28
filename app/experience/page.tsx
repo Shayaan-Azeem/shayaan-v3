@@ -1,7 +1,7 @@
 import ClientHome from '@/components/client-home'
-import { getAllFieldnotes, getAllWritings, getPhilosophy, getContentWorthConsuming, getAbout } from '@/lib/content'
+import { getAllFieldnotes, getPhilosophy, getContentWorthConsuming, getAbout } from '@/lib/content'
 
-export default async function WritingsPage() {
+export default async function ExperiencePage() {
   const fieldnotes = getAllFieldnotes()
   const philosophy = getPhilosophy()
   const contentWorthConsuming = getContentWorthConsuming()
@@ -13,14 +13,14 @@ export default async function WritingsPage() {
       philosophy={philosophy}
       contentWorthConsuming={contentWorthConsuming}
       about={about}
-      initialSection="fieldnotes"
+      initialSection="experience"
     />
   )
 }
 
 export function generateMetadata() {
   return {
-    title: 'Writings - Shayaan Azeem',
-    description: 'My writings and thoughts.',
+    title: 'Experience - Shayaan Azeem',
+    description: 'My work experience and professional background.',
   }
 }

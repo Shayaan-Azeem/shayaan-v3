@@ -1,7 +1,8 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useRouter, usePathname } from "next/navigation"
 import Link from "next/link"
 import { ModeToggle } from "@/components/mode-toggle"
 import { cn } from "@/lib/utils"
@@ -22,15 +23,22 @@ interface ClientHomeProps {
   philosophy: ContentItem | null
   contentWorthConsuming: ContentItem | null
   about: ContentItem | null
+  initialSection?: string
 }
 
-export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming, about }: ClientHomeProps) {
+export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming, about, initialSection }: ClientHomeProps) {
+  /* ────────────────────────────────
+     router setup
+  ────────────────────────────────── */
+  const router = useRouter()
+  const pathname = usePathname()
+
   /* ────────────────────────────────
      section definitions
   ────────────────────────────────── */
   const sections = [
     "about",
-    "experience",
+    "experience", 
     "projects",
     "fieldnotes",
     "inspirations",
@@ -42,12 +50,72 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   /* ────────────────────────────────
      state
   ────────────────────────────────── */
-  const [activeSection, setActiveSection] = useState<SectionKey>("about")
-  const [showTensorForest, setShowTensorForest] = useState(false)
-  const [activeTensorForest, setActiveTensorForest] = useState(false)
-  const [activeApocalypseHacks, setActiveApocalypseHacks] = useState(false)
+  const [activeSection, setActiveSection] = useState<SectionKey>(
+    (initialSection === "tensorforest" || initialSection === "apocalypse-hacks") 
+      ? "projects" 
+      : (initialSection && sections.includes(initialSection as SectionKey)) 
+        ? initialSection as SectionKey 
+        : "about"
+  )
+  const [showTensorForest, setShowTensorForest] = useState(initialSection === "tensorforest")
+  const [activeTensorForest, setActiveTensorForest] = useState(initialSection === "tensorforest")
+  const [activeApocalypseHacks, setActiveApocalypseHacks] = useState(initialSection === "apocalypse-hacks")
   const [activeFieldnote, setActiveFieldnote] = useState<string | null>(null)
   const [iconBarMode, setIconBarMode] = useState(false)
+
+  /* ────────────────────────────────
+     url sync effect
+  ────────────────────────────────── */
+  useEffect(() => {
+    // Sync state based on current pathname
+    if (pathname === "/" || pathname === "/about") {
+      setActiveSection("about")
+      setActiveTensorForest(false)
+      setActiveApocalypseHacks(false)
+      setActiveFieldnote(null)
+    } else if (pathname.startsWith("/projects/tensorforest")) {
+      setActiveSection("projects")
+      setActiveTensorForest(true)
+      setActiveApocalypseHacks(false)
+      setActiveFieldnote(null)
+    } else if (pathname.startsWith("/projects/apocalypse-hacks")) {
+      setActiveSection("projects")
+      setActiveTensorForest(false)
+      setActiveApocalypseHacks(true)
+      setActiveFieldnote(null)
+    } else if (pathname.startsWith("/fieldnotes/")) {
+      const slug = pathname.split("/fieldnotes/")[1]
+      setActiveSection("fieldnotes")
+      setActiveFieldnote(slug)
+      setActiveTensorForest(false)
+      setActiveApocalypseHacks(false)
+    } else if (pathname === "/projects") {
+      setActiveSection("projects")
+      setActiveTensorForest(false)
+      setActiveApocalypseHacks(false)
+      setActiveFieldnote(null)
+    } else if (pathname === "/fieldnotes") {
+      setActiveSection("fieldnotes")
+      setActiveTensorForest(false)
+      setActiveApocalypseHacks(false)
+      setActiveFieldnote(null)
+    } else if (pathname === "/experience") {
+      setActiveSection("experience")
+      setActiveTensorForest(false)
+      setActiveApocalypseHacks(false)
+      setActiveFieldnote(null)
+    } else if (pathname === "/inspirations") {
+      setActiveSection("inspirations")
+      setActiveTensorForest(false)
+      setActiveApocalypseHacks(false)
+      setActiveFieldnote(null)
+    } else if (pathname === "/content") {
+      setActiveSection("content")
+      setActiveTensorForest(false)
+      setActiveApocalypseHacks(false)
+      setActiveFieldnote(null)
+    }
+  }, [pathname])
 
   /* ────────────────────────────────
      helpers
@@ -59,6 +127,13 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveTensorForest(false)
     setActiveApocalypseHacks(false)
     setActiveFieldnote(null)
+    
+    // Update URL based on section
+    if (section === "about") {
+      router.push("/")
+    } else {
+      router.push(`/${section}`)
+    }
   }
 
   const selectTensorForest = () => {
@@ -66,6 +141,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveTensorForest(true)
     setActiveApocalypseHacks(false)
     setActiveFieldnote(null)
+    router.push("/projects/tensorforest")
   }
 
   const selectApocalypseHacks = () => {
@@ -73,6 +149,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveTensorForest(false)
     setActiveApocalypseHacks(true)
     setActiveFieldnote(null)
+    router.push("/projects/apocalypse-hacks")
   }
 
   const selectFieldnote = (slug: string) => {
@@ -80,6 +157,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveFieldnote(slug)
     setActiveTensorForest(false)
     setActiveApocalypseHacks(false)
+    router.push(`/fieldnotes/${slug}`)
   }
 
   // Command palette handlers

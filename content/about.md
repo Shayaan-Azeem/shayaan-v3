@@ -35,7 +35,7 @@ i've always been really creative, and a builder at heart, from a young age alway
 
 ## where do i see myself in 10 years:
 
-probably still building in tech, maybe in a niche like environmental or health tech. i'm not exactly sure where i'll end up, but i know i want to be creating products that make a real positive impact on people's lives. i might also be involved in venture capital, supporting other builders. and i hope i'm still fostering community and creating spaces for curious likeminded people to connect.
+probably still building in tech, maybe in a niche like environmental or health tech. i'm not exactly sure where i'll end up, but i know i want to be creating products that make a real positive impact on people's lives. i might also be involved in venture capital, supporting other builders. and i hope i'm still fostering community and creating spaces for cool people to connect.
 
 ## photo
 

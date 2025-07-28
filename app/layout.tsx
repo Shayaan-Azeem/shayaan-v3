@@ -7,8 +7,11 @@ export const metadata = {
   title: "Shayaan Azeem",
   description: "Personal website of Shayaan Azeem",
   icons: {
-    icon: '/icon.png',
-    shortcut: '/icon.png',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon.png', type: 'image/png', sizes: '32x32' }
+    ],
+    shortcut: '/favicon.svg',
     apple: '/icon.png',
   },
 }
