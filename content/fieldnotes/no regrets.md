@@ -1,4 +1,3 @@
-
 a few weeks ago, me and my friend were having a late night conversation that was quite deep lol, the premise being the idea of regretting things. he asked me if i had any regrets from high school and at the time, quite frustrated with my circumstances, situation, and awaiting university decisions, i gave him a huge list of things i'd do differently. but he heard me, took a pause, and promptly replied to me saying that if those things had happened or been done differently, you wouldn't be the same person you are today. you wouldn't have the same experiences. you wouldn't have done the things that make you so much of who you are.
 
 i hadn't realized this, but he was right. if things had gone the way i wanted, then i wouldn't even be me today. and if i'm being honest, i wouldn't trade anything for the experiences that have made me who i am today…
