@@ -91,8 +91,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       setActiveApocalypseHacks(false)
     } else if (pathname === "/projects") {
       setActiveSection("projects")
-      setActiveTensorForest(false)
-      setActiveApocalypseHacks(false)
+      // Don't reset project states when on projects page - allow inline viewing
       setActiveFieldnote(null)
     } else if (pathname === "/fieldnotes") {
       setActiveSection("fieldnotes")
@@ -141,7 +140,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveTensorForest(true)
     setActiveApocalypseHacks(false)
     setActiveFieldnote(null)
-    router.push("/tensorforest")
+    // Don't navigate to separate page - keep content inline
   }
 
   const selectApocalypseHacks = () => {
@@ -149,7 +148,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveTensorForest(false)
     setActiveApocalypseHacks(true)
     setActiveFieldnote(null)
-    router.push("/projects/apocalypse-hacks")
+    // Don't navigate to separate page - keep content inline
   }
 
   const selectFieldnote = (slug: string) => {
@@ -469,6 +468,19 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   function renderTensorForestContent() {
     return (
       <div>
+        {/* Navigation */}
+        <div className="flex items-center gap-2 mb-6 text-sm text-muted-foreground">
+          <button 
+            onClick={() => {
+              setActiveTensorForest(false)
+              setActiveApocalypseHacks(false)
+            }}
+            className="hover:text-foreground transition-colors"
+          >
+            ← back to projects
+          </button>
+        </div>
+
         {/* Hero Banner */}
         <HeroBanner
           title="TensorForest"
@@ -652,6 +664,19 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   function renderApocalypseHacksContent() {
     return (
       <div>
+        {/* Navigation */}
+        <div className="flex items-center gap-2 mb-6 text-sm text-muted-foreground">
+          <button 
+            onClick={() => {
+              setActiveTensorForest(false)
+              setActiveApocalypseHacks(false)
+            }}
+            className="hover:text-foreground transition-colors"
+          >
+            ← back to projects
+          </button>
+        </div>
+
         {/* Hero Banner */}
         <HeroBanner
           title="Apocalypse Hacks"
