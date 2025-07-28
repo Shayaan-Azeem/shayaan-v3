@@ -1,7 +1,9 @@
 ---
-title: no regrthis realization reminded me of the kanye lyric: "everything i'm not made me everything i am."
+title: no regrththis realization reminded me of the kanye lyric: "everything i'm not made me everything i am."
 
-<iframe data-testid="embed-iframe" style={{borderRadius:"12px"}} src="https://open.spotify.com/embed/track/0NrtwAmRAdLxua31SzHvXr?utm_source=generator" width="100%" height="100" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<iframe data-testid="embed-iframe" style={{borderRadius: "12px"}} src="https://open.spotify.com/embed/track/0NrtwAmRAdLxua31SzHvXr?utm_source=generator" width="100%" height="100" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>realization reminded me of the kanye lyric: "everything i'm not made me everything i am."
+
+<iframe data-testid="embed-iframe" style={{borderRadius: "12px"}} src="https://open.spotify.com/embed/track/0NrtwAmRAdLxua31SzHvXr?utm_source=generator" width="100%" height="100" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 slug: no regrets
 date: 2025-07-28
 summary: Brief description of this fieldnote
