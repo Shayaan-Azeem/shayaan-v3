@@ -24,9 +24,10 @@ interface ClientHomeProps {
   contentWorthConsuming: ContentItem | null
   about: ContentItem | null
   initialSection?: string
+  initialFieldnote?: string
 }
 
-export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming, about, initialSection }: ClientHomeProps) {
+export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming, about, initialSection, initialFieldnote }: ClientHomeProps) {
   /* ────────────────────────────────
      router setup
   ────────────────────────────────── */
@@ -60,7 +61,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   const [showTensorForest, setShowTensorForest] = useState(initialSection === "tensorforest")
   const [activeTensorForest, setActiveTensorForest] = useState(initialSection === "tensorforest")
   const [activeApocalypseHacks, setActiveApocalypseHacks] = useState(initialSection === "apocalypse-hacks")
-  const [activeFieldnote, setActiveFieldnote] = useState<string | null>(null)
+  const [activeFieldnote, setActiveFieldnote] = useState<string | null>(initialFieldnote || null)
   const [iconBarMode, setIconBarMode] = useState(false)
 
   /* ────────────────────────────────
@@ -122,7 +123,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   const selectSection = (section: SectionKey) => {
     setActiveSection(section)
     // Always reset detail views when selecting a section
-    // This ensures clicking "projects" from detail pages goes to main projects page
     setActiveTensorForest(false)
     setActiveApocalypseHacks(false)
     setActiveFieldnote(null)
@@ -140,7 +140,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveTensorForest(true)
     setActiveApocalypseHacks(false)
     setActiveFieldnote(null)
-    // Don't navigate to separate page - keep content inline
+    router.push("/tensorforest")
   }
 
   const selectApocalypseHacks = () => {
@@ -148,7 +148,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveTensorForest(false)
     setActiveApocalypseHacks(true)
     setActiveFieldnote(null)
-    // Don't navigate to separate page - keep content inline
+    router.push("/projects/apocalypse-hacks")
   }
 
   const selectFieldnote = (slug: string) => {
