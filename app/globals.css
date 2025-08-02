@@ -593,63 +593,6 @@ body {
     color: #000;
   }
   
-  /* Orange highlight for teen builders club */
-  .link-teenbuilders {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #FED7AA; /* Light orange */
-    color: #000;
-  }
-  .link-teenbuilders:hover {
-    background-color: #F97316; /* Darker orange on hover */
-    color: #fff;
-  }
-  .dark .link-teenbuilders {
-    background-color: #F97316;
-    color: #fff;
-  }
-  .dark .link-teenbuilders:hover {
-    background-color: #FED7AA;
-    color: #000;
-  }
-  
-  /* Blue highlight for code camp */
-  .link-codecamp {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #DBEAFE; /* Light blue */
-    color: #000;
-  }
-  .link-codecamp:hover {
-    background-color: #3B82F6; /* Darker blue on hover */
-    color: #fff;
-  }
-  .dark .link-codecamp {
-    background-color: #3B82F6;
-    color: #fff;
-  }
-  .dark .link-codecamp:hover {
-    background-color: #DBEAFE;
-    color: #000;
-  }
-  
-  /* Black/white highlight for chrome extension */
-  .link-chrome {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #F3F4F6; /* Light gray */
-    color: #000;
-  }
-  .link-chrome:hover {
-    background-color: #374151; /* Dark gray on hover */
-    color: #fff;
-  }
-  .dark .link-chrome {
-    background-color: #374151;
-    color: #fff;
-  }
-  .dark .link-chrome:hover {
-    background-color: #F3F4F6;
-    color: #000;
-  }
-  
   /* Footer email link styling */
   .footer-email {
     @apply px-1 py-0.5 transition-all duration-200;

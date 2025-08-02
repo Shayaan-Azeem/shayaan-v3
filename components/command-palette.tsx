@@ -18,8 +18,7 @@ import {
   Moon,
   ExternalLink,
   BookOpenCheck,
-  Leaf,
-  Layout
+  Leaf
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { type ContentItem } from '@/lib/content'
@@ -29,7 +28,6 @@ interface CommandPaletteProps {
   onNavigate: (section: string) => void
   onSelectFieldnote: (slug: string) => void
   onSelectProject: (project: string) => void
-  onToggleIconBar?: () => void
   currentSection?: string
   currentPage?: string
 }
@@ -39,49 +37,38 @@ export default function CommandPalette({
   onNavigate, 
   onSelectFieldnote, 
   onSelectProject,
-  onToggleIconBar,
   currentSection = 'about',
   currentPage = 'Home'
 }: CommandPaletteProps) {
   const [open, setOpen] = useState(false)
   const { theme, setTheme } = useTheme()
 
-  // Toggle command palette with Cmd+K / Ctrl+K and handle global shortcuts
+  // Toggle command palette with Cmd+K / Ctrl+K and handle shortcuts
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      // Always handle Cmd+K / Ctrl+K to toggle command palette
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
         setOpen((open) => !open)
-        return
       }
       
-      // Skip shortcuts if user is typing in an input field (except when command palette is open)
-      const target = e.target as HTMLElement
-      const isTyping = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable
-      
-      // If command palette is open, skip shortcuts only when typing in the search input
-      if (open && isTyping) {
-        return
-      }
-      
-      // If command palette is closed, skip shortcuts when typing in any input
-      if (!open && isTyping) {
-        return
-      }
-      
-      // Handle global shortcuts (work whether command palette is open or closed)
-      if (!e.metaKey && !e.ctrlKey && !e.altKey) {
+      // Handle shortcuts when command palette is open, but not when typing in search
+      if (open && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        // Skip shortcuts if user is typing in the search input
+        const target = e.target as HTMLElement
+        if (target.tagName === 'INPUT') {
+          return
+        }
+        
+        e.preventDefault()
+        
         // Special case for @ key (Shift+2 on many keyboards)
         if (e.key === '@') {
-          e.preventDefault()
           handleEmail()
           return
         }
         
         // Handle Shift + letter shortcuts
         if (e.shiftKey) {
-          e.preventDefault()
           switch (e.key.toLowerCase()) {
             case 'a':
               handleNavigate('about')
@@ -131,28 +118,22 @@ export default function CommandPalette({
             case '9':
               setMatchaMode()
               break
-            case 'i':
-              handleToggleIconBar()
-              break
             case '2':
               handleEmail() // @ key on many keyboards
               break
           }
         } else {
-          // Handle number shortcuts (without shift) - only when command palette is open
-          if (open) {
-            e.preventDefault()
-            switch (e.key) {
-              case '1':
-                if (fieldnotes[0]) handleSelectFieldnote(fieldnotes[0].slug)
-                break
-              case '2':
-                if (fieldnotes[1]) handleSelectFieldnote(fieldnotes[1].slug)
-                break
-              case '3':
-                if (fieldnotes[2]) handleSelectFieldnote(fieldnotes[2].slug)
-                break
-            }
+          // Handle number shortcuts (without shift)
+          switch (e.key) {
+            case '1':
+              if (fieldnotes[0]) handleSelectFieldnote(fieldnotes[0].slug)
+              break
+            case '2':
+              if (fieldnotes[1]) handleSelectFieldnote(fieldnotes[1].slug)
+              break
+            case '3':
+              if (fieldnotes[2]) handleSelectFieldnote(fieldnotes[2].slug)
+              break
           }
         }
       }
@@ -179,13 +160,6 @@ export default function CommandPalette({
 
   const handleExternalLink = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer')
-    setOpen(false)
-  }
-
-  const handleToggleIconBar = () => {
-    if (onToggleIconBar) {
-      onToggleIconBar()
-    }
     setOpen(false)
   }
 
@@ -255,7 +229,7 @@ export default function CommandPalette({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay className="bg-black/10 dark:bg-black/20" />
-        <DialogContent className="overflow-hidden p-0 shadow-2xl border border-white/20 bg-muted/50 backdrop-blur-sm w-[92vw] max-w-[600px] h-[80vh] max-h-[500px] sm:w-full sm:h-auto sm:max-h-[600px]">
+        <DialogContent className="overflow-hidden p-0 shadow-2xl border border-white/20 bg-muted/50 backdrop-blur-sm">
         <DialogTitle className="sr-only">
           command palette
         </DialogTitle>
@@ -276,7 +250,7 @@ export default function CommandPalette({
               className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
-          <Command.List className="max-h-[160px] sm:max-h-[300px] overflow-y-auto overflow-x-hidden">
+          <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden">
             <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
               no results found.
             </Command.Empty>
@@ -471,18 +445,6 @@ export default function CommandPalette({
                   shift + 9
                 </kbd>
               </Command.Item>
-              
-              {onToggleIconBar && (
-                <Command.Item onSelect={handleToggleIconBar}>
-                  <div className="flex items-center">
-                    <Layout className="mr-3 h-4 w-4 text-muted-foreground" />
-                    <span>toggle icon bar</span>
-                  </div>
-                  <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                    shift + i
-                  </kbd>
-                </Command.Item>
-              )}
             </Command.Group>
           </Command.List>
           
@@ -508,4 +470,4 @@ export default function CommandPalette({
       </DialogPortal>
     </Dialog>
   )
-}
+} 

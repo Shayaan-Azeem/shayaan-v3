@@ -1,19 +1,10 @@
 import type React from "react"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: "Shayaan Azeem",
-  description: "Personal website of Shayaan Azeem",
-  icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/icon.png', type: 'image/png', sizes: '32x32' }
-    ],
-    shortcut: '/favicon.svg',
-    apple: '/icon.png',
-  },
+  description: "Personal website of Shayaan Azeem"
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -28,7 +19,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           themes={['light', 'dark', 'reading', 'matcha']}
         >
           {children}
-          <Analytics />
         </ThemeProvider>
       </body>
     </html>

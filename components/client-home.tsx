@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
-import { useRouter, usePathname } from "next/navigation"
+import { useState } from "react"
 import Link from "next/link"
 import { ModeToggle } from "@/components/mode-toggle"
 import { cn } from "@/lib/utils"
@@ -23,23 +22,15 @@ interface ClientHomeProps {
   philosophy: ContentItem | null
   contentWorthConsuming: ContentItem | null
   about: ContentItem | null
-  initialSection?: string
-  initialFieldnote?: string
 }
 
-export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming, about, initialSection, initialFieldnote }: ClientHomeProps) {
-  /* ────────────────────────────────
-     router setup
-  ────────────────────────────────── */
-  const router = useRouter()
-  const pathname = usePathname()
-
+export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming, about }: ClientHomeProps) {
   /* ────────────────────────────────
      section definitions
   ────────────────────────────────── */
   const sections = [
     "about",
-    "experience", 
+    "experience",
     "projects",
     "fieldnotes",
     "inspirations",
@@ -51,71 +42,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   /* ────────────────────────────────
      state
   ────────────────────────────────── */
-  const [activeSection, setActiveSection] = useState<SectionKey>(
-    (initialSection === "tensorforest" || initialSection === "apocalypse-hacks") 
-      ? "projects" 
-      : (initialSection && sections.includes(initialSection as SectionKey)) 
-        ? initialSection as SectionKey 
-        : "about"
-  )
-  const [showTensorForest, setShowTensorForest] = useState(initialSection === "tensorforest")
-  const [activeTensorForest, setActiveTensorForest] = useState(initialSection === "tensorforest")
-  const [activeApocalypseHacks, setActiveApocalypseHacks] = useState(initialSection === "apocalypse-hacks")
-  const [activeFieldnote, setActiveFieldnote] = useState<string | null>(initialFieldnote || null)
-  const [iconBarMode, setIconBarMode] = useState(false)
-
-  /* ────────────────────────────────
-     url sync effect
-  ────────────────────────────────── */
-  useEffect(() => {
-    // Sync state based on current pathname
-    if (pathname === "/" || pathname === "/about") {
-      setActiveSection("about")
-      setActiveTensorForest(false)
-      setActiveApocalypseHacks(false)
-      setActiveFieldnote(null)
-    } else if (pathname.startsWith("/projects/tensorforest") || pathname.startsWith("/tensorforest")) {
-      setActiveSection("projects")
-      setActiveTensorForest(true)
-      setActiveApocalypseHacks(false)
-      setActiveFieldnote(null)
-    } else if (pathname.startsWith("/projects/apocalypse-hacks")) {
-      setActiveSection("projects")
-      setActiveTensorForest(false)
-      setActiveApocalypseHacks(true)
-      setActiveFieldnote(null)
-    } else if (pathname.startsWith("/fieldnotes/")) {
-      const slug = pathname.split("/fieldnotes/")[1]
-      setActiveSection("fieldnotes")
-      setActiveFieldnote(slug)
-      setActiveTensorForest(false)
-      setActiveApocalypseHacks(false)
-    } else if (pathname === "/projects") {
-      setActiveSection("projects")
-      // Don't reset project states when on projects page - allow inline viewing
-      setActiveFieldnote(null)
-    } else if (pathname === "/fieldnotes") {
-      setActiveSection("fieldnotes")
-      setActiveTensorForest(false)
-      setActiveApocalypseHacks(false)
-      setActiveFieldnote(null)
-    } else if (pathname === "/experience") {
-      setActiveSection("experience")
-      setActiveTensorForest(false)
-      setActiveApocalypseHacks(false)
-      setActiveFieldnote(null)
-    } else if (pathname === "/inspirations") {
-      setActiveSection("inspirations")
-      setActiveTensorForest(false)
-      setActiveApocalypseHacks(false)
-      setActiveFieldnote(null)
-    } else if (pathname === "/content") {
-      setActiveSection("content")
-      setActiveTensorForest(false)
-      setActiveApocalypseHacks(false)
-      setActiveFieldnote(null)
-    }
-  }, [pathname])
+  const [activeSection, setActiveSection] = useState<SectionKey>("about")
+  const [showTensorForest, setShowTensorForest] = useState(false)
+  const [activeTensorForest, setActiveTensorForest] = useState(false)
+  const [activeApocalypseHacks, setActiveApocalypseHacks] = useState(false)
+  const [activeFieldnote, setActiveFieldnote] = useState<string | null>(null)
 
   /* ────────────────────────────────
      helpers
@@ -123,16 +54,10 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   const selectSection = (section: SectionKey) => {
     setActiveSection(section)
     // Always reset detail views when selecting a section
+    // This ensures clicking "projects" from detail pages goes to main projects page
     setActiveTensorForest(false)
     setActiveApocalypseHacks(false)
     setActiveFieldnote(null)
-    
-    // Update URL based on section
-    if (section === "about") {
-      router.push("/")
-    } else {
-      router.push(`/${section}`)
-    }
   }
 
   const selectTensorForest = () => {
@@ -140,7 +65,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveTensorForest(true)
     setActiveApocalypseHacks(false)
     setActiveFieldnote(null)
-    router.push("/tensorforest")
   }
 
   const selectApocalypseHacks = () => {
@@ -148,7 +72,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveTensorForest(false)
     setActiveApocalypseHacks(true)
     setActiveFieldnote(null)
-    router.push("/projects/apocalypse-hacks")
   }
 
   const selectFieldnote = (slug: string) => {
@@ -156,7 +79,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     setActiveFieldnote(slug)
     setActiveTensorForest(false)
     setActiveApocalypseHacks(false)
-    router.push(`/fieldnotes/${slug}`)
   }
 
   // Command palette handlers
@@ -177,10 +99,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     }
   }
 
-  const handleToggleIconBar = () => {
-    setIconBarMode(!iconBarMode)
-  }
-
   // Get recent fieldnotes for sidebar (first 3)
   const recentFieldnotes = fieldnotes.slice(0, 3)
 
@@ -190,18 +108,8 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
       {/* ───────────── mobile top bar ───────────── */}
-      <div className={cn(
-        "md:hidden fixed z-50",
-        iconBarMode
-          ? "top-4 left-4 flex-col"
-          : "top-4 left-1/2 transform -translate-x-1/2"
-      )}>
-        <div className={cn(
-          "gap-1 bg-muted/50 backdrop-blur-sm p-1",
-          iconBarMode
-            ? "flex flex-col rounded-2xl"
-            : "flex items-center rounded-full"
-        )}>
+      <div className="md:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+        <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1 backdrop-blur-sm">
           <Button
             variant="ghost"
             size="sm"
@@ -218,7 +126,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           >
             <Search className="h-4 w-4" />
           </Button>
-          <div className={iconBarMode ? "h-px w-4 bg-border mx-2" : "w-px h-4 bg-border"} />
+          <div className="w-px h-4 bg-border" />
           <Button
             variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
             size="sm"
@@ -267,7 +175,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           >
             <Bookmark className="h-4 w-4" />
           </Button>
-          <div className={iconBarMode ? "h-px w-4 bg-border mx-2" : "w-px h-4 bg-border"} />
+          <div className="w-px h-4 bg-border" />
           <ModeToggle />
         </div>
       </div>
@@ -278,129 +186,69 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         <ModeToggle />
       </div>
 
-      <div className={cn(
-        "max-w-3xl w-full grid gap-8 md:gap-12",
-        iconBarMode 
-          ? "grid-cols-1 md:grid-cols-[60px_1fr]" 
-          : "grid-cols-1 md:grid-cols-[120px_1fr]"
-      )}>
+      <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
 
         {/* ───────────── desktop sidebar ───────────── */}
-        {iconBarMode ? (
-          /* Icon-only sidebar */
-          <nav className="hidden md:flex flex-col items-center space-y-4 text-sm text-muted-foreground sticky top-12 self-start">
-            <Button
-              variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('about')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <User className="h-5 w-5" />
-            </Button>
-            <Button
-              variant={activeSection === 'experience' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('experience')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <Briefcase className="h-5 w-5" />
-            </Button>
-            <Button
-              variant={activeSection === 'projects' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('projects')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <Code className="h-5 w-5" />
-            </Button>
-            <Button
-              variant={activeSection === 'fieldnotes' && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('fieldnotes')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <BookOpen className="h-5 w-5" />
-            </Button>
-            <Button
-              variant={activeSection === 'inspirations' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('inspirations')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <Heart className="h-5 w-5" />
-            </Button>
-            <Button
-              variant={activeSection === 'content' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
-              size="sm"
-              onClick={() => selectSection('content')}
-              className="h-10 w-10 p-0 rounded-full"
-            >
-              <Bookmark className="h-5 w-5" />
-            </Button>
-          </nav>
-        ) : (
-          /* Text-based sidebar */
-          <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
-            {sections.map((section) => (
-              <div key={section}>
-                {/* Main section button */}
-                <button
-                  onClick={() => selectSection(section)}
-                  className={cn(
-                    "block w-full text-right transition-colors duration-200",
-                    activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) && !(section === "fieldnotes" && activeFieldnote) 
-                      ? "text-foreground font-medium" 
-                      : "text-muted-foreground/70 hover:text-muted-foreground",
-                  )}
-                >
-                  {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
-                </button>
-                
-                {/* Project sub-items */}
-                {section === "projects" && activeSection === "projects" && (
-                  <div className="mt-4 space-y-2">
+        <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
+          {sections.map((section) => (
+            <div key={section}>
+              {/* Main section button */}
+              <button
+                onClick={() => selectSection(section)}
+                className={cn(
+                  "block w-full text-right transition-colors duration-200",
+                  activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) && !(section === "fieldnotes" && activeFieldnote) 
+                    ? "text-foreground font-medium" 
+                    : "text-muted-foreground/70 hover:text-muted-foreground",
+                )}
+              >
+                {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
+              </button>
+              
+              {/* Project sub-items */}
+              {section === "projects" && activeSection === "projects" && (
+                <div className="mt-4 space-y-2">
+                  <button
+                    onClick={selectTensorForest}
+                    className={cn(
+                      "block w-full text-right text-xs transition-colors duration-200 pl-4",
+                      activeTensorForest ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
+                    )}
+                  >
+                    tensorforest
+                  </button>
+                  <button
+                    onClick={selectApocalypseHacks}
+                    className={cn(
+                      "block w-full text-right text-xs transition-colors duration-200 pl-4",
+                      activeApocalypseHacks ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
+                    )}
+                  >
+                    apocalypse hacks
+                  </button>
+                </div>
+              )}
+              
+              {/* Fieldnotes sub-items */}
+              {section === "fieldnotes" && activeSection === "fieldnotes" && recentFieldnotes.length > 0 && (
+                <div className="mt-4 space-y-2">
+                  {recentFieldnotes.map((item) => (
                     <button
-                      onClick={selectTensorForest}
+                      key={item.slug}
+                      onClick={() => selectFieldnote(item.slug)}
                       className={cn(
                         "block w-full text-right text-xs transition-colors duration-200 pl-4",
-                        activeTensorForest ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
+                        activeFieldnote === item.slug ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light"
                       )}
                     >
-                      tensorforest
+                      {item.title}
                     </button>
-                    <button
-                      onClick={selectApocalypseHacks}
-                      className={cn(
-                        "block w-full text-right text-xs transition-colors duration-200 pl-4",
-                        activeApocalypseHacks ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light",
-                      )}
-                    >
-                      apocalypse hacks
-                    </button>
-                  </div>
-                )}
-                
-                {/* Fieldnotes sub-items */}
-                {section === "fieldnotes" && activeSection === "fieldnotes" && recentFieldnotes.length > 0 && (
-                  <div className="mt-4 space-y-2">
-                    {recentFieldnotes.map((item) => (
-                      <button
-                        key={item.slug}
-                        onClick={() => selectFieldnote(item.slug)}
-                        className={cn(
-                          "block w-full text-right text-xs transition-colors duration-200 pl-4",
-                          activeFieldnote === item.slug ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light"
-                        )}
-                      >
-                        {item.title}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        )}
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
 
         {/* ───────────── main content ───────────── */}
         <div className="text-base leading-relaxed">
@@ -430,7 +278,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         onNavigate={handleCommandNavigation}
         onSelectFieldnote={handleCommandFieldnote}
         onSelectProject={handleCommandProject}
-        onToggleIconBar={handleToggleIconBar}
         currentSection={activeSection}
         currentPage="Home"
       />
@@ -468,19 +315,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   function renderTensorForestContent() {
     return (
       <div>
-        {/* Navigation */}
-        <div className="flex items-center gap-2 mb-6 text-sm text-muted-foreground">
-          <button 
-            onClick={() => {
-              setActiveTensorForest(false)
-              setActiveApocalypseHacks(false)
-            }}
-            className="hover:text-foreground transition-colors"
-          >
-            ← back to projects
-          </button>
-        </div>
-
         {/* Hero Banner */}
         <HeroBanner
           title="TensorForest"
@@ -664,19 +498,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   function renderApocalypseHacksContent() {
     return (
       <div>
-        {/* Navigation */}
-        <div className="flex items-center gap-2 mb-6 text-sm text-muted-foreground">
-          <button 
-            onClick={() => {
-              setActiveTensorForest(false)
-              setActiveApocalypseHacks(false)
-            }}
-            className="hover:text-foreground transition-colors"
-          >
-            ← back to projects
-          </button>
-        </div>
-
         {/* Hero Banner */}
         <HeroBanner
           title="Apocalypse Hacks"
@@ -1142,8 +963,8 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                   </svg>
                 </Link>
                 <Link
@@ -1625,4 +1446,4 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         return null
     }
   }
-}
+} 

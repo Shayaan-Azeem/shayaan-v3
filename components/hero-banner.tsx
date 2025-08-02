@@ -25,7 +25,6 @@ export default function HeroBanner({
           src={backgroundImage} 
           alt={title}
           className="w-full h-full object-cover"
-          style={{ objectPosition: 'center 70%' }}
         />
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/40"></div>
