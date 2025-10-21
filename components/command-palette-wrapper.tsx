@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import CommandPalette from '@/components/command-palette'
-import { type ContentItem } from '@/lib/content'
+import { type SubstackArticle } from '@/lib/substack'
 
 interface CommandPaletteWrapperProps {
-  fieldnotes: ContentItem[]
+  fieldnotes: SubstackArticle[]
   currentSection?: string
   currentPage?: string
 }
@@ -32,7 +32,11 @@ export default function CommandPaletteWrapper({
   }
 
   const handleSelectFieldnote = (slug: string) => {
-    window.location.href = `/fieldnotes/${slug}`
+    // Find the fieldnote and redirect to its Substack URL
+    const fieldnote = fieldnotes.find(f => f.slug === slug)
+    if (fieldnote) {
+      window.open(fieldnote.substackUrl, '_blank', 'noopener,noreferrer')
+    }
   }
 
   const handleSelectProject = (project: string) => {

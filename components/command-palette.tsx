@@ -18,15 +18,15 @@ import {
   Moon,
   ExternalLink,
   BookOpenCheck,
-  Leaf
+  Leaf,
+  Camera
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { type ContentItem } from '@/lib/content'
+import { type SubstackArticle } from '@/lib/substack'
 
 interface CommandPaletteProps {
-  fieldnotes: ContentItem[]
+  fieldnotes: SubstackArticle[]
   onNavigate: (section: string) => void
-  onSelectFieldnote: (slug: string) => void
   onSelectProject: (project: string) => void
   currentSection?: string
   currentPage?: string
@@ -35,7 +35,6 @@ interface CommandPaletteProps {
 export default function CommandPalette({ 
   fieldnotes, 
   onNavigate, 
-  onSelectFieldnote, 
   onSelectProject,
   currentSection = 'about',
   currentPage = 'Home'
@@ -87,6 +86,9 @@ export default function CommandPalette({
               break
             case 'c':
               handleNavigate('content')
+              break
+            case 'o':
+              handleNavigate('photos')
               break
             case 't':
               handleSelectProject('tensorforest')
@@ -149,7 +151,10 @@ export default function CommandPalette({
   }
 
   const handleSelectFieldnote = (slug: string) => {
-    onSelectFieldnote(slug)
+    const fieldnote = fieldnotes.find(f => f.slug === slug)
+    if (fieldnote) {
+      window.open(fieldnote.substackUrl, '_blank', 'noopener,noreferrer')
+    }
     setOpen(false)
   }
 
@@ -176,7 +181,8 @@ export default function CommandPalette({
       projects: FolderOpen,
       fieldnotes: BookOpen,
       inspirations: Heart,
-      content: List
+      content: List,
+      photos: Camera
     }
 
     const sectionTitles = {
@@ -185,7 +191,8 @@ export default function CommandPalette({
       projects: 'projects',
       fieldnotes: 'fieldnotes',
       inspirations: 'philosophy',
-      content: 'content worth consuming'
+      content: 'content worth consuming',
+      photos: 'photos'
     }
 
     const sectionDescriptions = {
@@ -194,7 +201,8 @@ export default function CommandPalette({
       projects: 'things i\'ve created and shipped',
       fieldnotes: 'my learnings, thoughts, and reflections',
       inspirations: 'how i think and operate',
-      content: 'media that shaped my thinking'
+      content: 'media that shaped my thinking',
+      photos: 'polaroids, film, and disposable camera shots'
     }
 
     const Icon = sectionIcons[currentSection as keyof typeof sectionIcons] || FolderOpen
@@ -309,6 +317,15 @@ export default function CommandPalette({
                 </div>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                   shift + c
+                </kbd>
+              </Command.Item>
+              <Command.Item onSelect={() => handleNavigate('photos')}>
+                <div className="flex items-center">
+                  <Camera className="mr-3 h-4 w-4 text-muted-foreground" />
+                  <span>go to photos</span>
+                </div>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  shift + o
                 </kbd>
               </Command.Item>
             </Command.Group>

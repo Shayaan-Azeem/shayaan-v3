@@ -5,7 +5,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { ModeToggle } from "@/components/mode-toggle"
 import { cn } from "@/lib/utils"
-import type { ContentItem } from "@/lib/content"
+import type { SubstackArticle } from "@/lib/substack"
 import MDXRenderer from "@/components/mdx-renderer"
 import ContentRenderer from "@/components/content-renderer"
 import AboutRenderer from "@/components/about-renderer"
@@ -18,10 +18,10 @@ import { ChevronLeft, ChevronRight, User, Briefcase, Code, BookOpen, Heart, Book
 
 
 interface ClientHomeProps {
-  fieldnotes: ContentItem[]
-  philosophy: ContentItem | null
-  contentWorthConsuming: ContentItem | null
-  about: ContentItem | null
+  fieldnotes: SubstackArticle[]
+  philosophy: any
+  contentWorthConsuming: any
+  about: any
 }
 
 export default function ClientHome({ fieldnotes, philosophy, contentWorthConsuming, about }: ClientHomeProps) {
@@ -34,7 +34,8 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     "projects",
     "fieldnotes",
     "inspirations",
-    "content"
+    "content",
+    "photos"
   ] as const
 
   type SectionKey = typeof sections[number]
@@ -46,7 +47,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   const [showTensorForest, setShowTensorForest] = useState(false)
   const [activeTensorForest, setActiveTensorForest] = useState(false)
   const [activeApocalypseHacks, setActiveApocalypseHacks] = useState(false)
-  const [activeFieldnote, setActiveFieldnote] = useState<string | null>(null)
+  const [activePhotoTab, setActivePhotoTab] = useState<'polaroids' | 'digital' | 'film'>('polaroids')
 
   /* ────────────────────────────────
      helpers
@@ -57,29 +58,22 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     // This ensures clicking "projects" from detail pages goes to main projects page
     setActiveTensorForest(false)
     setActiveApocalypseHacks(false)
-    setActiveFieldnote(null)
+    // Reset photo tab to default when switching sections
+    setActivePhotoTab('polaroids')
   }
 
   const selectTensorForest = () => {
     setActiveSection("projects")
     setActiveTensorForest(true)
     setActiveApocalypseHacks(false)
-    setActiveFieldnote(null)
   }
 
   const selectApocalypseHacks = () => {
     setActiveSection("projects")
     setActiveTensorForest(false)
     setActiveApocalypseHacks(true)
-    setActiveFieldnote(null)
   }
 
-  const selectFieldnote = (slug: string) => {
-    setActiveSection("fieldnotes")
-    setActiveFieldnote(slug)
-    setActiveTensorForest(false)
-    setActiveApocalypseHacks(false)
-  }
 
   // Command palette handlers
   const handleCommandNavigation = (section: string) => {
@@ -87,9 +81,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     selectSection(sectionKey)
   }
 
-  const handleCommandFieldnote = (slug: string) => {
-    selectFieldnote(slug)
-  }
 
   const handleCommandProject = (project: string) => {
     if (project === 'tensorforest') {
@@ -99,8 +90,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     }
   }
 
-  // Get recent fieldnotes for sidebar (first 3)
-  const recentFieldnotes = fieldnotes.slice(0, 3)
 
   /* ────────────────────────────────
      render
@@ -128,7 +117,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           </Button>
           <div className="w-px h-4 bg-border" />
           <Button
-            variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+            variant={activeSection === 'about' && !activeTensorForest && !activeApocalypseHacks ? "default" : "ghost"}
             size="sm"
             onClick={() => selectSection('about')}
             className="h-8 w-8 p-0 rounded-full"
@@ -136,7 +125,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             <User className="h-4 w-4" />
           </Button>
           <Button
-            variant={activeSection === 'experience' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+            variant={activeSection === 'experience' && !activeTensorForest && !activeApocalypseHacks ? "default" : "ghost"}
             size="sm"
             onClick={() => selectSection('experience')}
             className="h-8 w-8 p-0 rounded-full"
@@ -144,7 +133,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             <Briefcase className="h-4 w-4" />
           </Button>
           <Button
-            variant={activeSection === 'projects' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+            variant={activeSection === 'projects' && !activeTensorForest && !activeApocalypseHacks ? "default" : "ghost"}
             size="sm"
             onClick={() => selectSection('projects')}
             className="h-8 w-8 p-0 rounded-full"
@@ -152,7 +141,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             <Code className="h-4 w-4" />
           </Button>
           <Button
-            variant={activeSection === 'fieldnotes' && !activeFieldnote ? "default" : "ghost"}
+            variant={activeSection === 'fieldnotes' ? "default" : "ghost"}
             size="sm"
             onClick={() => selectSection('fieldnotes')}
             className="h-8 w-8 p-0 rounded-full"
@@ -160,7 +149,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             <BookOpen className="h-4 w-4" />
           </Button>
           <Button
-            variant={activeSection === 'inspirations' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+            variant={activeSection === 'inspirations' && !activeTensorForest && !activeApocalypseHacks ? "default" : "ghost"}
             size="sm"
             onClick={() => selectSection('inspirations')}
             className="h-8 w-8 p-0 rounded-full"
@@ -168,12 +157,22 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             <Heart className="h-4 w-4" />
           </Button>
           <Button
-            variant={activeSection === 'content' && !activeTensorForest && !activeApocalypseHacks && !activeFieldnote ? "default" : "ghost"}
+            variant={activeSection === 'content' && !activeTensorForest && !activeApocalypseHacks ? "default" : "ghost"}
             size="sm"
             onClick={() => selectSection('content')}
             className="h-8 w-8 p-0 rounded-full"
           >
             <Bookmark className="h-4 w-4" />
+          </Button>
+          <Button
+            variant={activeSection === 'photos' && !activeTensorForest && !activeApocalypseHacks ? "default" : "ghost"}
+            size="sm"
+            onClick={() => selectSection('photos')}
+            className="h-8 w-8 p-0 rounded-full"
+          >
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
           </Button>
           <div className="w-px h-4 bg-border" />
           <ModeToggle />
@@ -197,7 +196,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 onClick={() => selectSection(section)}
                 className={cn(
                   "block w-full text-right transition-colors duration-200",
-                  activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) && !(section === "fieldnotes" && activeFieldnote) 
+                  activeSection === section && !(section === "projects" && (activeTensorForest || activeApocalypseHacks)) 
                     ? "text-foreground font-medium" 
                     : "text-muted-foreground/70 hover:text-muted-foreground",
                 )}
@@ -229,23 +228,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 </div>
               )}
               
-              {/* Fieldnotes sub-items */}
-              {section === "fieldnotes" && activeSection === "fieldnotes" && recentFieldnotes.length > 0 && (
-                <div className="mt-4 space-y-2">
-                  {recentFieldnotes.map((item) => (
-                    <button
-                      key={item.slug}
-                      onClick={() => selectFieldnote(item.slug)}
-                      className={cn(
-                        "block w-full text-right text-xs transition-colors duration-200 pl-4",
-                        activeFieldnote === item.slug ? "text-foreground font-medium" : "text-muted-foreground/60 hover:text-muted-foreground/80 font-light"
-                      )}
-                    >
-                      {item.title}
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
         </nav>
@@ -254,7 +236,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         <div className="text-base leading-relaxed">
           {activeTensorForest ? renderTensorForestContent() : 
            activeApocalypseHacks ? renderApocalypseHacksContent() : 
-           activeFieldnote ? renderFieldnoteContent(activeFieldnote) :
            renderSectionContent(activeSection)}
           
           {/* Footer */}
@@ -276,7 +257,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       <CommandPalette
         fieldnotes={fieldnotes}
         onNavigate={handleCommandNavigation}
-        onSelectFieldnote={handleCommandFieldnote}
         onSelectProject={handleCommandProject}
         currentSection={activeSection}
         currentPage="Home"
@@ -284,30 +264,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     </div>
   )
 
-  /* ────────────────────────────────
-     render fieldnote content
-  ────────────────────────────────── */
-  function renderFieldnoteContent(slug: string) {
-    const fieldnote = fieldnotes.find(item => item.slug === slug)
-    if (!fieldnote) return null
-
-    return (
-      <div className="pt-2">
-        {/* Navigation */}
-        <div className="flex items-center gap-2 mb-6 text-sm text-muted-foreground">
-          <button 
-            onClick={() => selectSection("fieldnotes")}
-            className="hover:text-foreground transition-colors"
-          >
-            ← back to fieldnotes
-          </button>
-        </div>
-
-        {/* Content */}
-        <MDXRenderer item={fieldnote} />
-      </div>
-    )
-  }
 
   /* ────────────────────────────────
      render tensorforest content
@@ -1164,9 +1120,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             ) : (
               <div className="space-y-6">
                 {fieldnotes.map((item) => (
-                  <button
+                  <a
                     key={item.slug}
-                    onClick={() => selectFieldnote(item.slug)}
+                    href={item.substackUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block w-full text-left transition-all duration-200 cursor-pointer group "
                   >
                     <div className="relative h-48 rounded-lg overflow-hidden transition-all duration-300 group-hover:h-56">
@@ -1200,25 +1158,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                                 year: 'numeric' 
                               })}
                             </span>
-                            {item.tags.length > 0 && (
-                              <div className="flex flex-wrap gap-2">
-                                {item.tags.slice(0, 2).map((tag) => (
-                                  <span key={tag} className="px-2 py-1 bg-white/20 text-white/90 rounded-md text-xs">
-                                    {tag}
-                                  </span>
-                                ))}
-                                {item.tags.length > 2 && (
-                                  <span className="px-2 py-1 bg-white/20 text-white/90 rounded-md text-xs">
-                                    +{item.tags.length - 2}
-                                  </span>
-                                )}
-                              </div>
-                            )}
                           </div>
                         </div>
                       </div>
                     </div>
-                  </button>
+                  </a>
                 ))}
               </div>
             )}
@@ -1442,8 +1386,414 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           </div>
         )
 
+      case "photos":
+        return renderPhotosContent()
+
       default:
         return null
     }
+  }
+
+  /* ────────────────────────────────
+     render photos content
+  ────────────────────────────────── */
+  function renderPhotosContent() {
+    
+    // Polaroid photos
+    const polaroidPhotos = [
+      {
+        id: "1",
+        title: "the start of something big",
+        location: "WeWork Toronto",
+        image: "/polaroids/the start of something big.png",
+        songUrl: "https://open.spotify.com/track/1zgHn1EqUyA0HqNYMdJ5ia?si=b10022a78daa4fa1"
+      },
+      {
+        id: "2",
+        title: "apocalypse w/ greg",
+        location: "Shopify Toronto",
+        image: "/polaroids/apogreg.png",
+        songUrl: "https://open.spotify.com/track/0mEdbdeRFQwBhN4xfyIeUM?si=e6bb613c681245fd"
+      },
+      {
+        id: "3",
+        title: "lost in toronto",
+        location: "Toronto, ON",
+        image: "/polaroids/lost in toronto.png",
+        songUrl: "https://open.spotify.com/track/5kDgJffgJ0lYHTSiaXFWNw?si=590001762a2840ce"
+      },
+      {
+        id: "4",
+        title: "the one where ayaan turns five",
+        location: "Jersey City, NJ",
+        image: "/polaroids/ayaanturns5.png",
+        songUrl: "https://open.spotify.com/track/4I4aQGNJ2HufloNtB65nxR?si=c579a5e4bb6042c2"
+      },
+      {
+        id: "5",
+        title: "airplane thoughts",
+        location: "Above Michigan",
+        image: "/polaroids/airplanethoughts.png",
+        songUrl: "https://open.spotify.com/track/19nu3H3vjeZ505i450lz8R?si=424f25c49b9f4b30"
+      },
+      {
+        id: "6",
+        title: "break things build better",
+        location: "Shopify Toronto",
+        image: "/polaroids/breakbuildbetter.png",
+        songUrl: "https://open.spotify.com/track/1oAwsWBovWRIp7qLMGPIet?si=d9e5bb4900954ea5"
+      },
+      {
+        id: "7",
+        title: "water water water loo loo loo",
+        location: "Waterloo, ON",
+        image: "/polaroids/water water.png",
+        songUrl: "https://open.spotify.com/track/1v0uVPU6BWcbog5BiWLWVa?si=0a01a3cab11149a9"
+      },
+      {
+        id: "8",
+        title: "robotics presidents!",
+        location: "Oakville, ON",
+        image: "/polaroids/nobel physic.PNG",
+        songUrl: "https://open.spotify.com/track/7kv7zBjMtVf0eIJle2VZxn?si=997f5b3c5ef24430"
+      },
+      {
+        id: "9",
+        title: "777",
+        location: "Toronto, ON",
+        image: "/polaroids/777.png",
+        songUrl: "https://open.spotify.com/track/32J2bR5gnepj9uHPGVGStr?si=84a55b42ab404585"
+      },
+      {
+        id: "19",
+        title: "ycombinator core",
+        location: "Waterloo, ON",
+        image: "/polaroids/water water water.png",
+        songUrl: "https://open.spotify.com/track/1Ukxccao1BlWrPhYkcXbwZ?si=9fee189e2ea547bb"
+      },
+      {
+        id: "11",
+        title: "dumbo!",
+        location: "New York City, NY",
+        image: "/polaroids/dumbo.png",
+        songUrl: " https://open.spotify.com/track/6wXPV6dNRAhFavrRaCdMXT?si=990666c03feb4eea"
+      },
+      {
+        id: "12",
+        title: "roomies",
+        location: "Oakville, ON",
+        image: "/polaroids/10xeng.png",
+        songUrl: "https://open.spotify.com/track/1auxYwYrFRqZP7t3s7w4um?si=3cf2d5a2f7b74500"
+      },
+      {
+        id: "13",
+        title: "entropy ifykyk",
+        location: "Oakville, ON",
+        image: "/polaroids/entropy ifyyk.PNG",
+        songUrl: "https://open.spotify.com/track/551xyaSJsg8hILXFq9JdST?si=b8651a2af5384226"
+      },
+      {
+        id: "14",
+        title: "senior sunrise",
+        location: "Oakville, ON",
+        image: "/polaroids/senior sunrise.PNG",
+        songUrl: "https://open.spotify.com/track/0NUqi0ps17YpLUC3kgsZq0?si=027549695c894f41"
+      },
+      {
+        id: "15",
+        title: "end of the beginning - djo",
+        location: "Chicago, IL",
+        image: "/polaroids/end of the begining.png",
+        songUrl: "https://open.spotify.com/track/3qhlB30KknSejmIvZZLjOD?si=2d6b0e552475446b"
+      },
+      {
+        id: "16",
+        title: "first hackathon i went to",
+        location: "WeWork Toronto",
+        image: "/polaroids/TheGang.png",
+        songUrl: "https://open.spotify.com/track/6wXPV6dNRAhFavrRaCdMXT?si=990666c03feb4eea"
+      },
+      {
+        id: "17",
+        title: "spanish lattes in nyc",
+        location: "New York City, NY",
+        image: "/polaroids/spanish lattes in nyc.png",
+        songUrl: "https://open.spotify.com/track/0TL0LFcwIBF5eX7arDIKxY?si=5dab4294e9d84b81"
+      },
+      {
+        id: "18",
+        title: "robotics exec social",
+        location: "Oakville, ON",
+        image: "/polaroids/execsocial.PNG",
+        songUrl: "https://open.spotify.com/track/1Ukxccao1BlWrPhYkcXbwZ?si=9fee189e2ea547bb"
+      }
+    ];
+
+    // Film emulation photos
+    const filmPhotos = [
+      {
+        id: "film1",
+        location: "New York City, NY",
+        image: "/emulation/littlepak.JPG"
+      },
+      {
+        id: "film2",
+        location: "New York City, NY",
+        image: "/emulation/mainbridge.JPG"
+      },
+      {
+        id: "film3",
+        location: "New York City, NY",
+        image: "/emulation/brownbuilding.JPG"
+      },
+      {
+        id: "film4",
+        location: "New York City, NY",
+        image: "/emulation/pipe.JPG"
+      },
+      {
+        id: "film5",
+        location: "New York City, NY",
+        image: "/emulation/sidebridge.JPG"
+      },
+      {
+        id: "film6",
+        location: "New York City, NY",
+        image: "/emulation/atm.JPG"
+      }
+    ];
+
+    // Disposable photos
+    const disposablePhotos = [
+      {
+        id: "disp1",
+        location: "Toronto, ON",
+        image: "/disposable/IMG_3442.JPG"
+      },
+      {
+        id: "disp2",
+        location: "Toronto, ON",
+        image: "/disposable/IMG_3445.JPG"
+      },
+      {
+        id: "disp3",
+        location: "Oakville, ON",
+        image: "/disposable/IMG_3446.JPG"
+      },
+      {
+        id: "disp4",
+        location: "Toronto, ON",
+        image: "/disposable/IMG_3448.JPG"
+      },
+      {
+        id: "disp5",
+        location: "Oakville, ON",
+        image: "/disposable/IMG_3449.JPG"
+      },
+      {
+        id: "disp6",
+        location: "Toronto, ON",
+        image: "/disposable/IMG_3450.JPG"
+      },
+      {
+        id: "disp7",
+        location: "Toronto, ON",
+        image: "/disposable/IMG_3447.JPG"
+      },
+      {
+        id: "disp8",
+        location: "Oakville, ON",
+        image: "/disposable/000138910025.jpg"
+      },
+      {
+        id: "disp9",
+        location: "Toronto, ON",
+        image: "/disposable/000114970025.jpg"
+      },
+      {
+        id: "disp10",
+        location: "Oakville, ON",
+        image: "/disposable/000114970006.jpg"
+      },
+      {
+        id: "disp11",
+        location: "Toronto, ON",
+        image: "/disposable/000114970001.jpg"
+      },
+      {
+        id: "disp12",
+        location: "Oakville, ON",
+        image: "/disposable/000114970005.jpg"
+      },
+      {
+        id: "disp13",
+        location: "Toronto, ON",
+        image: "/disposable/000129720005.jpg"
+      },
+      {
+        id: "disp14",
+        location: "Oakville, ON",
+        image: "/disposable/000129720006.jpg"
+      },
+      {
+        id: "disp15",
+        location: "Toronto, ON",
+        image: "/disposable/000138910005.jpg"
+      },
+      {
+        id: "disp16",
+        location: "Oakville, ON",
+        image: "/disposable/IMG_3418.JPG"
+      },
+      {
+        id: "disp17",
+        location: "Toronto, ON",
+        image: "/disposable/IMG_3424.JPG"
+      },
+      {
+        id: "disp18",
+        location: "Oakville, ON",
+        image: "/disposable/IMG_3440.JPG"
+      },
+      {
+        id: "disp19",
+        location: "Toronto, ON",
+        image: "/disposable/IMG_3439.JPG"
+      },
+      {
+        id: "disp20",
+        location: "Oakville, ON",
+        image: "/disposable/IMG_3461.JPG"
+      },
+      {
+        id: "disp21",
+        location: "Toronto, ON",
+        image: "/disposable/IMG_3459.JPG"
+      },
+      {
+        id: "disp22",
+        location: "Oakville, ON",
+        image: "/disposable/IMG_3453.JPG"
+      },
+      {
+        id: "disp23",
+        location: "Toronto, ON",
+        image: "/disposable/IMG_3455.JPG"
+      },
+      {
+        id: "disp24",
+        location: "Oakville, ON",
+        image: "/disposable/IMG_3435.JPG"
+      },
+      {
+        id: "disp25",
+        location: "Toronto, ON",
+        image: "/disposable/IMG_3433.JPG"
+      }
+    ];
+
+    // Get photos based on active tab
+    const getDisplayPhotos = () => {
+      switch(activePhotoTab) {
+        case 'polaroids':
+          return polaroidPhotos;
+        case 'digital':
+          return filmPhotos;
+        case 'film':
+          return disposablePhotos;
+        default:
+          return polaroidPhotos;
+      }
+    };
+
+    const displayPhotos = getDisplayPhotos();
+
+    return (
+      <div className="pt-2">
+        <h2 className="text-4xl font-bold mb-8">photos</h2>
+        <p className="text-lg text-muted-foreground mb-8">
+          a collection of polaroids, film emulation, and disposable camera shots
+        </p>
+        
+        {/* Tabs */}
+        <div className="flex justify-center mb-12 space-x-2">
+          <button 
+            onClick={() => setActivePhotoTab('polaroids')} 
+            className={`px-4 py-1 rounded-full text-sm ${activePhotoTab === 'polaroids' ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground'}`}
+          >
+            polaroids
+          </button>
+          <button 
+            onClick={() => setActivePhotoTab('film')} 
+            className={`px-4 py-1 rounded-full text-sm ${activePhotoTab === 'film' ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground'}`}
+          >
+            film
+          </button>
+          <button 
+            onClick={() => setActivePhotoTab('digital')} 
+            className={`px-4 py-1 rounded-full text-sm ${activePhotoTab === 'digital' ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground'}`}
+          >
+            digital
+          </button>
+        </div>
+        
+        {/* Photo grid with different layouts based on tab */}
+        {activePhotoTab === 'digital' ? (
+          // Digital layout - larger images in a 2-column grid
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-7xl mx-auto">
+            {displayPhotos.map((photo) => (
+              <div key={photo.id} className="flex flex-col group mb-6">
+                <div className="relative overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105">
+                  <img 
+                    src={photo.image} 
+                    alt={photo.location} 
+                    className="w-full h-auto object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                  />
+                </div>
+                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-sm text-muted-foreground">{photo.location}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : activePhotoTab === 'film' ? (
+          // Film layout - structured grid like the experience page
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {displayPhotos.map((photo) => (
+                <div key={photo.id} className="group aspect-[4/3]">
+                  <div className="relative h-full overflow-hidden dark:shadow-lg transition-transform duration-300 group-hover:scale-105">
+                    <img 
+                      src={photo.image} 
+                      alt={photo.location} 
+                      className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          // Polaroids layout - smaller images in a 3-column grid
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {displayPhotos.map((photo) => (
+              <div key={photo.id} className="flex flex-col items-center group">
+                <a href={photo.songUrl} target="_blank" rel="noopener noreferrer" className="relative overflow-hidden dark:shadow-lg transition-transform duration-300 group-hover:scale-105">
+                  <img 
+                    src={photo.image} 
+                    alt={photo.title || photo.location} 
+                    className="w-full max-w-[240px] object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                  />
+                </a>
+                <div className="text-center mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {photo.title && <p className="text-sm text-foreground">{photo.title}</p>}
+                  <p className="text-xs text-muted-foreground">{photo.location}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
   }
 } 
