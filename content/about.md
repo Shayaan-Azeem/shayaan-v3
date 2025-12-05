@@ -8,21 +8,18 @@ draft: false
 
 ## intro
 
-i'm an 18 years old, from toronto, and i like to build things.
+i'm a student at [hover-1] [@uwaterloo](https://uwaterloo.ca/) and i like to build things.
 
-incoming student studying applied math and ml at [hover-1] [@uwaterloo](https://uwaterloo.ca/). 
-## what i'm up to lately:
-- building a [hover-9] [community](https://www.teenbuilders.club/) for cracked/ambitious teenagers building cool sh*t
-- started my own [hover-10] [summer camp](https://www.thecodecamp.ca/) to teach kids how to code
-- building a [hover-11] [chrome extension](https://x.com/shayaan_azeem/status/1914686941573861797) for google docs
 ## some cool things i've done in the past:
 
-- spent a year building autonomous drones to predict forest fires  
-  [backed by [hover-2] [bloomberg philanthropies](https://www.bloomberg.org/government-innovation/spurring-innovation-in-cities/youth-climate-action-fund/)] [[hover-3] [offered $250k preseed](https://www.joinef.com/)]
-- worked as a growth intern at [hover-4] [hack club](https://hackclub.com/), grew [hover-5] [@starthackclub](https://www.instagram.com/starthackclub/) to 100k followers
-- organized [hover-6] [canada's largest high school hackathon](https://apocalypse.hackclub.com/), raised $50k
-- founded [hover-7] [robotics club](https://wossrobotics.ca/) at my hs, ranked top 62 in the world
-- won bronze [3rd place] at the [hover-8] [canadian world robot olympiad](https://wro-association.org/).
+- building the best edtech platform in the world [hover-2] [@revisiondojo](https://revisiondojo.com) (YCF24)
+- spent a year building autonomous drones to predict forest fires [backed by [hover-5] [bloomberg philanthropies](https://www.bloomberg.org/government-innovation/spurring-innovation-in-cities/youth-climate-action-fund/)]
+- built a [hover-7] [community](https://www.teenbuilders.club/) for cracked/ambitious teenagers building cool sh*t
+- worked as a growth intern at [hover-8] [hack club](https://hackclub.com/), grew [hover-9] [@starthackclub](https://www.instagram.com/starthackclub/) to 100k followers
+- organized [hover-10] [canada's largest high school hackathon](https://apocalypse.hackclub.com/), raised $50k
+- founded [hover-11] [robotics club](https://wossrobotics.ca/) at my hs, ranked top 62 in the world
+- won bronze [3rd place] at the [hover-12] [canadian world robot olympiad](https://wro-association.org/)
+- started my own [hover-13] [summer camp](https://www.thecodecamp.ca/) to teach kids how to code
 
 ## how i started:
 

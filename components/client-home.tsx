@@ -14,7 +14,7 @@ import CommandPalette from "@/components/command-palette"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, User, Briefcase, Code, BookOpen, Heart, Bookmark, Search } from "lucide-react"
+import { ChevronLeft, ChevronRight, User, Code, BookOpen, Heart, Bookmark, Search } from "lucide-react"
 
 
 interface ClientHomeProps {
@@ -30,7 +30,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   ────────────────────────────────── */
   const sections = [
     "about",
-    "experience",
     "projects",
     "fieldnotes",
     "inspirations",
@@ -48,6 +47,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   const [activeTensorForest, setActiveTensorForest] = useState(false)
   const [activeApocalypseHacks, setActiveApocalypseHacks] = useState(false)
   const [activePhotoTab, setActivePhotoTab] = useState<'polaroids' | 'digital' | 'film'>('polaroids')
+  const [projectFilter, setProjectFilter] = useState<'Everything' | 'Projects' | 'Communities' | 'Internship'>('Everything')
 
   /* ────────────────────────────────
      helpers
@@ -95,7 +95,15 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
      render
   ────────────────────────────────── */
     return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative">
+      {/* Dotted pattern background */}
+      <div className="fixed inset-0 pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(circle, hsl(var(--foreground) / 0.15) 1px, transparent 1px)',
+        backgroundSize: '20px 20px'
+      }}></div>
+      
+      {/* Content wrapper with relative positioning */}
+      <div className="relative z-10 w-full flex flex-col items-center">
       {/* ───────────── mobile top bar ───────────── */}
       <div className="md:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
         <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1 backdrop-blur-sm">
@@ -123,14 +131,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             className="h-8 w-8 p-0 rounded-full"
           >
             <User className="h-4 w-4" />
-          </Button>
-          <Button
-            variant={activeSection === 'experience' && !activeTensorForest && !activeApocalypseHacks ? "default" : "ghost"}
-            size="sm"
-            onClick={() => selectSection('experience')}
-            className="h-8 w-8 p-0 rounded-full"
-          >
-            <Briefcase className="h-4 w-4" />
           </Button>
           <Button
             variant={activeSection === 'projects' && !activeTensorForest && !activeApocalypseHacks ? "default" : "ghost"}
@@ -185,7 +185,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         <ModeToggle />
       </div>
 
-      <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
 
         {/* ───────────── desktop sidebar ───────────── */}
         <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
@@ -261,6 +261,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         currentSection={activeSection}
         currentPage="Home"
       />
+      </div>
     </div>
   )
 
@@ -897,52 +898,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       case "about":
         return (
           <div>
-            {/* Name and Social Icons */}
-            <div className="pt-2 flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4 sm:gap-0">
-              <h1 className="text-2xl font-bold">shayaan azeem</h1>
-              
-              {/* Social icons */}
-              <div className="flex gap-3 sm:gap-4">
-                <Link
-                  href="https://twitter.com/shayaan_azeem"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
-                >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                  </svg>
-                </Link>
-                <Link
-                  href="https://github.com/shayaanazeem1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
-                >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                  </svg>
-                </Link>
-                <Link
-                  href="https://linkedin.com/in/shayaan-azeem"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
-                >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </Link>
-                <Link
-                  href="mailto:shayaan.azeem@uwaterloo.ca"
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
-                >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
+            {/* Name */}
+            <h1 className="text-3xl font-bold mb-6 group cursor-default">
+              <span className="group-hover:hidden">Shayaan Azeem</span>
+              <span className="hidden group-hover:inline">شایان عظیم</span>
+            </h1>
             
             {/* Dynamic About Content */}
             {about ? (
@@ -950,157 +910,10 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             ) : (
               <p className="text-muted-foreground">No about content available.</p>
             )}
-          </div>
-        )
 
-      case "experience":
-        return (
-          <div className="pt-2">
-            <h2 className="text-4xl font-bold mb-8">experience</h2>
-            <div className="space-y-8">
-              {/* Hack Club */}
-              <div className="relative flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                    <img 
-                      src="/hclogo.png" 
-                      alt="Hack Club logo" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="w-px bg-border h-full mt-4"></div>
-                </div>
-                <div className="flex-1 pb-8">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="font-semibold text-lg">Content/Growth Intern</h3>
-                      <p className="text-muted-foreground">Hack Club</p>
-                    </div>
-                    <span className="text-sm text-muted-foreground">jul 2024 - jun 2025</span>
-                  </div>
-                  <p className="mb-4">grew @starthackclub to 100k followers</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">social media marketing</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">content strategy</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">web content optimization</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Robotics Club */}
-              <div className="relative flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                    <img 
-                      src="/wbotlogo.jpg" 
-                      alt="White Oaks Robotics logo" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="w-px bg-border h-full mt-4"></div>
-                </div>
-                <div className="flex-1 pb-8">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="font-semibold text-lg">President/Founder</h3>
-                      <p className="text-muted-foreground">White Oaks Robotics Club</p>
-                    </div>
-                    <span className="text-sm text-muted-foreground">sep 2023 - jun 2025</span>
-                  </div>
-                  <p className="mb-4">started the robotics club at my school, grew it to 100+ members, top 100 teams in the world, qualified for vex worlds, won 8 regional/provincial awards, garnered $7500+ in funds</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">team management</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">project management</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">start-up leadership</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Apocalypse Hacks */}
-              <div className="relative flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                    <img 
-                      src="/apohackslogo.jpg" 
-                      alt="Apocalypse Hacks logo" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="w-px bg-border h-full mt-4"></div>
-                </div>
-                <div className="flex-1 pb-8">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="font-semibold text-lg">Organizer</h3>
-                      <p className="text-muted-foreground">Apocalypse Hacks (Backed by Hack Club and Shopify)</p>
-                    </div>
-                    <span className="text-sm text-muted-foreground">dec 2023 - jun 2024</span>
-                  </div>
-                  <p className="mb-4">founded canada's largest high school hackathon (150 attendees, 40+ projects shipped), raised $50k from sponsors like shopify and doordash with a team of 10</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">fundraising</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">project management</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">operations management</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">communication</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Electrathon Team */}
-              <div className="relative flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                    <img 
-                      src="/eleclogo.jpg" 
-                      alt="WOSS Electrathon Team logo" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="w-px bg-border h-full mt-4"></div>
-                </div>
-                <div className="flex-1 pb-8">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="font-semibold text-lg">Head Captain</h3>
-                      <p className="text-muted-foreground">WOSS Electrathon Team</p>
-                    </div>
-                    <span className="text-sm text-muted-foreground">jun - aug 2023</span>
-                  </div>
-                  <p className="mb-4">building an electric vehicle to race at uwaterloo, also trying to make it autonomous for fun</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">electric vehicles</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">computer vision</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">machine learning</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">autonomous systems</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">control systems</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">mechanical design</span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-full text-sm">electrical engineering</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Linguistics Club */}
-              <div className="relative flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                    <img 
-                      src="/wosssling.jpg" 
-                      alt="WOSS Linguistics Club logo" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="font-semibold text-lg">President</h3>
-                      <p className="text-muted-foreground">Linguistics Club</p>
-                    </div>
-                    <span className="text-sm text-muted-foreground">sep 2024 - present</span>
-                  </div>
-                  <p className="mb-4">organized naclo competition, grew to 15 members</p>
-                </div>
-              </div>
+            {/* Projects Section Below */}
+            <div className="mt-8">
+              {renderProjectsSection()}
             </div>
           </div>
         )
@@ -1170,191 +983,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         )
 
       case "projects":
-        return renderWithHeading("projects", (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
-            {/* vibetype */}
-            <div className="rounded-lg p-3 bg-card transition-all duration-200 group ">
-              <Link
-                href="https://www.gptfixtsfor.me/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div className="h-48 mb-3 rounded-md overflow-hidden transition-all duration-300 group-hover:h-56 cursor-pointer">
-                  <img 
-                    src="/vibetype.png" 
-                    alt="vibetype project cover" 
-                    className="w-full h-full object-cover object-[center_30%]"
-                  />
-                </div>
-              </Link>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-lg font-semibold">vibetype</h3>
-              <div className="flex gap-2">
-                <Link
-                  href="https://devpost.com/software/vibetype"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </Link>
-                <Link
-                  href="https://www.gptfixtsfor.me/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                  </svg>
-                </Link>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground mb-4">
-                an AI writing sidekick that lives in your browser. highlight text to rewrite, expand, or clean it up instantly. open the sidebar to pull context from your tabs and draft smarter, faster.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">html</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">css</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">javascript</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">inbound vc interest</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">offered spot in spur accelerator</span>
-              </div>
-            </div>
-
-            {/* shoppy wrapped */}
-            <div className="rounded-lg p-3 bg-card transition-all duration-200 group ">
-              <Link
-                href="https://github.com/ultratrikx/shoppy-wrapped/pulls"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div className="h-48 mb-3 rounded-md overflow-hidden transition-all duration-300 group-hover:h-56 cursor-pointer">
-                  <img 
-                    src="/shoppy.png" 
-                    alt="shoppy wrapped project cover" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </Link>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-lg font-semibold">shoppy wrapped</h3>
-              <div className="flex gap-2">
-                <Link
-                  href="https://github.com/ultratrikx/shoppy-wrapped/pulls"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                  </svg>
-                </Link>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground mb-4">
-                spotify wrapped, but for your shopping. built with Shopify's Shop Mini framework. shows your top shops, spend, orders, and shopping style in a smooth stories-style recap.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">typescript</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">tailwind</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">shopify</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">won the Shopify Toronto Tech Week hackathon</span>
-              </div>
-            </div>
-
-            {/* tensorforest */}
-            <div className="rounded-lg p-4 bg-card transition-all duration-200 group ">
-                <button
-                  onClick={selectTensorForest}
-                  className="block w-full"
-                >
-                  <div className="h-48 mb-4 rounded-md overflow-hidden transition-all duration-300 group-hover:h-56 cursor-pointer">
-                    <img 
-                      src="/tensorforest.png" 
-                      alt="tensorforest project cover" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </button>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-lg font-semibold">tensorforest</h3>
-                <div className="flex gap-2">
-                  <button
-                    onClick={selectTensorForest}
-                    className="p-2 bg-gray-100 hover:bg-gray-200 dark:bg-secondary dark:hover:bg-secondary/80 rounded-md transition-colors"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-                <p className="text-sm text-muted-foreground mb-4">
-                  drones that predict and prevent forest fires. used remote sensing, AI, and physical sensors to detect risk zones and alert early.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                                  <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">python</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">pytorch</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">tensorflow</span>
-                <span className="px-2 py-1 bg-gray-100 text-gray-700 dark:bg-secondary dark:text-secondary-foreground rounded-md text-xs">hardware</span>
-                </div>
-              </div>
-
-            {/* apocalypse hacks */}
-            <div className="rounded-lg p-4 bg-card transition-all duration-200 group ">
-                            <button
-                onClick={selectApocalypseHacks}
-                className="block w-full"
-              >
-                <div className="h-48 mb-4 rounded-md overflow-hidden transition-all duration-300 group-hover:h-56 cursor-pointer">
-                  <img 
-                    src="/apoimages/vickyapo.png" 
-                    alt="apocalypse hacks project cover" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </button>
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-lg font-semibold">apocalypse hacks</h3>
-                <div className="flex gap-2">
-                  <Link
-                    href="https://apocalypse.hackclub.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                    </svg>
-                  </Link>
-                  <button
-                    onClick={selectApocalypseHacks}
-                    className="p-2 bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </button>
-              </div>
-            </div>
-              <p className="text-sm text-muted-foreground mb-4">
-                founded canada's largest high school hackathon with 150 attendees and 40+ projects shipped. raised $50k from sponsors like shopify and doordash.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">event organizing</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">fundraising</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">project management</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">raised $50k</span>
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs">150 attendees</span>
-                </div>
-              </div>
-            </div>
-        ))
+        return renderProjectsSection()
 
       case "inspirations":
         return (
@@ -1392,6 +1021,178 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       default:
         return null
     }
+  }
+
+  /* ────────────────────────────────
+     render projects content
+  ────────────────────────────────── */
+  function renderProjectsSection() {
+    interface Project {
+      title: string;
+      type: 'Internship' | 'Project' | 'Community';
+      image: string;
+      description: string;
+      badge?: {
+        text: string;
+        className: string; // Using className to apply highlight classes
+      };
+      year?: string;
+      link?: string;
+      action?: () => void;
+      tags?: string[]; // Keeping tags for optional additional details
+    }
+
+    const allProjects: Project[] = [
+      {
+        title: "revisiondojo (YCF24)",
+        type: "Internship",
+        image: "/revisiondojo.png",
+        description: "Get instant feedback on your EE research question. built rice purity test but for being performative, following the performative trend from this summer.",
+        tags: ["funsies"],
+        link: "https://revisiondojo.com" // Assumed or generic
+      },
+      {
+        title: "performativepuritytest.com",
+        type: "Project",
+        image: "/performativepurity.png",
+        description: "built rice purity test but for being performative, following the performative trend from this summer, the hardest part about this was not programming it but making the questions",
+        badge: { text: "300k+ users", className: "link-hackclub" },
+        link: "https://performativepuritytest.com"
+      },
+      {
+        title: "coach bob",
+        type: "Project",
+        image: "/coachbob.jpeg",
+        description: "street fighter but irl",
+        badge: { text: "won hackthenorth", className: "link-bloomberg" },
+        link: "https://devpost.com/software/coach-bob" // Assumed
+      },
+      {
+        title: "do-eve",
+        type: "Project",
+        image: "/doeve.png",
+        description: "built an imessage computer use agent which could control your computer, using...",
+        badge: { text: "won hackprinceton", className: "link-teenbuilders" },
+        link: "https://devpost.com/software/do-eve" // Assumed
+      },
+      {
+        title: "tensorforest",
+        type: "Project",
+        image: "/tensorforest.png",
+        description: "drones that predict and prevent forest fires. used remote sensing, AI, and physical sensors to detect risk zones and alert early.",
+        action: selectTensorForest
+      },
+      {
+        title: "teen builders club",
+        type: "Community",
+        image: "/teenbuildersclub.jpg",
+        description: "built what i always wished i had, a community of other people interested in making cool sh*t, hosted meetups/coworking sessions/demo nights- still tinkering with this"
+      },
+      {
+        title: "white oaks robotics",
+        type: "Community",
+        image: "/vex.png",
+        description: "started my schools robotics team, grew it to 100+ members, built world class robots, won excellence award 5x, design award, torunament champion",
+        badge: { text: "2nd in Ontario", className: "link-robotics" }
+      },
+      {
+        title: "apocalypse hacks",
+        type: "Community",
+        image: "/apoimages/vickyapo.png",
+        description: "i started canadas largest high school hackathon, but made it whimsical with theme of \"build something to survive an apocalypse\", raised 50k for this",
+        action: selectApocalypseHacks
+      },
+      {
+        title: "vibetype",
+        type: "Project",
+        image: "/vibetype.png",
+        description: "built this at a hackathon on my birthday earlier this year-wanted to build a browser extension which would let me",
+        link: "https://www.gptfixtsfor.me/"
+      },
+      {
+        title: "shoppywrapped",
+        type: "Project",
+        image: "/shoppy.png",
+        description: "built an imessage agent which could control your computer, using... spotify wrapped, but for your shopping. built with Shopify's Shop Mini framework.",
+        badge: { text: "won shopify hackathon", className: "link-olympiad" },
+        link: "https://github.com/ultratrikx/shoppy-wrapped/pulls"
+      }
+    ];
+
+    const filteredProjects = projectFilter === 'Everything' 
+      ? allProjects 
+      : allProjects.filter(p => {
+          if (projectFilter === 'Projects') return p.type === 'Project';
+          if (projectFilter === 'Communities') return p.type === 'Community';
+          return p.type === projectFilter;
+        });
+
+    return (
+      <div>
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap gap-4 mb-6">
+          {['Everything', 'Projects', 'Communities', 'Internship'].map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setProjectFilter(filter as any)}
+              className={cn(
+                "px-4 py-1 text-sm transition-colors duration-200",
+                projectFilter === filter 
+                  ? "bg-foreground text-background" 
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProjects.map((project, index) => (
+            <div key={index} className="flex flex-col group transition-colors">
+              {/* Image Container */}
+              <div 
+                className="relative mb-4 overflow-hidden aspect-[16/10] cursor-pointer bg-muted transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] dark:group-hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+                onClick={() => {
+                  if (project.action) project.action();
+                  else if (project.link) window.open(project.link, '_blank');
+                }}
+              >
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-all duration-300"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="flex flex-col">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-lg font-medium leading-tight">{project.title}</h3>
+                  {project.badge && (
+                    <span className={cn("text-[10px] font-medium ml-2 shrink-0", project.badge.className)}>
+                      {project.badge.text}
+                    </span>
+                  )}
+                  {!project.badge && (
+                    <span className="text-sm text-muted-foreground ml-2 shrink-0">
+                      {project.type === 'Community' ? 'community' : project.type.toLowerCase()}
+                    </span>
+                  )}
+                </div>
+                
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                  {project.tags && project.tags.length > 0 && (
+                    <span className="block mb-1 text-[10px] opacity-70">{project.tags.join(', ')}</span>
+                  )}
+                  {project.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
   }
 
   /* ────────────────────────────────

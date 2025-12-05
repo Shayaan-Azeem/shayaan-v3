@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
 interface AboutRendererProps {
@@ -6,6 +6,7 @@ interface AboutRendererProps {
 }
 
 export default function AboutRenderer({ content }: AboutRendererProps) {
+  const [showMore, setShowMore] = useState(false)
   // Parse sections from markdown content
   const parseAboutContent = (text: string) => {
     const sections = text.split('\n## ').filter(section => section.trim())
@@ -89,10 +90,10 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
   const sections = parseAboutContent(content)
 
   return (
-    <div className="space-y-8 md:space-y-12">
-      {/* Intro section */}
+    <div className="text-sm">
+      {/* Intro section - compact */}
       {sections.intro && (
-        <div>
+        <div className="mb-4">
           {sections.intro.split('\n\n').map((paragraph, index) => (
             <p key={index} className={index > 0 ? "mt-2" : ""}>
               {parseBulletPoints(paragraph)}
@@ -101,27 +102,11 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
         </div>
       )}
 
-      {/* What I'm up to lately section */}
-      {sections["what i'm up to lately:"] && (
-        <div className="pt-2">
-          <h2 className="mb-2 font-bold">what i'm up to lately:</h2>
-          <ul className="list-none space-y-2">
-            {sections["what i'm up to lately:"]
-              .split('\n- ')
-              .filter(item => item.trim())
-              .map((item, index) => {
-                const cleanItem = item.replace(/^- /, '').trim()
-                return parseBulletPoints(cleanItem, true)
-              })}
-          </ul>
-        </div>
-      )}
-
-      {/* Some cool things section */}
+      {/* Some cool things section - always visible */}
       {sections["some cool things i've done in the past:"] && (
-        <div className="pt-2">
-          <h2 className="mb-2 font-bold">some cool things i've done in the past:</h2>
-          <ul className="list-none space-y-2">
+        <div className="mb-4">
+          <h2 className="mb-2 font-bold text-sm">some cool things i've done in the past:</h2>
+          <ul className="list-none space-y-1 text-sm">
             {sections["some cool things i've done in the past:"]
               .split('\n- ')
               .filter(item => item.trim())
@@ -133,52 +118,54 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
         </div>
       )}
 
-      {/* How I started section */}
-      {sections["how i started:"] && (
-        <div className="pt-2">
-          <h2 className="mb-2 font-bold">how i started:</h2>
-          {sections["how i started:"].split('\n\n').map((part, partIndex) => {
-            if (part.includes('- ')) {
-              // This is the list part
-              return (
-                <ul key={partIndex} className="list-none space-y-2">
-                  {part.split('\n- ')
-                    .filter(item => item.trim())
-                    .map((item, index) => {
-                      const cleanItem = item.replace(/^- /, '').trim()
-                      return parseBulletPoints(cleanItem, true)
-                    })}
-                </ul>
-              )
-            } else {
-              // This is the intro paragraph
-              return (
-                <p key={partIndex} className="mb-2">
-                  {parseBulletPoints(part)}
-                </p>
-              )
-            }
-          })}
-        </div>
-      )}
+      {/* Read More button */}
+      <button
+        onClick={() => setShowMore(!showMore)}
+        className="text-sm underline hover:no-underline mb-4"
+      >
+        {showMore ? 'Show Less' : 'Read More'}
+      </button>
 
-      {/* Future vision section */}
-      {sections["where do i see myself in 10 years:"] && (
-        <div className="pt-2">
-          <h2 className="mb-2 font-bold">where do i see myself in 10 years:</h2>
-          <p>{parseBulletPoints(sections["where do i see myself in 10 years:"])}</p>
-        </div>
-      )}
+      {/* Expandable content */}
+      {showMore && (
+        <div className="space-y-4 text-sm">
 
-      {/* Photo section */}
-      {sections.photo && (
-        <div className="mt-12 mb-8 flex justify-center px-4 sm:px-8">
-          <img 
-            src="/000129720010.JPG" 
-            alt="Shayaan in workshop" 
-            className="shadow-md max-w-full h-auto"
-            style={{ maxWidth: '450px' }}
-          />
+          {/* How I started section */}
+          {sections["how i started:"] && (
+            <div>
+              <h2 className="mb-2 font-bold text-sm">how i started:</h2>
+              {sections["how i started:"].split('\n\n').map((part, partIndex) => {
+                if (part.includes('- ')) {
+                  // This is the list part
+                  return (
+                    <ul key={partIndex} className="list-none space-y-1">
+                      {part.split('\n- ')
+                        .filter(item => item.trim())
+                        .map((item, index) => {
+                          const cleanItem = item.replace(/^- /, '').trim()
+                          return parseBulletPoints(cleanItem, true)
+                        })}
+                    </ul>
+                  )
+                } else {
+                  // This is the intro paragraph
+                  return (
+                    <p key={partIndex} className="mb-2">
+                      {parseBulletPoints(part)}
+                    </p>
+                  )
+                }
+              })}
+            </div>
+          )}
+
+          {/* Future vision section */}
+          {sections["where do i see myself in 10 years:"] && (
+            <div>
+              <h2 className="mb-2 font-bold text-sm">where do i see myself in 10 years:</h2>
+              <p>{parseBulletPoints(sections["where do i see myself in 10 years:"])}</p>
+            </div>
+          )}
         </div>
       )}
     </div>
