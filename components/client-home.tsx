@@ -90,20 +90,44 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     }
   }
 
+  // Experiences data for command palette
+  const experiencesForCommandPalette = [
+    { title: "RevisionDojo (YCF24)", type: "Internship" as const, link: "https://revisiondojo.com", image: "/revisiondojo.png" },
+    { title: "performativepuritytest.com", type: "Project" as const, link: "https://performativepuritytest.com", image: "/performativepurity.png" },
+    { title: "tensorforest", type: "Project" as const, hasDetailPage: true, image: "/tensorforest.jpg" },
+    { title: "do-eve", type: "Project" as const, link: "https://devpost.com/software/do-eve", image: "/doeve.png" },
+    { title: "coach bob", type: "Project" as const, link: "https://devpost.com/software/coach-bob", image: "/coachbob.jpg" },
+    { title: "teen builders club", type: "Community" as const, image: "/teenbuildersclub.jpg" },
+    { title: "white oaks robotics", type: "Community" as const, image: "/vex.jpg" },
+    { title: "apocalypse hacks", type: "Community" as const, hasDetailPage: true, image: "/apoimages/vickyapo.png" },
+    { title: "vibetype", type: "Project" as const, link: "https://www.gptfixtsfor.me/", image: "/vibetype.png" },
+    { title: "shoppywrapped", type: "Project" as const, link: "https://github.com/ultratrikx/shoppy-wrapped/pulls", image: "/shoppy.png" },
+  ]
+
+  const handleSelectExperience = (experience: { title: string; type: string; link?: string; hasDetailPage?: boolean }) => {
+    if (experience.title === 'tensorforest') {
+      selectTensorForest()
+    } else if (experience.title === 'apocalypse hacks') {
+      selectApocalypseHacks()
+    } else if (experience.link) {
+      window.open(experience.link, '_blank', 'noopener,noreferrer')
+    }
+  }
+
 
   /* ────────────────────────────────
      render
   ────────────────────────────────── */
     return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative">
-      {/* Dotted pattern background */}
+      {/* Grid pattern background */}
       <div className="fixed inset-0 pointer-events-none" style={{
-        backgroundImage: 'radial-gradient(circle, hsl(var(--foreground) / 0.15) 1px, transparent 1px)',
-        backgroundSize: '20px 20px'
+        backgroundImage: `linear-gradient(hsl(var(--foreground) / 0.05) 1px, transparent 1px),
+                          linear-gradient(90deg, hsl(var(--foreground) / 0.05) 1px, transparent 1px)`,
+        backgroundSize: '24px 24px'
       }}></div>
       
-      {/* Content wrapper with relative positioning */}
-      <div className="relative z-10 w-full flex flex-col items-center">
+      <div className="w-full flex flex-col items-center relative z-10">
       {/* ───────────── mobile top bar ───────────── */}
       <div className="md:hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
         <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1 backdrop-blur-sm">
@@ -185,7 +209,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         <ModeToggle />
       </div>
 
-      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-[120px_1fr_120px] gap-8 md:gap-12">
 
         {/* ───────────── desktop sidebar ───────────── */}
         <nav className="hidden md:block md:text-right space-y-8 md:space-y-12 text-sm text-muted-foreground sticky top-12 self-start">
@@ -201,7 +225,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                     : "text-muted-foreground/70 hover:text-muted-foreground",
                 )}
               >
-                {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section}
+                {section === "content" ? "content worth consuming" : section === "inspirations" ? "my philosophy" : section === "projects" ? "experiences" : section}
               </button>
               
               {/* Project sub-items */}
@@ -239,7 +263,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
            renderSectionContent(activeSection)}
           
           {/* Footer */}
-          <div className="mt-12 pt-8 border-t border-border">
+          <div className="mt-12 pt-8">
             <p className="text-sm text-muted-foreground">
               email me at{" "}
               <Link
@@ -251,13 +275,18 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             </p>
           </div>
         </div>
+
+        {/* ───────────── right spacer (balances sidebar) ───────────── */}
+        <div className="hidden md:block" />
       </div>
 
       {/* Command Palette */}
       <CommandPalette
         fieldnotes={fieldnotes}
+        experiences={experiencesForCommandPalette}
         onNavigate={handleCommandNavigation}
         onSelectProject={handleCommandProject}
+        onSelectExperience={handleSelectExperience}
         currentSection={activeSection}
         currentPage="Home"
       />
@@ -272,14 +301,9 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   function renderTensorForestContent() {
     return (
       <div>
-        {/* Hero Banner */}
-        <HeroBanner
-          title="TensorForest"
-          subtitle="Autonomous drone system for wildfire prediction and prevention"
-          date="2023-12-01"
-          tags={["AI", "Drones", "Environmental Tech", "Machine Learning"]}
-          backgroundImage="/tensorforest.png"
-        />
+        {/* Title */}
+        <h1 className="text-4xl font-bold mb-2">TensorForest</h1>
+        <p className="text-muted-foreground mb-8">Autonomous drone system for wildfire prediction and prevention</p>
 
         {/* The Problem */}
         <div className="mb-10">
@@ -287,19 +311,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           <p className="mb-6">
             Wildfires have become increasingly frequent and severe, devastating forest ecosystems and contributing significantly to greenhouse gas emissions. The UN Environment Programme (UNEP) predicts a global rise in extreme wildfires by 14% by 2030, 30% by 2050, and 50% by 2100. Climate change and wildfires form a dangerous feedback loop, worsening the damage and increasing the need for fire prevention.
           </p>
-          
-          <div className="my-6 flex justify-center">
-            <div className="w-3/4">
-              <img
-                src="/tensorforest/tensorforestv1.png"
-                alt="TensorForest V1"
-                className="rounded-lg w-full"
-              />
-              <p className="text-sm text-gray-500 mt-2">
-                Our first prototype of TensorForest, designed to capture high-resolution forest data for wildfire risk assessment.
-              </p>
-            </div>
-          </div>
 
           <h2 className="text-2xl mb-4">The Opportunity</h2>
           <p className="mb-6">
@@ -353,60 +364,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               <span className="font-medium">Utilizing data for fire prevention planning</span>, helping determine optimal locations to cut fire lines and mitigate wildfire spread.
             </li>
           </ul>
-
-          <div className="my-8">
-            <img
-              src="/tensorforest/tensorforest v3 .png"
-              alt="TensorForest V3"
-              className="rounded-lg w-full"
-            />
-            <p className="text-sm text-gray-500 mt-2">
-              The latest version of TensorForest featuring improved hardware and AI capabilities for more accurate wildfire risk prediction.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
-            <div>
-              <img
-                src="/tensorforest/vegatation map capture, stich1.png"
-                alt="Vegetation Map Capture"
-                className="rounded-lg w-full"
-              />
-              <p className="text-sm text-gray-500 mt-2">
-                A stitched vegetation map created by TensorForest, showcasing our ability to create comprehensive forest visualizations from multiple drone captures.
-              </p>
-            </div>
-            <div>
-              <img
-                src="/tensorforest/Normalized Difference Vegetation Index  capture for heat map.png"
-                alt="NDVI Capture for Heat Map"
-                className="rounded-lg w-full"
-              />
-              <p className="text-sm text-gray-500 mt-2">
-                An NDVI capture used to generate heat maps, showing vegetation health and potential fire risk areas.
-              </p>
-            </div>
-            <div>
-              <img
-                src="/tensorforest/gopro to capture Normalized Difference Vegetation Index.png"
-                alt="GoPro NDVI Capture"
-                className="rounded-lg w-full"
-              />
-              <p className="text-sm text-gray-500 mt-2">
-                Our modified GoPro setup used to capture NDVI data, providing crucial vegetation health information for risk assessment.
-              </p>
-            </div>
-            <div>
-              <img
-                src="/tensorforest/campimod.png"
-                alt="Pi Computer Module"
-                className="rounded-lg w-full"
-              />
-              <p className="text-sm text-gray-500 mt-2">
-                The Raspberry Pi computer module with Edge TPU that powers our onboard image processing and AI analysis capabilities.
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* Current Development & Funding Needs */}
@@ -433,17 +390,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             </li>
           </ol>
 
-          <h2 className="text-2xl mb-4">Get Involved</h2>
-          <p className="mb-6">
-            We are continuously working on improving TensorForest. If you're interested in this project or want to collaborate, feel free to reach out at{" "}
-            <a
-              href="mailto:shayaanazeem10@gmail.com"
-              className="text-blue-500 hover:underline"
-            >
-              shayaanazeem10@gmail.com
-            </a>
-            .
-          </p>
         </div>
       </div>
     )
@@ -455,14 +401,9 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   function renderApocalypseHacksContent() {
     return (
       <div>
-        {/* Hero Banner */}
-        <HeroBanner
-          title="Apocalypse Hacks"
-          subtitle="Canada's largest high school hackathon"
-          date="2024-05-17"
-          tags={["Hackathon", "Community", "High School", "Toronto"]}
-          backgroundImage="/apoimages/vickyapo.png"
-        />
+        {/* Title */}
+        <h1 className="text-4xl font-bold mb-2">Apocalypse Hacks</h1>
+        <p className="text-muted-foreground mb-8">Canada's largest high school hackathon</p>
 
         {/* Summary */}
         <div className="mb-10">
@@ -474,81 +415,18 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           </p>
 
           <h2 className="text-2xl mb-4">Team</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6">
-            {[
-              {
-                name: "Acon Lin",
-                img: "https://cloud-jy1p4tt69-hack-club-bot.vercel.app/60.png",
-                site: "https://aconlin.vercel.app/",
-              },
-              {
-                name: "Arav Narula",
-                img: "https://cloud-jy1p4tt69-hack-club-bot.vercel.app/71.png",
-                site: "https://www.radioblahaj.com/?ref=apocalypse",
-              },
-              {
-                name: "Mutammim Sarkar",
-                img: "https://cloud-jy1p4tt69-hack-club-bot.vercel.app/92.png",
-                site: "https://www.mutammim.com/",
-              },
-              {
-                name: "Shayaan Azeem",
-                img: "https://cloud-jy1p4tt69-hack-club-bot.vercel.app/83.png",
-                site: "https://www.linkedin.com/in/shayaan-azeem/",
-              },
-              {
-                name: "Ryan Di Lorenzo",
-                img: "https://cloud-jy1p4tt69-hack-club-bot.vercel.app/04.png",
-                site: "https://limeskey.com/",
-              },
-              {
-                name: "Gregory Gu",
-                img: "https://cloud-jy1p4tt69-hack-club-bot.vercel.app/15.png",
-                site: "https://www.linkedin.com/in/gregory-gu-b777212ba/",
-              },
-              {
-                name: "Sam Liu",
-                img: "https://cloud-jy1p4tt69-hack-club-bot.vercel.app/26.png",
-                site: "https://samliu.dev/",
-              },
-              {
-                name: "Sarvesh Mohan Kumar",
-                img: "https://cloud-jy1p4tt69-hack-club-bot.vercel.app/37.png",
-                site: "https://www.linkedin.com/in/sarvesh-mohan-kumar-a009ba268/",
-              },
-              {
-                name: "Evelyn Wong",
-                img: "https://cloud-8bqvtn5zz-hack-club-bot.vercel.app/08.png",
-                site: "http://evelynw.ong/",
-              },
-              {
-                name: "Vivian Yuan",
-                img: "https://cloud-jy1p4tt69-hack-club-bot.vercel.app/59.png",
-                site: "https://www.linkedin.com/in/vivian-yuan-240716284/",
-              },
-            ].map((member) => (
-              <div
-                key={member.name}
-                className="flex flex-col items-center mb-2"
-              >
-                <a
-                  href={member.site}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col items-center"
-                >
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-12 h-12 rounded-full mb-1"
-                  />
-                  <span className="text-gray-400 text-center text-sm">
-                    {member.name}
-                  </span>
-                </a>
-              </div>
-            ))}
-          </div>
+          <p className="mb-6">
+            <a href="https://aconlin.vercel.app/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Acon Lin</a>,{" "}
+            <a href="https://www.radioblahaj.com/?ref=apocalypse" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Arav Narula</a>,{" "}
+            <a href="https://www.mutammim.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Mutammim Sarkar</a>,{" "}
+            <a href="https://www.linkedin.com/in/shayaan-azeem/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Shayaan Azeem</a>,{" "}
+            <a href="https://limeskey.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Ryan Di Lorenzo</a>,{" "}
+            <a href="https://www.linkedin.com/in/gregory-gu-b777212ba/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Gregory Gu</a>,{" "}
+            <a href="https://samliu.dev/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Sam Liu</a>,{" "}
+            <a href="https://www.linkedin.com/in/sarvesh-mohan-kumar-a009ba268/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Sarvesh Mohan Kumar</a>,{" "}
+            <a href="http://evelynw.ong/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Evelyn Wong</a>,{" "}
+            <a href="https://www.linkedin.com/in/vivian-yuan-240716284/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Vivian Yuan</a>
+          </p>
 
           <h2 className="text-2xl mb-4">Why Did We Build This?</h2>
           <p className="mb-6">
@@ -571,30 +449,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             I joined the core team in early 2024. At that point, we were actively looking for sponsors and a venue, and we cold emailed a
             LOT. We got a ton of nos and maybes, but finally, Shopify said yes, and the rest? Well, that was history.
           </p>
-
-          <h2 className="text-2xl mb-4">Rejection Emails</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-            <img
-              src="/apoimages/rejection1.png"
-              alt="Rejection Email 1"
-              className="rounded-lg"
-            />
-            <img
-              src="/apoimages/reject2.png"
-              alt="Rejection Email 2"
-              className="rounded-lg"
-            />
-            <img
-              src="/apoimages/rejection3.png"
-              alt="Rejection Email 3"
-              className="rounded-lg"
-            />
-            <img
-              src="/apoimages/rejection4.png"
-              alt="Rejection Email 4"
-              className="rounded-lg"
-            />
-          </div>
 
           <h2 className="text-2xl mb-4">Timeline of Talks with Shopify</h2>
           <p className="mb-4">
@@ -624,28 +478,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             Walking into Shopify's Toronto HQ for the first time was surreal. It was everything we could've wanted and even more. The venue was
             huge, it had amazing views of the city, the CN Tower—it felt like the space motivated us even more than we already were.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-            <img
-              src="/apoimages/shopify rooftop.png"
-              alt="Shopify Rooftop"
-              className="rounded-lg"
-            />
-            <img
-              src="/apoimages/shopify interior.png"
-              alt="Shopify Interior"
-              className="rounded-lg"
-            />
-            <img
-              src="/apoimages/torontoview.JPG"
-              alt="Toronto View"
-              className="rounded-lg"
-            />
-            <img
-              src="/apoimages/teamselfie.jpg"
-              alt="team View"
-              className="rounded-lg"
-            />
-          </div>
         </div>
 
         {/* Money Problems & Hack Club */}
@@ -669,13 +501,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             With money in hand, we got to work. I built a Trello board with auto-assignments, time tracking, and Slack integration, which
             would be the basis of all this.
           </p>
-          <div className="my-6">
-            <img
-              src="/apoimages/trello.png"
-              alt="Trello Board"
-              className="rounded-lg"
-            />
-          </div>
         </div>
 
         {/* Organizing the Event */}
@@ -692,35 +517,10 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             <li>Vendor Outreach - I remember getting responses from Chinese vendors on Alibaba at 4 AM hahah.</li>
           </ul>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
-            <img
-              src="/apoimages/merch1.jpg"
-              alt="Merchandise"
-              className="rounded-lg"
-            />
-            <img
-              src="/apoimages/sticker2.png"
-              alt="Stickers"
-              className="rounded-lg"
-            />
-            <img
-              src="/apoimages/caffeine.jpg"
-              alt="Caffeine"
-              className="rounded-lg"
-            />
-          </div>
-
           <p className="mb-6">
             From March to May 17th, we barely slept. There were 2 AM Slack calls on school nights, all-day Saturday meetings, and a
             ridiculous amount of last-minute scrambling. But somehow, we made it happen.
           </p>
-          <div className="my-6">
-            <img
-              src="/apoimages/12am.png"
-              alt="Late Night Work"
-              className="rounded-lg"
-            />
-          </div>
         </div>
 
         {/* How We Organized */}
@@ -760,14 +560,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             </li>
           </ul>
 
-          <div className="my-6">
-            <img
-              src="/apoimages/cardgame.jpg"
-              alt="Card Game"
-              className="rounded-lg"
-            />
-          </div>
-
           <h2 className="text-2xl mb-4">The Takeaway</h2>
           <p className="mb-6">
             If you have the ability to make it and think it's worth it to do so, then make it. Don't worry about semantics like titles and
@@ -788,59 +580,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             as me. Like I said in the beginning, we set out to create a place to meet our people, and we definitely did just that.
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 my-6">
-            <img
-              src="/apoimages/event0.jpg"
-              alt="Event Image 0"
-              className="rounded-lg object-cover h-full w-full"
-            />
-            <img
-              src="/apoimages/event1.jpeg"
-              alt="Event Image 1"
-              className="rounded-lg object-cover h-full w-full"
-            />
-            <img
-              src="/apoimages/event2.jpg"
-              alt="Event Image 2"
-              className="rounded-lg object-cover h-full w-full"
-            />
-            <img
-              src="/apoimages/event3.jpg"
-              alt="Event Image 3"
-              className="rounded-lg object-cover h-full w-full"
-            />
-            <img
-              src="/apoimages/event4.png"
-              alt="Event Image 4"
-              className="rounded-lg object-cover h-full w-full"
-            />
-            <img
-              src="/apoimages/event6.jpg"
-              alt="Event Image 6"
-              className="rounded-lg object-cover h-full w-full"
-            />
-            <img
-              src="/apoimages/lightiningtalk1.jpg"
-              alt="Lightning Talk"
-              className="rounded-lg object-cover h-full w-full"
-            />
-            <img
-              src="/apoimages/lockedineddie.png"
-              alt="Locked in Eddie"
-              className="rounded-lg object-cover h-full w-full"
-            />
-            <img
-              src="/apoimages/selfie.png"
-              alt="Selfie"
-              className="rounded-lg object-cover h-full w-full"
-            />
-            <img
-              src="/apoimages/workshop1.png"
-              alt="Workshop 1"
-              className="rounded-lg object-cover h-full w-full"
-            />
-          </div>
-
           <p className="mb-4 text-center">
             Check out this documentary I made to recap the event! :)
           </p>
@@ -857,11 +596,10 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           </div>
           <div className="flex justify-center my-8">
             <iframe
-              style={{ borderRadius: "12px" }}
-              src="https://open.spotify.com/embed/track/1oAwsWBovWRIp7qLMGPIet?utm_source=generator&theme=0"
+              style={{ borderRadius: "12px", border: "none" }}
+              src="https://open.spotify.com/embed/track/1oAwsWBovWRIp7qLMGPIet?utm_source=generator"
               width="80%"
-              height="100"
-              frameBorder="0"
+              height="152"
               allowFullScreen
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
@@ -898,11 +636,40 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       case "about":
         return (
           <div>
-            {/* Name */}
-            <h1 className="text-3xl font-bold mb-6 group cursor-default">
-              <span className="group-hover:hidden">Shayaan Azeem</span>
-              <span className="hidden group-hover:inline">شایان عظیم</span>
-            </h1>
+            {/* Name and Social Icons */}
+            <div className="flex justify-between items-center mb-6">
+              <h1 className="text-3xl font-bold group cursor-default">
+                <span className="group-hover:hidden">Shayaan Azeem</span>
+                <span className="hidden group-hover:inline">شایان عظیم</span>
+              </h1>
+              <div className="flex items-center gap-4">
+                <a href="https://x.com/shayaan" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
+                <a href="https://github.com/Shayaan-Azeem" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                  </svg>
+                </a>
+                <a href="https://linkedin.com/in/shayaan-azeem" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
+                <a href="https://devpost.com/shayaanazeem10" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.002 1.61L0 12.004L6.002 22.39h11.996L24 12.004L17.998 1.61H6.002zm1.593 4.084h3.947c3.605 0 6.276 1.695 6.276 6.31c0 4.436-3.21 6.302-6.456 6.302H7.595V5.694zm2.517 2.449v7.714h1.241c2.646 0 3.862-1.55 3.862-3.861c.009-2.569-1.096-3.853-3.767-3.853h-1.336z"/>
+                  </svg>
+                </a>
+                <a href="mailto:shayaan.azeem@uwaterloo.ca" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
             
             {/* Dynamic About Content */}
             {about ? (
@@ -989,7 +756,9 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         return (
           <div className="pt-2">
             {philosophy ? (
+              <div className="text-justify">
               <MDXRenderer item={philosophy} />
+              </div>
             ) : (
               <div>
                 <h2 className="text-2xl font-bold mb-4">My Philosophy</h2>
@@ -1031,7 +800,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       title: string;
       type: 'Internship' | 'Project' | 'Community';
       image: string;
-      description: string;
+      description: React.ReactNode;
       badge?: {
         text: string;
         className: string; // Using className to apply highlight classes
@@ -1044,76 +813,75 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
 
     const allProjects: Project[] = [
       {
-        title: "revisiondojo (YCF24)",
+        title: "RevisionDojo (YCF24)",
         type: "Internship",
         image: "/revisiondojo.png",
-        description: "Get instant feedback on your EE research question. built rice purity test but for being performative, following the performative trend from this summer.",
-        tags: ["funsies"],
-        link: "https://revisiondojo.com" // Assumed or generic
+        description: "over fall 2025, I worked at RevisionDojo as a software engineer. built and shipped new features used by 600k+ students. learnt a lot and worked with some of the coolest people.",
+        link: "https://revisiondojo.com"
       },
       {
         title: "performativepuritytest.com",
         type: "Project",
         image: "/performativepurity.png",
-        description: "built rice purity test but for being performative, following the performative trend from this summer, the hardest part about this was not programming it but making the questions",
+        description: <>shipped a performative purity test that mixed the summer's "performative" trend with the rice purity test. accidentally went viral and <a href="https://x.com/i/trending/1990747485631860858" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">trended on twitter for two days.</a></>,
         badge: { text: "300k+ users", className: "link-hackclub" },
         link: "https://performativepuritytest.com"
       },
       {
-        title: "coach bob",
+        title: "tensorforest",
         type: "Project",
-        image: "/coachbob.jpeg",
-        description: "street fighter but irl",
-        badge: { text: "won hackthenorth", className: "link-bloomberg" },
-        link: "https://devpost.com/software/coach-bob" // Assumed
+        image: "/tensorforest.jpg",
+        description: "drones that find early forest fire risks. used remote sensing, NDVI, and onboard ML to detect dangerous vegetation zones and generate orthomosaic risk maps before fires start. worked with the town of oakville to test it.",
+        action: selectTensorForest
       },
       {
         title: "do-eve",
         type: "Project",
         image: "/doeve.png",
-        description: "built an imessage computer use agent which could control your computer, using...",
+        description: "poke but for computer use. built an imessage agent that can use your laptop for you. opens apps, runs scripts, organizes files, and handles random tasks just by texting it.",
         badge: { text: "won hackprinceton", className: "link-teenbuilders" },
-        link: "https://devpost.com/software/do-eve" // Assumed
+        link: "https://devpost.com/software/do-eve"
       },
       {
-        title: "tensorforest",
+        title: "coach bob",
         type: "Project",
-        image: "/tensorforest.png",
-        description: "drones that predict and prevent forest fires. used remote sensing, AI, and physical sensors to detect risk zones and alert early.",
-        action: selectTensorForest
+        image: "/coachbob.jpg",
+        description: "built street fighter but irl. an AR pose based fighting game where you hit targets and get scored in real time. used gemini to give audio feedback and help you train.",
+        badge: { text: "won hackthenorth", className: "link-bloomberg" },
+        link: "https://devpost.com/software/coach-bob"
       },
       {
         title: "teen builders club",
         type: "Community",
         image: "/teenbuildersclub.jpg",
-        description: "built what i always wished i had, a community of other people interested in making cool sh*t, hosted meetups/coworking sessions/demo nights- still tinkering with this"
+        description: "made the community I always wanted. hosted weekly coworking, demo nights, and built a space for ambitious young people to meet each other and actually build."
       },
       {
         title: "white oaks robotics",
         type: "Community",
-        image: "/vex.png",
-        description: "started my schools robotics team, grew it to 100+ members, built world class robots, won excellence award 5x, design award, torunament champion",
+        image: "/vex.jpg",
+        description: "started and scaled my school's robotics team to 100+ members. built competitive robots, won the excellence award 5 times, and ranked top 62/2400 worldwide. handled design reviews, programming, scouting, and ops.",
         badge: { text: "2nd in Ontario", className: "link-robotics" }
       },
       {
         title: "apocalypse hacks",
         type: "Community",
         image: "/apoimages/vickyapo.png",
-        description: "i started canadas largest high school hackathon, but made it whimsical with theme of \"build something to survive an apocalypse\", raised 50k for this",
+        description: "started canada's largest high school hackathon with 150 attendees and 40+ projects shipped. zombie apocalypse theme. raised 50k from shopify, doordash, and others. handled outreach, ops, sponsorships, and everything in between.",
         action: selectApocalypseHacks
       },
       {
         title: "vibetype",
         type: "Project",
         image: "/vibetype.png",
-        description: "built this at a hackathon on my birthday earlier this year-wanted to build a browser extension which would let me",
+        description: "built \"dia but for arc\" before dia had sidebar tabs. an ai writing sidekick that lives in your browser. highlight text to rewrite, expand, or clean it instantly. the sidebar reads your open tabs so it can help you draft way faster.",
         link: "https://www.gptfixtsfor.me/"
       },
       {
         title: "shoppywrapped",
         type: "Project",
         image: "/shoppy.png",
-        description: "built an imessage agent which could control your computer, using... spotify wrapped, but for your shopping. built with Shopify's Shop Mini framework.",
+        description: "spotify wrapped but for your shopping. built with shopify's shop mini framework. shows your top shops, spending, and order history in a clean stories style recap. won the shopify toronto tech week hackathon.",
         badge: { text: "won shopify hackathon", className: "link-olympiad" },
         link: "https://github.com/ultratrikx/shoppy-wrapped/pulls"
       }
@@ -1129,30 +897,46 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
 
     return (
       <div>
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap gap-4 mb-6">
-          {['Everything', 'Projects', 'Communities', 'Internship'].map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setProjectFilter(filter as any)}
-              className={cn(
-                "px-4 py-1 text-sm transition-colors duration-200",
-                projectFilter === filter 
-                  ? "bg-foreground text-background" 
-                  : "text-muted-foreground hover:text-foreground"
+        {/* Filter Buttons and Search */}
+        <div className="flex justify-between items-center mb-6">
+          <div className="flex flex-wrap gap-4">
+            {['Everything', 'Projects', 'Communities', 'Internship'].map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setProjectFilter(filter as any)}
+                className={cn(
+                  "px-4 py-1 text-sm transition-colors duration-200 rounded",
+                  projectFilter === filter 
+                    ? "bg-foreground text-background" 
+                    : "text-muted-foreground hover:text-foreground"
               )}
             >
               {filter}
             </button>
           ))}
+          </div>
+          <button
+            onClick={() => {
+              const event = new KeyboardEvent('keydown', {
+                key: 'k',
+                metaKey: true,
+                bubbles: true
+              })
+              document.dispatchEvent(event)
+            }}
+            className="text-muted-foreground hover:text-foreground transition-colors p-2"
+            aria-label="Search"
+          >
+            <Search className="w-5 h-5" />
+          </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {filteredProjects.map((project, index) => (
             <div key={index} className="flex flex-col group transition-colors">
               {/* Image Container */}
               <div 
-                className="relative mb-4 overflow-hidden aspect-[16/10] cursor-pointer bg-muted transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] dark:group-hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+                className="relative mb-4 overflow-hidden aspect-[16/10] cursor-pointer bg-muted rounded-lg"
                 onClick={() => {
                   if (project.action) project.action();
                   else if (project.link) window.open(project.link, '_blank');
@@ -1161,7 +945,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-full object-cover transition-all duration-300"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
 
@@ -1170,7 +954,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-lg font-medium leading-tight">{project.title}</h3>
                   {project.badge && (
-                    <span className={cn("text-[10px] font-medium ml-2 shrink-0", project.badge.className)}>
+                    <span className={cn("text-[10px] font-medium ml-2 shrink-0 px-2 py-0.5 rounded-md", project.badge.className)}>
                       {project.badge.text}
                     </span>
                   )}
@@ -1181,7 +965,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                   )}
                 </div>
                 
-                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   {project.tags && project.tags.length > 0 && (
                     <span className="block mb-1 text-[10px] opacity-70">{project.tags.join(', ')}</span>
                   )}

@@ -18,7 +18,7 @@ const components = {
   ul: (props: any) => <ul className="list-disc list-inside mb-4 space-y-2" {...props} />,
   ol: (props: any) => <ol className="list-decimal list-inside mb-4 space-y-2" {...props} />,
   li: (props: any) => <li className="leading-relaxed" {...props} />,
-  blockquote: (props: any) => <blockquote className="border-l-4 border-border pl-4 italic mb-4" {...props} />,
+  blockquote: (props: any) => <blockquote className="border-l-4 border-foreground/20 pl-6 pr-6 py-4 mb-4 mr-8 bg-black/[0.02] dark:bg-muted/20 rounded-r-lg" {...props} />,
       code: (props: any) => <code className="bg-gray-100 dark:bg-secondary px-2 py-1 rounded text-sm" {...props} />,
     pre: (props: any) => <pre className="bg-gray-100 dark:bg-secondary p-4 rounded-lg overflow-x-auto mb-4" {...props} />,
   a: (props: any) => <a className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,

@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 body {
-  /* Modern sans-serif font stack to match the screenshot */
-  font-family:
-    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @layer utilities {
@@ -246,7 +244,7 @@ body {
   
   /* Colored link highlight classes */
   .link-blue {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: hsl(var(--highlight-blue));
   }
   .link-blue:hover {
@@ -355,7 +353,7 @@ body {
   }
   
   .link-green {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: hsl(var(--highlight-green));
   }
   .link-green:hover {
@@ -364,7 +362,7 @@ body {
   }
   
   .link-purple {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: hsl(var(--highlight-purple));
   }
   .link-purple:hover {
@@ -373,7 +371,7 @@ body {
   }
   
   .link-orange {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: hsl(var(--highlight-orange));
   }
   .link-orange:hover {
@@ -382,7 +380,7 @@ body {
   }
   
   .link-pink {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: hsl(var(--highlight-pink));
   }
   .link-pink:hover {
@@ -391,7 +389,7 @@ body {
   }
   
   .link-teal {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: hsl(var(--highlight-teal));
   }
   .link-teal:hover {
@@ -456,7 +454,7 @@ body {
   
   /* Custom golden yellow highlight for uwaterloo */
   .link-uwaterloo {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: #FFF3C4; /* Light yellow */
     color: #000;
   }
@@ -477,7 +475,7 @@ body {
   
   /* Custom purple highlight for Bloomberg Philanthropies */
   .link-bloomberg {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: #E8D5F5; /* Light purple */
     color: #000;
   }
@@ -498,7 +496,7 @@ body {
   
   /* Custom bright purple highlight for preseed link */
   .link-preseed {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: #E6D9FF; /* Light bright purple */
     color: #000;
   }
@@ -519,7 +517,7 @@ body {
   
   /* Red highlight for hack club links */
   .link-hackclub {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: #FECACA; /* Light red */
     color: #000;
   }
@@ -538,7 +536,7 @@ body {
   
   /* Pink highlight for hackathon link */
   .link-hackathon {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: #FFE1F1; /* Light pink */
     color: #000;
   }
@@ -557,7 +555,7 @@ body {
   
   /* Blue highlight for robotics club */
   .link-robotics {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: #DBEAFE; /* Light blue */
     color: #000;
   }
@@ -576,7 +574,7 @@ body {
   
   /* Green highlight for robot olympiad */
   .link-olympiad {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: #D1FAE5; /* Light green */
     color: #000;
   }
@@ -595,7 +593,7 @@ body {
   
   /* Orange highlight for teen builders club */
   .link-teenbuilders {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: #FED7AA; /* Light orange */
     color: #000;
   }
@@ -614,7 +612,7 @@ body {
   
   /* Blue highlight for code camp */
   .link-codecamp {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: #DBEAFE; /* Light blue */
     color: #000;
   }
@@ -633,7 +631,7 @@ body {
   
   /* Black/white highlight for chrome extension */
   .link-chrome {
-    @apply px-1 py-0.5 transition-all duration-200;
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
     background-color: #F3F4F6; /* Light gray */
     color: #000;
   }
@@ -648,6 +646,25 @@ body {
   .dark .link-chrome:hover {
     background-color: #F3F4F6;
     color: #000;
+  }
+  
+  /* RevisionDojo blue highlight (rgb 85, 185, 249) */
+  .link-revisiondojo {
+    @apply px-1 py-0.5 transition-all duration-200 rounded;
+    background-color: rgba(85, 185, 249, 0.2); /* Light blue */
+    color: #000;
+  }
+  .link-revisiondojo:hover {
+    background-color: rgb(85, 185, 249); /* Full blue on hover */
+    color: #fff;
+  }
+  .dark .link-revisiondojo {
+    background-color: rgba(85, 185, 249, 0.3);
+    color: #fff;
+  }
+  .dark .link-revisiondojo:hover {
+    background-color: rgba(85, 185, 249, 0.2);
+    color: #fff;
   }
   
   /* Footer email link styling */
