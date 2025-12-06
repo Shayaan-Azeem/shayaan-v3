@@ -11,6 +11,7 @@ import ContentRenderer from "@/components/content-renderer"
 import AboutRenderer from "@/components/about-renderer"
 import ContentWorthConsumingRenderer from "@/components/content-worth-consuming-renderer"
 import CommandPalette from "@/components/command-palette"
+import Mafia from "@/components/mafia"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
 import { Button } from "@/components/ui/button"
@@ -47,7 +48,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   const [activeTensorForest, setActiveTensorForest] = useState(false)
   const [activeApocalypseHacks, setActiveApocalypseHacks] = useState(false)
   const [activePhotoTab, setActivePhotoTab] = useState<'polaroids' | 'digital' | 'film'>('polaroids')
-  const [projectFilter, setProjectFilter] = useState<'Everything' | 'Projects' | 'Communities' | 'Internship'>('Everything')
+  const [projectFilter, setProjectFilter] = useState<'Everything' | 'Projects' | 'Communities'>('Everything')
 
   /* ────────────────────────────────
      helpers
@@ -201,7 +202,20 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
 
       {/* desktop theme toggle and command palette hint */}
       <div className="hidden md:flex absolute top-4 right-4 items-center gap-3">
-        <KeyboardHint />
+        <button
+          onClick={() => {
+            const event = new KeyboardEvent('keydown', {
+              key: 'k',
+              metaKey: true,
+              bubbles: true
+            })
+            document.dispatchEvent(event)
+          }}
+          className="flex items-center gap-1.5 px-2 py-1 text-xs text-muted-foreground hover:text-foreground border border-border rounded-md hover:bg-muted/50 transition-colors"
+        >
+          <span className="text-[10px]">⌘</span>
+          <span>K</span>
+        </button>
         <ModeToggle />
       </div>
 
@@ -269,51 +283,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 shayaan.azeem@uwaterloo.ca
               </Link>
             </p>
-            <div className="flex items-center gap-1 group">
-              <button
-                onClick={() => {
-                  const sites = [
-                    "https://www.kevinjosethomas.com/",
-                    "https://www.rohanthmarem.co/",
-                    "https://www.casperdong.com/",
-                    "https://www.danielcwq.com/",
-                    "https://www.chinmayjindal.com/"
-                  ];
-                  const currentIndex = parseInt(localStorage.getItem('friendSiteIndex') || '0');
-                  const prevIndex = (currentIndex - 1 + sites.length) % sites.length;
-                  localStorage.setItem('friendSiteIndex', prevIndex.toString());
-                  window.open(sites[prevIndex], '_blank');
-                }}
-                className="p-1 text-muted-foreground hover:text-foreground hover:scale-125 transition-all duration-200"
-                aria-label="Visit previous friend's site"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <img 
-                src="/icon.svg" 
-                alt="Icon" 
-                className="h-6 w-6 dark:invert opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200"
-              />
-              <button
-                onClick={() => {
-                  const sites = [
-                    "https://www.kevinjosethomas.com/",
-                    "https://www.rohanthmarem.co/",
-                    "https://www.casperdong.com/",
-                    "https://www.danielcwq.com/",
-                    "https://www.chinmayjindal.com/"
-                  ];
-                  const currentIndex = parseInt(localStorage.getItem('friendSiteIndex') || '-1');
-                  const nextIndex = (currentIndex + 1) % sites.length;
-                  localStorage.setItem('friendSiteIndex', nextIndex.toString());
-                  window.open(sites[nextIndex], '_blank');
-                }}
-                className="p-1 text-muted-foreground hover:text-foreground hover:scale-125 transition-all duration-200"
-                aria-label="Visit next friend's site"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-          </div>
+            <Mafia />
         </div>
         </div>
 
@@ -942,7 +912,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         {/* Filter Buttons and Search */}
         <div className="hidden md:flex justify-between items-center mb-6">
           <div className="flex flex-wrap gap-4">
-            {['Everything', 'Projects', 'Communities', 'Internship'].map((filter) => (
+            {['Everything', 'Projects', 'Communities'].map((filter) => (
               <button
                 key={filter}
                 onClick={() => setProjectFilter(filter as any)}

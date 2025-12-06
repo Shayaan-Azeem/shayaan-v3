@@ -675,7 +675,7 @@ body {
     color: #fff;
   }
   .dark .link-revisiondojo:hover {
-    background-color: rgb(105, 200, 255);
+    background-color: rgba(85, 185, 249, 0.2);
     color: #fff;
   }
   
