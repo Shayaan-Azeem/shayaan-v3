@@ -168,8 +168,8 @@ export default function CommandPalette({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
-        <DialogOverlay className="bg-black/5 dark:bg-black/20" />
-        <DialogContent className="overflow-hidden p-0 shadow-2xl border border-black/10 dark:border-white/20 bg-white/70 dark:bg-muted/50 backdrop-blur-md">
+        <DialogOverlay className="bg-black/[0.02] dark:bg-black/20" />
+        <DialogContent className="overflow-hidden p-0 shadow-2xl border border-black/5 dark:border-white/20 bg-white/95 dark:bg-muted/50 backdrop-blur-md">
         <DialogTitle className="sr-only">
           command palette
         </DialogTitle>

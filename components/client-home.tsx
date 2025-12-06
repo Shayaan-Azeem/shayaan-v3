@@ -93,8 +93,8 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   // Experiences data for command palette
   const experiencesForCommandPalette = [
     { title: "RevisionDojo (YCF24)", type: "Internship" as const, link: "https://revisiondojo.com", image: "/revisiondojo.png" },
-    { title: "performativepuritytest.com", type: "Project" as const, link: "https://performativepuritytest.com", image: "/performativepurity.png" },
     { title: "tensorforest", type: "Project" as const, hasDetailPage: true, image: "/tensorforest.jpg" },
+    { title: "performativepuritytest.com", type: "Project" as const, link: "https://performativepuritytest.com", image: "/performativepurity.png" },
     { title: "do-eve", type: "Project" as const, link: "https://devpost.com/software/do-eve", image: "/doeve.png" },
     { title: "coach bob", type: "Project" as const, link: "https://devpost.com/software/coach-bob", image: "/coachbob.jpg" },
     { title: "teen builders club", type: "Community" as const, image: "/teenbuildersclub.jpg" },
@@ -121,10 +121,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative">
       {/* Dotted pattern background */}
-      <div className="fixed inset-0 pointer-events-none" style={{
-        backgroundImage: 'radial-gradient(circle, hsl(var(--foreground) / 0.2) 1px, transparent 1px)',
-        backgroundSize: '24px 24px'
-      }}></div>
+      <div className="fixed inset-0 pointer-events-none dotted-bg"></div>
       
       <div className="w-full flex flex-col items-center relative z-10">
       {/* ───────────── mobile top bar ───────────── */}
@@ -262,7 +259,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
            renderSectionContent(activeSection)}
           
           {/* Footer */}
-          <div className="mt-12 pt-8">
+          <div className="mt-12 pt-8 flex justify-between items-center">
             <p className="text-sm text-muted-foreground">
               email me at{" "}
               <Link
@@ -272,7 +269,52 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 shayaan.azeem@uwaterloo.ca
               </Link>
             </p>
+            <div className="flex items-center gap-1 group">
+              <button
+                onClick={() => {
+                  const sites = [
+                    "https://www.kevinjosethomas.com/",
+                    "https://www.rohanthmarem.co/",
+                    "https://www.casperdong.com/",
+                    "https://www.danielcwq.com/",
+                    "https://www.chinmayjindal.com/"
+                  ];
+                  const currentIndex = parseInt(localStorage.getItem('friendSiteIndex') || '0');
+                  const prevIndex = (currentIndex - 1 + sites.length) % sites.length;
+                  localStorage.setItem('friendSiteIndex', prevIndex.toString());
+                  window.open(sites[prevIndex], '_blank');
+                }}
+                className="p-1 text-muted-foreground hover:text-foreground hover:scale-125 transition-all duration-200"
+                aria-label="Visit previous friend's site"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <img 
+                src="/icon.svg" 
+                alt="Icon" 
+                className="h-6 w-6 dark:invert opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200"
+              />
+              <button
+                onClick={() => {
+                  const sites = [
+                    "https://www.kevinjosethomas.com/",
+                    "https://www.rohanthmarem.co/",
+                    "https://www.casperdong.com/",
+                    "https://www.danielcwq.com/",
+                    "https://www.chinmayjindal.com/"
+                  ];
+                  const currentIndex = parseInt(localStorage.getItem('friendSiteIndex') || '-1');
+                  const nextIndex = (currentIndex + 1) % sites.length;
+                  localStorage.setItem('friendSiteIndex', nextIndex.toString());
+                  window.open(sites[nextIndex], '_blank');
+                }}
+                className="p-1 text-muted-foreground hover:text-foreground hover:scale-125 transition-all duration-200"
+                aria-label="Visit next friend's site"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
           </div>
+        </div>
         </div>
 
         {/* ───────────── right spacer (balances sidebar) ───────────── */}
@@ -289,6 +331,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         currentSection={activeSection}
         currentPage="Home"
       />
+
       </div>
     </div>
   )
@@ -819,19 +862,19 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         link: "https://revisiondojo.com"
       },
       {
+        title: "tensorforest",
+        type: "Project",
+        image: "/tensorforest.jpg",
+        description: "drones that find early forest fire risks. used remote sensing, NDVI, and onboard ML to detect dangerous vegetation zones and generate orthomosaic risk maps before fires start. worked with the town of oakville to test it.",
+        action: selectTensorForest
+      },
+      {
         title: "performativepuritytest.com",
         type: "Project",
         image: "/performativepurity.png",
         description: <>shipped a performative purity test that mixed the summer's "performative" trend with the rice purity test. accidentally went viral and <a href="https://x.com/i/trending/1990747485631860858" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">trended on twitter for two days.</a></>,
         badge: { text: "300k+ users", className: "link-hackclub" },
         link: "https://performativepuritytest.com"
-      },
-      {
-        title: "tensorforest",
-        type: "Project",
-        image: "/tensorforest.jpg",
-        description: "drones that find early forest fire risks. used remote sensing, NDVI, and onboard ML to detect dangerous vegetation zones and generate orthomosaic risk maps before fires start. worked with the town of oakville to test it.",
-        action: selectTensorForest
       },
       {
         title: "do-eve",
@@ -897,7 +940,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return (
       <div>
         {/* Filter Buttons and Search */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="hidden md:flex justify-between items-center mb-6">
           <div className="flex flex-wrap gap-4">
             {['Everything', 'Projects', 'Communities', 'Internship'].map((filter) => (
               <button

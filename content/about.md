@@ -12,7 +12,7 @@ i'm a student at [hover-1] [@uwaterloo](https://uwaterloo.ca/) and i like to bui
 
 ## some cool things i've done in the past:
 
-- building the best edtech platform in the world [hover-2] [@RevisionDojo (YCF24)](https://revisiondojo.com)
+- worked on building the best edtech platform in the world [hover-2] [@RevisionDojo (YCF24)](https://revisiondojo.com)
 - spent a year building autonomous drones to predict forest fires [backed by [hover-5] [bloomberg philanthropies](https://www.bloomberg.org/government-innovation/spurring-innovation-in-cities/youth-climate-action-fund/)]
 - built a [hover-7] [community](https://www.teenbuilders.club/) for cracked/ambitious teenagers building cool sh*t
 - worked as a growth intern at [hover-8] [hack club](https://hackclub.com/), grew [hover-9] [@starthackclub](https://www.instagram.com/starthackclub/) to 100k followers

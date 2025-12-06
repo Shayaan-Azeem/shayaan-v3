@@ -1,9 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Manrope", sans-serif;
+}
+
+/* Dotted background pattern */
+.dotted-bg {
+  background-image: radial-gradient(circle, hsl(var(--foreground) / 0.2) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dark .dotted-bg {
+  background-image: radial-gradient(circle, hsl(var(--foreground) / 0.08) 1px, transparent 1px);
 }
 
 @layer utilities {
@@ -659,11 +671,11 @@ body {
     color: #fff;
   }
   .dark .link-revisiondojo {
-    background-color: rgba(85, 185, 249, 0.3);
+    background-color: rgb(85, 185, 249);
     color: #fff;
   }
   .dark .link-revisiondojo:hover {
-    background-color: rgba(85, 185, 249, 0.2);
+    background-color: rgb(105, 200, 255);
     color: #fff;
   }
   
@@ -685,5 +697,27 @@ body {
   .dark .footer-email:hover {
     background-color: hsl(0 0% 0%);
     color: hsl(0 0% 100%);
+  }
+
+  /* Badge styles for project cards - always dark with white text */
+  .badge-teenbuilders {
+    background-color: #EA580C !important;
+    color: #fff !important;
+  }
+  .badge-hackclub {
+    background-color: #DC2626 !important;
+    color: #fff !important;
+  }
+  .badge-bloomberg {
+    background-color: #7B4FAE !important;
+    color: #fff !important;
+  }
+  .badge-robotics {
+    background-color: #4A9FE7 !important;
+    color: #fff !important;
+  }
+  .badge-olympiad {
+    background-color: #10B981 !important;
+    color: #fff !important;
   }
 }
