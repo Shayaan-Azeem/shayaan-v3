@@ -120,10 +120,9 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
   ────────────────────────────────── */
     return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative">
-      {/* Grid pattern background */}
+      {/* Dotted pattern background */}
       <div className="fixed inset-0 pointer-events-none" style={{
-        backgroundImage: `linear-gradient(hsl(var(--foreground) / 0.05) 1px, transparent 1px),
-                          linear-gradient(90deg, hsl(var(--foreground) / 0.05) 1px, transparent 1px)`,
+        backgroundImage: 'radial-gradient(circle, hsl(var(--foreground) / 0.2) 1px, transparent 1px)',
         backgroundSize: '24px 24px'
       }}></div>
       
