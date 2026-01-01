@@ -122,7 +122,6 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
     return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative">
       {/* Dotted pattern background */}
-      <div className="fixed inset-0 pointer-events-none dotted-bg"></div>
       
       <div className="w-full flex flex-col items-center relative z-10">
       {/* ───────────── mobile top bar ───────────── */}
@@ -719,7 +718,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                     rel="noopener noreferrer"
                     className="block w-full text-left transition-all duration-200 cursor-pointer group "
                   >
-                    <div className="relative h-48 rounded-lg overflow-hidden transition-all duration-300 group-hover:h-56">
+                    <div className="relative h-48 overflow-hidden transition-all duration-300 group-hover:h-56">
                       {/* Background Image */}
                       {item.banner ? (
                         <img 
@@ -948,7 +947,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             <div key={index} className="flex flex-col group transition-colors">
               {/* Image Container */}
               <div 
-                className="relative mb-4 overflow-hidden aspect-[16/10] cursor-pointer bg-muted rounded-lg"
+                className="relative mb-4 overflow-hidden aspect-[16/10] cursor-pointer bg-muted"
                 onClick={() => {
                   if (project.action) project.action();
                   else if (project.link) window.open(project.link, '_blank');
@@ -966,7 +965,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-lg font-medium leading-tight">{project.title}</h3>
                   {project.badge && (
-                    <span className={cn("text-[10px] font-medium ml-2 shrink-0 px-2 py-0.5 rounded-md", project.badge.className)}>
+                    <span className={cn("text-[10px] font-medium ml-2 shrink-0 px-2 py-0.5", project.badge.className)}>
                       {project.badge.text}
                     </span>
                   )}
