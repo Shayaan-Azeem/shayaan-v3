@@ -12,6 +12,17 @@ export interface SubstackArticle {
 
 // Substack articles configuration
 const SUBSTACK_ARTICLES: Record<string, SubstackArticle> = {
+  '2025-wrapped': {
+    slug: '2025-wrapped',
+    title: '2025 wrapped: in pursuit of global minima',
+    date: '2025-12-31',
+    summary: 'year recap, content recommendations, things i liked',
+    banner: undefined, // Will be fetched from Substack
+    tags: ['personal', 'year-recap'],
+    draft: false,
+    content: '',
+    substackUrl: 'https://shayaanazeem.substack.com/p/2025-wrapped-in-pursuit-of-global'
+  },
   'no-regrets': {
     slug: 'no-regrets',
     title: 'no regrets',
