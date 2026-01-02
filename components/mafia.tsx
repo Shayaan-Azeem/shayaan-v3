@@ -1,59 +1,39 @@
 "use client"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
-
-const sites = [
-  "https://www.kevinjosethomas.com/",
-  "https://www.rohanthmarem.co/",
-  "https://www.casperdong.com/",
-  "https://www.danielcwq.com/",
-  "https://www.chinmayjindal.com/"
-]
+import { useEffect, useRef } from "react"
 
 export default function Mafia() {
-  const handlePrevious = () => {
-    const currentIndex = parseInt(localStorage.getItem('friendSiteIndex') || '0')
-    const prevIndex = (currentIndex - 1 + sites.length) % sites.length
-    localStorage.setItem('friendSiteIndex', prevIndex.toString())
-    window.open(sites[prevIndex], '_blank')
-  }
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  const handleNext = () => {
-    const currentIndex = parseInt(localStorage.getItem('friendSiteIndex') || '-1')
-    const nextIndex = (currentIndex + 1) % sites.length
-    localStorage.setItem('friendSiteIndex', nextIndex.toString())
-    window.open(sites[nextIndex], '_blank')
-  }
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    // Check if script already exists
+    const existingScript = containerRef.current.querySelector('script')
+    if (existingScript) return
+
+    const script = document.createElement('script')
+    script.src = 'https://uwaterloo.network/embed.js'
+    script.setAttribute('data-webring', '')
+    script.setAttribute('data-user', 'shayaan-azeem')
+    script.setAttribute('data-color', 'custom')
+    script.setAttribute('data-custom-color', '#262626')
+    script.setAttribute('data-no-background', '')
+    
+    containerRef.current.appendChild(script)
+
+    return () => {
+      if (containerRef.current && script.parentNode === containerRef.current) {
+        containerRef.current.removeChild(script)
+      }
+    }
+  }, [])
 
   return (
-    <div className="flex items-center gap-1 group">
-      <button
-        onClick={handlePrevious}
-        className="p-1 text-muted-foreground hover:text-foreground hover:scale-125 transition-all duration-200"
-        aria-label="Visit previous friend's site"
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </button>
-      <a 
-        href="https://thewaterloomafia.com" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-200"
-      >
-        <img 
-          src="/icon.svg" 
-          alt="Waterloo Mafia" 
-          className="h-6 w-6 dark:invert"
-        />
-      </a>
-      <button
-        onClick={handleNext}
-        className="p-1 text-muted-foreground hover:text-foreground hover:scale-125 transition-all duration-200"
-        aria-label="Visit next friend's site"
-      >
-        <ChevronRight className="h-4 w-4" />
-      </button>
-    </div>
+    <div 
+      ref={containerRef} 
+      className="flex items-center scale-75 origin-right opacity-50 hover:opacity-100 transition-opacity duration-200 dark:invert [&>div]:!bg-transparent [&>div]:!border-none [&>div]:!shadow-none [&>div]:!p-0" 
+    />
   )
 }
 
