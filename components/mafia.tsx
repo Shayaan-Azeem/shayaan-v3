@@ -32,7 +32,7 @@ export default function Mafia() {
   return (
     <div 
       ref={containerRef} 
-      className="flex items-center scale-75 origin-right opacity-50 hover:opacity-100 transition-opacity duration-200 dark:invert [&>div]:!bg-transparent [&>div]:!border-none [&>div]:!shadow-none [&>div]:!p-0" 
+      className="flex items-center scale-50 origin-right opacity-50 hover:opacity-100 transition-opacity duration-200 dark:invert [&>div]:!bg-transparent [&>div]:!border-none [&>div]:!shadow-none [&>div]:!p-0" 
     />
   )
 }
