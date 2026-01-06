@@ -73,6 +73,10 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
       if (title.toLowerCase() === 'summer camp' || url.includes('thecodecamp.ca')) {
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-codecamp">${title}</a>`
       }
+      // Special handling for email link (blue)
+      if (url.includes('mailto:')) {
+        return `<a href="${url}" class="link-blue hover-dark-1">${title}</a>`
+      }
       // Special handling for chrome extension link (black/white)
       if (title.toLowerCase() === 'chrome extension' || url.includes('x.com/shayaan')) {
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-chrome">${title}</a>`

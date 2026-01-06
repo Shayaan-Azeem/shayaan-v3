@@ -12,6 +12,7 @@ import AboutRenderer from "@/components/about-renderer"
 import ContentWorthConsumingRenderer from "@/components/content-worth-consuming-renderer"
 import CommandPalette from "@/components/command-palette"
 import Mafia from "@/components/mafia"
+import ScrambleText from "@/components/scramble-text"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
 import { Button } from "@/components/ui/button"
@@ -274,13 +275,13 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           {/* Footer */}
           <div className="mt-12 pt-8 flex justify-between items-center">
             <p className="text-sm text-muted-foreground">
-              email me at{" "}
-              <Link
-                href="mailto:shayaan.azeem@uwaterloo.ca"
-                className="footer-email"
-              >
-                shayaan.azeem@uwaterloo.ca
-              </Link>
+              made with help from{" "}
+              <ScrambleText
+                initialText="v0"
+                targetText="Kevin"
+                href="https://kevinjosethomas.com"
+                className="font-mono transition-colors"
+              />
             </p>
             <Mafia />
         </div>
