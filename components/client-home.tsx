@@ -883,11 +883,11 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         action: selectApocalypseHacks
       },
       {
-        title: "vibetype",
+        title: "uwaterloo.network",
         type: "Project",
-        image: "/vibetype.png",
-        description: "built \"dia but for arc\" before dia had sidebar tabs. an ai writing sidekick that lives in your browser. highlight text to rewrite, expand, or clean it instantly. the sidebar reads your open tabs so it can help you draft way faster.",
-        link: "https://www.gptfixtsfor.me/"
+        image: "/uwaterloonetwork.png",
+        description: "i built a webring for waterloo friends :)",
+        link: "https://uwaterloo.network"
       },
       {
         title: "shoppywrapped",
@@ -896,6 +896,13 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         description: "spotify wrapped but for your shopping. built with shopify's shop mini framework. shows your top shops, spending, and order history in a clean stories style recap. won the shopify toronto tech week hackathon.",
         badge: { text: "won shopify hackathon", className: "link-olympiad" },
         link: "https://github.com/ultratrikx/shoppy-wrapped/pulls"
+      },
+      {
+        title: "vibetype",
+        type: "Project",
+        image: "/vibetype.png",
+        description: "built \"dia but for arc\" before dia had sidebar tabs. an ai writing sidekick that lives in your browser. highlight text to rewrite, expand, or clean it instantly. the sidebar reads your open tabs so it can help you draft way faster.",
+        link: "https://www.gptfixtsfor.me/"
       }
     ];
 
