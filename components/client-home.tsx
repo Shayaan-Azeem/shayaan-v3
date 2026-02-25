@@ -843,7 +843,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         type: "Project",
         image: "/performativepurity.png",
         description: <>shipped a performative purity test that mixed the summer's "performative" trend with the rice purity test. accidentally went viral and <a href="https://x.com/i/trending/1990747485631860858" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">trended on twitter for two days.</a></>,
-        badge: { text: "300k+ users", className: "link-hackclub" },
+        badge: { text: "1M+ users", className: "link-hackclub" },
         link: "https://performativepuritytest.com"
       },
       {
