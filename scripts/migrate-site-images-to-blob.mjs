@@ -45,7 +45,9 @@ function collectImageReferences() {
     const text = fs.readFileSync(file, 'utf8')
     const matches = text.match(IMAGE_PATTERN)
     if (!matches) continue
-    matches.forEach((match) => refs.add(match))
+    matches
+      .filter((match) => !match.includes('${'))
+      .forEach((match) => refs.add(match))
   }
 
   return [...refs].sort()
@@ -93,8 +95,12 @@ async function migrate() {
     console.log(`Uploaded ${localRef} -> ${blob.url}`)
   }
 
-  fs.writeFileSync(outputManifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
-  console.log(`Wrote manifest to ${outputManifestPath}`)
+  if (dryRun) {
+    console.log('[dry-run] Manifest not written to disk.')
+  } else {
+    fs.writeFileSync(outputManifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
+    console.log(`Wrote manifest to ${outputManifestPath}`)
+  }
 
   if (missing.length > 0) {
     console.warn(`Skipped ${missing.length} missing files:`)
