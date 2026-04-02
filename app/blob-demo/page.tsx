@@ -87,7 +87,7 @@ export default function BlobDemo() {
                 <CardHeader>
                   <CardTitle>Large File Upload (Client)</CardTitle>
                   <CardDescription>
-                    Upload any file type up to 100MB. Files go directly to blob storage.
+                    Upload WebP images and documents up to 100MB. Files go directly to blob storage.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -96,7 +96,7 @@ export default function BlobDemo() {
                       console.log('File uploaded:', { url, name })
                     }}
                     maxSize={100}
-                    allowedTypes={['image/*', 'application/pdf', '.txt', '.md', '.json']}
+                    allowedTypes={['image/webp', 'application/pdf', '.txt', '.md', '.json']}
                   />
                 </CardContent>
               </Card>

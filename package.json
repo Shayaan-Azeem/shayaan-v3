@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "images:migrate-to-blob": "node scripts/migrate-site-images-to-blob.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -67,6 +68,7 @@
     "recharts": "2.15.0",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
+    "sharp": "^0.34.5",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",

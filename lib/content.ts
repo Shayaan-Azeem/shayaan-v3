@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { resolveSiteImage } from '@/lib/site-image'
 
 export interface ContentItem {
   slug: string
@@ -45,6 +46,7 @@ function getContentItems(type: 'fieldnotes' | 'writings'): ContentItem[] {
       if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
         banner = `/fieldnotes/${banner}`
       }
+      banner = banner ? resolveSiteImage(banner) : null
 
       return {
         slug,
@@ -101,6 +103,7 @@ export function getContentItem(type: 'fieldnotes' | 'writings', slug: string): C
         if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
           banner = `/fieldnotes/${banner}`
         }
+        banner = banner ? resolveSiteImage(banner) : null
 
         return {
           slug: actualSlug,
@@ -129,6 +132,7 @@ export function getContentItem(type: 'fieldnotes' | 'writings', slug: string): C
         if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
           banner = `/fieldnotes/${banner}`
         }
+        banner = banner ? resolveSiteImage(banner) : null
 
         return {
           slug: data.slug,
@@ -171,7 +175,7 @@ export function getPhilosophy(): ContentItem | null {
       title: data.title || "My Philosophy",
       date: data.date || new Date().toISOString().split("T")[0],
       summary: data.summary || "",
-      banner: data.banner || null,
+      banner: data.banner ? resolveSiteImage(data.banner) : null,
       tags: data.tags || [],
       draft: data.draft || false,
       content,
@@ -203,7 +207,7 @@ export function getContentWorthConsuming(): ContentItem | null {
       title: data.title || "Content Worth Consuming",
       date: data.date || new Date().toISOString().split("T")[0],
       summary: data.summary || "",
-      banner: data.banner || null,
+      banner: data.banner ? resolveSiteImage(data.banner) : null,
       tags: data.tags || [],
       draft: data.draft || false,
       content,
@@ -232,7 +236,7 @@ export function getAbout(): ContentItem | null {
       title: data.title || "About",
       date: data.date || new Date().toISOString().split("T")[0],
       summary: data.summary || "",
-      banner: data.banner || null,
+      banner: data.banner ? resolveSiteImage(data.banner) : null,
       tags: data.tags || [],
       draft: data.draft || false,
       content,

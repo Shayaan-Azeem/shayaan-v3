@@ -15,6 +15,7 @@ import Mafia from "@/components/mafia"
 import ScrambleText from "@/components/scramble-text"
 import KeyboardHint from "@/components/keyboard-hint"
 import HeroBanner from "@/components/hero-banner"
+import { resolveSiteImage } from "@/lib/site-image"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, User, Code, BookOpen, Heart, Bookmark, Search } from "lucide-react"
 
@@ -94,16 +95,16 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
 
   // Experiences data for command palette
   const experiencesForCommandPalette = [
-    { title: "RevisionDojo (YCF24)", type: "Internship" as const, link: "https://revisiondojo.com", image: "/revisiondojo.png" },
-    { title: "tensorforest", type: "Project" as const, hasDetailPage: true, image: "/tensorforest.jpg" },
-    { title: "performativepuritytest.com", type: "Project" as const, link: "https://performativepuritytest.com", image: "/performativepurity.png" },
-    { title: "do-eve", type: "Project" as const, link: "https://devpost.com/software/do-eve", image: "/doeve.png" },
-    { title: "coach bob", type: "Project" as const, link: "https://devpost.com/software/coach-bob", image: "/coachbob.jpg" },
-    { title: "teen builders club", type: "Community" as const, image: "/teenbuildersclub.jpg" },
-    { title: "white oaks robotics", type: "Community" as const, image: "/vex.jpg" },
-    { title: "apocalypse hacks", type: "Community" as const, hasDetailPage: true, image: "/apoimages/vickyapo.png" },
-    { title: "vibetype", type: "Project" as const, link: "https://www.gptfixtsfor.me/", image: "/vibetype.png" },
-    { title: "shoppywrapped", type: "Project" as const, link: "https://github.com/ultratrikx/shoppy-wrapped/pulls", image: "/shoppy.png" },
+    { title: "RevisionDojo (YCF24)", type: "Internship" as const, link: "https://revisiondojo.com", image: resolveSiteImage("/revisiondojo.png") },
+    { title: "tensorforest", type: "Project" as const, hasDetailPage: true, image: resolveSiteImage("/tensorforest.jpg") },
+    { title: "performativepuritytest.com", type: "Project" as const, link: "https://performativepuritytest.com", image: resolveSiteImage("/performativepurity.png") },
+    { title: "do-eve", type: "Project" as const, link: "https://devpost.com/software/do-eve", image: resolveSiteImage("/doeve.png") },
+    { title: "coach bob", type: "Project" as const, link: "https://devpost.com/software/coach-bob", image: resolveSiteImage("/coachbob.jpg") },
+    { title: "teen builders club", type: "Community" as const, image: resolveSiteImage("/teenbuildersclub.jpg") },
+    { title: "white oaks robotics", type: "Community" as const, image: resolveSiteImage("/vex.jpg") },
+    { title: "apocalypse hacks", type: "Community" as const, hasDetailPage: true, image: resolveSiteImage("/apoimages/vickyapo.png") },
+    { title: "vibetype", type: "Project" as const, link: "https://www.gptfixtsfor.me/", image: resolveSiteImage("/vibetype.png") },
+    { title: "shoppywrapped", type: "Project" as const, link: "https://github.com/ultratrikx/shoppy-wrapped/pulls", image: resolveSiteImage("/shoppy.png") },
   ]
 
   const handleSelectExperience = (experience: { title: string; type: string; link?: string; hasDetailPage?: boolean }) => {
@@ -723,7 +724,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                       {/* Background Image */}
                       {item.banner ? (
                         <img 
-                          src={item.banner} 
+                          src={resolveSiteImage(item.banner)} 
                           alt={item.title}
                           className="w-full h-full object-cover"
                         />
@@ -827,21 +828,21 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "RevisionDojo (YCF24)",
         type: "Internship",
-        image: "/revisiondojo.png",
+        image: resolveSiteImage("/revisiondojo.png"),
         description: "over fall 2025, I worked at RevisionDojo as a software engineer. built and shipped new features used by 600k+ students. learnt a lot and worked with some of the coolest people.",
         link: "https://revisiondojo.com"
       },
       {
         title: "tensorforest",
         type: "Project",
-        image: "/tensorforest.jpg",
+        image: resolveSiteImage("/tensorforest.jpg"),
         description: "drones that find early forest fire risks. used remote sensing, NDVI, and onboard ML to detect dangerous vegetation zones and generate orthomosaic risk maps before fires start. worked with the town of oakville to test it.",
         action: selectTensorForest
       },
       {
         title: "performativepuritytest.com",
         type: "Project",
-        image: "/performativepurity.png",
+        image: resolveSiteImage("/performativepurity.png"),
         description: <>shipped a performative purity test that mixed the summer's "performative" trend with the rice purity test. accidentally went viral and <a href="https://x.com/i/trending/1990747485631860858" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">trended on twitter for two days.</a></>,
         badge: { text: "300k+ users", className: "link-hackclub" },
         link: "https://performativepuritytest.com"
@@ -849,7 +850,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "do-eve",
         type: "Project",
-        image: "/doeve.png",
+        image: resolveSiteImage("/doeve.png"),
         description: "poke but for computer use. built an imessage agent that can use your laptop for you. opens apps, runs scripts, organizes files, and handles random tasks just by texting it.",
         badge: { text: "won hackprinceton", className: "link-teenbuilders" },
         link: "https://devpost.com/software/do-eve"
@@ -857,7 +858,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "coach bob",
         type: "Project",
-        image: "/coachbob.jpg",
+        image: resolveSiteImage("/coachbob.jpg"),
         description: "built street fighter but irl. an AR pose based fighting game where you hit targets and get scored in real time. used gemini to give audio feedback and help you train.",
         badge: { text: "won hackthenorth", className: "link-bloomberg" },
         link: "https://devpost.com/software/coach-bob"
@@ -865,34 +866,34 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "teen builders club",
         type: "Community",
-        image: "/teenbuildersclub.jpg",
+        image: resolveSiteImage("/teenbuildersclub.jpg"),
         description: "made the community I always wanted. hosted weekly coworking, demo nights, and built a space for ambitious young people to meet each other and actually build."
       },
       {
         title: "white oaks robotics",
         type: "Community",
-        image: "/vex.jpg",
+        image: resolveSiteImage("/vex.jpg"),
         description: "started and scaled my school's robotics team to 100+ members. built competitive robots, won the excellence award 5 times, and ranked top 62/2400 worldwide. handled design reviews, programming, scouting, and ops.",
         badge: { text: "2nd in Ontario", className: "link-robotics" }
       },
       {
         title: "apocalypse hacks",
         type: "Community",
-        image: "/apoimages/vickyapo.png",
+        image: resolveSiteImage("/apoimages/vickyapo.png"),
         description: "started canada's largest high school hackathon with 150 attendees and 40+ projects shipped. zombie apocalypse theme. raised 50k from shopify, doordash, and others. handled outreach, ops, sponsorships, and everything in between.",
         action: selectApocalypseHacks
       },
       {
         title: "uwaterloo.network",
         type: "Project",
-        image: "/uwaterloonetwork.png",
+        image: resolveSiteImage("/uwaterloonetwork.png"),
         description: "i built a webring for waterloo friends :)",
         link: "https://uwaterloo.network"
       },
       {
         title: "shoppywrapped",
         type: "Project",
-        image: "/shoppy.png",
+        image: resolveSiteImage("/shoppy.png"),
         description: "spotify wrapped but for your shopping. built with shopify's shop mini framework. shows your top shops, spending, and order history in a clean stories style recap. won the shopify toronto tech week hackathon.",
         badge: { text: "won shopify hackathon", className: "link-olympiad" },
         link: "https://github.com/ultratrikx/shoppy-wrapped/pulls"
@@ -900,7 +901,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "vibetype",
         type: "Project",
-        image: "/vibetype.png",
+        image: resolveSiteImage("/vibetype.png"),
         description: "built \"dia but for arc\" before dia had sidebar tabs. an ai writing sidekick that lives in your browser. highlight text to rewrite, expand, or clean it instantly. the sidebar reads your open tabs so it can help you draft way faster.",
         link: "https://www.gptfixtsfor.me/"
       }
@@ -962,7 +963,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 }}
               >
                 <img 
-                  src={project.image} 
+                  src={resolveSiteImage(project.image)} 
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
@@ -1009,126 +1010,126 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         id: "1",
         title: "the start of something big",
         location: "WeWork Toronto",
-        image: "/polaroids/the start of something big.png",
+        image: resolveSiteImage("/polaroids/the start of something big.png"),
         songUrl: "https://open.spotify.com/track/1zgHn1EqUyA0HqNYMdJ5ia?si=b10022a78daa4fa1"
       },
       {
         id: "2",
         title: "apocalypse w/ greg",
         location: "Shopify Toronto",
-        image: "/polaroids/apogreg.png",
+        image: resolveSiteImage("/polaroids/apogreg.png"),
         songUrl: "https://open.spotify.com/track/0mEdbdeRFQwBhN4xfyIeUM?si=e6bb613c681245fd"
       },
       {
         id: "3",
         title: "lost in toronto",
         location: "Toronto, ON",
-        image: "/polaroids/lost in toronto.png",
+        image: resolveSiteImage("/polaroids/lost in toronto.png"),
         songUrl: "https://open.spotify.com/track/5kDgJffgJ0lYHTSiaXFWNw?si=590001762a2840ce"
       },
       {
         id: "4",
         title: "the one where ayaan turns five",
         location: "Jersey City, NJ",
-        image: "/polaroids/ayaanturns5.png",
+        image: resolveSiteImage("/polaroids/ayaanturns5.png"),
         songUrl: "https://open.spotify.com/track/4I4aQGNJ2HufloNtB65nxR?si=c579a5e4bb6042c2"
       },
       {
         id: "5",
         title: "airplane thoughts",
         location: "Above Michigan",
-        image: "/polaroids/airplanethoughts.png",
+        image: resolveSiteImage("/polaroids/airplanethoughts.png"),
         songUrl: "https://open.spotify.com/track/19nu3H3vjeZ505i450lz8R?si=424f25c49b9f4b30"
       },
       {
         id: "6",
         title: "break things build better",
         location: "Shopify Toronto",
-        image: "/polaroids/breakbuildbetter.png",
+        image: resolveSiteImage("/polaroids/breakbuildbetter.png"),
         songUrl: "https://open.spotify.com/track/1oAwsWBovWRIp7qLMGPIet?si=d9e5bb4900954ea5"
       },
       {
         id: "7",
         title: "water water water loo loo loo",
         location: "Waterloo, ON",
-        image: "/polaroids/water water.png",
+        image: resolveSiteImage("/polaroids/water water.png"),
         songUrl: "https://open.spotify.com/track/1v0uVPU6BWcbog5BiWLWVa?si=0a01a3cab11149a9"
       },
       {
         id: "8",
         title: "robotics presidents!",
         location: "Oakville, ON",
-        image: "/polaroids/nobel physic.PNG",
+        image: resolveSiteImage("/polaroids/nobel physic.PNG"),
         songUrl: "https://open.spotify.com/track/7kv7zBjMtVf0eIJle2VZxn?si=997f5b3c5ef24430"
       },
       {
         id: "9",
         title: "777",
         location: "Toronto, ON",
-        image: "/polaroids/777.png",
+        image: resolveSiteImage("/polaroids/777.png"),
         songUrl: "https://open.spotify.com/track/32J2bR5gnepj9uHPGVGStr?si=84a55b42ab404585"
       },
       {
         id: "19",
         title: "ycombinator core",
         location: "Waterloo, ON",
-        image: "/polaroids/water water water.png",
+        image: resolveSiteImage("/polaroids/water water water.png"),
         songUrl: "https://open.spotify.com/track/1Ukxccao1BlWrPhYkcXbwZ?si=9fee189e2ea547bb"
       },
       {
         id: "11",
         title: "dumbo!",
         location: "New York City, NY",
-        image: "/polaroids/dumbo.png",
+        image: resolveSiteImage("/polaroids/dumbo.png"),
         songUrl: " https://open.spotify.com/track/6wXPV6dNRAhFavrRaCdMXT?si=990666c03feb4eea"
       },
       {
         id: "12",
         title: "roomies",
         location: "Oakville, ON",
-        image: "/polaroids/10xeng.png",
+        image: resolveSiteImage("/polaroids/10xeng.png"),
         songUrl: "https://open.spotify.com/track/1auxYwYrFRqZP7t3s7w4um?si=3cf2d5a2f7b74500"
       },
       {
         id: "13",
         title: "entropy ifykyk",
         location: "Oakville, ON",
-        image: "/polaroids/entropy ifyyk.PNG",
+        image: resolveSiteImage("/polaroids/entropy ifyyk.PNG"),
         songUrl: "https://open.spotify.com/track/551xyaSJsg8hILXFq9JdST?si=b8651a2af5384226"
       },
       {
         id: "14",
         title: "senior sunrise",
         location: "Oakville, ON",
-        image: "/polaroids/senior sunrise.PNG",
+        image: resolveSiteImage("/polaroids/senior sunrise.PNG"),
         songUrl: "https://open.spotify.com/track/0NUqi0ps17YpLUC3kgsZq0?si=027549695c894f41"
       },
       {
         id: "15",
         title: "end of the beginning - djo",
         location: "Chicago, IL",
-        image: "/polaroids/end of the begining.png",
+        image: resolveSiteImage("/polaroids/end of the begining.png"),
         songUrl: "https://open.spotify.com/track/3qhlB30KknSejmIvZZLjOD?si=2d6b0e552475446b"
       },
       {
         id: "16",
         title: "first hackathon i went to",
         location: "WeWork Toronto",
-        image: "/polaroids/TheGang.png",
+        image: resolveSiteImage("/polaroids/TheGang.png"),
         songUrl: "https://open.spotify.com/track/6wXPV6dNRAhFavrRaCdMXT?si=990666c03feb4eea"
       },
       {
         id: "17",
         title: "spanish lattes in nyc",
         location: "New York City, NY",
-        image: "/polaroids/spanish lattes in nyc.png",
+        image: resolveSiteImage("/polaroids/spanish lattes in nyc.png"),
         songUrl: "https://open.spotify.com/track/0TL0LFcwIBF5eX7arDIKxY?si=5dab4294e9d84b81"
       },
       {
         id: "18",
         title: "robotics exec social",
         location: "Oakville, ON",
-        image: "/polaroids/execsocial.PNG",
+        image: resolveSiteImage("/polaroids/execsocial.PNG"),
         songUrl: "https://open.spotify.com/track/1Ukxccao1BlWrPhYkcXbwZ?si=9fee189e2ea547bb"
       }
     ];
@@ -1138,32 +1139,32 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         id: "film1",
         location: "New York City, NY",
-        image: "/emulation/littlepak.JPG"
+        image: resolveSiteImage("/emulation/littlepak.JPG")
       },
       {
         id: "film2",
         location: "New York City, NY",
-        image: "/emulation/mainbridge.JPG"
+        image: resolveSiteImage("/emulation/mainbridge.JPG")
       },
       {
         id: "film3",
         location: "New York City, NY",
-        image: "/emulation/brownbuilding.JPG"
+        image: resolveSiteImage("/emulation/brownbuilding.JPG")
       },
       {
         id: "film4",
         location: "New York City, NY",
-        image: "/emulation/pipe.JPG"
+        image: resolveSiteImage("/emulation/pipe.JPG")
       },
       {
         id: "film5",
         location: "New York City, NY",
-        image: "/emulation/sidebridge.JPG"
+        image: resolveSiteImage("/emulation/sidebridge.JPG")
       },
       {
         id: "film6",
         location: "New York City, NY",
-        image: "/emulation/atm.JPG"
+        image: resolveSiteImage("/emulation/atm.JPG")
       }
     ];
 
@@ -1172,127 +1173,127 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         id: "disp1",
         location: "Toronto, ON",
-        image: "/disposable/IMG_3442.JPG"
+        image: resolveSiteImage("/disposable/IMG_3442.JPG")
       },
       {
         id: "disp2",
         location: "Toronto, ON",
-        image: "/disposable/IMG_3445.JPG"
+        image: resolveSiteImage("/disposable/IMG_3445.JPG")
       },
       {
         id: "disp3",
         location: "Oakville, ON",
-        image: "/disposable/IMG_3446.JPG"
+        image: resolveSiteImage("/disposable/IMG_3446.JPG")
       },
       {
         id: "disp4",
         location: "Toronto, ON",
-        image: "/disposable/IMG_3448.JPG"
+        image: resolveSiteImage("/disposable/IMG_3448.JPG")
       },
       {
         id: "disp5",
         location: "Oakville, ON",
-        image: "/disposable/IMG_3449.JPG"
+        image: resolveSiteImage("/disposable/IMG_3449.JPG")
       },
       {
         id: "disp6",
         location: "Toronto, ON",
-        image: "/disposable/IMG_3450.JPG"
+        image: resolveSiteImage("/disposable/IMG_3450.JPG")
       },
       {
         id: "disp7",
         location: "Toronto, ON",
-        image: "/disposable/IMG_3447.JPG"
+        image: resolveSiteImage("/disposable/IMG_3447.JPG")
       },
       {
         id: "disp8",
         location: "Oakville, ON",
-        image: "/disposable/000138910025.jpg"
+        image: resolveSiteImage("/disposable/000138910025.jpg")
       },
       {
         id: "disp9",
         location: "Toronto, ON",
-        image: "/disposable/000114970025.jpg"
+        image: resolveSiteImage("/disposable/000114970025.jpg")
       },
       {
         id: "disp10",
         location: "Oakville, ON",
-        image: "/disposable/000114970006.jpg"
+        image: resolveSiteImage("/disposable/000114970006.jpg")
       },
       {
         id: "disp11",
         location: "Toronto, ON",
-        image: "/disposable/000114970001.jpg"
+        image: resolveSiteImage("/disposable/000114970001.jpg")
       },
       {
         id: "disp12",
         location: "Oakville, ON",
-        image: "/disposable/000114970005.jpg"
+        image: resolveSiteImage("/disposable/000114970005.jpg")
       },
       {
         id: "disp13",
         location: "Toronto, ON",
-        image: "/disposable/000129720005.jpg"
+        image: resolveSiteImage("/disposable/000129720005.jpg")
       },
       {
         id: "disp14",
         location: "Oakville, ON",
-        image: "/disposable/000129720006.jpg"
+        image: resolveSiteImage("/disposable/000129720006.jpg")
       },
       {
         id: "disp15",
         location: "Toronto, ON",
-        image: "/disposable/000138910005.jpg"
+        image: resolveSiteImage("/disposable/000138910005.jpg")
       },
       {
         id: "disp16",
         location: "Oakville, ON",
-        image: "/disposable/IMG_3418.JPG"
+        image: resolveSiteImage("/disposable/IMG_3418.JPG")
       },
       {
         id: "disp17",
         location: "Toronto, ON",
-        image: "/disposable/IMG_3424.JPG"
+        image: resolveSiteImage("/disposable/IMG_3424.JPG")
       },
       {
         id: "disp18",
         location: "Oakville, ON",
-        image: "/disposable/IMG_3440.JPG"
+        image: resolveSiteImage("/disposable/IMG_3440.JPG")
       },
       {
         id: "disp19",
         location: "Toronto, ON",
-        image: "/disposable/IMG_3439.JPG"
+        image: resolveSiteImage("/disposable/IMG_3439.JPG")
       },
       {
         id: "disp20",
         location: "Oakville, ON",
-        image: "/disposable/IMG_3461.JPG"
+        image: resolveSiteImage("/disposable/IMG_3461.JPG")
       },
       {
         id: "disp21",
         location: "Toronto, ON",
-        image: "/disposable/IMG_3459.JPG"
+        image: resolveSiteImage("/disposable/IMG_3459.JPG")
       },
       {
         id: "disp22",
         location: "Oakville, ON",
-        image: "/disposable/IMG_3453.JPG"
+        image: resolveSiteImage("/disposable/IMG_3453.JPG")
       },
       {
         id: "disp23",
         location: "Toronto, ON",
-        image: "/disposable/IMG_3455.JPG"
+        image: resolveSiteImage("/disposable/IMG_3455.JPG")
       },
       {
         id: "disp24",
         location: "Oakville, ON",
-        image: "/disposable/IMG_3435.JPG"
+        image: resolveSiteImage("/disposable/IMG_3435.JPG")
       },
       {
         id: "disp25",
         location: "Toronto, ON",
-        image: "/disposable/IMG_3433.JPG"
+        image: resolveSiteImage("/disposable/IMG_3433.JPG")
       }
     ];
 
@@ -1349,7 +1350,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               <div key={photo.id} className="flex flex-col group mb-6">
                 <div className="relative overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105">
                   <img 
-                    src={photo.image} 
+                    src={resolveSiteImage(photo.image)} 
                     alt={photo.location} 
                     className="w-full h-auto object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
                   />
@@ -1368,7 +1369,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                 <div key={photo.id} className="group aspect-[4/3]">
                   <div className="relative h-full overflow-hidden dark:shadow-lg transition-transform duration-300 group-hover:scale-105">
                     <img 
-                      src={photo.image} 
+                      src={resolveSiteImage(photo.image)} 
                       alt={photo.location} 
                       className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
                     />
@@ -1384,7 +1385,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
               <div key={photo.id} className="flex flex-col items-center group">
                 <a href={photo.songUrl} target="_blank" rel="noopener noreferrer" className="relative overflow-hidden dark:shadow-lg transition-transform duration-300 group-hover:scale-105">
                   <img 
-                    src={photo.image} 
+                    src={resolveSiteImage(photo.image)} 
                     alt={photo.title || photo.location} 
                     className="w-full max-w-[240px] object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
                   />

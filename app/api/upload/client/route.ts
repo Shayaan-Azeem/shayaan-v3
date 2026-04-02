@@ -19,10 +19,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         
         return {
           allowedContentTypes: [
-            'image/jpeg',
-            'image/png', 
             'image/webp',
-            'image/gif',
             'application/pdf',
             'text/plain',
             'text/markdown',

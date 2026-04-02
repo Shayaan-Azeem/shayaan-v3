@@ -17,7 +17,7 @@ interface LargeFileUploadProps {
 
 export default function LargeFileUpload({ 
   onFileUploaded, 
-  allowedTypes = ['image/*', 'application/pdf', '.txt', '.md'],
+  allowedTypes = ['image/webp', 'application/pdf', '.txt', '.md'],
   maxSize = 100,
   className = "" 
 }: LargeFileUploadProps) {
@@ -68,14 +68,6 @@ export default function LargeFileUpload({
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
     }
-  }
-
-  const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes'
-    const k = 1024
-    const sizes = ['Bytes', 'KB', 'MB', 'GB']
-    const i = Math.floor(Math.log(bytes) / Math.log(k))
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
   }
 
   return (

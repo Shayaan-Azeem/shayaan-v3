@@ -1,4 +1,5 @@
 import React from 'react'
+import { resolveSiteImage } from '@/lib/site-image'
 
 interface HeroBannerProps {
   title: string
@@ -22,7 +23,7 @@ export default function HeroBanner({
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src={backgroundImage} 
+          src={resolveSiteImage(backgroundImage)} 
           alt={title}
           className="w-full h-full object-cover"
         />
