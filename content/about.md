@@ -8,7 +8,7 @@ draft: false
 
 ## intro
 
-i am an engineer and student at [hover-1] [@university of waterloo](https://uwaterloo.ca/) and i like to build things
+i am an engineer and student at [hover-1] [the university of waterloo](https://uwaterloo.ca/) and i like to build things
 
 ## some cool things i've done in the past:
 
