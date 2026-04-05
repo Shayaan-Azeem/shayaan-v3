@@ -116,7 +116,7 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
                   className="ml-0 text-sm cursor-pointer"
                   style={{ textDecoration: 'none', background: 'none', border: 'none', padding: 0 }}
                 >
-                  {showMore ? ' show less' : '...'}
+                  {'...'}
                 </button>
               )}
             </p>
