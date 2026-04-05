@@ -113,9 +113,10 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
               {index === sections.intro.split('\n\n').length - 1 && (
                 <button
                   onClick={() => setShowMore(!showMore)}
-                  className="text-sm underline hover:no-underline cursor-pointer"
+                  className="ml-0 text-sm cursor-pointer"
+                  style={{ textDecoration: 'none', background: 'none', border: 'none', padding: 0 }}
                 >
-                  {showMore ? ' show less' : ''}
+                  {showMore ? ' show less' : '...'}
                 </button>
               )}
             </p>
