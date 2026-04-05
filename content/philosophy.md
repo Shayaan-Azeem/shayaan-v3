@@ -1,7 +1,7 @@
 ---
 title: my philosophy
 slug: philosophy
-date: ""
+date: "June 2025"
 summary: 
 draft: false
 ---
