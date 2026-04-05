@@ -110,7 +110,7 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
           {sections.intro.split('\n\n').map((paragraph, index) => (
             <p key={index} className={index > 0 ? "mt-2" : ""}>
               {parseBulletPoints(paragraph)}
-              {index === sections.intro.split('\n\n').length - 1 && (
+              {index === sections.intro.split('\n\n').length - 1 && !showMore && (
                 <button
                   onClick={() => setShowMore(!showMore)}
                   className="ml-0 text-sm cursor-pointer"
@@ -140,6 +140,12 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
                     return parseBulletPoints(cleanItem, true)
                   })}
               </ul>
+              <button
+                onClick={() => setShowMore(false)}
+                className="text-sm underline hover:no-underline mt-2"
+              >
+                show less
+              </button>
             </div>
           )}
         </div>
