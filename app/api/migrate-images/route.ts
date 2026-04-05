@@ -24,13 +24,14 @@ async function uploadDirectory(dir: string, prefix = '') {
       if (isImage) {
         const fileBuffer = fs.readFileSync(filePath)
         const blobPath = prefix ? `${prefix}/${file}` : file
-        
+
         try {
           console.log(`[v0] Uploading: ${blobPath}`)
           const blob = await put(blobPath, fileBuffer, {
             access: 'public',
+            addRandomSuffix: false,
           })
-          
+
           const oldPath = `/${blobPath}`
           urlMap[oldPath] = blob.url
           console.log(`[v0] Uploaded: ${oldPath} → ${blob.url}`)
@@ -44,19 +45,25 @@ async function uploadDirectory(dir: string, prefix = '') {
 
 export async function POST() {
   try {
+    // Reset map for each run
+    Object.keys(urlMap).forEach(k => delete urlMap[k])
+
     const publicDir = path.join(process.cwd(), 'public')
     console.log(`[v0] Starting migration from: ${publicDir}`)
     console.log(`[v0] Directory exists: ${fs.existsSync(publicDir)}`)
-    
+
     await uploadDirectory(publicDir)
-    
-    console.log('[v0] Migration complete!')
-    console.log('[v0] URL Map:', JSON.stringify(urlMap, null, 2))
-    
-    return NextResponse.json({ 
-      success: true, 
+
+    // Save the mapping to a JSON file so we can use it to update code
+    const mappingPath = path.join(process.cwd(), 'blob-mapping.json')
+    fs.writeFileSync(mappingPath, JSON.stringify(urlMap, null, 2))
+    console.log(`[v0] Saved mapping to ${mappingPath}`)
+    console.log('[v0] Migration complete! Count:', Object.keys(urlMap).length)
+
+    return NextResponse.json({
+      success: true,
       mapping: urlMap,
-      count: Object.keys(urlMap).length
+      count: Object.keys(urlMap).length,
     })
   } catch (error) {
     console.error('[v0] Migration error:', error)
