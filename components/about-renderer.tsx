@@ -120,7 +120,7 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
         onClick={() => setShowMore(!showMore)}
         className="text-sm underline hover:no-underline mb-4"
       >
-        {showMore ? 'Show Less' : 'Read More'}
+        {showMore ? 'Show Less' : '...'}
       </button>
 
       {/* Hidden behind Read More */}
