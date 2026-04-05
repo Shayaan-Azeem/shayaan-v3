@@ -1,10 +1,12 @@
 import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const publicDir = path.join(__dirname, '../public');
+const publicDir = path.join(process.cwd(), 'public');
+
+console.log('Working directory:', process.cwd());
+console.log('Public directory:', publicDir);
+console.log('Public exists:', fs.existsSync(publicDir));
 
 async function convertToWebp(filePath) {
   try {
@@ -13,19 +15,26 @@ async function convertToWebp(filePath) {
 
     const outputPath = filePath.replace(/\.(jpg|jpeg|png)$/i, '.webp');
     
-    console.log(`Converting ${filePath} to ${outputPath}...`);
+    console.log(`Converting ${path.basename(filePath)} to WebP...`);
     
     await sharp(filePath)
       .webp({ quality: 80 })
       .toFile(outputPath);
     
-    console.log(`✓ Converted: ${outputPath}`);
+    // Delete original
+    fs.unlinkSync(filePath);
+    console.log(`✓ Converted: ${path.basename(outputPath)}`);
   } catch (error) {
-    console.error(`Error converting ${filePath}:`, error);
+    console.error(`Error converting ${filePath}:`, error.message);
   }
 }
 
 async function walkDir(dir) {
+  if (!fs.existsSync(dir)) {
+    console.log(`Directory does not exist: ${dir}`);
+    return;
+  }
+
   const files = fs.readdirSync(dir);
 
   for (const file of files) {
@@ -41,7 +50,7 @@ async function walkDir(dir) {
 }
 
 async function main() {
-  console.log('Starting WebP conversion...');
+  console.log(`Starting WebP conversion in: ${publicDir}`);
   await walkDir(publicDir);
   console.log('Done!');
 }

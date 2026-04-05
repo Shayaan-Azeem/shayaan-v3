@@ -94,16 +94,16 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
 
   // Experiences data for command palette
   const experiencesForCommandPalette = [
-    { title: "RevisionDojo (YCF24)", type: "Internship" as const, link: "https://revisiondojo.com", image: "/revisiondojo.png" },
-    { title: "tensorforest", type: "Project" as const, hasDetailPage: true, image: "/tensorforest.jpg" },
-    { title: "performativepuritytest.com", type: "Project" as const, link: "https://performativepuritytest.com", image: "/performativepurity.png" },
-    { title: "do-eve", type: "Project" as const, link: "https://devpost.com/software/do-eve", image: "/doeve.png" },
-    { title: "coach bob", type: "Project" as const, link: "https://devpost.com/software/coach-bob", image: "/coachbob.jpg" },
-    { title: "teen builders club", type: "Community" as const, image: "/teenbuildersclub.jpg" },
-    { title: "white oaks robotics", type: "Community" as const, image: "/vex.jpg" },
-    { title: "apocalypse hacks", type: "Community" as const, hasDetailPage: true, image: "/apoimages/vickyapo.png" },
-    { title: "vibetype", type: "Project" as const, link: "https://www.gptfixtsfor.me/", image: "/vibetype.png" },
-    { title: "shoppywrapped", type: "Project" as const, link: "https://github.com/ultratrikx/shoppy-wrapped/pulls", image: "/shoppy.png" },
+    { title: "RevisionDojo (YCF24)", type: "Internship" as const, link: "https://revisiondojo.com", image: "/revisiondojo.webp" },
+    { title: "tensorforest", type: "Project" as const, hasDetailPage: true, image: "/tensorforest.webp" },
+    { title: "performativepuritytest.com", type: "Project" as const, link: "https://performativepuritytest.com", image: "/performativepurity.webp" },
+    { title: "do-eve", type: "Project" as const, link: "https://devpost.com/software/do-eve", image: "/doeve.webp" },
+    { title: "coach bob", type: "Project" as const, link: "https://devpost.com/software/coach-bob", image: "/coachbob.webp" },
+    { title: "teen builders club", type: "Community" as const, image: "/teenbuildersclub.webp" },
+    { title: "white oaks robotics", type: "Community" as const, image: "/vex.webp" },
+    { title: "apocalypse hacks", type: "Community" as const, hasDetailPage: true, image: "/apoimages/vickyapo.webp" },
+    { title: "vibetype", type: "Project" as const, link: "https://www.gptfixtsfor.me/", image: "/vibetype.webp" },
+    { title: "shoppywrapped", type: "Project" as const, link: "https://github.com/ultratrikx/shoppy-wrapped/pulls", image: "/shoppy.webp" },
   ]
 
   const handleSelectExperience = (experience: { title: string; type: string; link?: string; hasDetailPage?: boolean }) => {
@@ -827,21 +827,21 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "RevisionDojo (YCF24)",
         type: "Internship",
-        image: "/revisiondojo.png",
+        image: "/revisiondojo.webp",
         description: "over fall 2025, I worked at RevisionDojo as a software engineer. built and shipped new features used by 600k+ students. learnt a lot and worked with some of the coolest people.",
         link: "https://revisiondojo.com"
       },
       {
         title: "tensorforest",
         type: "Project",
-        image: "/tensorforest.jpg",
+        image: "/tensorforest.webp",
         description: "drones that find early forest fire risks. used remote sensing, NDVI, and onboard ML to detect dangerous vegetation zones and generate orthomosaic risk maps before fires start. worked with the town of oakville to test it.",
         action: selectTensorForest
       },
       {
         title: "performativepuritytest.com",
         type: "Project",
-        image: "/performativepurity.png",
+        image: "/performativepurity.webp",
         description: <>shipped a performative purity test that mixed the summer's "performative" trend with the rice purity test. accidentally went viral and <a href="https://x.com/i/trending/1990747485631860858" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">trended on twitter for two days.</a></>,
         badge: { text: "300k+ users", className: "link-hackclub" },
         link: "https://performativepuritytest.com"
@@ -849,7 +849,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "do-eve",
         type: "Project",
-        image: "/doeve.png",
+        image: "/doeve.webp",
         description: "poke but for computer use. built an imessage agent that can use your laptop for you. opens apps, runs scripts, organizes files, and handles random tasks just by texting it.",
         badge: { text: "won hackprinceton", className: "link-teenbuilders" },
         link: "https://devpost.com/software/do-eve"
@@ -857,7 +857,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "coach bob",
         type: "Project",
-        image: "/coachbob.jpg",
+        image: "/coachbob.webp",
         description: "built street fighter but irl. an AR pose based fighting game where you hit targets and get scored in real time. used gemini to give audio feedback and help you train.",
         badge: { text: "won hackthenorth", className: "link-bloomberg" },
         link: "https://devpost.com/software/coach-bob"
@@ -865,34 +865,34 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "teen builders club",
         type: "Community",
-        image: "/teenbuildersclub.jpg",
+        image: "/teenbuildersclub.webp",
         description: "made the community I always wanted. hosted weekly coworking, demo nights, and built a space for ambitious young people to meet each other and actually build."
       },
       {
         title: "white oaks robotics",
         type: "Community",
-        image: "/vex.jpg",
+        image: "/vex.webp",
         description: "started and scaled my school's robotics team to 100+ members. built competitive robots, won the excellence award 5 times, and ranked top 62/2400 worldwide. handled design reviews, programming, scouting, and ops.",
         badge: { text: "2nd in Ontario", className: "link-robotics" }
       },
       {
         title: "apocalypse hacks",
         type: "Community",
-        image: "/apoimages/vickyapo.png",
+        image: "/apoimages/vickyapo.webp",
         description: "started canada's largest high school hackathon with 150 attendees and 40+ projects shipped. zombie apocalypse theme. raised 50k from shopify, doordash, and others. handled outreach, ops, sponsorships, and everything in between.",
         action: selectApocalypseHacks
       },
       {
         title: "uwaterloo.network",
         type: "Project",
-        image: "/uwaterloonetwork.png",
+        image: "/uwaterloonetwork.webp",
         description: "i built a webring for waterloo friends :)",
         link: "https://uwaterloo.network"
       },
       {
         title: "shoppywrapped",
         type: "Project",
-        image: "/shoppy.png",
+        image: "/shoppy.webp",
         description: "spotify wrapped but for your shopping. built with shopify's shop mini framework. shows your top shops, spending, and order history in a clean stories style recap. won the shopify toronto tech week hackathon.",
         badge: { text: "won shopify hackathon", className: "link-olympiad" },
         link: "https://github.com/ultratrikx/shoppy-wrapped/pulls"
@@ -900,7 +900,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "vibetype",
         type: "Project",
-        image: "/vibetype.png",
+        image: "/vibetype.webp",
         description: "built \"dia but for arc\" before dia had sidebar tabs. an ai writing sidekick that lives in your browser. highlight text to rewrite, expand, or clean it instantly. the sidebar reads your open tabs so it can help you draft way faster.",
         link: "https://www.gptfixtsfor.me/"
       }
@@ -1009,49 +1009,49 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         id: "1",
         title: "the start of something big",
         location: "WeWork Toronto",
-        image: "/polaroids/the start of something big.png",
+        image: "/polaroids/the start of something big.webp",
         songUrl: "https://open.spotify.com/track/1zgHn1EqUyA0HqNYMdJ5ia?si=b10022a78daa4fa1"
       },
       {
         id: "2",
         title: "apocalypse w/ greg",
         location: "Shopify Toronto",
-        image: "/polaroids/apogreg.png",
+        image: "/polaroids/apogreg.webp",
         songUrl: "https://open.spotify.com/track/0mEdbdeRFQwBhN4xfyIeUM?si=e6bb613c681245fd"
       },
       {
         id: "3",
         title: "lost in toronto",
         location: "Toronto, ON",
-        image: "/polaroids/lost in toronto.png",
+        image: "/polaroids/lost in toronto.webp",
         songUrl: "https://open.spotify.com/track/5kDgJffgJ0lYHTSiaXFWNw?si=590001762a2840ce"
       },
       {
         id: "4",
         title: "the one where ayaan turns five",
         location: "Jersey City, NJ",
-        image: "/polaroids/ayaanturns5.png",
+        image: "/polaroids/ayaanturns5.webp",
         songUrl: "https://open.spotify.com/track/4I4aQGNJ2HufloNtB65nxR?si=c579a5e4bb6042c2"
       },
       {
         id: "5",
         title: "airplane thoughts",
         location: "Above Michigan",
-        image: "/polaroids/airplanethoughts.png",
+        image: "/polaroids/airplanethoughts.webp",
         songUrl: "https://open.spotify.com/track/19nu3H3vjeZ505i450lz8R?si=424f25c49b9f4b30"
       },
       {
         id: "6",
         title: "break things build better",
         location: "Shopify Toronto",
-        image: "/polaroids/breakbuildbetter.png",
+        image: "/polaroids/breakbuildbetter.webp",
         songUrl: "https://open.spotify.com/track/1oAwsWBovWRIp7qLMGPIet?si=d9e5bb4900954ea5"
       },
       {
         id: "7",
         title: "water water water loo loo loo",
         location: "Waterloo, ON",
-        image: "/polaroids/water water.png",
+        image: "/polaroids/water water.webp",
         songUrl: "https://open.spotify.com/track/1v0uVPU6BWcbog5BiWLWVa?si=0a01a3cab11149a9"
       },
       {
@@ -1065,28 +1065,28 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         id: "9",
         title: "777",
         location: "Toronto, ON",
-        image: "/polaroids/777.png",
+        image: "/polaroids/777.webp",
         songUrl: "https://open.spotify.com/track/32J2bR5gnepj9uHPGVGStr?si=84a55b42ab404585"
       },
       {
         id: "19",
         title: "ycombinator core",
         location: "Waterloo, ON",
-        image: "/polaroids/water water water.png",
+        image: "/polaroids/water water water.webp",
         songUrl: "https://open.spotify.com/track/1Ukxccao1BlWrPhYkcXbwZ?si=9fee189e2ea547bb"
       },
       {
         id: "11",
         title: "dumbo!",
         location: "New York City, NY",
-        image: "/polaroids/dumbo.png",
+        image: "/polaroids/dumbo.webp",
         songUrl: " https://open.spotify.com/track/6wXPV6dNRAhFavrRaCdMXT?si=990666c03feb4eea"
       },
       {
         id: "12",
         title: "roomies",
         location: "Oakville, ON",
-        image: "/polaroids/10xeng.png",
+        image: "/polaroids/10xeng.webp",
         songUrl: "https://open.spotify.com/track/1auxYwYrFRqZP7t3s7w4um?si=3cf2d5a2f7b74500"
       },
       {
@@ -1107,21 +1107,21 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
         id: "15",
         title: "end of the beginning - djo",
         location: "Chicago, IL",
-        image: "/polaroids/end of the begining.png",
+        image: "/polaroids/end of the begining.webp",
         songUrl: "https://open.spotify.com/track/3qhlB30KknSejmIvZZLjOD?si=2d6b0e552475446b"
       },
       {
         id: "16",
         title: "first hackathon i went to",
         location: "WeWork Toronto",
-        image: "/polaroids/TheGang.png",
+        image: "/polaroids/TheGang.webp",
         songUrl: "https://open.spotify.com/track/6wXPV6dNRAhFavrRaCdMXT?si=990666c03feb4eea"
       },
       {
         id: "17",
         title: "spanish lattes in nyc",
         location: "New York City, NY",
-        image: "/polaroids/spanish lattes in nyc.png",
+        image: "/polaroids/spanish lattes in nyc.webp",
         songUrl: "https://open.spotify.com/track/0TL0LFcwIBF5eX7arDIKxY?si=5dab4294e9d84b81"
       },
       {
@@ -1207,42 +1207,42 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         id: "disp8",
         location: "Oakville, ON",
-        image: "/disposable/000138910025.jpg"
+        image: "/disposable/000138910025.webp"
       },
       {
         id: "disp9",
         location: "Toronto, ON",
-        image: "/disposable/000114970025.jpg"
+        image: "/disposable/000114970025.webp"
       },
       {
         id: "disp10",
         location: "Oakville, ON",
-        image: "/disposable/000114970006.jpg"
+        image: "/disposable/000114970006.webp"
       },
       {
         id: "disp11",
         location: "Toronto, ON",
-        image: "/disposable/000114970001.jpg"
+        image: "/disposable/000114970001.webp"
       },
       {
         id: "disp12",
         location: "Oakville, ON",
-        image: "/disposable/000114970005.jpg"
+        image: "/disposable/000114970005.webp"
       },
       {
         id: "disp13",
         location: "Toronto, ON",
-        image: "/disposable/000129720005.jpg"
+        image: "/disposable/000129720005.webp"
       },
       {
         id: "disp14",
         location: "Oakville, ON",
-        image: "/disposable/000129720006.jpg"
+        image: "/disposable/000129720006.webp"
       },
       {
         id: "disp15",
         location: "Toronto, ON",
-        image: "/disposable/000138910005.jpg"
+        image: "/disposable/000138910005.webp"
       },
       {
         id: "disp16",
