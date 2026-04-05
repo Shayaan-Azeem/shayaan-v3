@@ -110,18 +110,19 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
           {sections.intro.split('\n\n').map((paragraph, index) => (
             <p key={index} className={index > 0 ? "mt-2" : ""}>
               {parseBulletPoints(paragraph)}
+              {index === sections.intro.split('\n\n').length - 1 && (
+                <button
+                  onClick={() => setShowMore(!showMore)}
+                  className="text-sm underline hover:no-underline cursor-pointer"
+                >
+                  {showMore ? ' show less' : ''}
+                </button>
+              )}
             </p>
           ))}
         </div>
       )}
 
-      {/* Read More button */}
-      <button
-        onClick={() => setShowMore(!showMore)}
-        className="text-sm underline hover:no-underline mb-4"
-      >
-        {showMore ? 'Show Less' : '...'}
-      </button>
 
       {/* Hidden behind Read More */}
       {showMore && (
