@@ -20,7 +20,7 @@ export default function HeroBanner({
   return (
     <div className={`relative h-[400px] overflow-hidden rounded-xl mb-8 ${className}`}>
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 rounded-xl overflow-hidden">
         <img 
           src={backgroundImage} 
           alt={title}

@@ -719,7 +719,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
                     rel="noopener noreferrer"
                     className="block w-full text-left transition-all duration-200 cursor-pointer group "
                   >
-                    <div className="relative h-48 overflow-hidden transition-all duration-300 group-hover:h-56">
+                    <div className="relative h-48 overflow-hidden rounded-lg transition-all duration-300 group-hover:h-56">
                       {/* Background Image */}
                       {item.banner ? (
                         <img 
@@ -955,7 +955,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             <div key={index} className="flex flex-col group transition-colors">
               {/* Image Container */}
               <div 
-                className="relative mb-4 overflow-hidden aspect-[16/10] cursor-pointer bg-muted"
+                className="relative mb-4 overflow-hidden aspect-[16/10] cursor-pointer bg-muted rounded-lg"
                 onClick={() => {
                   if (project.action) project.action();
                   else if (project.link) window.open(project.link, '_blank');
@@ -1347,7 +1347,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-7xl mx-auto">
             {displayPhotos.map((photo) => (
               <div key={photo.id} className="flex flex-col group mb-6">
-                <div className="relative overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105">
+                <div className="relative overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 rounded-lg">
                   <img 
                     src={photo.image} 
                     alt={photo.location} 
@@ -1366,7 +1366,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {displayPhotos.map((photo) => (
                 <div key={photo.id} className="group aspect-[4/3]">
-                  <div className="relative h-full overflow-hidden dark:shadow-lg transition-transform duration-300 group-hover:scale-105">
+                  <div className="relative h-full overflow-hidden dark:shadow-lg transition-transform duration-300 group-hover:scale-105 rounded-lg">
                     <img 
                       src={photo.image} 
                       alt={photo.location} 
@@ -1382,7 +1382,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {displayPhotos.map((photo) => (
               <div key={photo.id} className="flex flex-col items-center group">
-                <a href={photo.songUrl} target="_blank" rel="noopener noreferrer" className="relative overflow-hidden dark:shadow-lg transition-transform duration-300 group-hover:scale-105">
+                <a href={photo.songUrl} target="_blank" rel="noopener noreferrer" className="relative overflow-hidden dark:shadow-lg transition-transform duration-300 group-hover:scale-105 rounded-lg">
                   <img 
                     src={photo.image} 
                     alt={photo.title || photo.location} 
