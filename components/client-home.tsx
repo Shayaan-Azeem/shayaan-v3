@@ -885,7 +885,7 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
       {
         title: "uwaterloo.network",
         type: "Project",
-        image: "/uwaterloonetwork.webp",
+        image: "/uwaterloonetwork.png",
         description: "i built a webring for waterloo friends :)",
         link: "https://uwaterloo.network"
       },
