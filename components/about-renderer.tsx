@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 
 interface AboutRendererProps {
@@ -6,9 +6,6 @@ interface AboutRendererProps {
 }
 
 export default function AboutRenderer({ content }: AboutRendererProps) {
-  const [showMore, setShowMore] = useState(false)
-  const [howIStartedOpen, setHowIStartedOpen] = useState(false)
-  const [futureVisionOpen, setFutureVisionOpen] = useState(false)
   // Parse sections from markdown content
   const parseAboutContent = (text: string) => {
     const sections = text.split('\n## ').filter(section => section.trim())
@@ -133,73 +130,8 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
         </div>
       )}
 
-      {/* Read More button */}
-      <button
-        onClick={() => setShowMore(!showMore)}
-        className="text-sm underline hover:no-underline mb-4"
-      >
-        {showMore ? 'Show Less' : 'Read More'}
-      </button>
 
-      {/* Hidden behind Read More */}
-      {showMore && (
-        <div className="space-y-4">
-          {/* How I started - expandable box */}
-          {sections["how i started:"] && (
-            <div className="border border-border">
-              <button
-                onClick={() => setHowIStartedOpen(!howIStartedOpen)}
-                className="w-full text-left px-4 py-3 flex justify-between items-center hover:bg-muted/50 transition-colors"
-              >
-                <span className="font-bold text-sm">how i started:</span>
-                <span className="text-muted-foreground">{howIStartedOpen ? '−' : '+'}</span>
-              </button>
-              {howIStartedOpen && (
-                <div className="px-4 pb-4 text-sm">
-                  {sections["how i started:"].split('\n\n').map((part, partIndex) => {
-                    if (part.includes('- ')) {
-                      return (
-                        <ul key={partIndex} className="list-none space-y-1">
-                          {part.split('\n- ')
-                            .filter(item => item.trim())
-                            .map((item, index) => {
-                              const cleanItem = item.replace(/^- /, '').trim()
-                              return parseBulletPoints(cleanItem, true)
-                            })}
-                        </ul>
-                      )
-                    } else {
-                      return (
-                        <p key={partIndex} className="mb-2">
-                          {parseBulletPoints(part)}
-                        </p>
-                      )
-                    }
-                  })}
-                </div>
-              )}
-            </div>
-          )}
 
-          {/* Future vision - expandable box */}
-          {sections["where do i see myself in 10 years:"] && (
-            <div className="border border-border">
-              <button
-                onClick={() => setFutureVisionOpen(!futureVisionOpen)}
-                className="w-full text-left px-4 py-3 flex justify-between items-center hover:bg-muted/50 transition-colors"
-              >
-                <span className="font-bold text-sm">where do i see myself in 10 years:</span>
-                <span className="text-muted-foreground">{futureVisionOpen ? '−' : '+'}</span>
-              </button>
-              {futureVisionOpen && (
-                <div className="px-4 pb-4 text-sm">
-                  <p>{parseBulletPoints(sections["where do i see myself in 10 years:"])}</p>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      )}
     </div>
   )
 }
