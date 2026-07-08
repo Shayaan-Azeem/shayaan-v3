@@ -484,6 +484,25 @@ body {
     background-color: #FFF3C4;
     color: #000;
   }
+
+  /* Forus highlight — colors sampled from the Forus "us." brand icons */
+  .link-forus {
+    @apply px-1 py-0.5 transition-all duration-200;
+    background-color: #080707; /* Forus black */
+    color: #f2f0ec; /* Forus cream */
+  }
+  .link-forus:hover {
+    background-color: #2a2828; /* slightly lifted black */
+    color: #f2f0ec;
+  }
+  .dark .link-forus {
+    background-color: #f1f0ec; /* Forus cream */
+    color: #080607; /* Forus black */
+  }
+  .dark .link-forus:hover {
+    background-color: #dcdad3; /* slightly deepened cream */
+    color: #080607;
+  }
   
   /* Custom purple highlight for Bloomberg Philanthropies */
   .link-bloomberg {

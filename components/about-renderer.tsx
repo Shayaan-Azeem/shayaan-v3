@@ -41,6 +41,10 @@ export default function AboutRenderer({ content }: AboutRendererProps) {
       if (title.toLowerCase().includes('uwaterloo') || url.includes('uwaterloo.ca')) {
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-uwaterloo">${title}</a>`
       }
+      // Special handling for forus link
+      if (title.toLowerCase().includes('forus') || url.includes('forus.com')) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-forus">${title}</a>`
+      }
       // Special handling for preseed link
       if (title.toLowerCase().includes('offered $250k preseed') || url.includes('joinef.com')) {
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="link-preseed">${title}</a>`

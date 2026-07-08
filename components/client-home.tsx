@@ -650,9 +650,9 @@ export default function ClientHome({ fieldnotes, philosophy, contentWorthConsumi
           <div>
             {/* Name and Social Icons */}
             <div className="flex justify-between items-center mb-6">
-              <h1 className="text-3xl font-bold group cursor-default">
-                <span className="group-hover:hidden">Shayaan Azeem</span>
-                <span className="hidden group-hover:inline">شایان عظیم</span>
+              <h1 className="text-3xl font-bold group cursor-default grid [grid-template-areas:'name'] w-fit">
+                <span className="[grid-area:name] transition-opacity duration-300 ease-in-out group-hover:opacity-0">Shayaan Azeem</span>
+                <span aria-hidden="true" className="[grid-area:name] transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100">شایان عظیم</span>
               </h1>
               <div className="flex items-center gap-4">
                 <a href="https://x.com/shayaan" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
