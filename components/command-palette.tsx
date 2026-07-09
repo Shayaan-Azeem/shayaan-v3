@@ -23,6 +23,7 @@ import {
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { type SubstackArticle } from '@/lib/substack'
+import { resolveSiteImage } from '@/lib/site-image'
 
 interface Experience {
   title: string
@@ -249,7 +250,7 @@ export default function CommandPalette({
                     <div className="flex items-center gap-3">
                       {exp.image && (
                         <img 
-                          src={exp.image} 
+                          src={resolveSiteImage(exp.image)} 
                           alt={exp.title}
                           className="w-14 h-9 rounded object-cover flex-shrink-0"
                         />
@@ -275,7 +276,7 @@ export default function CommandPalette({
                     <div className="flex items-center gap-3">
                       {item.banner ? (
                         <img 
-                          src={item.banner} 
+                          src={resolveSiteImage(item.banner)} 
                           alt={item.title}
                           className="w-14 h-9 rounded object-cover flex-shrink-0"
                         />

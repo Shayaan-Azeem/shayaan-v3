@@ -2,6 +2,7 @@ import Link from "next/link"
 import { getAllWritings } from "@/lib/content"
 import { ModeToggle } from "@/components/mode-toggle"
 import CommandPaletteWrapper from "@/components/command-palette-wrapper"
+import { resolveSiteImage } from "@/lib/site-image"
 
 export default function WritingsPage() {
   const writings = getAllWritings()
@@ -47,7 +48,7 @@ export default function WritingsPage() {
                   {item.banner && (
                     <div className="aspect-video mb-4 rounded-md overflow-hidden">
                       <img 
-                        src={item.banner} 
+                        src={resolveSiteImage(item.banner)} 
                         alt={item.title}
                         className="w-full h-full object-cover"
                       />

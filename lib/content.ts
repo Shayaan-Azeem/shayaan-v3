@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { resolveSiteImage } from '@/lib/site-image'
 
 export interface ContentItem {
   slug: string
@@ -41,10 +42,11 @@ function getContentItems(type: 'fieldnotes' | 'writings'): ContentItem[] {
       const slug = data.slug || defaultSlug
 
       // Auto-prepend /fieldnotes/ to banner if it's just a filename
-      let banner = data.banner || null
+      let banner = data.banner || undefined
       if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
         banner = `/fieldnotes/${banner}`
       }
+      banner = banner ? resolveSiteImage(banner) : undefined
 
       return {
         slug,
@@ -97,10 +99,11 @@ export function getContentItem(type: 'fieldnotes' | 'writings', slug: string): C
         const actualSlug = data.slug || fileSlug
 
         // Auto-prepend /fieldnotes/ to banner if it's just a filename
-        let banner = data.banner || null
+        let banner = data.banner || undefined
         if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
           banner = `/fieldnotes/${banner}`
         }
+        banner = banner ? resolveSiteImage(banner) : undefined
 
         return {
           slug: actualSlug,
@@ -125,10 +128,11 @@ export function getContentItem(type: 'fieldnotes' | 'writings', slug: string): C
       
       if (data.slug === slug) {
         // Auto-prepend /fieldnotes/ to banner if it's just a filename
-        let banner = data.banner || null
+        let banner = data.banner || undefined
         if (banner && !banner.startsWith('/') && !banner.startsWith('http')) {
           banner = `/fieldnotes/${banner}`
         }
+        banner = banner ? resolveSiteImage(banner) : undefined
 
         return {
           slug: data.slug,
@@ -171,7 +175,7 @@ export function getPhilosophy(): ContentItem | null {
       title: data.title || "My Philosophy",
       date: data.date || new Date().toISOString().split("T")[0],
       summary: data.summary || "",
-      banner: data.banner || null,
+      banner: data.banner ? resolveSiteImage(data.banner) : undefined,
       tags: data.tags || [],
       draft: data.draft || false,
       content,
@@ -203,7 +207,7 @@ export function getContentWorthConsuming(): ContentItem | null {
       title: data.title || "Content Worth Consuming",
       date: data.date || new Date().toISOString().split("T")[0],
       summary: data.summary || "",
-      banner: data.banner || null,
+      banner: data.banner ? resolveSiteImage(data.banner) : undefined,
       tags: data.tags || [],
       draft: data.draft || false,
       content,
@@ -232,7 +236,7 @@ export function getAbout(): ContentItem | null {
       title: data.title || "About",
       date: data.date || new Date().toISOString().split("T")[0],
       summary: data.summary || "",
-      banner: data.banner || null,
+      banner: data.banner ? resolveSiteImage(data.banner) : undefined,
       tags: data.tags || [],
       draft: data.draft || false,
       content,

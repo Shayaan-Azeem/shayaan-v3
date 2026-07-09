@@ -19,10 +19,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         
         return {
           allowedContentTypes: [
-            'image/jpeg',
-            'image/png', 
             'image/webp',
-            'image/gif',
             'application/pdf',
             'text/plain',
             'text/markdown',
@@ -44,7 +41,6 @@ export async function POST(request: Request): Promise<NextResponse> {
         console.log('Blob upload completed:', {
           url: blob.url,
           pathname: blob.pathname,
-          size: blob.size,
           tokenPayload,
         })
 

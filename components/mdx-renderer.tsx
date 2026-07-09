@@ -5,6 +5,7 @@ import { serialize } from 'next-mdx-remote/serialize'
 import { useEffect, useState } from 'react'
 import type { ContentItem } from '@/lib/content'
 import HeroBanner from '@/components/hero-banner'
+import { resolveSiteImage } from '@/lib/site-image'
 
 interface MDXRendererProps {
   item: ContentItem
@@ -22,7 +23,7 @@ const components = {
       code: (props: any) => <code className="bg-gray-100 dark:bg-secondary px-2 py-1 rounded text-sm" {...props} />,
     pre: (props: any) => <pre className="bg-gray-100 dark:bg-secondary p-4 rounded-lg overflow-x-auto mb-4" {...props} />,
   a: (props: any) => <a className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
-  img: (props: any) => <img className="rounded-lg my-6 max-w-full" {...props} />,
+  img: (props: any) => <img className="rounded-lg my-6 max-w-full" {...props} src={resolveSiteImage(props.src)} />,
   hr: (props: any) => <hr className="border-border my-8" {...props} />,
 }
 
