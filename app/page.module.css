@@ -8,9 +8,18 @@
 }
 
 .stack {
+  --mx: 50%;
+  --my: 50%;
+  --rx: 0deg;
+  --ry: 0deg;
+  --gloss: 0;
   position: relative;
   width: min(460px, 88vw);
   aspect-ratio: 460 / 660;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease-out;
+  will-change: transform;
   filter: drop-shadow(0 40px 50px rgba(10, 40, 20, 0.35))
     drop-shadow(0 12px 18px rgba(0, 0, 0, 0.18));
 }
@@ -169,15 +178,38 @@
 .name {
   position: relative;
   z-index: 1;
-  font-size: clamp(26px, 7.2vw, 44px);
+  font-size: clamp(34px, 9.5vw, 58px);
   font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
+  text-align: left;
+  line-height: 0.98;
   color: var(--cream);
   text-shadow:
     0 -1px 0 rgba(0, 0, 0, 0.4),
     0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
+
+/* pointer-following specular highlight */
+.gloss {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: var(--gloss);
+  transition: opacity 0.35s ease;
+  background:
+    radial-gradient(
+      60% 45% at var(--mx) var(--my),
+      rgba(255, 255, 255, 0.22),
+      rgba(255, 255, 255, 0.06) 45%,
+      transparent 70%
+    ),
+    linear-gradient(
+      calc(100deg + (var(--mx) - 50%) * 0.6),
+      transparent 30%,
+      rgba(255, 255, 255, 0.05) 48%,
+      transparent 62%
+    );
+  mix-blend-mode: screen;
+}

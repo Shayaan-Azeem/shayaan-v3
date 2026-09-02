@@ -1,25 +1,10 @@
-import Link from "next/link";
+import Notebook from "./components/Notebook";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.stack}>
-        <div className={styles.pages} aria-hidden="true" />
-        <section className={styles.notebook} aria-label="Shayaan Azeem">
-          <div className={styles.staples} aria-hidden="true">
-            <span className={styles.staple} />
-            <span className={styles.staple} />
-          </div>
-          <nav className={styles.nav} aria-label="Primary">
-            <Link href="/writing">Writing</Link>
-            <Link href="/about">About Me</Link>
-            <Link href="/experience">Experience</Link>
-          </nav>
-          <div className={styles.spacer} />
-          <h1 className={styles.name}>Shayaan Azeem</h1>
-        </section>
-      </div>
+      <Notebook />
     </main>
   );
 }
