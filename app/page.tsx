@@ -18,10 +18,6 @@ export default function Home() {
           </nav>
           <div className={styles.spacer} />
           <h1 className={styles.name}>Shayaan Azeem</h1>
-          <div className={styles.footer} aria-hidden="true">
-            <span>Memo Book</span>
-            <span>Pocket Size</span>
-          </div>
         </section>
       </div>
     </main>
