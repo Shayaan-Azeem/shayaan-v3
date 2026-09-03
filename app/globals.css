@@ -1,5 +1,7 @@
 :root {
-  --bg: #ffffff;
+  --bg: #fcfcfa;
+  --graph-fine: rgba(31, 82, 50, 0.08);
+  --graph-bold: rgba(31, 82, 50, 0.16);
   --cover: #1f5232;
   --cover-dark: #143a22;
   --cover-light: #2a6a42;
@@ -18,7 +20,18 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--graph-bold) 1px, transparent 1px),
+    linear-gradient(90deg, var(--graph-bold) 1px, transparent 1px),
+    linear-gradient(var(--graph-fine) 1px, transparent 1px),
+    linear-gradient(90deg, var(--graph-fine) 1px, transparent 1px);
+  background-size:
+    100px 100px,
+    100px 100px,
+    20px 20px,
+    20px 20px;
+  background-position: center;
   color: var(--text);
   font-family:
     -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial,
