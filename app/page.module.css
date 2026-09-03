@@ -1,4 +1,47 @@
+/* graph paper: fine and bold grids plus 45deg diagonals */
+.grid,
+.grid::after,
+.diagonals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-position: center;
+}
+
+.grid {
+  background-image:
+    linear-gradient(90deg, var(--graph-fine) 1px, transparent 1px),
+    linear-gradient(var(--graph-fine) 1px, transparent 1px);
+  background-size: 10vmin 10vmin;
+}
+
+.grid::after {
+  content: "";
+  background-image:
+    linear-gradient(90deg, var(--graph-bold) 1px, transparent 1px),
+    linear-gradient(var(--graph-bold) 1px, transparent 1px);
+  background-size: 30vmin 30vmin;
+}
+
+.diagonals {
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 49.5%,
+      var(--graph-fine) 49.5% 50.5%,
+      transparent 50.5%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 49.5%,
+      var(--graph-fine) 49.5% 50.5%,
+      transparent 50.5%
+    );
+  background-size: 10vmin 10vmin;
+}
+
 .main {
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
