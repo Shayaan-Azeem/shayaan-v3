@@ -67,6 +67,34 @@ export default function Notebook() {
           <span className={styles.staple} />
           <span className={styles.staple} />
         </span>
+        <span className={styles.stickers} aria-hidden="true">
+          <span className={`${styles.sticker} ${styles.s1}`}>
+            <svg viewBox="0 0 48 48" fill="none" stroke="#111" strokeWidth="3.5" strokeLinecap="round">
+              <path d="M14 18v4M34 18v4M13 30c4 6 18 6 22 0" />
+            </svg>
+          </span>
+
+          <span className={`${styles.sticker} ${styles.s2}`}>hi :)</span>
+
+          <span className={`${styles.sticker} ${styles.s3}`}>
+            <svg viewBox="0 0 48 48" fill="#111">
+              <path d="M24 2c2 12 8 18 20 22-12 4-18 10-20 22-2-12-8-18-20-22C16 20 22 14 24 2Z" />
+            </svg>
+          </span>
+
+          <span className={`${styles.sticker} ${styles.s4}`}>TORONTO</span>
+
+          <span className={`${styles.sticker} ${styles.s5}`}>
+            <svg viewBox="0 0 48 48" fill="#111">
+              <path d="M27 2 8 27h12L19 46l21-27H27l4-17Z" />
+            </svg>
+          </span>
+
+          <span className={`${styles.sticker} ${styles.s6}`}>
+            <span className={styles.photo} />
+          </span>
+        </span>
+
         <span className={styles.spacer} />
         <span className={styles.name}>
           Shayaan
