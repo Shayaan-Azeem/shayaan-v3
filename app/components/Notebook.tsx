@@ -73,7 +73,6 @@ export default function Notebook() {
           <br />
           Azeem
         </span>
-        <span className={styles.hint}>{open ? "close" : "open"}</span>
         <span className={styles.gloss} aria-hidden="true" />
         <span className={styles.coverBack} aria-hidden="true" />
       </button>
