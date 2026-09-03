@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useState, type PointerEvent } from "react";
 import styles from "../page.module.css";
 
@@ -45,15 +44,6 @@ export default function Notebook() {
       onPointerMove={onMove}
       onPointerLeave={rest}
     >
-      <div className={styles.spread}>
-        <span className={styles.pageShadow} aria-hidden="true" />
-        <nav className={styles.inside} aria-label="Primary">
-          <Link href="/writing">Writing</Link>
-          <Link href="/about">About Me</Link>
-          <Link href="/experience">Experience</Link>
-        </nav>
-      </div>
-
       <button
         type="button"
         className={styles.notebook}
