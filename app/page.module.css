@@ -59,9 +59,10 @@
   position: relative;
   width: min(460px, 88vw);
   aspect-ratio: 460 / 660;
-  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transform: translateX(var(--shift, 0)) scale(var(--scale, 1))
+    rotateX(var(--rx)) rotateY(var(--ry));
   transform-style: preserve-3d;
-  transition: transform 0.12s ease-out;
+  transition: transform 0.9s cubic-bezier(0.32, 0.72, 0, 1);
   will-change: transform;
   filter: drop-shadow(0 40px 50px rgba(10, 40, 20, 0.35))
     drop-shadow(0 12px 18px rgba(0, 0, 0, 0.18));
@@ -89,8 +90,24 @@
   opacity: 0.6;
 }
 
+.isOpen {
+  --shift: 50%;
+  --scale: 1.06;
+}
+
 .notebook {
+  appearance: none;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
   position: relative;
+  transform-origin: left center;
+  transform: rotateY(var(--cover-angle, 0deg)) translateZ(1px);
+  transform-style: preserve-3d;
+  transition:
+    transform 0.9s cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 0.9s cubic-bezier(0.32, 0.72, 0, 1);
   width: 100%;
   height: 100%;
   border-radius: 4px 22px 22px 4px;
@@ -119,6 +136,7 @@
   content: "";
   position: absolute;
   inset: 0;
+  backface-visibility: hidden;
   background:
     linear-gradient(
       45deg,
@@ -133,6 +151,7 @@
 
 
 .staples {
+  backface-visibility: hidden;
   position: absolute;
   left: 2.4%;
   top: 0;
@@ -162,37 +181,13 @@
   top: 70%;
 }
 
-.nav {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 5px;
-  font-size: clamp(14px, 3.4vw, 19px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  text-shadow:
-    0 -1px 0 rgba(0, 0, 0, 0.35),
-    0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
-.nav a {
-  transition:
-    opacity 0.15s ease,
-    transform 0.15s ease;
-}
-
-.nav a:hover {
-  opacity: 0.8;
-  transform: translateX(-2px);
-}
 
 .spacer {
   flex: 1;
 }
 
 .name {
+  backface-visibility: hidden;
   position: relative;
   z-index: 1;
   font-size: clamp(34px, 9.5vw, 58px);
@@ -209,6 +204,7 @@
 
 /* pointer-following diffuse light wash */
 .gloss {
+  backface-visibility: hidden;
   position: absolute;
   inset: 0;
   z-index: 3;
@@ -222,4 +218,117 @@
     transparent 85%
   );
   mix-blend-mode: overlay;
+}
+
+.isOpen .notebook {
+  --cover-angle: -178deg;
+  background-color: var(--cover-dark);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.16),
+    -18px 0 40px rgba(0, 0, 0, 0.25);
+}
+
+.isOpen .gloss {
+  backface-visibility: hidden;
+  opacity: 0;
+}
+
+/* inside page revealed when the cover swings open */
+.spread {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(0.5px);
+  border-radius: 4px 22px 22px 4px;
+  background-color: #fbf8ef;
+  background-image:
+    linear-gradient(90deg, rgba(31, 82, 50, 0.09) 1px, transparent 1px),
+    linear-gradient(rgba(31, 82, 50, 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+  box-shadow: inset 16px 0 26px -16px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.32, 0.72, 0, 1) 0.1s;
+  display: flex;
+  align-items: center;
+  padding: 0 12%;
+}
+
+.isOpen .spread {
+  opacity: 1;
+}
+
+.inside {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: clamp(20px, 4.4vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1f5232;
+}
+
+.inside a {
+  width: fit-content;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.inside a:hover {
+  border-bottom-color: currentColor;
+}
+
+.hint {
+  backface-visibility: hidden;
+  position: relative;
+  z-index: 1;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+/* back of the cover, shown once it swings past 90deg */
+.coverBack {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px 22px 22px 4px;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  background-color: var(--cover-dark);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.1);
+}
+
+/* shadow the spine casts across the page as the cover lifts */
+.pageShadow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.35),
+    rgba(0, 0, 0, 0.12) 25%,
+    transparent 60%
+  );
+  opacity: 1;
+  transition: opacity 0.9s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.isOpen .pageShadow {
+  opacity: 0.45;
+}
+
+/* the cover's contents belong to its front face only */
+.name,
+.hint,
+.staples,
+.gloss {
+  transition: opacity 0.25s ease;
+}
+
+.isOpen .name,
+.isOpen .hint,
+.isOpen .staples {
+  opacity: 0;
 }

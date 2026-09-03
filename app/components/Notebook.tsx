@@ -1,17 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, type PointerEvent } from "react";
+import { useRef, useState, type PointerEvent } from "react";
 import styles from "../page.module.css";
 
 const MAX_TILT = 9;
 
 export default function Notebook() {
   const ref = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
 
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || open) return;
     const rect = el.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
@@ -22,7 +23,7 @@ export default function Notebook() {
     el.style.setProperty("--gloss", "1");
   };
 
-  const onLeave = () => {
+  const rest = () => {
     const el = ref.current;
     if (!el) return;
     el.style.setProperty("--mx", "50%");
@@ -32,32 +33,50 @@ export default function Notebook() {
     el.style.setProperty("--gloss", "0");
   };
 
+  const toggle = () => {
+    rest();
+    setOpen((v) => !v);
+  };
+
   return (
     <div
       ref={ref}
-      className={styles.stack}
+      className={`${styles.stack} ${open ? styles.isOpen : ""}`}
       onPointerMove={onMove}
-      onPointerLeave={onLeave}
+      onPointerLeave={rest}
     >
       <div className={styles.pages} aria-hidden="true" />
-      <section className={styles.notebook} aria-label="Shayaan Azeem">
-        <div className={styles.staples} aria-hidden="true">
-          <span className={styles.staple} />
-          <span className={styles.staple} />
-        </div>
-        <nav className={styles.nav} aria-label="Primary">
+
+      <div className={styles.spread}>
+        <span className={styles.pageShadow} aria-hidden="true" />
+        <nav className={styles.inside} aria-label="Primary">
           <Link href="/writing">Writing</Link>
           <Link href="/about">About Me</Link>
           <Link href="/experience">Experience</Link>
         </nav>
-        <div className={styles.spacer} />
-        <h1 className={styles.name}>
+      </div>
+
+      <button
+        type="button"
+        className={styles.notebook}
+        aria-expanded={open}
+        aria-label={open ? "Close notebook" : "Open notebook"}
+        onClick={toggle}
+      >
+        <span className={styles.staples} aria-hidden="true">
+          <span className={styles.staple} />
+          <span className={styles.staple} />
+        </span>
+        <span className={styles.spacer} />
+        <span className={styles.name}>
           Shayaan
           <br />
           Azeem
-        </h1>
-        <div className={styles.gloss} aria-hidden="true" />
-      </section>
+        </span>
+        <span className={styles.hint}>{open ? "close" : "open"}</span>
+        <span className={styles.gloss} aria-hidden="true" />
+        <span className={styles.coverBack} aria-hidden="true" />
+      </button>
     </div>
   );
 }
