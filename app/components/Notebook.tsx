@@ -44,6 +44,11 @@ export default function Notebook() {
       onPointerMove={onMove}
       onPointerLeave={rest}
     >
+      <div className={styles.paper} aria-hidden="true">
+        <span className={styles.grain} />
+        <span className={styles.gutter} />
+      </div>
+
       <button
         type="button"
         className={styles.notebook}
