@@ -69,8 +69,11 @@ export default function Home() {
         <Org src="/revisiondojo.png" href="https://www.revisiondojo.com/">
           RevisionDojo
         </Org>
-        , <A href="https://tensorforest.com">autonomous drones</A> to predict
-        forest fires,{" "}
+        ,{" "}
+        <A href="https://tensorforest.com">
+          autonomous drones to predict forest fires
+        </A>
+        ,{" "}
         <A href="https://www.oakvillenews.org/success/new-oakville-robotics-club-now-listed-among-best-in-the-world-9958475">
           one of the best
         </A>{" "}
