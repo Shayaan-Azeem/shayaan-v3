@@ -14,6 +14,18 @@
   white-space: nowrap;
 }
 
+.paragraph a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(0, 0, 0, 0.3);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease;
+}
+
+.paragraph a:hover {
+  text-decoration-color: currentColor;
+}
+
 .inlineIcon {
   display: inline-block;
   vertical-align: -3px;
