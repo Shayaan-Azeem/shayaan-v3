@@ -1,23 +1,21 @@
 import Layout from "../components/Layout";
 import styles from "../page.module.css";
 
-const INVESTMENTS = [
-  { name: "Company one", href: "https://example.com" },
-];
+const FAVOURITES = [{ name: "Something I love", href: "https://example.com" }];
 
-export default function Investments() {
+export default function Favourites() {
   return (
-    <Layout active="/investments">
+    <Layout active="/favourites">
       <section className={styles.list}>
-        {INVESTMENTS.map((company) => (
-          <div key={company.name} className={styles.item}>
+        {FAVOURITES.map((favourite) => (
+          <div key={favourite.name} className={styles.item}>
             <a
-              href={company.href}
+              href={favourite.href}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.itemTitle}
             >
-              {company.name}
+              {favourite.name}
             </a>
           </div>
         ))}

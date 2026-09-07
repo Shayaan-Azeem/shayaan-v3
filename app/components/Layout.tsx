@@ -5,7 +5,7 @@ import styles from "./Layout.module.css";
 const NAV = [
   { href: "/writing", label: "writing" },
   { href: "/projects", label: "projects" },
-  { href: "/investments", label: "investments" },
+  { href: "/favourites", label: "favourites" },
 ];
 
 export default function Layout({
