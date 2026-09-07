@@ -22,6 +22,7 @@
 }
 
 .org:hover {
+  color: inherit;
   background-color: rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
@@ -32,11 +33,14 @@
   text-decoration-thickness: 1px;
   text-decoration-color: rgba(0, 0, 0, 0.3);
   text-underline-offset: 3px;
-  transition: text-decoration-color 0.15s ease;
+  transition:
+    text-decoration-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .paragraph a:hover,
 .small a:hover {
+  color: var(--link-hover);
   text-decoration-color: transparent;
 }
 
