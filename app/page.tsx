@@ -71,9 +71,12 @@ export default function Home() {
           RevisionDojo
         </Org>{" "}
         (650k+ students), autonomous drones for forest fire detection, a{" "}
-        <A href="https://wossrobotics.ca/">robotics team</A> ranked among the
-        best in Canada, a <A href="https://www.teenbuilders.club/">community</A>{" "}
-        for ambitious teenagers,{" "}
+        <A href="https://wossrobotics.ca/">robotics team</A>{" "}
+        <A href="https://www.oakvillenews.org/success/new-oakville-robotics-club-now-listed-among-best-in-the-world-9958475">
+          ranked among the best in Canada
+        </A>
+        , a <A href="https://www.teenbuilders.club/">community</A> for ambitious
+        teenagers,{" "}
         <A href="https://apocalypse.hackclub.com/">
           Canada&rsquo;s largest high school hackathon
         </A>
