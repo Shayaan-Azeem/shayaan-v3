@@ -86,9 +86,6 @@ export default function Home() {
         <A href="https://www.instagram.com/starthackclub/">@starthackclub</A> to
         100k followers.
       </p>
-      <p className={styles.paragraph}>
-        If you&rsquo;re building something interesting, say hi.
-      </p>
       <p className={styles.small}>
         You can reach me at shayaanazeem10 [at] gmail [dot] com.
       </p>
