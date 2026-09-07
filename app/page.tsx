@@ -37,36 +37,30 @@ export default function Home() {
         University of Waterloo.
       </p>
       <p className={styles.paragraph}>
-        Most recently, I worked at <Logo src="/forus.svg" alt="Forus" />
-        Forus in New York, building AI systems that help people access
-        medication faster and more affordably.
+        Most recently at <Logo src="/forus.svg" alt="Forus" />
+        Forus in New York, building AI systems that make medication faster and
+        cheaper to get.
       </p>
       <p className={styles.paragraph}>
         I&rsquo;m a scout at <Logo src="/crv.png" alt="CRV" />
-        CRV, where I write $25&ndash;100k scout cheques into pre-seed and seed
-        startups, and spend a lot of my time meeting founders early.
+        CRV, writing $25&ndash;100k cheques into pre-seed and seed startups.
       </p>
       <p className={styles.paragraph}>
-        Before that, I engineered products used by more than 650,000 students at{" "}
-        <Logo src="/revisiondojo.png" alt="RevisionDojo" />
-        RevisionDojo, built autonomous drones for detecting forest fires, and
-        started a <A href="https://wossrobotics.ca/">robotics team</A> that
-        became one of the best in Canada.
-      </p>
-      <p className={styles.paragraph}>
-        I&rsquo;ve also built{" "}
-        <A href="https://www.teenbuilders.club/">communities</A> for ambitious
-        teenagers, organized{" "}
+        Before that, <Logo src="/revisiondojo.png" alt="RevisionDojo" />
+        RevisionDojo (650k+ students), autonomous drones for forest fire
+        detection, a <A href="https://wossrobotics.ca/">robotics team</A> ranked
+        among the best in Canada, a{" "}
+        <A href="https://www.teenbuilders.club/">community</A> for ambitious
+        teenagers,{" "}
         <A href="https://apocalypse.hackclub.com/">
           Canada&rsquo;s largest high school hackathon
         </A>
-        , raised over $50,000, and helped grow{" "}
+        , and{" "}
         <A href="https://www.instagram.com/starthackclub/">@starthackclub</A> to
-        100,000 followers.
+        100k followers.
       </p>
       <p className={styles.paragraph}>
-        If you&rsquo;re building something interesting, I&rsquo;d love to hear
-        from you.
+        If you&rsquo;re building something interesting, say hi.
       </p>
       <p className={styles.small}>
         You can reach me at shayaanazeem10 [at] gmail [dot] com.
