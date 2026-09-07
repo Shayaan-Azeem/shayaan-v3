@@ -20,7 +20,17 @@ export default function Layout({
       <div className={styles.container}>
         <section className={styles.header}>
           <Link href="/">
-            <h1 className={styles.name}>Shayaan Azeem</h1>
+            <h1 className={styles.name}>
+              <span className={styles.nameEn}>Shayaan Azeem</span>
+              <span
+                className={styles.nameUr}
+                lang="ur"
+                dir="rtl"
+                aria-hidden="true"
+              >
+                شایان عظیم
+              </span>
+            </h1>
           </Link>
           <div className={styles.nav}>
             {NAV.map((item) => (

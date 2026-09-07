@@ -25,6 +25,32 @@
   color: #4b5563;
 }
 
+.nameEn,
+.nameUr {
+  grid-area: 1 / 1;
+  transition: opacity 0.25s ease;
+}
+
+.name {
+  display: inline-grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.nameUr {
+  opacity: 0;
+  font-family: var(--font-urdu), serif;
+  line-height: 1.6;
+}
+
+.name:hover .nameEn {
+  opacity: 0;
+}
+
+.name:hover .nameUr {
+  opacity: 1;
+}
+
 .nav {
   text-align: center;
 }
