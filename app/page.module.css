@@ -18,11 +18,6 @@
   transition: background-color 0.15s ease;
 }
 
-.org:hover {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
 .paragraph a,
 .small a {
   text-decoration: underline;
@@ -38,6 +33,12 @@
 .small a:hover {
   color: var(--link-hover);
   text-decoration-color: transparent;
+}
+
+.paragraph a.org:hover,
+.small a.org:hover {
+  color: var(--text);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .inlineIcon {
