@@ -75,9 +75,9 @@ export default function Home() {
         </A>
         ,{" "}
         <A href="https://www.oakvillenews.org/success/new-oakville-robotics-club-now-listed-among-best-in-the-world-9958475">
-          one of the best
-        </A>{" "}
-        <A href="https://wossrobotics.ca/">robotics teams</A> in Canada,{" "}
+          one of the best robotics teams in Canada
+        </A>
+        ,{" "}
         <A href="https://www.teenbuilders.club/">communities</A> for ambitious
         teenagers,{" "}
         <A href="https://apocalypse.hackclub.com/">
