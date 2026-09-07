@@ -1,13 +1,9 @@
 :root {
-  --bg: #fcfcfa;
-  --graph-fine: rgba(31, 82, 50, 0.08);
-  --graph-bold: rgba(31, 82, 50, 0.16);
-  --cover: #1f5232;
-  --cover-dark: #143a22;
-  --cover-light: #2a6a42;
-  --cream: #f4f1e6;
-  --text: #1a1a1a;
-  --muted: #6b6b6b;
+  --text: #1f2937;
+  --muted: #4b5563;
+  --link-hover: #2563eb;
+  --active: #1d4ed8;
+  --border: #eaeaea;
 }
 
 * {
@@ -20,12 +16,13 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: var(--bg);
+  background-color: #fff;
   color: var(--text);
   font-family:
     -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial,
     sans-serif;
   -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
 }
 
 a {
