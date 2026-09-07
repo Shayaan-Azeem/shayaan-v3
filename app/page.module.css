@@ -14,7 +14,8 @@
   white-space: nowrap;
 }
 
-.paragraph a {
+.paragraph a,
+.small a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-decoration-color: rgba(0, 0, 0, 0.3);
@@ -22,7 +23,8 @@
   transition: text-decoration-color 0.15s ease;
 }
 
-.paragraph a:hover {
+.paragraph a:hover,
+.small a:hover {
   text-decoration-color: currentColor;
 }
 

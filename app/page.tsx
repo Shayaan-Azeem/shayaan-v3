@@ -82,7 +82,8 @@ export default function Home() {
         100k followers.
       </p>
       <p className={styles.small}>
-        You can reach me at shayaanazeem10 [at] gmail [dot] com.
+        You can reach me at shayaanazeem10 [at] gmail [dot] com or{" "}
+        <A href="https://x.com/shayaan">X</A>.
       </p>
     </Layout>
   );
