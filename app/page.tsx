@@ -68,7 +68,7 @@ export default function Home() {
           CRV
         </Org>
         , where I spend time with early stage founders and write cheques of
-        $25k&ndash;100k.
+        $25k&ndash;100k in pre-seed/seed startups.
       </p>
       <p className={styles.paragraph}>
         Before that,{" "}
