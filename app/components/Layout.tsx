@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import styles from "./Layout.module.css";
 
 const NAV = [
-  { href: "/writing", label: "writing" },
+  { href: "/fieldnotes", label: "fieldnotes" },
   { href: "/projects", label: "projects" },
   { href: "/favourites", label: "favourites" },
 ];

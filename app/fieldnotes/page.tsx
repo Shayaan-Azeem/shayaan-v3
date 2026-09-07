@@ -8,9 +8,9 @@ const POSTS = [
     date: "2025-12-31",
     desc: "year recap, content recommendations, things i liked",
     images: [
-      "/writing/2025-wrapped-1.jpg",
-      "/writing/2025-wrapped-2.jpg",
-      "/writing/2025-wrapped-3.jpg",
+      "/fieldnotes/2025-wrapped-1.jpg",
+      "/fieldnotes/2025-wrapped-2.jpg",
+      "/fieldnotes/2025-wrapped-3.jpg",
     ],
     href: "https://shayaanazeem.substack.com/p/2025-wrapped-in-pursuit-of-global",
   },
@@ -18,14 +18,14 @@ const POSTS = [
     title: "no regrets",
     date: "2025-05-21",
     desc: "everything i'm not made me everything i am",
-    images: ["/writing/no-regrets.jpg"],
+    images: ["/fieldnotes/no-regrets.jpg"],
     href: "https://shayaanazeem.substack.com/p/no-regrets",
   },
   {
     title: "17 lessons from 17",
     date: "2024-12-31",
     desc: "the most important things 2024 taught me",
-    images: ["/writing/17-lessons.jpg"],
+    images: ["/fieldnotes/17-lessons.jpg"],
     href: "https://shayaanazeem.substack.com/p/17-lessons-from-17",
   },
 ];
@@ -38,9 +38,9 @@ function formatDate(date: string) {
   });
 }
 
-export default function Writing() {
+export default function Fieldnotes() {
   return (
-    <Layout active="/writing">
+    <Layout active="/fieldnotes">
       <section className={styles.cards}>
         {POSTS.map((post) => (
           <a
