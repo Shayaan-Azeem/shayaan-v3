@@ -45,7 +45,7 @@ export default function Home() {
   return (
     <Layout>
       <p className={styles.paragraph}>
-        I&rsquo;m a Software Engineer and student at the{" "}
+        I&rsquo;m an engineer and a student at the{" "}
         <Org href="https://uwaterloo.ca/">University of Waterloo</Org>.
       </p>
       <p className={styles.paragraph}>
