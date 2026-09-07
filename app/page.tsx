@@ -54,8 +54,8 @@ export default function Home() {
         <Org src="/forus.svg" href="https://forus.com/">
           Forus
         </Org>{" "}
-        in New York, building an AI-powered network that helps people access
-        medication faster and more affordably.
+        in New York, building AI to help people get medication cheaper and
+        faster.
       </p>
       <p className={styles.paragraph}>
         I&rsquo;m a scout at{" "}
