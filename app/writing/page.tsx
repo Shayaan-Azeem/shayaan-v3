@@ -30,6 +30,14 @@ const POSTS = [
   },
 ];
 
+function formatDate(date: string) {
+  const [year, month] = date.split("-");
+  return new Date(Number(year), Number(month) - 1).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+}
+
 export default function Writing() {
   return (
     <Layout active="/writing">
@@ -63,7 +71,7 @@ export default function Writing() {
               <span className={styles.cardTitle}>
                 {post.title}
                 <span className={styles.cardBadge}>
-                  <time dateTime={post.date}>{post.date}</time>
+                  <time dateTime={post.date}>{formatDate(post.date)}</time>
                 </span>
               </span>
               <span className={styles.cardDesc}>{post.desc}</span>
