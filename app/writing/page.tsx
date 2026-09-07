@@ -42,11 +42,15 @@ export default function Writing() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className={styles.shots}>
-              {[0, 1, 2].map((i) => (
-                <span key={i} className={styles.shot}>
+            <span
+              className={`${styles.shots} ${
+                post.images.length === 1 ? styles.single : ""
+              }`}
+            >
+              {post.images.map((image) => (
+                <span key={image} className={styles.shot}>
                   <Image
-                    src={post.images[i % post.images.length]}
+                    src={image}
                     alt=""
                     width={120}
                     height={160}

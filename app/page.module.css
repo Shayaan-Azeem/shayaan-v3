@@ -41,8 +41,6 @@
   opacity: 0.75;
 }
 
-
-
 .cards {
   display: flex;
   flex-direction: column;
@@ -137,6 +135,20 @@
   --x: 16px;
   --y: -2px;
   --r: 12deg;
+}
+
+.shots.single .shot:nth-child(1) {
+  z-index: 1;
+  width: 42px;
+  height: 55px;
+  --x: 0px;
+  --y: 0px;
+  --r: -2deg;
+}
+
+.card:hover .shots.single .shot:nth-child(1) {
+  --r: 2deg;
+  --s: 1.06;
 }
 
 .cardText {
