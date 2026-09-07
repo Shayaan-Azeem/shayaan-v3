@@ -43,6 +43,127 @@
 
 
 
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  margin: 0 -12px;
+  border-radius: 16px;
+  background: transparent;
+  transition: background-color 0.26s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card:hover {
+  background: rgba(23, 22, 15, 0.035);
+}
+
+.shots {
+  position: relative;
+  flex-shrink: 0;
+  width: 66px;
+  height: 63px;
+}
+
+.shot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  overflow: hidden;
+  border: 1.5px solid #fff;
+  border-radius: 3px;
+  box-shadow:
+    0 0.85px 5px rgba(0, 0, 0, 0.1),
+    0 0.43px 1.3px rgba(0, 0, 0, 0.06);
+  transform: translate(-50%, -50%) translate(var(--x), var(--y))
+    rotate(var(--r)) scale(var(--s, 1));
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shot:nth-child(1) {
+  z-index: 1;
+  width: 26px;
+  height: 34px;
+  --x: -14px;
+  --y: -1px;
+  --r: -10deg;
+}
+
+.shot:nth-child(2) {
+  z-index: 3;
+  width: 35px;
+  height: 46px;
+  --x: -2px;
+  --y: -1px;
+  --r: 0deg;
+}
+
+.shot:nth-child(3) {
+  z-index: 2;
+  width: 30px;
+  height: 40px;
+  --x: 11px;
+  --y: 1px;
+  --r: 7deg;
+}
+
+.card:hover .shot:nth-child(1) {
+  --x: -18px;
+  --y: -3px;
+  --r: -15deg;
+}
+
+.card:hover .shot:nth-child(2) {
+  --y: -3px;
+  --s: 1.03;
+}
+
+.card:hover .shot:nth-child(3) {
+  --x: 16px;
+  --y: -2px;
+  --r: 12deg;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.cardBadge {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2c6fff;
+}
+
+.cardDesc {
+  font-size: 15px;
+  color: var(--muted);
+}
+
 .list {
   margin-top: 8px;
 }
