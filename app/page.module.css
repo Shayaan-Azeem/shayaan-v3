@@ -9,6 +9,22 @@
   margin-top: 8px;
 }
 
+.org {
+  display: inline;
+  padding: 2px 4px;
+  margin: 0 -3px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.org:hover {
+  background-color: #f1f3f5;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
 .inlineIcon {
   display: inline-block;
   vertical-align: -3px;

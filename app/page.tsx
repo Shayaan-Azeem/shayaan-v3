@@ -3,15 +3,31 @@ import type { ReactNode } from "react";
 import Layout from "./components/Layout";
 import styles from "./page.module.css";
 
-function Logo({ src, alt }: { src: string; alt: string }) {
+function Org({
+  src,
+  href,
+  children,
+}: {
+  src: string;
+  href: string;
+  children: ReactNode;
+}) {
   return (
-    <Image
-      className={styles.inlineIcon}
-      src={src}
-      alt={alt}
-      width={20}
-      height={20}
-    />
+    <a
+      className={styles.org}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Image
+        className={styles.inlineIcon}
+        src={src}
+        alt=""
+        width={20}
+        height={20}
+      />
+      {children}
+    </a>
   );
 }
 
@@ -33,21 +49,32 @@ export default function Home() {
     <Layout>
       <p className={styles.paragraph}>
         I&rsquo;m a Software Engineer and student at the{" "}
-        <Logo src="/waterloo.svg" alt="University of Waterloo" />
-        University of Waterloo.
+        <Org src="/waterloo.svg" href="https://uwaterloo.ca/">
+          University of Waterloo
+        </Org>
+        .
       </p>
       <p className={styles.paragraph}>
-        Most recently at <Logo src="/forus.svg" alt="Forus" />
-        Forus in New York, building AI systems that make medication faster and
-        cheaper to get.
+        Most recently at{" "}
+        <Org src="/forus.svg" href="https://forus.com/">
+          Forus
+        </Org>{" "}
+        in New York, building AI systems that make medication faster and cheaper
+        to get.
       </p>
       <p className={styles.paragraph}>
-        I&rsquo;m a scout at <Logo src="/crv.png" alt="CRV" />
-        CRV, writing $25&ndash;100k cheques into pre-seed and seed startups.
+        I&rsquo;m a scout at{" "}
+        <Org src="/crv.png" href="https://www.crv.com/">
+          CRV
+        </Org>
+        , writing $25&ndash;100k cheques into pre-seed and seed startups.
       </p>
       <p className={styles.paragraph}>
-        Before that, <Logo src="/revisiondojo.png" alt="RevisionDojo" />
-        RevisionDojo (650k+ students), autonomous drones for forest fire
+        Before that,{" "}
+        <Org src="/revisiondojo.png" href="https://www.revisiondojo.com/">
+          RevisionDojo
+        </Org>{" "}
+        (650k+ students), autonomous drones for forest fire
         detection, a <A href="https://wossrobotics.ca/">robotics team</A> ranked
         among the best in Canada, a{" "}
         <A href="https://www.teenbuilders.club/">community</A> for ambitious
