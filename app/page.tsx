@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import Layout from "./components/Layout";
 import styles from "./page.module.css";
@@ -19,15 +20,23 @@ export default function Home() {
   return (
     <Layout>
       <p className={styles.paragraph}>
-        I&rsquo;m a software engineer and student at the University of Waterloo.
+        I&rsquo;m a Software Engineer and student at the{" "}
+        <Image
+          className={styles.inlineIcon}
+          src="/waterloo.svg"
+          alt="University of Waterloo"
+          width={18}
+          height={21}
+        />
+        University of Waterloo.
       </p>
       <p className={styles.paragraph}>
         Most recently, I worked at Forus in New York, building AI systems that
         help people access medication faster and more affordably.
       </p>
       <p className={styles.paragraph}>
-        I&rsquo;m also a scout at CRV and love meeting people working on
-        ambitious ideas.
+        I&rsquo;m a scout at CRV and love meeting people working on ambitious
+        ideas.
       </p>
       <p className={styles.paragraph}>
         Before that, I engineered products used by more than 650,000 students at

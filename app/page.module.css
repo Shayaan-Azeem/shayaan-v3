@@ -9,6 +9,14 @@
   margin-top: 8px;
 }
 
+.inlineIcon {
+  display: inline-block;
+  vertical-align: -3px;
+  margin-right: 5px;
+  width: auto;
+  height: 1.05em;
+}
+
 .link {
   text-decoration: underline;
 }
