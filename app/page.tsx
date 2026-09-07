@@ -19,37 +19,36 @@ export default function Home() {
   return (
     <Layout>
       <p className={styles.paragraph}>
-        hi, my name is shayaan, i&rsquo;m a software engineer and a student at
-        the university of waterloo
+        I&rsquo;m a software engineer and student at the University of Waterloo.
       </p>
       <p className={styles.paragraph}>
-        i was most recently an engineer in nyc at Forus (backed by Thrive, GC,
-        Accel and BCV), building the ai network to help people get medicine
-        cheaper, faster and easier
+        Most recently, I worked at Forus in New York, building AI systems that
+        help people access medication faster and more affordably. I&rsquo;m also
+        a scout at CRV and love meeting people working on ambitious ideas.
       </p>
       <p className={styles.paragraph}>
-        i&rsquo;m excited about startups and early stage companies, and
-        i&rsquo;m a scout at CRV. if you&rsquo;re building something cool and
-        want to chat, reach me at shayaanazeem10 [at] gmail [dot] com
+        Before that, I engineered products used by more than 650,000 students at
+        RevisionDojo, built autonomous drones for detecting forest fires, and
+        started a <A href="https://wossrobotics.ca/">robotics team</A> that
+        became one of the best in Canada.
       </p>
       <p className={styles.paragraph}>
-        some cool things i&rsquo;ve worked on in the past include: engineering
-        at revisiondojo, an edtech platform used by 650k+ students/teachers
-        across 180 countries, building autonomous drones to predict forest
-        fires, building a{" "}
-        <A href="https://www.teenbuilders.club/">community</A> for
-        cracked/ambitious teenagers building cool sh*t, growth intern at{" "}
-        <A href="https://hackclub.com/">hack club</A>, growing{" "}
-        <A href="https://www.instagram.com/starthackclub/">@starthackclub</A> to
-        100k followers, organizing{" "}
+        I&rsquo;ve also built{" "}
+        <A href="https://www.teenbuilders.club/">communities</A> for ambitious
+        teenagers, organized{" "}
         <A href="https://apocalypse.hackclub.com/">
-          canada&rsquo;s largest high school hackathon
-        </A>{" "}
-        and raising $50k for it, founding the{" "}
-        <A href="https://wossrobotics.ca/">robotics club</A> at my hs which
-        ranked top 62/2400 in the world, running a summer camp to teach kids how
-        to code, and taking bronze (3rd place) at the{" "}
-        <A href="https://wro-association.org/">canadian world robot olympiad</A>
+          Canada&rsquo;s largest high school hackathon
+        </A>
+        , raised over $50,000, and helped grow{" "}
+        <A href="https://www.instagram.com/starthackclub/">@starthackclub</A> to
+        100,000 followers.
+      </p>
+      <p className={styles.paragraph}>
+        If you&rsquo;re building something interesting, I&rsquo;d love to hear
+        from you.
+      </p>
+      <p className={styles.small}>
+        You can reach me at shayaanazeem10 [at] gmail [dot] com.
       </p>
     </Layout>
   );
