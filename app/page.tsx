@@ -70,7 +70,8 @@ export default function Home() {
         <Org src="/revisiondojo.png" href="https://www.revisiondojo.com/">
           RevisionDojo
         </Org>
-        , built autonomous drones for predicting forest fires, started a{" "}
+        , built <A href="https://tensorforest.com">autonomous drones</A> for
+        predicting forest fires, started a{" "}
         <A href="https://wossrobotics.ca/">robotics team</A> that{" "}
         <A href="https://www.oakvillenews.org/success/new-oakville-robotics-club-now-listed-among-best-in-the-world-9958475">
           became one of the best in Canada
