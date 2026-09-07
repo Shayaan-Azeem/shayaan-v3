@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Noto_Nastaliq_Urdu } from "next/font/google";
+import { Noto_Naskh_Arabic } from "next/font/google";
 import "./globals.css";
 
-const urdu = Noto_Nastaliq_Urdu({
+const urdu = Noto_Naskh_Arabic({
   subsets: ["arabic"],
   weight: "600",
   variable: "--font-urdu",

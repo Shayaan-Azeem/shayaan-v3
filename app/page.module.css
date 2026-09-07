@@ -11,18 +11,7 @@
 
 .org {
   display: inline;
-  padding: 2px 4px;
-  margin: 0 -3px;
-  border-radius: 6px;
   white-space: nowrap;
-  transition:
-    background-color 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.org:hover {
-  background-color: #f1f3f5;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
 }
 
 .inlineIcon {
@@ -33,12 +22,82 @@
   height: 1.05em;
 }
 
-.link {
-  text-decoration: underline;
+.hl {
+  padding: 2px 4px;
+  color: #000;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.link:hover {
-  opacity: 0.75;
+.waterloo {
+  background-color: #fff3c4;
+}
+
+.waterloo:hover {
+  color: #fff;
+  background-color: #f59e0b;
+}
+
+.forus {
+  background-color: #e7e5df;
+}
+
+.forus:hover {
+  color: #f2f0ec;
+  background-color: #2a2828;
+}
+
+.crv {
+  background-color: #e6d9ff;
+}
+
+.crv:hover {
+  color: #fff;
+  background-color: #8b5fff;
+}
+
+.revisiondojo {
+  background-color: rgba(85, 185, 249, 0.2);
+}
+
+.revisiondojo:hover {
+  color: #fff;
+  background-color: #55b9f9;
+}
+
+.robotics {
+  background-color: #dbeafe;
+}
+
+.robotics:hover {
+  color: #fff;
+  background-color: #4a9fe7;
+}
+
+.teenbuilders {
+  background-color: #fed7aa;
+}
+
+.teenbuilders:hover {
+  color: #fff;
+  background-color: #ea580c;
+}
+
+.hackathon {
+  background-color: #ffe1f1;
+}
+
+.hackathon:hover {
+  color: #fff;
+  background-color: #ff8bc7;
+}
+
+.hackclub {
+  background-color: #fecaca;
+}
+
+.hackclub:hover {
+  color: #fff;
+  background-color: #dc2626;
 }
 
 .cards {
@@ -139,8 +198,8 @@
 
 .shots.single .shot:nth-child(1) {
   z-index: 1;
-  width: 42px;
-  height: 55px;
+  width: 62px;
+  height: 42px;
   --x: 0px;
   --y: 0px;
   --r: -2deg;
