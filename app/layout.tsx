@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
-import { Noto_Naskh_Arabic } from "next/font/google";
+import { Manrope, Noto_Naskh_Arabic } from "next/font/google";
 import "./globals.css";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 const urdu = Noto_Naskh_Arabic({
   subsets: ["arabic"],
@@ -19,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={urdu.variable}>
+    <html lang="en" className={`${manrope.variable} ${urdu.variable}`}>
       <body>{children}</body>
     </html>
   );
