@@ -78,8 +78,10 @@ export default function Home() {
           one of the best robotics teams in Canada
         </A>
         ,{" "}
-        <A href="https://www.teenbuilders.club/">communities</A> for ambitious
-        teenagers,{" "}
+        <A href="https://www.teenbuilders.club/">
+          communities for ambitious teenagers
+        </A>
+        ,{" "}
         <A href="https://apocalypse.hackclub.com/">
           Canada&rsquo;s largest high school hackathon
         </A>{" "}
