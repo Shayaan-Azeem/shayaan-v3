@@ -67,7 +67,8 @@ export default function Home() {
         <Org src="/crv.png" href="https://www.crv.com/">
           CRV
         </Org>
-        , writing $25&ndash;100k cheques into pre-seed and seed startups.
+        , where I spend time with early stage founders and write cheques of
+        $25k&ndash;100k.
       </p>
       <p className={styles.paragraph}>
         Before that,{" "}
