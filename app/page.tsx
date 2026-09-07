@@ -8,7 +8,7 @@ function Org({
   href,
   children,
 }: {
-  src: string;
+  src?: string;
   href: string;
   children: ReactNode;
 }) {
@@ -19,13 +19,15 @@ function Org({
       target="_blank"
       rel="noopener noreferrer"
     >
-      <Image
-        className={styles.inlineIcon}
-        src={src}
-        alt=""
-        width={20}
-        height={20}
-      />
+      {src ? (
+        <Image
+          className={styles.inlineIcon}
+          src={src}
+          alt=""
+          width={20}
+          height={20}
+        />
+      ) : null}
       {children}
     </a>
   );
@@ -44,10 +46,7 @@ export default function Home() {
     <Layout>
       <p className={styles.paragraph}>
         I&rsquo;m a Software Engineer and student at the{" "}
-        <Org src="/waterloo.svg" href="https://uwaterloo.ca/">
-          University of Waterloo
-        </Org>
-        .
+        <Org href="https://uwaterloo.ca/">University of Waterloo</Org>.
       </p>
       <p className={styles.paragraph}>
         Most recently, I worked at{" "}
