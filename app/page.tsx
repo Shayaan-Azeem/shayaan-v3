@@ -60,7 +60,7 @@ export default function Home() {
       <p className={styles.paragraph}>
         I&rsquo;m a scout at{" "}
         <Org src="/crv.png" href="https://www.crv.com/">
-          CRV
+          Charles River Ventures
         </Org>
         , where I spend time with early stage founders and write cheques of
         $25k&ndash;100k into pre-seed/seed startups.
