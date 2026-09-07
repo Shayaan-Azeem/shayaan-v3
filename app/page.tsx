@@ -66,8 +66,7 @@ export default function Home() {
         $25k&ndash;100k into pre-seed/seed startups.
       </p>
       <p className={styles.paragraph}>
-        In the past, I&rsquo;ve built products used by more than 650,000
-        students at{" "}
+        In the past, I&rsquo;ve built products at{" "}
         <Org src="/revisiondojo.png" href="https://www.revisiondojo.com/">
           RevisionDojo
         </Org>
