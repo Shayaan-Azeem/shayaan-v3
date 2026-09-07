@@ -43,7 +43,8 @@ export default function Home() {
       </p>
       <p className={styles.paragraph}>
         I&rsquo;m a scout at <Logo src="/crv.png" alt="CRV" />
-        CRV and love meeting people working on ambitious ideas.
+        CRV, investing $25&ndash;100k scout cheques into promising pre-seed and
+        seed startups. I love meeting people working on ambitious ideas.
       </p>
       <p className={styles.paragraph}>
         Before that, I engineered products used by more than 650,000 students at{" "}
