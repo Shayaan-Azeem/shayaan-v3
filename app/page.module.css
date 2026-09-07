@@ -10,12 +10,14 @@
 }
 
 .org {
-  display: inline;
+  display: inline-block;
   white-space: nowrap;
   padding: 2px 5px;
   margin: 0 -2px;
   border-radius: 6px;
-  transition: background-color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
 }
 
 .paragraph a,
@@ -39,6 +41,7 @@
 .small a.org:hover {
   color: var(--text);
   background-color: rgba(0, 0, 0, 0.05);
+  transform: rotate(-2deg) scale(1.03);
 }
 
 .inlineIcon {
