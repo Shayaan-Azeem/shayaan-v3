@@ -23,8 +23,11 @@ export default function Home() {
       </p>
       <p className={styles.paragraph}>
         Most recently, I worked at Forus in New York, building AI systems that
-        help people access medication faster and more affordably. I&rsquo;m also
-        a scout at CRV and love meeting people working on ambitious ideas.
+        help people access medication faster and more affordably.
+      </p>
+      <p className={styles.paragraph}>
+        I&rsquo;m also a scout at CRV and love meeting people working on
+        ambitious ideas.
       </p>
       <p className={styles.paragraph}>
         Before that, I engineered products used by more than 650,000 students at
