@@ -187,6 +187,30 @@
   color: var(--muted);
 }
 
+.favourites {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+}
+
+.favourite {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 5px 6px;
+  margin: 0 -6px;
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+}
+
+.favourite:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.favouriteTitle {
+  font-size: 16px;
+}
+
 .list {
   margin-top: 8px;
 }
