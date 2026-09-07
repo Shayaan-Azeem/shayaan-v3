@@ -3,6 +3,18 @@ import type { ReactNode } from "react";
 import Layout from "./components/Layout";
 import styles from "./page.module.css";
 
+function Logo({ src, alt }: { src: string; alt: string }) {
+  return (
+    <Image
+      className={styles.inlineIcon}
+      src={src}
+      alt={alt}
+      width={20}
+      height={20}
+    />
+  );
+}
+
 function A({ href, children }: { href: string; children: ReactNode }) {
   return (
     <a
@@ -21,25 +33,21 @@ export default function Home() {
     <Layout>
       <p className={styles.paragraph}>
         I&rsquo;m a Software Engineer and student at the{" "}
-        <Image
-          className={styles.inlineIcon}
-          src="/waterloo.svg"
-          alt="University of Waterloo"
-          width={18}
-          height={21}
-        />
+        <Logo src="/waterloo.svg" alt="University of Waterloo" />
         University of Waterloo.
       </p>
       <p className={styles.paragraph}>
-        Most recently, I worked at Forus in New York, building AI systems that
-        help people access medication faster and more affordably.
+        Most recently, I worked at <Logo src="/forus.svg" alt="Forus" />
+        Forus in New York, building AI systems that help people access
+        medication faster and more affordably.
       </p>
       <p className={styles.paragraph}>
-        I&rsquo;m a scout at CRV and love meeting people working on ambitious
-        ideas.
+        I&rsquo;m a scout at <Logo src="/crv.png" alt="CRV" />
+        CRV and love meeting people working on ambitious ideas.
       </p>
       <p className={styles.paragraph}>
-        Before that, I engineered products used by more than 650,000 students at
+        Before that, I engineered products used by more than 650,000 students at{" "}
+        <Logo src="/revisiondojo.png" alt="RevisionDojo" />
         RevisionDojo, built autonomous drones for detecting forest fires, and
         started a <A href="https://wossrobotics.ca/">robotics team</A> that
         became one of the best in Canada.
