@@ -69,20 +69,19 @@ export default function Home() {
         <Org src="/revisiondojo.png" href="https://www.revisiondojo.com/">
           RevisionDojo
         </Org>
-        , built <A href="https://tensorforest.com">autonomous drones</A> for
-        predicting forest fires, started a{" "}
-        <A href="https://wossrobotics.ca/">robotics team</A> that{" "}
+        , <A href="https://tensorforest.com">autonomous drones</A> to predict
+        forest fires,{" "}
         <A href="https://www.oakvillenews.org/success/new-oakville-robotics-club-now-listed-among-best-in-the-world-9958475">
-          became one of the best in Canada
-        </A>
-        , built <A href="https://www.teenbuilders.club/">communities</A> for
-        ambitious teenagers, organized{" "}
+          one of the best
+        </A>{" "}
+        <A href="https://wossrobotics.ca/">robotics teams</A> in Canada,{" "}
+        <A href="https://www.teenbuilders.club/">communities</A> for ambitious
+        teenagers,{" "}
         <A href="https://apocalypse.hackclub.com/">
           Canada&rsquo;s largest high school hackathon
-        </A>
-        , and grew{" "}
-        <A href="https://www.instagram.com/starthackclub/">@starthackclub</A> to
-        100,000 followers.
+        </A>{" "}
+        and{" "}
+        <A href="https://www.instagram.com/starthackclub/">@starthackclub</A>.
       </p>
       <p className={styles.small}>
         You can reach me at shayaanazeem10 [at] gmail [dot] com or{" "}
