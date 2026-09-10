@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import styles from "./Layout.module.css";
+import NavIcon from "./NavIcons";
 
 const NAV = [
   { href: "/projects", label: "projects" },
@@ -32,13 +33,16 @@ export default function Layout({
           </Link>
           <div className={styles.nav}>
             {NAV.map((item) => (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.href} href={item.href} aria-label={item.label}>
                 <span
                   className={`${styles.navLink} ${
                     active === item.href ? styles.navLinkActive : ""
                   }`}
                 >
-                  {item.label}
+                  <span className={styles.navIcon}>
+                    <NavIcon href={item.href} />
+                  </span>
+                  <span className={styles.navLabel}>{item.label}</span>
                 </span>
               </Link>
             ))}
