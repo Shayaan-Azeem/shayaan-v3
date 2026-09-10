@@ -1,9 +1,9 @@
-import { Bookmark, BookOpen, Calendar, Code, Heart } from "lucide-react";
+import { Bookmark, BookOpen, Calendar, Heart, SquareCode } from "lucide-react";
 import type { ComponentType } from "react";
 
 /** Icons shown instead of the nav labels on narrow screens, keyed by nav href. */
 const NAV_ICONS: Record<string, ComponentType<{ size?: number }>> = {
-  "/projects": Code,
+  "/projects": SquareCode,
   "/fieldnotes": BookOpen,
   "/philosophy": Heart,
   "/events": Calendar,

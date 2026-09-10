@@ -607,7 +607,12 @@
   }
 
   .writingYearGroup {
-    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .writingYear {
+    padding-top: 20px;
+    padding-bottom: 8px;
   }
 
   .writingRow {
