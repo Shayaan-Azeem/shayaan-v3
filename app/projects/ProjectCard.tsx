@@ -3,15 +3,21 @@ import styles from "../page.module.css";
 import type { Project } from "./data";
 import ProjectMedia from "./ProjectMedia";
 
+/**
+ * `featured` cards (home) label every project and highlight awards; `gallery`
+ * cards (projects page) show the description and only an explicit period.
+ */
 export default function ProjectCard({
   project,
   mediaSizes,
-  showDescription = false,
+  variant,
 }: {
   project: Project;
   mediaSizes: string;
-  showDescription?: boolean;
+  variant: "featured" | "gallery";
 }) {
+  const featured = variant === "featured";
+
   return (
     <a
       className={`${styles.homeProjectCard} ${styles.projectsPageCard}`}
@@ -23,19 +29,21 @@ export default function ProjectCard({
       <ProjectMedia project={project} sizes={mediaSizes} />
       <span className={styles.homeProjectTitle}>
         {project.title}
-        {project.award ? (
+        {featured && project.award ? (
           <span
             className={`${styles.homeProjectPeriod} ${styles.homeProjectAward}`}
           >
             <AnnotationHighlight>{project.award}</AnnotationHighlight>
           </span>
-        ) : project.period ? (
-          <span className={styles.homeProjectPeriod}>{project.period}</span>
+        ) : project.period || featured ? (
+          <span className={styles.homeProjectPeriod}>
+            {project.period ?? "Project"}
+          </span>
         ) : null}
       </span>
-      {showDescription ? (
+      {featured ? null : (
         <span className={styles.homeProjectDesc}>{project.desc}</span>
-      ) : null}
+      )}
     </a>
   );
 }

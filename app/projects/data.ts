@@ -69,7 +69,6 @@ export const PROJECTS: Project[] = [
     video: "/projects/tensorforest-film.mp4",
     videoEffect: "ascii",
     shortMedia: true,
-    period: "Project",
     featured: true,
   },
   {

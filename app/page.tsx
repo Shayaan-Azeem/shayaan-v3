@@ -109,6 +109,7 @@ export default function Home() {
               key={project.title}
               project={project}
               mediaSizes={FEATURED_MEDIA_SIZES}
+              variant="featured"
             />
           ))}
         </div>

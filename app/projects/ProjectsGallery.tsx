@@ -68,7 +68,7 @@ export default function ProjectsGallery() {
             key={project.title}
             project={project}
             mediaSizes={MEDIA_SIZES}
-            showDescription
+            variant="gallery"
           />
         ))}
       </div>
