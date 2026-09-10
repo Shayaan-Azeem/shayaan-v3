@@ -147,9 +147,13 @@ export function paintHalftoneFrame(
   }
 }
 
+/** How early a canvas starts fetching its video before it scrolls into view. */
+const PRELOAD_MARGIN = "200px";
+
 /**
- * Paints sampled video frames onto a canvas, throttled to `frameInterval` and
- * paused while the canvas is off screen.
+ * Paints sampled video frames onto a canvas, throttled to `frameInterval`. The
+ * video is only fetched once the canvas approaches the viewport, and pauses
+ * again while it is off screen.
  */
 export function useSampledVideo({
   canvasRef,
@@ -184,7 +188,7 @@ export function useSampledVideo({
 
     let animationFrame = 0;
     let lastFrame = 0;
-    let isVisible = true;
+    let isVisible = false;
 
     const resize = () => resizeToDisplaySize(canvas);
 
@@ -203,17 +207,25 @@ export function useSampledVideo({
       paint(context, pixels, columns, rows);
     };
 
-    const observer = new IntersectionObserver(([entry]) => {
-      isVisible = entry.isIntersecting;
-      if (isVisible) void video.play().catch(() => undefined);
-      else video.pause();
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+
+        if (!isVisible) {
+          video.pause();
+          return;
+        }
+
+        if (video.readyState === video.HAVE_NOTHING) video.load();
+        void video.play().catch(() => undefined);
+      },
+      { rootMargin: PRELOAD_MARGIN },
+    );
     const resizeObserver = new ResizeObserver(resize);
 
     observer.observe(canvas);
     resizeObserver.observe(canvas);
     resize();
-    void video.play().catch(() => undefined);
     animationFrame = requestAnimationFrame(draw);
 
     return () => {

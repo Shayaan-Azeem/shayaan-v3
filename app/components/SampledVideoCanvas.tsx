@@ -47,11 +47,10 @@ export default function SampledVideoCanvas({
         ref={videoRef}
         src={src}
         poster={poster}
-        autoPlay
         muted
         loop
         playsInline
-        preload="auto"
+        preload="none"
         aria-hidden="true"
         style={HIDDEN_VIDEO_STYLE}
       />

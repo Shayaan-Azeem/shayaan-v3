@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
     desc: "Built Street Fighter, but IRL. An AR pose-based fighting game where you hit targets and get scored in real time. Used Gemini to provide audio feedback and help you train.",
     images: ["/projects/coachbob.jpg"],
     href: "https://devpost.com/software/coach-bob",
-    video: "/projects/coachbob-film.mp4?v=3",
+    video: "/projects/coachbob-film.mp4",
     videoEffect: "ascii",
     award: "Hack The North Winner",
     featured: true,
