@@ -39,33 +39,6 @@
   color: #a8a29e;
 }
 
-.animatedName {
-  display: inline-grid;
-  white-space: nowrap;
-}
-
-.animatedNamePlaceholder,
-.manimName {
-  grid-area: 1 / 1;
-}
-
-.manimName {
-  opacity: 0;
-}
-
-.animatedNamePlaceholder,
-.manimName {
-  transition: opacity 0.15s ease;
-}
-
-.animatedNameReady .animatedNamePlaceholder {
-  opacity: 0;
-}
-
-.animatedNameReady .manimName {
-  opacity: 1;
-}
-
 .nav {
   text-align: center;
 }

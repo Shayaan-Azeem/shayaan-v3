@@ -1,14 +1,13 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import AnnotationHighlight from "./components/AnnotationHighlight";
-import AsciiImage from "./components/AsciiImage";
-import AsciiVideo from "./components/AsciiVideo";
 import CopyEmail from "./components/CopyEmail";
-import HalftoneVideo from "./components/HalftoneVideo";
 import Layout from "./components/Layout";
 import ReadMore from "./components/ReadMore";
 import styles from "./page.module.css";
+import ProjectCard from "./projects/ProjectCard";
 import { PROJECTS } from "./projects/data";
+
+const FEATURED_MEDIA_SIZES = "(max-width: 639px) calc(100vw - 40px), 490px";
 
 function Org({
   src,
@@ -105,102 +104,12 @@ export default function Home() {
         <div
           className={`${styles.homeProjectGrid} ${styles.homeFeaturedGrid}`}
         >
-          {PROJECTS.filter((project) =>
-            ["Forus", "General Learning", "Coach Bob", "TensorForest"].includes(
-              project.title,
-            ),
-          ).map((project) => (
-            <a
+          {PROJECTS.filter((project) => project.featured).map((project) => (
+            <ProjectCard
               key={project.title}
-              className={`${styles.homeProjectCard} ${styles.projectsPageCard}`}
-              href={project.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View ${project.title}`}
-            >
-              <span
-                className={`${styles.homeProjectImage} ${
-                  project.overlayLogo ? styles.homeProjectImageBranded : ""
-                } ${
-                  project.shortMedia ? styles.homeProjectImageShort : ""
-                }`}
-              >
-                {project.imageEffect === "ascii" ? (
-                  <AsciiImage
-                    src={project.images[0]}
-                    alt={`${project.title} project preview rendered as ASCII art`}
-                    className={styles.homeProjectAscii}
-                  />
-                ) : project.videoEffect === "ascii" && project.video ? (
-                  <AsciiVideo
-                    src={project.video}
-                    poster={
-                      project.hideVideoPoster ? undefined : project.images[0]
-                    }
-                    className={styles.homeProjectAscii}
-                  />
-                ) : project.videoEffect === "halftone" && project.video ? (
-                  <HalftoneVideo
-                    src={project.video}
-                    poster={
-                      project.hideVideoPoster ? undefined : project.images[0]
-                    }
-                    className={styles.homeProjectHalftone}
-                  />
-                ) : project.video ? (
-                  <video
-                    src={project.video}
-                    poster={
-                      project.hideVideoPoster ? undefined : project.images[0]
-                    }
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    aria-hidden="true"
-                  />
-                ) : (
-                  <Image
-                    src={project.images[0]}
-                    alt={`${project.title} project preview`}
-                    fill
-                    sizes="(max-width: 639px) calc(100vw - 40px), 490px"
-                  />
-                )}
-                {project.overlayLogo ? (
-                  <span className={styles.homeProjectLogo}>
-                    <Image
-                      src={project.overlayLogo}
-                      alt=""
-                      width={499}
-                      height={136}
-                    />
-                  </span>
-                ) : null}
-                {project.overlayText ? (
-                  <span className={styles.homeProjectWordmark}>
-                    {project.overlayText}
-                  </span>
-                ) : null}
-              </span>
-              <span className={styles.homeProjectTitle}>
-                {project.title}
-                {project.title === "Coach Bob" ? (
-                  <span
-                    className={`${styles.homeProjectPeriod} ${styles.homeProjectAward}`}
-                  >
-                    <AnnotationHighlight>
-                      Hack The North Winner
-                    </AnnotationHighlight>
-                  </span>
-                ) : project.period || project.title === "TensorForest" ? (
-                  <span className={styles.homeProjectPeriod}>
-                    {project.period ?? "Project"}
-                  </span>
-                ) : null}
-              </span>
-            </a>
+              project={project}
+              mediaSizes={FEATURED_MEDIA_SIZES}
+            />
           ))}
         </div>
       </section>
