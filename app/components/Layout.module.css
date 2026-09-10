@@ -5,6 +5,19 @@
   padding: 0 20px;
 }
 
+.containerWide {
+  max-width: none;
+  padding-right: clamp(20px, 4vw, 64px);
+  padding-left: clamp(20px, 4vw, 64px);
+}
+
+.containerWide .header {
+  width: 100%;
+  max-width: 600px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -14,41 +27,42 @@
 }
 
 .name {
-  font-size: 30px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 24px;
   transition: color 0.2s;
 }
 
 .name:hover {
-  color: #4b5563;
+  color: #a8a29e;
 }
 
-.nameEn,
-.nameUr {
-  grid-area: 1 / 1;
-  transition: opacity 0.25s ease;
-}
-
-.name {
+.animatedName {
   display: inline-grid;
-  align-items: center;
-  justify-items: center;
+  white-space: nowrap;
 }
 
-.nameUr {
-  opacity: 0;
-  font-family: var(--font-urdu), serif;
-  font-size: 1.35em;
-  line-height: 1.6;
+.animatedNamePlaceholder,
+.manimName {
+  grid-area: 1 / 1;
 }
 
-.name:hover .nameEn {
+.manimName {
   opacity: 0;
 }
 
-.name:hover .nameUr {
+.animatedNamePlaceholder,
+.manimName {
+  transition: opacity 0.15s ease;
+}
+
+.animatedNameReady .animatedNamePlaceholder {
+  opacity: 0;
+}
+
+.animatedNameReady .manimName {
   opacity: 1;
 }
 
@@ -58,8 +72,11 @@
 
 .navLink {
   margin-right: 16px;
-  font-size: 20px;
-  transition: color 0.2s;
+  color: #a8a29e;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navLink:hover {
@@ -67,7 +84,7 @@
 }
 
 .navLinkActive {
-  font-weight: 700;
+  font-weight: 400;
   color: var(--active);
 }
 
@@ -82,7 +99,6 @@
   }
 
   .name {
-    font-size: 24px;
     padding-right: 32px;
   }
 

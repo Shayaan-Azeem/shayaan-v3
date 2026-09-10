@@ -1,0 +1,48 @@
+.readMore {
+  margin-top: 0;
+}
+
+.trigger {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #e7e5e4;
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  transition: color 0.15s ease;
+}
+
+.trigger:hover {
+  color: #fff;
+}
+
+.trigger:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.panel > :first-child {
+  margin-top: 0;
+}
+
+.panel > :last-child {
+  margin-bottom: 12px;
+}
+
+.panelOpen {
+  max-height: 240px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: none;
+  }
+}

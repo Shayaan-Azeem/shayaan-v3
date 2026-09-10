@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Manrope, Noto_Naskh_Arabic } from "next/font/google";
+import { Geist, Inter } from "next/font/google";
 import "./globals.css";
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-const urdu = Noto_Naskh_Arabic({
-  subsets: ["arabic"],
-  weight: "600",
-  variable: "--font-urdu",
+const geist = Geist({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-geist",
 });
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${urdu.variable}`}>
+    <html lang="en" className={`${inter.variable} ${geist.variable}`}>
       <body>{children}</body>
     </html>
   );
