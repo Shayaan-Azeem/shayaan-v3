@@ -1,26 +1,36 @@
-import type React from "react"
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import type { Metadata } from "next";
+import { Geist, Inter } from "next/font/google";
+import AsciiFooter from "./components/AsciiFooter";
+import "./globals.css";
 
-export const metadata = {
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const geist = Geist({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-geist",
+});
+
+export const metadata: Metadata = {
   title: "Shayaan Azeem",
-  description: "Personal website of Shayaan Azeem"
-}
+  description: "Shayaan Azeem is a software engineer studying Math and Philosophy at the University of Waterloo. Explore his projects, writing, and communities.",
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
-        <ThemeProvider 
-          attribute="class" 
-          defaultTheme="light" 
-          enableSystem={false} 
-          disableTransitionOnChange
-          themes={['light', 'dark', 'reading', 'matcha']}
-        >
-          {children}
-        </ThemeProvider>
+    <html lang="en" className={`${inter.variable} ${geist.variable}`}>
+      <body>
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        {children}
+        <AsciiFooter />
       </body>
     </html>
-  )
+  );
 }

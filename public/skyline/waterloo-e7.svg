@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660">
+  <title>Waterloo Engineering 7 front elevation</title>
+  <desc>Simplified flat front elevation based on the supplied E7 photographs: triangular facade panels, a recessed glass atrium, a right wing, and the entrance canopy. Opaque white glazing preserves the facade against the skyline.</desc>
+  <defs>
+    <pattern id="panels" width="108" height="76" patternUnits="userSpaceOnUse" x="12" y="12">
+      <rect width="108" height="76" fill="#fff"/>
+      <path d="M0 4H108L54 35Z M0 72H108L54 41Z" fill="#000"/>
+      <path d="M0 0V76M108 0V76M0 38H108" fill="none" stroke="#000" stroke-width="3"/>
+    </pattern>
+    <pattern id="glass" width="44" height="76" patternUnits="userSpaceOnUse" x="558" y="20">
+      <rect width="44" height="76" fill="#fff"/>
+      <path d="M0 0H44V76H0Z" fill="none" stroke="#000" stroke-width="6"/>
+    </pattern>
+    <pattern id="shopfront" width="72" height="88" patternUnits="userSpaceOnUse" x="12" y="566">
+      <rect width="72" height="88" fill="#000"/>
+      <rect x="7" y="8" width="25" height="72" fill="#fff"/>
+      <rect x="38" y="8" width="25" height="72" fill="#fff"/>
+    </pattern>
+  </defs>
+  <!-- Flat facade planes: no vanishing point, side faces, or perspective. -->
+  <path d="M12 12H552V20H774V28H988V660H12Z" fill="#fff"/>
+  <path d="M12 12H552V568H12Z" fill="url(#panels)" stroke="#000" stroke-width="7"/>
+  <path d="M558 20H774V568H558Z" fill="url(#glass)" stroke="#000" stroke-width="7"/>
+  <path d="M786 28H988V568H786Z" fill="url(#panels)" stroke="#000" stroke-width="7"/>
+  <path d="M552 16H560V568H552Z M774 24H786V568H774Z" fill="#000"/>
+  <!-- Strong slab edges separate seven rows of faceted glazing. -->
+  <path d="M12 88H552M12 164H552M12 240H552M12 316H552M12 392H552M12 468H552M12 544H552
+    M786 104H988M786 180H988M786 256H988M786 332H988M786 408H988M786 484H988M786 560H988"
+    fill="none" stroke="#000" stroke-width="7"/>
+  <path d="M562 166H770M562 318H770M562 470H770" fill="none" stroke="#000" stroke-width="10"/>
+  <rect x="12" y="566" width="976" height="94" fill="url(#shopfront)"/>
+  <!-- The broad, thin entrance canopy and upright supports meet the street. -->
+  <rect x="0" y="560" width="1000" height="15" fill="#000"/>
+  <path d="M28 572V660M232 572V660M438 572V660M778 572V660M972 572V660" stroke="#000" stroke-width="12"/>
+  <rect x="592" y="580" width="150" height="80" fill="#fff" stroke="#000" stroke-width="7"/>
+  <path d="M642 582V660M692 582V660M594 601H740" fill="none" stroke="#000" stroke-width="6"/>
+  <path d="M6 657H994" stroke="#000" stroke-width="6"/>
+</svg>
