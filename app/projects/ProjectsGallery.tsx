@@ -1,27 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import styles from "../page.module.css";
-import ProjectCard from "./ProjectCard";
-import { PROJECTS, type Project } from "./data";
 
-type ProjectCategory = "projects" | "work" | "communities";
+type ProjectCategory = "project" | "work" | "community";
 
 const FILTERS: Array<{ label: string; value: ProjectCategory }> = [
-  { label: "Projects", value: "projects" },
+  { label: "Projects", value: "project" },
   { label: "Work", value: "work" },
-  { label: "Communities", value: "communities" },
+  { label: "Communities", value: "community" },
 ];
 
-const MEDIA_SIZES = "(max-width: 767px) calc(100vw - 40px), 288px";
-
-function getProjectCategory(project: Project): ProjectCategory {
-  if (project.category === "community") return "communities";
-  if (project.category === "project") return "projects";
-  return "work";
-}
-
-export default function ProjectsGallery() {
+export default function ProjectsGallery({
+  items,
+}: {
+  items: { title: string; category: ProjectCategory; card: ReactNode }[];
+}) {
   const [activeFilters, setActiveFilters] = useState<Set<ProjectCategory>>(
     () => new Set(FILTERS.map((filter) => filter.value)),
   );
@@ -35,14 +29,18 @@ export default function ProjectsGallery() {
     });
   }
 
-  const visibleProjects = PROJECTS.filter((project) =>
-    activeFilters.has(getProjectCategory(project)),
+  const visibleProjects = items.filter((project) =>
+    activeFilters.has(project.category),
   );
 
   return (
     <>
       <div className={styles.projectFilterBar}>
-        <div className={styles.projectFilterTabs} aria-label="Filter projects">
+        <div
+          className={styles.projectFilterTabs}
+          role="group"
+          aria-label="Filter projects"
+        >
           {FILTERS.map((filter) => {
             const selected = activeFilters.has(filter.value);
 
@@ -54,6 +52,7 @@ export default function ProjectsGallery() {
                 }`}
                 type="button"
                 aria-pressed={selected}
+                aria-controls="project-results"
                 onClick={() => toggleFilter(filter.value)}
               >
                 {filter.label}
@@ -62,16 +61,29 @@ export default function ProjectsGallery() {
           })}
         </div>
       </div>
-      <div className={`${styles.homeProjectGrid} ${styles.projectsPageGrid}`}>
+      <p className="sr-only" role="status">
+        {visibleProjects.length} of {items.length} projects shown.
+      </p>
+      <div
+        id="project-results"
+        className={`${styles.homeProjectGrid} ${styles.projectsPageGrid}`}
+      >
         {visibleProjects.map((project) => (
-          <ProjectCard
-            key={project.title}
-            project={project}
-            mediaSizes={MEDIA_SIZES}
-            variant="gallery"
-          />
+          <div key={project.title}>{project.card}</div>
         ))}
       </div>
+      {visibleProjects.length === 0 ? (
+        <div className={styles.projectEmpty}>
+          <p>Select a category to explore my work.</p>
+          <button
+            className={`${styles.projectFilterButton} ${styles.projectFilterButtonActive}`}
+            type="button"
+            onClick={() => setActiveFilters(new Set(FILTERS.map((filter) => filter.value)))}
+          >
+            Show all projects
+          </button>
+        </div>
+      ) : null}
     </>
   );
 }

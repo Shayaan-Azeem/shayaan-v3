@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useId, useState, type ReactNode } from "react";
 import styles from "./ReadMore.module.css";
 
 export default function ReadMore({
@@ -13,6 +13,7 @@ export default function ReadMore({
   children: ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const panelId = useId();
 
   return (
     <div className={styles.readMore}>
@@ -22,19 +23,19 @@ export default function ReadMore({
           type="button"
           className={styles.trigger}
           aria-expanded={isOpen}
-          aria-controls="previous-work"
+          aria-controls={panelId}
           onClick={() => setIsOpen((open) => !open)}
         >
           {isOpen ? "Read Less" : "Read More"}
         </button>
       </p>
       <div
-        id="previous-work"
+        id={panelId}
         className={`${styles.panel} ${isOpen ? styles.panelOpen : ""}`}
         aria-hidden={!isOpen}
         inert={!isOpen}
       >
-        {children}
+        <div className={styles.panelContent}>{children}</div>
       </div>
     </div>
   );

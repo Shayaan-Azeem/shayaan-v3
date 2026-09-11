@@ -1,10 +1,6 @@
 .homepage {
-  --text: #f5f5f4;
-  --muted: #a8a29e;
-  --link-hover: #ffffff;
-  --active: #ffffff;
   color: var(--text);
-  background-color: var(--background);
+  background-color: transparent;
   font-family:
     var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
     Arial, sans-serif;
@@ -13,13 +9,13 @@
 .homepage .paragraph a,
 .homepage .small a,
 .homepage .copyEmail {
-  color: #f5f5f4;
+  color: var(--text);
 }
 
 .paragraph {
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 1.6;
   margin: 12px 0;
 }
 
@@ -34,9 +30,9 @@
 .philosophy {
   margin-top: 48px;
   color: var(--text);
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .philosophy p + p {
@@ -72,25 +68,37 @@
   white-space: nowrap;
 }
 
+.skylineSpotlightTrigger {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
 .paragraph a,
 .small a,
 .copyEmail {
-  padding: 1px 4px;
-  margin: -1px -2px;
-  border-radius: 5px;
-  text-decoration: none;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  transition:
-    color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(23, 23, 23, 0.3);
+  text-underline-offset: 3px;
+  transition: none;
 }
 
 .paragraph a:hover,
 .small a:hover,
-.copyEmail:hover {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.12);
+.copyEmail:hover,
+.paragraph a:focus-visible,
+.small a:focus-visible,
+.copyEmail:focus-visible {
+  color: var(--text);
+  background-color: transparent;
+  text-decoration-color: currentColor;
 }
 
 .copyEmail {
@@ -117,6 +125,31 @@
 
 .homepage .homeProjects {
   margin-top: 40px;
+  margin-bottom: 0;
+}
+
+/* Let the full-width skyline sit behind the last row, not after a blank band. */
+.homepage + :global(footer) {
+  margin-top: clamp(-150px, -10vw, -92px);
+  z-index: 0;
+}
+
+.homepage .homeProjectCard {
+  position: relative;
+  z-index: 1;
+}
+
+.homepage .projectCardTextLink {
+  position: relative;
+  display: flow-root;
+  padding-bottom: 6px;
+}
+
+@media (max-width: 639px) {
+  .homepage + :global(footer) {
+    /* A stacked card would hide the landmarks; tuck the skyline to its label. */
+    margin-top: -24px;
+  }
 }
 
 .homeProjectGrid {
@@ -131,10 +164,69 @@
   text-decoration: none;
 }
 
+.projectMediaFrame {
+  position: relative;
+  display: block;
+}
+
+.projectMediaLink,
+.projectCardTextLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.videoPlaybackToggle {
+  position: absolute;
+  z-index: 3;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  color: #fff;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.videoPlaybackToggle svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.homeProjectCard:hover .videoPlaybackToggle,
+.homeProjectCard:focus-within .videoPlaybackToggle,
+.videoPlaybackToggle:focus-visible {
+  opacity: 1;
+}
+
+.videoPlaybackToggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
 .homeProjectCard:hover,
 .homeProjectCard:focus-visible,
-.homeProjectCard .homeProjectTitle {
+.homeProjectCard .homeProjectTitle,
+.projectCardTextLink:hover,
+.projectCardTextLink:focus-visible {
   text-decoration: none;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .videoPlaybackToggle {
+    opacity: 1;
+  }
 }
 
 .homeProjectImage {
@@ -225,6 +317,7 @@
 }
 
 .homeProjectTitle {
+  gap: 4px 8px;
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
@@ -238,8 +331,10 @@
 .homeProjectPeriod {
   margin-left: auto;
   color: var(--muted);
-  font-size: 11px;
-  font-weight: 400;
+  font-size: inherit;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: inherit;
   text-transform: none;
 }
 
@@ -251,6 +346,18 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
+}
+
+.projectDescriptionLink {
+  text-decoration: underline;
+  text-decoration-color: rgba(23, 23, 23, 0.3);
+  text-underline-offset: 3px;
+}
+
+.projectDescriptionLink:hover,
+.projectDescriptionLink:focus-visible {
+  color: var(--text);
+  text-decoration-color: currentColor;
 }
 
 .projectsPageShell {
@@ -285,6 +392,7 @@
 
 .projectFilterButton {
   padding: 4px 8px;
+  min-height: 28px;
   border: 0;
   border-radius: 4px;
   color: var(--muted);
@@ -306,8 +414,8 @@
 
 .projectFilterButtonActive,
 .projectFilterButtonActive:hover {
-  color: #d6d3d1;
-  background: #34312f;
+  color: var(--text);
+  background: #f1f1f3;
 }
 
 .homeFeaturedGrid {
@@ -319,23 +427,66 @@
   aspect-ratio: 4 / 3;
 }
 
+/* Keep desktop cards compact while preserving the original intro spacing. */
+@media (min-width: 1024px) {
+  .homepage {
+    flex: 1 0 auto;
+  }
+
+  .homepage .homeFeaturedGrid {
+    width: 100%;
+    row-gap: 24px;
+  }
+
+  .homepage .homeFeaturedGrid .homeProjectImage {
+    aspect-ratio: auto;
+    height: clamp(154px, calc(100svh / 3 - 86px), 174px);
+  }
+
+  .homepage .homeFeaturedGrid .homeProjectTitle {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .homepage .homeProjectWordmark {
+    font-size: 28px;
+  }
+
+  .homepage + :global(footer) {
+    --skyline-height: clamp(160px, calc(100svh - 600px), 270px);
+    margin-top: calc(var(--skyline-height) * -0.6);
+  }
+}
+
 .projectsPageCard .homeProjectImage {
   aspect-ratio: 3 / 2;
   border-radius: 8px;
 }
 
+@media (min-width: 1024px) and (max-height: 800px) {
+  .homepage .homeFeaturedGrid {
+    row-gap: 20px;
+  }
+}
+
 .projectsPageCard .homeProjectImage img,
 .projectsPageCard .homeProjectImage video,
 .projectsPageCard .homeProjectImage canvas {
-  transition: none;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.projectsPageCard:hover .homeProjectImage,
-.projectsPageCard:focus-visible .homeProjectImage {
-  opacity: 0.7;
+.projectsPageCard:hover .homeProjectImage img,
+.projectsPageCard:hover .homeProjectImage video,
+.projectsPageCard:hover .homeProjectImage canvas,
+.projectsPageCard:focus-within .homeProjectImage img,
+.projectsPageCard:focus-within .homeProjectImage video,
+.projectsPageCard:focus-within .homeProjectImage canvas {
+  transform: scale(1.03);
 }
 
 .projectsPageCard .homeProjectTitle {
+  gap: 4px 8px;
   margin-top: 16px;
   color: var(--text);
   font-family: var(--font-geist), sans-serif;
@@ -350,11 +501,6 @@
   margin-left: auto;
   color: var(--muted);
   font-family: inherit;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: normal;
-  line-height: 16px;
-  text-transform: none;
 }
 
 .projectsPageCard .homeProjectDesc {
@@ -382,15 +528,17 @@
   /* Leaves room for the hand-drawn ellipse, which overshoots the text box. */
   margin-right: 8px;
   margin-left: auto;
-  color: #ff4d4d;
+  color: #c52a36;
   font-family: var(--font-sans), sans-serif;
   font-size: 13px;
   font-weight: 460;
+  letter-spacing: normal;
   line-height: 16px;
+  text-transform: none;
 }
 
 .projectsPageCard .homeProjectPeriod.homeProjectAward {
-  color: #ff4d4d;
+  color: #c52a36;
   font-family: var(--font-sans), sans-serif;
   font-size: 13px;
   line-height: 16px;
@@ -398,7 +546,7 @@
 
 @media (max-width: 639px) {
   .homeProjects {
-    width: calc(100vw - 40px);
+    width: 100%;
     margin-top: 56px;
   }
 
@@ -422,7 +570,7 @@
 }
 
 .card:hover {
-  background: rgba(255, 255, 255, 0.055);
+  background: rgba(0, 0, 0, 0.035);
 }
 
 .shots {
@@ -437,11 +585,11 @@
   left: 50%;
   top: 50%;
   overflow: hidden;
-  border: 1.5px solid #292929;
+  border: 1.5px solid #ffffff;
   border-radius: 3px;
   box-shadow:
-    0 0.85px 5px rgba(0, 0, 0, 0.5),
-    0 0.43px 1.3px rgba(0, 0, 0, 0.32);
+    0 0.85px 5px rgba(0, 0, 0, 0.16),
+    0 0.43px 1.3px rgba(0, 0, 0, 0.1);
   transform: translate(-50%, -50%) translate(var(--x), var(--y))
     rotate(var(--r)) scale(var(--s, 1));
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
@@ -544,7 +692,7 @@
 }
 
 .writingYearGroup + .writingYearGroup {
-  border-top: 1px solid #292929;
+  border-top: 1px solid var(--border);
 }
 
 .writingYear {
@@ -570,7 +718,7 @@
 }
 
 .writingRow + .writingRow {
-  border-top: 1px solid #292929;
+  border-top: 1px solid var(--border);
 }
 
 .writingRow:hover {
@@ -594,11 +742,11 @@
 }
 
 .writingList:has(.writingRow:hover) .writingTitle {
-  opacity: 0.3;
+  color: var(--muted);
 }
 
 .writingList .writingRow:hover .writingTitle {
-  opacity: 1;
+  color: var(--text);
 }
 
 @media (max-width: 639px) {
@@ -631,7 +779,7 @@
 }
 
 .favouritesGroup + .favouritesGroup {
-  border-top: 1px solid #292929;
+  border-top: 1px solid var(--border);
 }
 
 .favouritesKind {
@@ -659,7 +807,7 @@
 }
 
 .favouriteRowPreview + .favouriteRowPreview .favouritesRow {
-  border-top: 1px solid #292929;
+  border-top: 1px solid var(--border);
 }
 
 .favouritesTitle {
@@ -702,11 +850,11 @@
 }
 
 .favouritesTable:has(.favouritesRow:hover) .favouritesTitle {
-  opacity: 0.3;
+  color: var(--muted);
 }
 
 .favouritesTable .favouritesRow:hover .favouritesTitle {
-  opacity: 1;
+  color: var(--text);
 }
 
 @media (max-width: 639px) {
@@ -715,3 +863,28 @@
   }
 }
 
+.emailFallback {
+  display: inline;
+  margin-left: 0.5em;
+  overflow-wrap: anywhere;
+}
+
+.projectEmpty {
+  padding: 40px 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.projectEmpty button {
+  margin-top: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projectsPageCard:hover .homeProjectImage img,
+  .projectsPageCard:hover .homeProjectImage video,
+  .projectsPageCard:hover .homeProjectImage canvas,
+  .projectsPageCard:focus-within .homeProjectImage img,
+  .projectsPageCard:focus-within .homeProjectImage video,
+  .projectsPageCard:focus-within .homeProjectImage canvas { transform: none; }
+  .shot { transition: none; }
+}

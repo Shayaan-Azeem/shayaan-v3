@@ -1,11 +1,11 @@
 :root {
-  --background: #1c1917;
-  --text: #f5f5f4;
-  --muted: #a8a29e;
-  --link-hover: #ffffff;
-  --active: #ffffff;
-  --border: #292929;
-  color-scheme: dark;
+  --background: #ffffff;
+  --text: #171717;
+  --muted: #737373;
+  --link-hover: #000000;
+  --active: #000000;
+  --border: #e5e5e5;
+  color-scheme: light;
 }
 
 * {
@@ -16,8 +16,6 @@
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
   background-color: var(--background);
   color: var(--text);
   font-family:
@@ -30,4 +28,61 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+body > footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 4000;
+  top: 12px;
+  left: 12px;
+  padding: 8px 16px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

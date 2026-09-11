@@ -6,15 +6,14 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: #e7e5e4;
+  color: var(--muted);
   font: inherit;
-  font-size: 14px;
-  line-height: 20px;
+  cursor: pointer;
   transition: color 0.15s ease;
 }
 
 .trigger:hover {
-  color: #fff;
+  color: var(--text);
 }
 
 .trigger:focus-visible {
@@ -24,21 +23,26 @@
 }
 
 .panel {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.panel > :first-child {
+.panelContent {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panelContent > :first-child {
   margin-top: 0;
 }
 
-.panel > :last-child {
+.panelContent > :last-child {
   margin-bottom: 12px;
 }
 
 .panelOpen {
-  max-height: 240px;
+  grid-template-rows: 1fr;
 }
 
 @media (prefers-reduced-motion: reduce) {

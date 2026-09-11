@@ -4,46 +4,62 @@ import type { Project } from "./data";
 import ProjectMedia from "./ProjectMedia";
 
 /**
- * `featured` cards (home) label every project and highlight awards; `gallery`
+ * `featured` cards label every project and can highlight awards; `gallery`
  * cards (projects page) show the description and only an explicit period.
  */
 export default function ProjectCard({
   project,
   mediaSizes,
   variant,
+  eager = false,
+  showAward = true,
 }: {
   project: Project;
   mediaSizes: string;
   variant: "featured" | "gallery";
+  eager?: boolean;
+  showAward?: boolean;
 }) {
   const featured = variant === "featured";
 
   return (
-    <a
+    <article
       className={`${styles.homeProjectCard} ${styles.projectsPageCard}`}
-      href={project.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`View ${project.title}`}
     >
-      <ProjectMedia project={project} sizes={mediaSizes} />
-      <span className={styles.homeProjectTitle}>
-        {project.title}
-        {featured && project.award ? (
-          <span
-            className={`${styles.homeProjectPeriod} ${styles.homeProjectAward}`}
-          >
-            <AnnotationHighlight>{project.award}</AnnotationHighlight>
-          </span>
-        ) : project.period || featured ? (
-          <span className={styles.homeProjectPeriod}>
-            {project.period ?? "Project"}
-          </span>
+      <ProjectMedia project={project} sizes={mediaSizes} eager={eager} />
+      <a
+        className={styles.projectCardTextLink}
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <h2 className={styles.homeProjectTitle}>
+          {project.title}
+          {featured && showAward && project.award ? (
+            <span
+              className={`${styles.homeProjectPeriod} ${styles.homeProjectAward}`}
+            >
+              <AnnotationHighlight>{project.award}</AnnotationHighlight>
+            </span>
+          ) : project.period || featured ? (
+            <span className={styles.homeProjectPeriod}>
+              {project.period ?? "Project"}
+            </span>
+          ) : null}
+        </h2>
+        {!featured && typeof project.desc === "string" ? (
+          <span className={styles.homeProjectDesc}>{project.desc}</span>
         ) : null}
-      </span>
-      {featured ? null : (
-        <span className={styles.homeProjectDesc}>{project.desc}</span>
-      )}
-    </a>
+      </a>
+      {!featured && Array.isArray(project.desc) ? (
+        <p className={styles.homeProjectDesc}>
+          {project.desc.map((part, index) => typeof part === "string" ? part : (
+            <a key={index} className={styles.projectDescriptionLink} href={part.href} target="_blank" rel="noopener noreferrer">
+              {part.label}
+            </a>
+          ))}
+        </p>
+      ) : null}
+    </article>
   );
 }

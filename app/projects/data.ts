@@ -1,11 +1,10 @@
 export type Project = {
   title: string;
   category: "work" | "project" | "community";
-  desc: string;
+  desc: string | (string | { label: string; href: string })[];
   images: string[];
   href: string;
   video?: string;
-  hideVideoPoster?: boolean;
   videoEffect?: "halftone" | "ascii";
   imageEffect?: "ascii";
   shortMedia?: boolean;
@@ -24,10 +23,9 @@ export const PROJECTS: Project[] = [
     images: ["/forus.svg"],
     href: "https://forus.com/",
     video: "/projects/forus-prior-authorization.mp4",
-    hideVideoPoster: true,
     overlayLogo: "/projects/forus-light.svg",
     shortMedia: true,
-    period: "Summer 2026",
+    period: "2026",
     featured: true,
   },
   {
@@ -39,7 +37,7 @@ export const PROJECTS: Project[] = [
     video: "/projects/revisiondojo-source.mp4",
     videoEffect: "halftone",
     overlayText: "General Learning",
-    period: "Fall 2025",
+    period: "2025",
     featured: true,
   },
   {
@@ -100,9 +98,19 @@ export const PROJECTS: Project[] = [
     href: "https://wossrobotics.ca/",
   },
   {
-    title: "UWaterloo.network",
+    title: "uwaterloo.network",
     category: "project",
-    desc: "I built a webring for Waterloo friends :)",
+    desc: [
+      "Built a webring for Waterloo friends that inspired students at ",
+      { label: "Cornell", href: "http://www.bigred.network/" },
+      ", ",
+      { label: "Guelph", href: "http://www.uguelph.network/" },
+      ", and ",
+      { label: "UT Austin", href: "http://www.utexas.network/" },
+      " to create .network sites for their own schools. A friend at Columbia bought ",
+      { label: "columbia.network", href: "http://www.columbia.network/" },
+      " too.",
+    ],
     images: ["/projects/uwaterloonetwork.png"],
     href: "https://uwaterloo.network/",
   },

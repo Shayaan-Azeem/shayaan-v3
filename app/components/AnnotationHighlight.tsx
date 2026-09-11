@@ -2,6 +2,7 @@
 
 import { RoughNotation } from "react-rough-notation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import useReducedMotion from "./useReducedMotion";
 
 export default function AnnotationHighlight({
   children,
@@ -13,6 +14,7 @@ export default function AnnotationHighlight({
   delay?: number;
 }) {
   const [show, setShow] = useState(false);
+  const reducedMotion = useReducedMotion();
   const containerRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -51,6 +53,7 @@ export default function AnnotationHighlight({
         strokeWidth={1.5}
         padding={[2, 6]}
         animationDuration={800}
+        animate={!reducedMotion}
       >
         {children}
       </RoughNotation>

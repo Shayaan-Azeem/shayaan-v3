@@ -41,6 +41,7 @@ export default function AsciiImage({
         source,
         source.naturalWidth,
         source.naturalHeight,
+        canvas.width / canvas.height,
       );
       paintAsciiFrame(context, pixels, COLUMNS, ROWS);
     };

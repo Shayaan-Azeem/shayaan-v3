@@ -1,0 +1,124 @@
+.footer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  color: #000;
+}
+
+.artwork {
+  position: relative;
+  height: var(--skyline-height, clamp(110px, 23vw, 300px));
+}
+
+.skyline,
+.clouds,
+.glow,
+.measure {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 4px;
+  font-weight: 400;
+  line-height: 4px;
+  letter-spacing: 0;
+  white-space: pre;
+}
+
+.skyline,
+.clouds,
+.glow {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.clouds {
+  opacity: 0.28;
+}
+
+.skyline {
+  opacity: 0.35;
+}
+
+.glow {
+  color: var(--spotlight-color, rgba(0, 0, 0, 0.9));
+  background-image: var(--spotlight-fill, none);
+  background-clip: text;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  mask-image: radial-gradient(220px 150px at var(--ascii-hover-x, 50%) var(--ascii-hover-y, 85%), #000 0%, #000 52%, transparent 100%);
+}
+
+.measure {
+  position: absolute;
+  visibility: hidden;
+}
+
+@media (max-width: 600px) {
+  .skyline,
+  .clouds,
+  .glow,
+  .measure {
+    font-size: 3px;
+    line-height: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow {
+    display: none;
+    transition: none;
+  }
+}
+
+/* The intro's Knicks spotlight stops at the NYC cluster, before the CN Tower. */
+:global(body:has([data-skyline-spotlight="nyc"]:focus-visible)) .glow {
+  --spotlight-color: transparent;
+  --spotlight-fill: linear-gradient(to bottom, #006bb6 0%, #006bb6 45%, #f58426 70%, #f58426 100%);
+  display: block;
+  opacity: 1 !important;
+  color: var(--spotlight-color);
+  background-image: var(--spotlight-fill);
+  background-clip: text;
+  mask-image: linear-gradient(to right, #000 0% 22.5%, transparent 22.5% 100%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :global(body:has([data-skyline-spotlight="nyc"]:hover)) .glow {
+    --spotlight-color: transparent;
+    --spotlight-fill: linear-gradient(to bottom, #006bb6 0%, #006bb6 45%, #f58426 70%, #f58426 100%);
+    display: block;
+    opacity: 1 !important;
+    color: var(--spotlight-color);
+    background-image: var(--spotlight-fill);
+    background-clip: text;
+    mask-image: linear-gradient(to right, #000 0% 22.5%, transparent 22.5% 100%);
+  }
+}
+
+/* Highlight only E7, using the same bounds that place its facade. */
+:global(body:has([data-skyline-spotlight="waterloo"]:focus-visible)) .glow {
+  display: block;
+  opacity: 1 !important;
+  color: transparent;
+  background-image: linear-gradient(to bottom, #000 0% 30%, #fed34c 70% 100%);
+  background-size: 100% var(--waterloo-height);
+  background-position: 0 var(--waterloo-top);
+  background-repeat: no-repeat;
+  mask-image: none;
+  clip-path: var(--waterloo-clip, inset(100%));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :global(body:has([data-skyline-spotlight="waterloo"]:hover)) .glow {
+    display: block;
+    opacity: 1 !important;
+    color: transparent;
+    background-image: linear-gradient(to bottom, #000 0% 30%, #fed34c 70% 100%);
+    background-size: 100% var(--waterloo-height);
+    background-position: 0 var(--waterloo-top);
+    background-repeat: no-repeat;
+    mask-image: none;
+    clip-path: var(--waterloo-clip, inset(100%));
+  }
+}

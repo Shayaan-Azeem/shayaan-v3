@@ -1,11 +1,9 @@
-import DatedEntryList from "../components/DatedEntryList";
-import Layout from "../components/Layout";
-import { POSTS } from "./data";
+import type { Metadata } from "next";
+import BackpackSite from "../components/BackpackSite";
+import { BACKPACK_ROUTES } from "../lib/backpackNavigation";
 
-export default function Fieldnotes() {
-  return (
-    <Layout active="/fieldnotes">
-      <DatedEntryList entries={POSTS} label="Writing" />
-    </Layout>
-  );
+export const metadata: Metadata = BACKPACK_ROUTES["/fieldnotes"];
+
+export default function Page() {
+  return <BackpackSite initialPath="/fieldnotes" />;
 }

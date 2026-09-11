@@ -2,6 +2,7 @@
 
 import {
   useEffect,
+  useRef,
   useState,
   type CSSProperties,
   type FocusEvent,
@@ -43,6 +44,9 @@ export default function ViewPreview({
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
   const [activated, setActivated] = useState(false);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const focused = useRef(false);
+  const hovered = useRef(false);
   const previewSize =
     shape === "portrait"
       ? { width: PORTRAIT_WIDTH, height: PORTRAIT_HEIGHT }
@@ -51,13 +55,35 @@ export default function ViewPreview({
         : { width: PREVIEW_WIDTH, height: PREVIEW_HEIGHT };
 
   useEffect(() => {
-    const host = document.createElement("div");
-    host.className = styles.portalHost;
-    document.documentElement.appendChild(host);
-    setPortalHost(host);
-
-    return () => host.remove();
+    return () => { if (hideTimer.current) clearTimeout(hideTimer.current); };
   }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    const dismiss = () => setVisible(false);
+    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") dismiss(); };
+    document.addEventListener("keydown", onKey);
+    window.addEventListener("scroll", dismiss, true);
+    window.addEventListener("resize", dismiss);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      window.removeEventListener("scroll", dismiss, true);
+      window.removeEventListener("resize", dismiss);
+    };
+  }, [visible]);
+
+  function keepVisible() {
+    hovered.current = true;
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+  }
+
+  function hideSoon() {
+    hovered.current = false;
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    hideTimer.current = setTimeout(() => {
+      if (!focused.current && !hovered.current) setVisible(false);
+    }, 160);
+  }
 
   function updatePosition(clientX: number, clientY: number) {
     let x = clientX + PREVIEW_GAP;
@@ -78,22 +104,29 @@ export default function ViewPreview({
   }
 
   function showAt(clientX: number, clientY: number) {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    setPortalHost(document.body);
     setActivated(true);
     updatePosition(clientX, clientY);
     setVisible(true);
   }
 
   function handlePointerEnter(event: PointerEvent<HTMLSpanElement>) {
+    if (!event.currentTarget.contains(event.target as Node)) return;
     if (event.pointerType === "touch") return;
+    keepVisible();
     showAt(event.clientX, event.clientY);
   }
 
   function handlePointerMove(event: PointerEvent<HTMLSpanElement>) {
+    if (!event.currentTarget.contains(event.target as Node)) return;
     if (event.pointerType === "touch") return;
     updatePosition(event.clientX, event.clientY);
   }
 
   function handleFocus(event: FocusEvent<HTMLSpanElement>) {
+    focused.current = true;
     const rect = event.currentTarget.getBoundingClientRect();
     showAt(rect.right, rect.top + rect.height / 2);
   }
@@ -108,9 +141,12 @@ export default function ViewPreview({
       className={`${styles.trigger} ${className ?? ""}`}
       onPointerEnter={handlePointerEnter}
       onPointerMove={handlePointerMove}
-      onPointerLeave={() => setVisible(false)}
+      onPointerLeave={hideSoon}
       onFocus={handleFocus}
-      onBlur={() => setVisible(false)}
+      onBlur={() => {
+        focused.current = false;
+        if (!hovered.current) setVisible(false);
+      }}
     >
       {children}
       {portalHost && activated
@@ -126,12 +162,13 @@ export default function ViewPreview({
                 visible ? styles.visible : ""
               }`}
               style={previewStyle}
-              role="tooltip"
-              aria-hidden={!visible}
+              aria-hidden="true"
+              onPointerEnter={keepVisible}
+              onPointerLeave={hideSoon}
             >
               {/* A native image keeps this utility compatible with local and remote previews. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt={alt} />
+              <img src={src} alt={alt} decoding="async" />
             </span>,
             portalHost,
           )

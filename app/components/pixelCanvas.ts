@@ -31,16 +31,16 @@ export function createSampler(columns: number, rows: number): Sampler | null {
   return context ? { context, columns, rows } : null;
 }
 
-/** Center-crops the source to the sampler grid and returns its pixel data. */
+/** Center-crops to the displayed frame; the sampling grid only sets detail. */
 export function sampleSource(
   sampler: Sampler,
   source: CanvasImageSource,
   sourceWidth: number,
   sourceHeight: number,
+  targetRatio: number,
 ) {
   const { context, columns, rows } = sampler;
   const sourceRatio = sourceWidth / sourceHeight;
-  const targetRatio = columns / rows;
   let x = 0;
   let y = 0;
   let width = sourceWidth;
@@ -147,13 +147,9 @@ export function paintHalftoneFrame(
   }
 }
 
-/** How early a canvas starts fetching its video before it scrolls into view. */
-const PRELOAD_MARGIN = "200px";
-
 /**
- * Paints sampled video frames onto a canvas, throttled to `frameInterval`. The
- * video is only fetched once the canvas approaches the viewport, and pauses
- * again while it is off screen.
+ * Paint only changing, visible video frames. Playback is owned separately so
+ * toggling pause does not clear the canvas or recreate its sampling buffers.
  */
 export function useSampledVideo({
   canvasRef,
@@ -186,50 +182,68 @@ export function useSampledVideo({
     const sampler = createSampler(columns, rows);
     if (!context || !sampler) return;
 
-    let animationFrame = 0;
-    let lastFrame = 0;
+    let animationFrame: number | null = null;
+    let lastFrame = -Infinity;
+    let lastVideoTime = -1;
     let isVisible = false;
 
-    const resize = () => resizeToDisplaySize(canvas);
-
-    const draw = (time: number) => {
-      animationFrame = requestAnimationFrame(draw);
-      if (!isVisible || video.readyState < 2) return;
-      if (time - lastFrame < frameInterval) return;
-      lastFrame = time;
-
+    const paintFrame = (force = false) => {
+      if (!isVisible || document.hidden || video.readyState < 2) return;
+      if (!force && lastVideoTime === video.currentTime) return;
       const pixels = sampleSource(
         sampler,
         video,
         video.videoWidth,
         video.videoHeight,
+        canvas.width / canvas.height,
       );
       paint(context, pixels, columns, rows);
+      lastVideoTime = video.currentTime;
+      canvas.style.opacity = "1";
     };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
+    const stop = () => {
+      if (animationFrame !== null) cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    };
 
-        if (!isVisible) {
-          video.pause();
-          return;
-        }
+    const draw = (time: number) => {
+      animationFrame = null;
+      if (!isVisible || document.hidden || video.paused) return;
+      if (time - lastFrame >= frameInterval) {
+        paintFrame();
+        lastFrame = time;
+      }
+      animationFrame = requestAnimationFrame(draw);
+    };
 
-        if (video.readyState === video.HAVE_NOTHING) video.load();
-        void video.play().catch(() => undefined);
-      },
-      { rootMargin: PRELOAD_MARGIN },
-    );
+    const sync = () => {
+      stop();
+      paintFrame(true);
+      if (isVisible && !document.hidden && !video.paused) {
+        animationFrame = requestAnimationFrame(draw);
+      }
+    };
+    const resize = () => {
+      resizeToDisplaySize(canvas);
+      paintFrame(true);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      sync();
+    });
     const resizeObserver = new ResizeObserver(resize);
 
+    for (const event of ["loadeddata", "seeked", "playing", "pause"]) video.addEventListener(event, sync);
+    document.addEventListener("visibilitychange", sync);
     observer.observe(canvas);
     resizeObserver.observe(canvas);
     resize();
-    animationFrame = requestAnimationFrame(draw);
 
     return () => {
-      cancelAnimationFrame(animationFrame);
+      stop();
+      for (const event of ["loadeddata", "seeked", "playing", "pause"]) video.removeEventListener(event, sync);
+      document.removeEventListener("visibilitychange", sync);
       observer.disconnect();
       resizeObserver.disconnect();
     };

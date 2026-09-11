@@ -1,16 +1,9 @@
-import Layout from "../components/Layout";
-import styles from "../page.module.css";
-import ProjectsGallery from "./ProjectsGallery";
+import type { Metadata } from "next";
+import BackpackSite from "../components/BackpackSite";
+import { BACKPACK_ROUTES } from "../lib/backpackNavigation";
 
-export default function Projects() {
-  return (
-    <Layout active="/projects" wide className={styles.projectsPageShell}>
-      <section
-        className={`${styles.homeProjects} ${styles.projectsPage}`}
-        aria-label="Projects"
-      >
-        <ProjectsGallery />
-      </section>
-    </Layout>
-  );
+export const metadata: Metadata = BACKPACK_ROUTES["/projects"];
+
+export default function Page() {
+  return <BackpackSite initialPath="/projects" />;
 }

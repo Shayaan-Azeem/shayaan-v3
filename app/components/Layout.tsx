@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "./BackpackLink";
 import type { ReactNode } from "react";
 import styles from "./Layout.module.css";
 import NavIcon from "./NavIcons";
@@ -27,28 +27,31 @@ export default function Layout({
       <div
         className={`${styles.container} ${wide ? styles.containerWide : ""}`}
       >
-        <section className={styles.header}>
+        <header className={styles.header}>
           <Link href="/">
-            <h1 className={styles.name}>Shayaan Azeem</h1>
+            {active ? <span className={styles.name}>Shayaan Azeem</span> : <h1 className={styles.name}>Shayaan Azeem</h1>}
           </Link>
-          <div className={styles.nav}>
+          <nav className={styles.nav} aria-label="Main navigation">
             {NAV.map((item) => (
-              <Link key={item.href} href={item.href} aria-label={item.label}>
+              <Link key={item.href} href={item.href} aria-label={item.label} aria-current={active === item.href ? "page" : undefined} title={item.label}>
                 <span
                   className={`${styles.navLink} ${
                     active === item.href ? styles.navLinkActive : ""
                   }`}
                 >
                   <span className={styles.navIcon}>
-                    <NavIcon href={item.href} />
+                    <NavIcon href={item.href} active={active === item.href} />
                   </span>
                   <span className={styles.navLabel}>{item.label}</span>
                 </span>
               </Link>
             ))}
-          </div>
-        </section>
-        <div className={styles.content}>{children}</div>
+          </nav>
+        </header>
+        <div id="main-content" className={styles.content} tabIndex={-1}>
+          {active ? <h1 className="sr-only">{NAV.find((item) => item.href === active)?.label}</h1> : null}
+          {children}
+        </div>
       </div>
     </main>
   );

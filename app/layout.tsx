@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Inter } from "next/font/google";
+import AsciiFooter from "./components/AsciiFooter";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,7 +16,7 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: "Shayaan Azeem",
-  description: "Personal website of Shayaan Azeem",
+  description: "Shayaan Azeem is a software engineer studying Math and Philosophy at the University of Waterloo. Explore his projects, writing, and communities.",
 };
 
 export default function RootLayout({
@@ -25,7 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${geist.variable}`}>
-      <body>{children}</body>
+      <body>
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        {children}
+        <AsciiFooter />
+      </body>
     </html>
   );
 }

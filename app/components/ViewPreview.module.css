@@ -1,16 +1,9 @@
-.portalHost {
-  position: fixed;
-  z-index: 3200;
-  inset: 0;
-  overflow: visible;
-  pointer-events: none;
-}
-
 .trigger {
   display: inline;
 }
 
 .preview {
+  z-index: 3200;
   position: fixed;
   top: 0;
   left: 0;
@@ -21,7 +14,7 @@
   border: 0;
   border-radius: 8px;
   background: #171717;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.24);
   opacity: 0;
   transform: translate3d(
       var(--view-preview-x),
@@ -60,6 +53,7 @@
 }
 
 .visible {
+  pointer-events: auto;
   opacity: 1;
   transform: translate3d(
       var(--view-preview-x),

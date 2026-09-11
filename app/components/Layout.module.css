@@ -23,34 +23,40 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  flex-wrap: wrap;
   margin-top: 40px;
   margin-bottom: 24px;
 }
 
 .name {
-  color: #fff;
-  font-size: 16px;
-  font-weight: 400;
+  display: block;
+  white-space: nowrap;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 600;
   letter-spacing: -0.025em;
-  line-height: 24px;
+  line-height: 28px;
   transition: color 0.2s;
 }
 
 .name:hover {
-  color: #a8a29e;
+  color: var(--muted);
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 2px;
 }
 
 .navLink {
   display: flex;
   align-items: center;
   padding: 8px;
-  color: #a8a29e;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  color: var(--muted);
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -68,17 +74,7 @@
 
 .navIcon {
   display: flex;
-}
-
-.navIcon svg {
-  fill: transparent;
-  transition: fill 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* The active icon keeps its outline and tints its interior. */
-.navLinkActive .navIcon svg {
-  fill: currentColor;
-  fill-opacity: 0.35;
+  color: #000;
 }
 
 .navLabel {
@@ -95,15 +91,18 @@
   }
 
   .name {
-    padding-right: 32px;
+    padding-right: 0;
   }
 
   .nav {
-    gap: 16px;
+    gap: 14px;
   }
 
   .navLink {
     padding: 0;
+    min-height: 32px;
+    min-width: 0;
+    font-size: 14px;
   }
 
   .navIcon {
@@ -113,4 +112,9 @@
   .navLabel {
     display: inline;
   }
+}
+
+@media (max-width: 419px) {
+  .header { gap: 8px; }
+  .nav { margin-left: -8px; }
 }
