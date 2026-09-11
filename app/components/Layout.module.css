@@ -20,9 +20,10 @@
 
 .header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-top: 64px;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 40px;
   margin-bottom: 24px;
 }
 
@@ -39,39 +40,16 @@
   color: #a8a29e;
 }
 
-.animatedName {
-  display: inline-grid;
-  white-space: nowrap;
-}
-
-.animatedNamePlaceholder,
-.manimName {
-  grid-area: 1 / 1;
-}
-
-.manimName {
-  opacity: 0;
-}
-
-.animatedNamePlaceholder,
-.manimName {
-  transition: opacity 0.15s ease;
-}
-
-.animatedNameReady .animatedNamePlaceholder {
-  opacity: 0;
-}
-
-.animatedNameReady .manimName {
-  opacity: 1;
-}
-
 .nav {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .navLink {
-  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  padding: 8px;
   color: #a8a29e;
   font-size: 16px;
   font-weight: 400;
@@ -88,14 +66,32 @@
   color: var(--active);
 }
 
+.navIcon {
+  display: flex;
+}
+
+.navIcon svg {
+  fill: transparent;
+  transition: fill 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* The active icon keeps its outline and tints its interior. */
+.navLinkActive .navIcon svg {
+  fill: currentColor;
+  fill-opacity: 0.35;
+}
+
+.navLabel {
+  display: none;
+}
+
 .content {
   margin-bottom: 24px;
 }
 
 @media (min-width: 768px) {
   .header {
-    flex-direction: row;
-    justify-content: space-between;
+    margin-top: 64px;
   }
 
   .name {
@@ -103,6 +99,18 @@
   }
 
   .nav {
-    text-align: left;
+    gap: 16px;
+  }
+
+  .navLink {
+    padding: 0;
+  }
+
+  .navIcon {
+    display: none;
+  }
+
+  .navLabel {
+    display: inline;
   }
 }
