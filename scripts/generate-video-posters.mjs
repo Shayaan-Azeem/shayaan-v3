@@ -33,7 +33,7 @@ for (const project of PROJECTS.filter(project => project.video)) {
   } else {
     context.drawImage(source, 0, 0);
   }
-  const webp = await sharp(canvas.toBuffer("image/png")).webp({ quality: 40 }).toBuffer();
+  const webp = await sharp(canvas.toBuffer("image/png")).resize({ width: 192 }).webp({ quality: 40 }).toBuffer();
   posters[project.video] = `data:image/webp;base64,${webp.toString("base64")}`;
   console.log(`${project.title}: ${webp.length} bytes`);
 }
