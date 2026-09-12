@@ -794,7 +794,9 @@
 .forus-article #figure-3 .flow-controls button{border:0;background:transparent;box-shadow:none;border-radius:0;color:#999}.forus-article #figure-3 .flow-controls button:hover{background:transparent;color:#333}.forus-article #figure-3 .flow-controls .flow-step[aria-pressed="true"]{background:transparent;color:#222;font-weight:600;text-decoration:underline;text-underline-offset:5px}
 .forus-article #figure-8 .reset-code-label{text-align:center;font:13px/24px ui-sans-serif,system-ui,sans-serif;color:#444;white-space:nowrap}.forus-article #figure-8 .reset-code-label code{font:11px/1.4 ui-monospace,SFMono-Regular,monospace;background:#f2f2f2;border:1px solid #ddd;border-radius:3px;padding:2px 4px;color:#555}
 
-.forus-article #figure-1 .technical-diagram .semantic-focus rect{fill:#ededed!important;stroke:#333!important;stroke-width:2.5px!important}
+.forus-article #figure-1 .technical-diagram .node.semantic-focus rect{fill:#fff!important;stroke:#aaa!important;stroke-width:1px!important}
+.forus-article #figure-1 .technical-diagram .node:not(.semantic-focus),
+.forus-article #figure-1 .technical-diagram .connection{opacity:.45}
 .forus-article #figure-1 .technical-diagram .project-focus-label{font:600 16px ui-sans-serif,system-ui,sans-serif;fill:#333;letter-spacing:0}
 .forus-article .reasoning-grid{align-items:stretch;margin-bottom:20px}
 .forus-article .reasoning-grid .editorial-point{display:flex;flex-direction:column}
