@@ -9,6 +9,7 @@ import useReducedMotion from "../components/useReducedMotion";
 import { requestVideoPlayback, useVideoPlayback } from "../components/videoPlayback";
 import styles from "../page.module.css";
 import type { Project } from "./data";
+import videoPosters from "./videoPosters.json";
 
 export default function ProjectMedia({
   project,
@@ -25,6 +26,9 @@ export default function ProjectMedia({
   const [pauseOverride, setPauseOverride] = useState<boolean | null>(null);
   const [playing, setPlaying] = useState(false);
   const paused = pauseOverride ?? reducedMotion;
+  const poster = project.video
+    ? (videoPosters as Record<string, string>)[project.video]
+    : undefined;
   useVideoPlayback({ videoRef, targetRef: frameRef, src: project.video ?? "", paused, onPlaybackChange: setPlaying });
 
   function togglePlayback() {
@@ -44,6 +48,11 @@ export default function ProjectMedia({
         aria-label={`View ${project.title}`}
       >
         <span
+          style={poster ? {
+            backgroundImage: `url("${poster}")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          } : undefined}
           className={`${styles.homeProjectImage} ${
             project.overlayLogo ? styles.homeProjectImageBranded : ""
           } ${project.shortMedia ? styles.homeProjectImageShort : ""}`}
@@ -75,6 +84,7 @@ export default function ProjectMedia({
               ref={videoRef}
               src={project.video}
               muted
+              poster={poster}
               loop
               playsInline
               preload="none"
