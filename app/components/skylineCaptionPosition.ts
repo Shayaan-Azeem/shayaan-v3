@@ -1,7 +1,7 @@
 export const SKYLINE_CAPTIONS = {
   lahore: "Lahore, Pakistan",
   toronto: "Toronto, Canada",
-  nyc: "New York City, USA",
+  nyc: "New York, USA",
   waterloo: "Waterloo, Canada",
 } as const;
 

@@ -6,7 +6,7 @@ test("skyline captions show only city and country", () => {
   assert.deepEqual(SKYLINE_CAPTIONS, {
     lahore: "Lahore, Pakistan",
     toronto: "Toronto, Canada",
-    nyc: "New York City, USA",
+    nyc: "New York, USA",
     waterloo: "Waterloo, Canada",
   });
 });
@@ -82,7 +82,7 @@ test("switching landmarks keeps the label visible and only measures changed city
   assert.equal(stats.measurements, 2);
   assert.equal(stats.textWrites, 1);
   controller.show("nyc", 200, 500);
-  assert.equal(label.textContent, "New York City, USA");
+  assert.equal(label.textContent, "New York, USA");
   assert.equal(stats.measurements, 4);
   assert.equal(caption.dataset.visible, "true");
   assert.ok(stats.visibleStates.every((state) => state === "true"), "no intermediate hide/fade");
