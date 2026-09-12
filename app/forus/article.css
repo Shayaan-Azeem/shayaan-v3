@@ -1077,6 +1077,26 @@
     overflow-x: visible;
   }
   .forus-article figure:not(#figure-4) .figure-heading::after { content: none; }
+  .forus-article #figure-4 > .diag-wrap { padding: 12px; }
+  .forus-article #figure-4 .diag-wrap .demo-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .forus-article #figure-4 .browser-pane,
+  .forus-article #figure-4 .agent-pane { height: 420px; }
+  .forus-article #figure-4 .terminal-session { padding: 12px 14px; }
+  .forus-article #figure-4 .agent-pane .agent-heading,
+  .forus-article #figure-4 .agent-pane .agent-request,
+  .forus-article #figure-4 .agent-pane #proposal,
+  .forus-article #figure-4 .agent-pane .agent-tool strong,
+  .forus-article #figure-4 .agent-pane .permission-question,
+  .forus-article #figure-4 .agent-pane .approval .buttons button { font-size: 11px; }
+  .forus-article #figure-4 .agent-pane .agent-heading { margin-bottom: 12px; }
+  .forus-article #figure-4 .agent-pane .agent-request { margin-bottom: 12px; }
+  .forus-article #figure-4 .ehr-layout { min-height: 300px; }
+  .forus-article #figure-4 .ehr-main { padding: 10px; }
+  .forus-article #figure-4 .ehr-app .ehr-nav { font-size: 10px; padding: 8px 6px; }
+  .forus-article #figure-4 .ehr-app button.ehr-row { min-height: 44px; padding: 6px 8px; }
+  .forus-article #figure-4 .ehr-page-title { font-size: 14px; margin-bottom: 10px; }
+  .forus-article pre,
+  .forus-article div.sourceCode pre { font-size: 11px; line-height: 1.5; padding: 14px; }
 }
 .forus-article > article { animation: forus-page-enter 620ms cubic-bezier(.22,1,.36,1) both; }
 @keyframes forus-page-enter { from { opacity:0; transform:translateY(32px) scale(.985); } to { opacity:1; transform:none; } }
