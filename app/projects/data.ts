@@ -5,6 +5,7 @@ export type Project = {
   images: string[];
   href: string;
   video?: string;
+  mediaFit?: "contain";
   videoEffect?: "halftone" | "ascii";
   imageEffect?: "ascii";
   shortMedia?: boolean;
@@ -41,13 +42,13 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
-    title: "Personal Markdown Editor & Library",
+    title: "Library",
     category: "project",
     desc: "Built a personal Markdown editor and reading library with Cloudflare Workers. Keeps my writing, books, and blogs in one place, with reading lists and a bookshelf view.",
     images: ["/projects/personal-library.jpg"],
     video: "/projects/personal-library.mp4",
+    mediaFit: "contain",
     href: "https://x.com/shayaan_azeem/status/2031429596789285292",
-    period: "2026",
   },
   {
     title: "Do-Eve",

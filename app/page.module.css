@@ -504,6 +504,21 @@
   transform: scale(1.03);
 }
 
+/* Screen recordings retain their full frame, including while hovering. */
+.homeProjectImage.homeProjectImageContained {
+  background-color: #f2f1ef;
+}
+
+.homeProjectImage.homeProjectImageContained img,
+.homeProjectImage.homeProjectImageContained video {
+  object-fit: contain;
+}
+
+.projectsPageCard .homeProjectImage.homeProjectImageContained img,
+.projectsPageCard .homeProjectImage.homeProjectImageContained video {
+  transform: none;
+}
+
 .projectsPageCard .homeProjectTitle {
   gap: 4px 8px;
   margin-top: 16px;

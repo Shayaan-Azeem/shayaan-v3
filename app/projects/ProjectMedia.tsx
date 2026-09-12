@@ -51,12 +51,13 @@ export default function ProjectMedia({
         <span
           style={poster ? {
             backgroundImage: `url("${poster}")`,
-            backgroundSize: "cover",
+            backgroundSize: project.mediaFit ?? "cover",
+            backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
           } : undefined}
           className={`${styles.homeProjectImage} ${
             project.overlayLogo ? styles.homeProjectImageBranded : ""
-          } ${project.shortMedia ? styles.homeProjectImageShort : ""}`}
+          } ${project.shortMedia ? styles.homeProjectImageShort : ""} ${project.mediaFit === "contain" ? styles.homeProjectImageContained : ""}`}
         >
           {project.imageEffect === "ascii" ? (
             <AsciiImage
