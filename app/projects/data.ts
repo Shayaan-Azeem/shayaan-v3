@@ -41,9 +41,9 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
-    title: "Personal Library",
+    title: "Personal Markdown Editor & Library",
     category: "project",
-    desc: "Built a reading library for myself to keep books, blogs, and saved writing in one place. Tracks what I want to read and what I’ve finished, with a bookshelf view for books.",
+    desc: "Built a personal Markdown editor and reading library with Cloudflare Workers. Keeps my writing, books, and blogs in one place, with reading lists and a bookshelf view.",
     images: ["/projects/personal-library.jpg"],
     video: "/projects/personal-library.mp4",
     href: "https://x.com/shayaan_azeem/status/2031429596789285292",
