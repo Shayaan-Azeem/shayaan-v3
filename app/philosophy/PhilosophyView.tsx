@@ -1,6 +1,9 @@
 import Image from "next/image";
+import { Caveat } from "next/font/google";
 import Layout from "../components/Layout";
 import styles from "../page.module.css";
+
+const handwritten = Caveat({ subsets: ["latin"], weight: "500", preload: false });
 
 export default function Philosophy() {
   return (
@@ -39,7 +42,16 @@ export default function Philosophy() {
             sizes="(max-width: 359px) calc(100vw - 40px), 320px"
           />
           <figcaption>
-            A gift from my friend, with this quote on the hood.
+            a gift from my friend{" "}
+            <a
+              href="https://www.casperdong.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${handwritten.className} ${styles.handwrittenFriend}`}
+            >
+              casper
+            </a>
+            , with this quote on the hood.
           </figcaption>
         </figure>
       </article>

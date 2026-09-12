@@ -57,10 +57,29 @@
 }
 
 .philosophyPhoto figcaption {
+  width: max-content;
+  max-width: calc(100vw - 40px);
   margin-top: 8px;
+  margin-left: 50%;
+  transform: translateX(-50%);
   color: var(--muted);
   font-size: 12px;
   line-height: 18px;
+  text-align: center;
+}
+
+.handwrittenFriend {
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 3px;
+}
+
+.handwrittenFriend:hover,
+.handwrittenFriend:focus-visible {
+  text-decoration-color: currentColor;
 }
 
 .org {
