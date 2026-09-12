@@ -252,13 +252,13 @@
   position: relative;
   display: block;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: var(--project-media-ratio, 4 / 3);
   border-radius: 3px;
   background: #151515;
 }
 
 .homeProjectImageShort {
-  aspect-ratio: 3 / 2;
+  aspect-ratio: var(--project-media-ratio, 3 / 2);
 }
 
 .homeProjectImage img,
@@ -306,7 +306,7 @@
   z-index: 2;
   top: 50%;
   left: 50%;
-  width: 58%;
+  width: var(--project-logo-width, 58%);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
@@ -621,6 +621,11 @@
   object-fit: cover;
 }
 
+.framedShot img {
+  object-fit: contain;
+  padding: 2px;
+}
+
 .shot:nth-child(1) {
   z-index: 1;
   width: 26px;
@@ -768,6 +773,19 @@
   color: var(--text);
 }
 
+.fieldnotesPage .writingRow {
+  min-height: 86px;
+  grid-template-columns: 80px minmax(0, 1fr) auto;
+  gap: 16px;
+}
+
+.fieldnotesPage .writingTitle { font-size: 16px; }
+.fieldnotesPage .writingYear { padding-top: 34px; }
+.fieldnotesPage .shots {
+  transform: scale(1.18);
+  transform-origin: left center;
+}
+
 @media (max-width: 639px) {
   .writingSection {
     margin-top: 32px;
@@ -790,6 +808,15 @@
   .writingRow .shots {
     width: 54px;
   }
+
+  .fieldnotesPage .writingRow {
+    grid-template-columns: 66px minmax(0, 1fr) auto;
+    gap: 10px;
+    min-height: 80px;
+  }
+
+  .fieldnotesPage .writingYear { padding-top: 20px; }
+  .fieldnotesPage .writingRow .shots { width: 60px; transform: scale(1.06); }
 }
 
 .favouritesGroup {

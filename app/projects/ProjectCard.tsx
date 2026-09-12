@@ -1,4 +1,5 @@
 import AnnotationHighlight from "../components/AnnotationHighlight";
+import BackpackLink from "../components/BackpackLink";
 import styles from "../page.module.css";
 import type { Project } from "./data";
 import ProjectMedia from "./ProjectMedia";
@@ -27,11 +28,11 @@ export default function ProjectCard({
       className={`${styles.homeProjectCard} ${styles.projectsPageCard}`}
     >
       <ProjectMedia project={project} sizes={mediaSizes} eager={eager} />
-      <a
+      <BackpackLink
         className={styles.projectCardTextLink}
         href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={project.href.startsWith("/") ? undefined : "_blank"}
+        rel={project.href.startsWith("/") ? undefined : "noopener noreferrer"}
       >
         <h2 className={styles.homeProjectTitle}>
           {project.title}
@@ -50,7 +51,7 @@ export default function ProjectCard({
         {!featured && typeof project.desc === "string" ? (
           <span className={styles.homeProjectDesc}>{project.desc}</span>
         ) : null}
-      </a>
+      </BackpackLink>
       {!featured && Array.isArray(project.desc) ? (
         <p className={styles.homeProjectDesc}>
           {project.desc.map((part, index) => typeof part === "string" ? part : (

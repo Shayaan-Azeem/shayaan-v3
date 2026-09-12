@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import CopyEmail from "./components/CopyEmail";
+import BackpackLink from "./components/BackpackLink";
 import Layout from "./components/Layout";
 import ReadMore from "./components/ReadMore";
 import styles from "./page.module.css";
@@ -19,11 +20,11 @@ function Org({
   children: ReactNode;
 }) {
   return (
-    <a
+    <BackpackLink
       className={styles.org}
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={href.startsWith("/") ? undefined : "_blank"}
+      rel={href.startsWith("/") ? undefined : "noopener noreferrer"}
     >
       {src ? (
         <Image
@@ -35,7 +36,7 @@ function Org({
         />
       ) : null}
       {children}
-    </a>
+    </BackpackLink>
   );
 }
 
@@ -67,7 +68,7 @@ export default function Home() {
             Most recently, I was a Member of Technical Staff at{" "}
             <Org
               src="/forus.svg"
-              href="https://x.com/sahirjaggi/status/2097333810983555399?s=20"
+              href="/forus"
             >
               Forus
             </Org>{" "}

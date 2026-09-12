@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import BackpackLink from "../components/BackpackLink";
 import { useRef, useState } from "react";
 import AsciiImage from "../components/AsciiImage";
 import AsciiVideo from "../components/AsciiVideo";
@@ -40,11 +41,11 @@ export default function ProjectMedia({
 
   return (
     <span ref={frameRef} className={styles.projectMediaFrame}>
-      <a
+      <BackpackLink
         className={styles.projectMediaLink}
         href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={project.href.startsWith("/") ? undefined : "_blank"}
+        rel={project.href.startsWith("/") ? undefined : "noopener noreferrer"}
         aria-label={`View ${project.title}`}
       >
         <span
@@ -110,7 +111,7 @@ export default function ProjectMedia({
             </span>
           ) : null}
         </span>
-      </a>
+      </BackpackLink>
       {project.video ? (
         <button
           type="button"

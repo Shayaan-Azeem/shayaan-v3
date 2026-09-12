@@ -1,4 +1,5 @@
 import Image from "next/image";
+import BackpackLink from "./BackpackLink";
 import { groupBy } from "../lib/group";
 import styles from "../page.module.css";
 
@@ -8,6 +9,7 @@ export type DatedEntry = {
   date: string;
   href: string;
   images: string[];
+  coverBackground?: string;
 };
 
 const THUMBNAIL = {
@@ -42,12 +44,12 @@ export default function DatedEntryList({
             <span className={styles.writingYear}>{year}</span>
             <div className={styles.writingRows}>
               {yearEntries.map((entry) => (
-                <a
+                <BackpackLink
                   key={entry.href}
                   className={`${styles.card} ${styles.writingRow}`}
                   href={entry.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={entry.href.startsWith("/") ? undefined : "_blank"}
+                  rel={entry.href.startsWith("/") ? undefined : "noopener noreferrer"}
                 >
                   <span
                     className={`${styles.shots} ${
@@ -57,7 +59,11 @@ export default function DatedEntryList({
                     }`}
                   >
                     {entry.images.map((image) => (
-                      <span key={image} className={styles.shot}>
+                      <span
+                        key={image}
+                        className={`${styles.shot} ${entry.coverBackground ? styles.framedShot : ""}`}
+                        style={entry.coverBackground ? { background: entry.coverBackground } : undefined}
+                      >
                         <Image
                           src={image}
                           alt=""
@@ -72,7 +78,7 @@ export default function DatedEntryList({
                   <time className={styles.writingDate} dateTime={entry.date}>
                     {formatDate(entry.date)}
                   </time>
-                </a>
+                </BackpackLink>
               ))}
             </div>
           </div>

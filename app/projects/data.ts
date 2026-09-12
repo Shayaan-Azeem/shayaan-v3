@@ -21,7 +21,7 @@ export const PROJECTS: Project[] = [
     category: "work",
     desc: "I joined Forus as engineer #26, working across browser agents, agent harnesses, and backend infrastructure to help patients get their medication faster. I was there as the company raised its Series B through Series C.",
     images: ["/forus.svg"],
-    href: "https://forus.com/",
+    href: "/forus",
     video: "/projects/forus-prior-authorization.mp4",
     overlayLogo: "/projects/forus-light.svg",
     shortMedia: true,

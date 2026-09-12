@@ -2,6 +2,13 @@ import type { DatedEntry } from "../components/DatedEntryList";
 
 export const POSTS: DatedEntry[] = [
   {
+    title: "Knowing When to Stop Using Agents",
+    date: "2026-09-12",
+    images: ["/forus/prescription-workflow.png"],
+    coverBackground: "linear-gradient(135deg, #f4f0e5 0%, #dfe7dc 100%)",
+    href: "/forus",
+  },
+  {
     title: "2025 Wrapped: In Pursuit of Global Minima",
     date: "2025-12-31",
     images: [

@@ -7,6 +7,10 @@ export const BACKPACK_ROUTES = {
     title: "Projects — Shayaan Azeem",
     description: "Software, AI, robotics, and communities built by Shayaan Azeem.",
   },
+  "/forus": {
+    title: "Forus — Shayaan Azeem",
+    description: "Building browser agents, agent harnesses, and backend infrastructure at Forus to help patients get their medication faster.",
+  },
   "/fieldnotes": {
     title: "Fieldnotes — Shayaan Azeem",
     description: "Notes and essays by Shayaan Azeem on building, learning, and life.",

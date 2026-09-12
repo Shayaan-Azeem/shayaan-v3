@@ -8,6 +8,7 @@ import Fieldnotes from "../fieldnotes/FieldnotesView";
 import Philosophy from "../philosophy/PhilosophyView";
 import Events from "../events/EventsView";
 import Favourites from "../favourites/FavouritesView";
+import Forus from "../forus/ForusView";
 import { BACKPACK_ROUTES, createBackpackNavigation, getBackpackPath, type BackpackPath, type ScrollPosition } from "../lib/backpackNavigation";
 import { BackpackNavigationContext } from "./BackpackLink";
 
@@ -20,6 +21,7 @@ const VIEWS = {
   "/philosophy": Philosophy,
   "/events": Events,
   "/favourites": Favourites,
+  "/forus": Forus,
 } satisfies Record<BackpackPath, typeof Home>;
 
 export default function BackpackSite({ initialPath }: { initialPath: BackpackPath }) {
@@ -39,7 +41,7 @@ export default function BackpackSite({ initialPath }: { initialPath: BackpackPat
       const key = crypto.randomUUID();
       entryKey.current = key;
       // Next's documented History API integration preserves its own router state.
-      window.history.pushState({ backpackKey: key }, "", nextPath);
+      window.history.pushState({ backpackKey: key, backpackFrom: getBackpackPath(window.location.pathname) }, "", nextPath);
     },
     focus() {
       document.getElementById("main-content")?.focus({ preventScroll: true });

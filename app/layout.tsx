@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Inter } from "next/font/google";
+import { Geist, Manrope } from "next/font/google";
 import AsciiFooter from "./components/AsciiFooter";
 import "./globals.css";
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${geist.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${geist.variable}`}>
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
         {children}
