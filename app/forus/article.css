@@ -1061,6 +1061,22 @@
 }
 @media (max-width: 600px) {
   .forus-article .intro-details { grid-template-columns: 1fr; gap: 28px; }
+  .forus-article .technical-diagram,
+  .forus-article #figure-1 .technical-diagram,
+  .forus-article #figure-3 .technical-diagram,
+  .forus-article #figure-8 .reset-diagram,
+  .forus-article #figure-2 .authoring-lanes {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+  }
+  .forus-article figure:not(#figure-4) .diag-wrap,
+  .forus-article #figure-2 .authoring-lanes-wrap {
+    padding: 10px 6px;
+    overflow-x: visible;
+  }
+  .forus-article figure:not(#figure-4) .figure-heading::after { content: none; }
 }
 .forus-article > article { animation: forus-page-enter 620ms cubic-bezier(.22,1,.36,1) both; }
 @keyframes forus-page-enter { from { opacity:0; transform:translateY(32px) scale(.985); } to { opacity:1; transform:none; } }
