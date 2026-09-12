@@ -114,7 +114,31 @@
   }
 }
 
-@media (max-width: 419px) {
-  .header { gap: 8px; }
-  .nav { margin-left: -8px; }
+@media (max-width: 767px) {
+  .header {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .nav {
+    gap: 0;
+    margin-right: -6px;
+  }
+
+  .navLink {
+    padding: 6px;
+    min-width: 36px;
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 359px) {
+  .name {
+    font-size: 17px;
+  }
+
+  .navLink {
+    padding: 4px;
+    min-width: 28px;
+  }
 }
