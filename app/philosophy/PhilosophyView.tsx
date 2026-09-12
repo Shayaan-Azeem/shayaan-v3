@@ -44,7 +44,7 @@ export default function Philosophy() {
           <figcaption>
             a gift from my friend{" "}
             <a
-              href="https://www.casperdong.com/"
+              href="https://x.com/casperdongg"
               target="_blank"
               rel="noopener noreferrer"
               className={`${handwritten.className} ${styles.handwrittenFriend}`}
