@@ -41,6 +41,15 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
+    title: "Personal Library",
+    category: "project",
+    desc: "Built a reading library for myself to keep books, blogs, and saved writing in one place. Tracks what I want to read and what I’ve finished, with a bookshelf view for books.",
+    images: ["/projects/personal-library.jpg"],
+    video: "/projects/personal-library.mp4",
+    href: "https://x.com/shayaan_azeem/status/2031429596789285292",
+    period: "2026",
+  },
+  {
     title: "Do-Eve",
     category: "project",
     desc: "Poke, but for computer use. Built an iMessage agent that can use your laptop for you. It opens apps, runs scripts, organizes files, and handles random tasks just by texting it.",
