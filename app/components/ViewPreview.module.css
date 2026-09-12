@@ -1,0 +1,77 @@
+.trigger {
+  display: inline;
+}
+
+.preview {
+  z-index: 3200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  overflow: hidden;
+  width: 218px;
+  height: 123px;
+  border: 0;
+  border-radius: 8px;
+  background: #171717;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.24);
+  opacity: 0;
+  transform: translate3d(
+      var(--view-preview-x),
+      var(--view-preview-y),
+      0
+    )
+    scale(0.94);
+  transform-origin: top left;
+  visibility: hidden;
+  transition:
+    opacity 0.16s ease,
+    visibility 0.16s ease,
+    transform 0.28s cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: none;
+}
+
+.preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portrait {
+  width: 164px;
+  height: 220px;
+}
+
+.square {
+  width: 184px;
+  height: 184px;
+}
+
+.contain img {
+  object-fit: contain;
+}
+
+.visible {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translate3d(
+      var(--view-preview-x),
+      var(--view-preview-y),
+      0
+    )
+    scale(1);
+  visibility: visible;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .preview {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview {
+    transition: none;
+  }
+}

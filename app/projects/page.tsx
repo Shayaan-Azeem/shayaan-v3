@@ -1,24 +1,9 @@
-import ClientHome from '@/components/client-home'
-import { getAllFieldnotes, getPhilosophy, getContentWorthConsuming, getAbout } from '@/lib/content'
+import type { Metadata } from "next";
+import BackpackSite from "../components/BackpackSite";
+import { BACKPACK_ROUTES } from "../lib/backpackNavigation";
 
-export default async function ProjectsPage() {
-  const fieldnotes = getAllFieldnotes()
-  const philosophy = getPhilosophy()
-  const contentWorthConsuming = getContentWorthConsuming()
-  const about = getAbout()
+export const metadata: Metadata = BACKPACK_ROUTES["/projects"];
 
-  return (
-    <ClientHome 
-      fieldnotes={fieldnotes}
-      philosophy={philosophy}
-      contentWorthConsuming={contentWorthConsuming}
-      about={about}
-      initialSection="projects"
-    />
-  )
-}
-
-export const metadata = {
-  title: 'Projects - Shayaan Azeem',
-  description: 'Projects by Shayaan Azeem',
+export default function Page() {
+  return <BackpackSite initialPath="/projects" />;
 }

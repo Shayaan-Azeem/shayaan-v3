@@ -1,758 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+:root {
+  --background: #ffffff;
+  --text: #171717;
+  --muted: #737373;
+  --link-hover: #000000;
+  --active: #000000;
+  --border: #e5e5e5;
+  color-scheme: light;
+}
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family:
+    var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 body {
-  font-family: "Manrope", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
 }
 
-/* Dotted background pattern */
-.dotted-bg {
-  background-image: radial-gradient(circle, hsl(var(--foreground) / 0.2) 1px, transparent 1px);
-  background-size: 24px 24px;
+body > footer {
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
-.dark .dotted-bg {
-  background-image: radial-gradient(circle, hsl(var(--foreground) / 0.08) 1px, transparent 1px);
+button, a {
+  -webkit-tap-highlight-color: transparent;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
-@layer base {
-  :root {
-    --background: 0 0% 100%; /* Pure white background */
-    --foreground: 0 0% 15%; /* Dark grey text, slightly lighter than black */
-    --muted-foreground: 0 0% 40%; /* Lighter grey for sidebar labels */
-    --highlight-bg: 210 100% 90%; /* Light green for link highlights */
-    
-    /* Multiple highlight colors for links */
-    --highlight-blue: 220 100% 88%;
-    --highlight-blue-hover: 220 100% 78%;
-    --highlight-green: 130 60% 85%;
-    --highlight-green-hover: 130 60% 75%;
-    --highlight-purple: 280 60% 88%;
-    --highlight-purple-hover: 280 60% 78%;
-    --highlight-orange: 30 90% 85%;
-    --highlight-orange-hover: 30 90% 75%;
-    --highlight-pink: 330 60% 88%;
-    --highlight-pink-hover: 330 60% 78%;
-    --highlight-teal: 180 50% 85%;
-    --highlight-teal-hover: 180 50% 75%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 15%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 15%;
-    --primary: 0 0% 15%; /* Primary elements like buttons will be dark */
-    --primary-foreground: 0 0% 98%; /* White text on dark primary */
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 15%;
-    --muted: 0 0% 96.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 15%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 15%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%; /* Light background for sidebar */
-    --sidebar-foreground: 0 0% 15%; /* Dark text for sidebar */
-    --sidebar-primary: 0 0% 15%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 0 0% 96.1%;
-    --sidebar-accent-foreground: 0 0% 15%;
-    --sidebar-border: 0 0% 89.8%;
-    --sidebar-ring: 0 0% 15%;
-  }
-  .dark {
-    --background: 240 10% 3.9%; /* Dark background for dark mode */
-    --foreground: 0 0% 98%; /* Light text for dark mode */
-    --muted-foreground: 240 5% 65%; /* Muted text for dark mode */
-    --highlight-bg: 210 100% 20%; /* Darker green for link highlights in dark mode */
-    
-    /* Dark mode highlight colors */
-    --highlight-blue: 220 70% 25%;
-    --highlight-blue-hover: 220 70% 35%;
-    --highlight-green: 130 50% 25%;
-    --highlight-green-hover: 130 50% 35%;
-    --highlight-purple: 280 50% 25%;
-    --highlight-purple-hover: 280 50% 35%;
-    --highlight-orange: 30 70% 25%;
-    --highlight-orange-hover: 30 70% 35%;
-    --highlight-pink: 330 50% 25%;
-    --highlight-pink-hover: 330 50% 35%;
-    --highlight-teal: 180 40% 25%;
-    --highlight-teal-hover: 180 40% 35%;
-
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 10% 3.9%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 5% 65%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 10% 5%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 0 0% 98%;
-    --sidebar-primary-foreground: 240 10% 5%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 240 5% 65%;
-  }
-
-  /* Reading Mode - Warm yellow/sepia tones for comfortable reading */
-  .reading {
-    --background: 48 100% 96%; /* Warm off-white */
-    --foreground: 30 40% 12%; /* Warm dark brown text */
-    --muted-foreground: 30 25% 40%; /* Medium warm brown for muted text */
-    --highlight-bg: 45 100% 85%; /* Warm yellow highlight */
-    
-    /* Reading mode highlight colors - warmer tones */
-    --highlight-blue: 200 40% 80%;
-    --highlight-blue-hover: 200 40% 70%;
-    --highlight-green: 110 30% 80%;
-    --highlight-green-hover: 110 30% 70%;
-    --highlight-purple: 270 30% 80%;
-    --highlight-purple-hover: 270 30% 70%;
-    --highlight-orange: 35 60% 80%;
-    --highlight-orange-hover: 35 60% 70%;
-    --highlight-pink: 320 30% 80%;
-    --highlight-pink-hover: 320 30% 70%;
-    --highlight-teal: 170 25% 80%;
-    --highlight-teal-hover: 170 25% 70%;
-
-    --card: 48 100% 96%;
-    --card-foreground: 30 40% 12%;
-    --popover: 48 100% 96%;
-    --popover-foreground: 30 40% 12%;
-    --primary: 35 45% 25%; /* Warm brown for buttons */
-    --primary-foreground: 48 100% 96%;
-    --secondary: 42 35% 88%; /* Warm beige for secondary buttons */
-    --secondary-foreground: 30 40% 12%;
-    --muted: 42 35% 88%;
-    --accent: 40 40% 85%; /* Warm accent for tags */
-    --accent-foreground: 30 40% 12%;
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 48 100% 96%;
-    --border: 38 25% 82%;
-    --input: 38 25% 82%;
-    --ring: 30 40% 12%;
-    --chart-1: 35 70% 55%;
-    --chart-2: 25 60% 45%;
-    --chart-3: 15 50% 35%;
-    --chart-4: 45 80% 60%;
-    --chart-5: 55 75% 65%;
-    --sidebar-background: 46 45% 92%;
-    --sidebar-foreground: 30 40% 12%;
-    --sidebar-primary: 30 40% 12%;
-    --sidebar-primary-foreground: 46 45% 92%;
-    --sidebar-accent: 42 35% 88%;
-    --sidebar-accent-foreground: 30 40% 12%;
-    --sidebar-border: 38 25% 82%;
-    --sidebar-ring: 30 40% 12%;
-  }
-
-  /* Matcha Mode - Green tones inspired by matcha */
-  .matcha {
-    --background: 120 25% 96%; /* Very light green */
-    --foreground: 130 35% 18%; /* Dark sage green text */
-    --muted-foreground: 125 25% 40%; /* Medium sage green for muted text */
-    --highlight-bg: 110 40% 85%; /* Matcha green highlight */
-    
-    /* Matcha mode highlight colors - green variations */
-    --highlight-blue: 180 30% 80%;
-    --highlight-blue-hover: 180 30% 70%;
-    --highlight-green: 120 40% 80%;
-    --highlight-green-hover: 120 40% 70%;
-    --highlight-purple: 140 25% 80%;
-    --highlight-purple-hover: 140 25% 70%;
-    --highlight-orange: 80 35% 80%;
-    --highlight-orange-hover: 80 35% 70%;
-    --highlight-pink: 100 25% 80%;
-    --highlight-pink-hover: 100 25% 70%;
-    --highlight-teal: 160 35% 80%;
-    --highlight-teal-hover: 160 35% 70%;
-
-    --card: 120 25% 96%;
-    --card-foreground: 130 35% 18%;
-    --popover: 120 25% 96%;
-    --popover-foreground: 130 35% 18%;
-    --primary: 125 40% 25%; /* Sage green for buttons */
-    --primary-foreground: 120 25% 96%;
-    --secondary: 115 25% 88%; /* Light sage for secondary buttons */
-    --secondary-foreground: 130 35% 18%;
-    --muted: 115 25% 88%;
-    --accent: 118 30% 85%; /* Sage accent for tags */
-    --accent-foreground: 130 35% 18%;
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 120 25% 96%;
-    --border: 112 20% 82%;
-    --input: 112 20% 82%;
-    --ring: 130 35% 18%;
-    --chart-1: 120 50% 55%;
-    --chart-2: 140 45% 45%;
-    --chart-3: 100 40% 35%;
-    --chart-4: 160 55% 60%;
-    --chart-5: 80 60% 65%;
-    --sidebar-background: 118 28% 92%;
-    --sidebar-foreground: 130 35% 18%;
-    --sidebar-primary: 130 35% 18%;
-    --sidebar-primary-foreground: 118 28% 92%;
-    --sidebar-accent: 115 25% 88%;
-    --sidebar-accent-foreground: 130 35% 18%;
-    --sidebar-border: 112 20% 82%;
-    --sidebar-ring: 130 35% 18%;
-  }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-
-  /* Custom list item styling for tighter bullet spacing */
-  .tight-list-item {
-    position: relative;
-    padding-left: 1.2em; /* Adjust this value to control overall indentation */
-  }
-
-  .tight-list-item::before {
-    content: "•"; /* The bullet character */
-    position: absolute;
-    left: 0.2em; /* Adjust this value to control bullet position */
-    margin-right: 0.2em; /* Adjust this value for space between bullet and text */
-    top: 0; /* Align with text baseline */
-  }
-  
-  /* Colored link highlight classes */
-  .link-blue {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: hsl(var(--highlight-blue));
-  }
-  .link-blue:hover {
-    background-color: hsl(220 100% 55%);
-    color: white;
-  }
-  
-  /* Random dark hover colors */
-  .hover-dark-1:hover {
-    background-color: hsl(220 50% 20%);
-    color: hsl(0 0% 98%);
-  }
-  .hover-dark-2:hover {
-    background-color: hsl(280 40% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .hover-dark-3:hover {
-    background-color: hsl(140 35% 22%);
-    color: hsl(0 0% 98%);
-  }
-  .hover-dark-4:hover {
-    background-color: hsl(15 45% 28%);
-    color: hsl(0 0% 98%);
-  }
-  .hover-dark-5:hover {
-    background-color: hsl(190 30% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .hover-dark-6:hover {
-    background-color: hsl(30 40% 30%);
-    color: hsl(0 0% 98%);
-  }
-  .hover-dark-7:hover {
-    background-color: hsl(340 35% 28%);
-    color: hsl(0 0% 98%);
-  }
-  .hover-dark-8:hover {
-    background-color: hsl(60 25% 25%);
-    color: hsl(0 0% 98%);
-  }
-  
-  /* Dark mode hover colors - flipped behavior */
-  .dark .hover-dark-1 {
-    background-color: hsl(220 50% 20%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .hover-dark-1:hover {
-    background-color: hsl(220 50% 80%);
-    color: hsl(0 0% 15%);
-  }
-  .dark .hover-dark-2 {
-    background-color: hsl(280 40% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .hover-dark-2:hover {
-    background-color: hsl(280 40% 75%);
-    color: hsl(0 0% 15%);
-  }
-  .dark .hover-dark-3 {
-    background-color: hsl(140 35% 22%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .hover-dark-3:hover {
-    background-color: hsl(140 35% 78%);
-    color: hsl(0 0% 15%);
-  }
-  .dark .hover-dark-4 {
-    background-color: hsl(15 45% 28%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .hover-dark-4:hover {
-    background-color: hsl(15 45% 72%);
-    color: hsl(0 0% 15%);
-  }
-  .dark .hover-dark-5 {
-    background-color: hsl(190 30% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .hover-dark-5:hover {
-    background-color: hsl(190 30% 75%);
-    color: hsl(0 0% 15%);
-  }
-  .dark .hover-dark-6 {
-    background-color: hsl(30 40% 30%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .hover-dark-6:hover {
-    background-color: hsl(30 40% 70%);
-    color: hsl(0 0% 15%);
-  }
-  .dark .hover-dark-7 {
-    background-color: hsl(340 35% 28%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .hover-dark-7:hover {
-    background-color: hsl(340 35% 72%);
-    color: hsl(0 0% 15%);
-  }
-  .dark .hover-dark-8 {
-    background-color: hsl(60 25% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .hover-dark-8:hover {
-    background-color: hsl(60 25% 75%);
-    color: hsl(0 0% 15%);
-  }
-  
-  .link-green {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: hsl(var(--highlight-green));
-  }
-  .link-green:hover {
-    background-color: hsl(130 60% 45%);
-    color: white;
-  }
-  
-  .link-purple {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: hsl(var(--highlight-purple));
-  }
-  .link-purple:hover {
-    background-color: hsl(280 60% 55%);
-    color: white;
-  }
-  
-  .link-orange {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: hsl(var(--highlight-orange));
-  }
-  .link-orange:hover {
-    background-color: hsl(30 90% 55%);
-    color: white;
-  }
-  
-  .link-pink {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: hsl(var(--highlight-pink));
-  }
-  .link-pink:hover {
-    background-color: hsl(330 60% 55%);
-    color: white;
-  }
-  
-  .link-teal {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: hsl(var(--highlight-teal));
-  }
-  .link-teal:hover {
-    background-color: hsl(180 50% 55%);
-    color: white;
-  }
-  
-  /* Dark mode versions for content highlights - matching about page behavior */
-  .dark .link-blue {
-    background-color: hsl(220 70% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .link-blue:hover {
-    background-color: hsl(220 50% 80%);
-    color: hsl(0 0% 15%);
-  }
-  
-  .dark .link-green {
-    background-color: hsl(130 50% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .link-green:hover {
-    background-color: hsl(140 35% 78%);
-    color: hsl(0 0% 15%);
-  }
-  
-  .dark .link-purple {
-    background-color: hsl(280 50% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .link-purple:hover {
-    background-color: hsl(280 40% 75%);
-    color: hsl(0 0% 15%);
-  }
-  
-  .dark .link-orange {
-    background-color: hsl(30 70% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .link-orange:hover {
-    background-color: hsl(30 40% 70%);
-    color: hsl(0 0% 15%);
-  }
-  
-  .dark .link-pink {
-    background-color: hsl(330 50% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .link-pink:hover {
-    background-color: hsl(340 35% 72%);
-    color: hsl(0 0% 15%);
-  }
-  
-  .dark .link-teal {
-    background-color: hsl(180 40% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .link-teal:hover {
-    background-color: hsl(190 30% 75%);
-    color: hsl(0 0% 15%);
-  }
-  
-  /* Custom golden yellow highlight for uwaterloo */
-  .link-uwaterloo {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #FFF3C4; /* Light yellow */
-    color: #000;
-  }
-  .link-uwaterloo:hover {
-    background-color: #F59E0B; /* Much darker yellow on hover */
-    color: #fff;
-  }
-  
-  /* Dark mode version - flipped */
-  .dark .link-uwaterloo {
-    background-color: #F59E0B;
-    color: #fff;
-  }
-  .dark .link-uwaterloo:hover {
-    background-color: #FFF3C4;
-    color: #000;
-  }
-
-  /* Forus highlight — colors sampled from the Forus "us." brand icons */
-  .link-forus {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #080707; /* Forus black */
-    color: #f2f0ec; /* Forus cream */
-  }
-  .link-forus:hover {
-    background-color: #2a2828; /* slightly lifted black */
-    color: #f2f0ec;
-  }
-  .dark .link-forus {
-    background-color: #f1f0ec; /* Forus cream */
-    color: #080607; /* Forus black */
-  }
-  .dark .link-forus:hover {
-    background-color: #dcdad3; /* slightly deepened cream */
-    color: #080607;
-  }
-  
-  /* Custom purple highlight for Bloomberg Philanthropies */
-  .link-bloomberg {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #E8D5F5; /* Light purple */
-    color: #000;
-  }
-  .link-bloomberg:hover {
-    background-color: #7B4FAE; /* Darker on hover */
-    color: #fff;
-  }
-  
-  /* Dark mode version - flipped */
-  .dark .link-bloomberg {
-    background-color: #7B4FAE;
-    color: #fff;
-  }
-  .dark .link-bloomberg:hover {
-    background-color: #E8D5F5;
-    color: #000;
-  }
-  
-  /* Custom bright purple highlight for preseed link */
-  .link-preseed {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #E6D9FF; /* Light bright purple */
-    color: #000;
-  }
-  .link-preseed:hover {
-    background-color: #8B5FFF; /* Darker on hover */
-    color: #fff;
-  }
-  
-  /* Dark mode version - flipped */
-  .dark .link-preseed {
-    background-color: #8B5FFF;
-    color: #fff;
-  }
-  .dark .link-preseed:hover {
-    background-color: #E6D9FF;
-    color: #000;
-  }
-  
-  /* Red highlight for hack club links */
-  .link-hackclub {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #FECACA; /* Light red */
-    color: #000;
-  }
-  .link-hackclub:hover {
-    background-color: #DC2626; /* Darker on hover */
-    color: #fff;
-  }
-  .dark .link-hackclub {
-    background-color: #DC2626;
-    color: #fff;
-  }
-  .dark .link-hackclub:hover {
-    background-color: #FECACA;
-    color: #000;
-  }
-  
-  /* Pink highlight for hackathon link */
-  .link-hackathon {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #FFE1F1; /* Light pink */
-    color: #000;
-  }
-  .link-hackathon:hover {
-    background-color: #FF8BC7; /* Darker on hover */
-    color: #fff;
-  }
-  .dark .link-hackathon {
-    background-color: #FF8BC7;
-    color: #fff;
-  }
-  .dark .link-hackathon:hover {
-    background-color: #FFE1F1;
-    color: #000;
-  }
-  
-  /* Blue highlight for robotics club */
-  .link-robotics {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #DBEAFE; /* Light blue */
-    color: #000;
-  }
-  .link-robotics:hover {
-    background-color: #4A9FE7; /* Darker on hover */
-    color: #fff;
-  }
-  .dark .link-robotics {
-    background-color: #4A9FE7;
-    color: #fff;
-  }
-  .dark .link-robotics:hover {
-    background-color: #DBEAFE;
-    color: #000;
-  }
-  
-  /* Green highlight for robot olympiad */
-  .link-olympiad {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #D1FAE5; /* Light green */
-    color: #000;
-  }
-  .link-olympiad:hover {
-    background-color: #10B981; /* Darker on hover */
-    color: #fff;
-  }
-  .dark .link-olympiad {
-    background-color: #10B981;
-    color: #fff;
-  }
-  .dark .link-olympiad:hover {
-    background-color: #D1FAE5;
-    color: #000;
-  }
-  
-  /* Orange highlight for teen builders club */
-  .link-teenbuilders {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #FED7AA; /* Light orange */
-    color: #000;
-  }
-  .link-teenbuilders:hover {
-    background-color: #EA580C; /* Darker on hover */
-    color: #fff;
-  }
-  .dark .link-teenbuilders {
-    background-color: #EA580C;
-    color: #fff;
-  }
-  .dark .link-teenbuilders:hover {
-    background-color: #FED7AA;
-    color: #000;
-  }
-  
-  /* Blue highlight for code camp */
-  .link-codecamp {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #DBEAFE; /* Light blue */
-    color: #000;
-  }
-  .link-codecamp:hover {
-    background-color: #2563EB; /* Darker on hover */
-    color: #fff;
-  }
-  .dark .link-codecamp {
-    background-color: #2563EB;
-    color: #fff;
-  }
-  .dark .link-codecamp:hover {
-    background-color: #DBEAFE;
-    color: #000;
-  }
-  
-  /* Black/white highlight for chrome extension */
-  .link-chrome {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: #F3F4F6; /* Light gray */
-    color: #000;
-  }
-  .link-chrome:hover {
-    background-color: #374151; /* Dark gray on hover */
-    color: #fff;
-  }
-  .dark .link-chrome {
-    background-color: #374151;
-    color: #fff;
-  }
-  .dark .link-chrome:hover {
-    background-color: #F3F4F6;
-    color: #000;
-  }
-  
-  /* RevisionDojo blue highlight (rgb 85, 185, 249) */
-  .link-revisiondojo {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: rgba(85, 185, 249, 0.2); /* Light blue */
-    color: #000;
-  }
-  .link-revisiondojo:hover {
-    background-color: rgb(85, 185, 249); /* Full blue on hover */
-    color: #fff;
-  }
-  .dark .link-revisiondojo {
-    background-color: rgb(85, 185, 249);
-    color: #fff;
-  }
-  .dark .link-revisiondojo:hover {
-    background-color: rgba(85, 185, 249, 0.2);
-    color: #fff;
-  }
-  
-  /* Footer email link styling */
-  .footer-email {
-    @apply px-1 py-0.5 transition-all duration-200;
-    background-color: hsl(var(--highlight-blue));
-  }
-  .footer-email:hover {
-    background-color: hsl(0 0% 0%);
-    color: hsl(0 0% 100%);
-  }
-  
-  /* Dark mode version for footer email */
-  .dark .footer-email {
-    background-color: hsl(220 70% 25%);
-    color: hsl(0 0% 98%);
-  }
-  .dark .footer-email:hover {
-    background-color: hsl(0 0% 0%);
-    color: hsl(0 0% 100%);
-  }
-
-  /* Badge styles for project cards - always dark with white text */
-  .badge-teenbuilders {
-    background-color: #EA580C !important;
-    color: #fff !important;
-  }
-  .badge-hackclub {
-    background-color: #DC2626 !important;
-    color: #fff !important;
-  }
-  .badge-bloomberg {
-    background-color: #7B4FAE !important;
-    color: #fff !important;
-  }
-  .badge-robotics {
-    background-color: #4A9FE7 !important;
-    color: #fff !important;
-  }
-  .badge-olympiad {
-    background-color: #10B981 !important;
-    color: #fff !important;
-  }
+.skip-link {
+  position: fixed;
+  z-index: 4000;
+  top: 12px;
+  left: 12px;
+  padding: 8px 16px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  transform: translateY(-200%);
 }
 
-/* Pulsing width animation for ScrambleText indicator */
-@keyframes pulse-width {
-  0%, 100% {
-    width: 0%;
-    opacity: 0;
-  }
-  50% {
-    width: 100%;
-    opacity: 0.5;
-  }
+.skip-link:focus {
+  transform: translateY(0);
 }
 
-.animate-pulse-width {
-  animation: pulse-width 3s ease-in-out infinite;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
