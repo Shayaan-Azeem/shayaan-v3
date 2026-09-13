@@ -42,15 +42,6 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
-    title: "Library",
-    category: "project",
-    desc: "Built a personal Markdown editor and reading library with Cloudflare Workers. Keeps my writing, books, and blogs in one place, with reading lists and a bookshelf view.",
-    images: ["/projects/personal-library.jpg"],
-    video: "/projects/personal-library.mp4",
-    mediaFit: "contain",
-    href: "https://x.com/shayaan_azeem/status/2031429596789285292",
-  },
-  {
     title: "Do-Eve",
     category: "project",
     desc: "Poke, but for computer use. Built an iMessage agent that can use your laptop for you. It opens apps, runs scripts, organizes files, and handles random tasks just by texting it.",
