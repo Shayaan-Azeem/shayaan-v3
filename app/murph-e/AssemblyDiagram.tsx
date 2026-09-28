@@ -71,7 +71,7 @@ export default function AssemblyDiagram() {
     <section ref={section} data-status={status} className={`${styles.section} ${status === "fallback" ? styles.fallback : ""}`} aria-label="Arcade assembly diagram">
       <div ref={panel} className={styles.panel}>
         <div className={styles.stage}>
-          {status !== "ready" && <p className={styles.loading} role="status">{status === "fallback" ? "The 3D model couldn’t load." : "Loading 3D model…"}</p>}
+          {status === "fallback" && <p className={styles.loading} role="status">The 3D model couldn’t load.</p>}
           {status !== "fallback" && <iframe ref={iframe} className={styles.model} src="/murph-e/model/index.html" onLoad={initialize} onError={() => setStatus("fallback")} title="Scroll-controlled 3D assembly of Murph-E" tabIndex={-1} aria-hidden="true" style={{ opacity: status === "ready" ? 1 : 0 }} />}
         </div>
 

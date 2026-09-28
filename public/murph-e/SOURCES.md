@@ -6,7 +6,7 @@
 
 `npm run dev` and `npm run build` first bundle the viewer with esbuild into `model/viewer.bundle.js`. This generated file is ignored by Git and served locally with no CDN dependencies. After editing viewer sources during development, run `npm run build:murphe` or keep `npm run watch:murphe` running and reload the article.
 
-The viewer starts from the article’s initial HTML, preloads its large assets, and loads the model, assembly data, and screen texture concurrently. A readiness handshake also handles loading before React hydrates. Slow connections are allowed to finish; only actual loading/rendering errors select the fallback.
+The viewer starts from the article’s initial HTML, preloads its large assets, and loads the model, assembly data, and screen texture concurrently. A readiness handshake also handles loading before React hydrates. Slow connections are allowed to finish without a visible loading label; only actual loading/rendering errors select the fallback.
 
 To regenerate the optimized model and CRT texture from the original files (authoring only; these packages are not site dependencies):
 
@@ -45,3 +45,7 @@ The CRT screen uses the user-provided `codex-clipboard-00cf47e8-fac8-42bb-b9f8-3
 `photos/14-team-group.webp` is a 1600 × 1200 web version of IMG_1871, used in the article after the semifinalist paragraph. Unused full-resolution JPEG conversions are omitted from the site. Original HEIC files are untouched.
 
 `photos/15-team-finale.webp` is a web-optimized copy of the user-provided `IMG_5534 2.jpg`, placed immediately before the closing thank-you.
+
+## Shared-link preview
+
+`app/murph-e/opengraph-image.png` is the user-provided machine photo (`codex-clipboard-7deef43b-47f0-4d42-9adb-a9a33d736c03.png`), used for Open Graph and Twitter link previews. The Fieldnotes listing retains its team thumbnail.
