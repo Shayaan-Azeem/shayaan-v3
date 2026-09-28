@@ -6,6 +6,8 @@
 .openingModel + header { margin-top: -48px; }
 .openingModel:has([data-status="fallback"]) + header { margin-top: 32px; }
 
+.team a { text-decoration: underline; text-underline-offset: 3px; }
+
 .article {
   width: min(calc(100% - 40px), 672px);
   margin: 0 auto 96px;

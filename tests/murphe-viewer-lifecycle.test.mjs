@@ -24,6 +24,7 @@ function viewer() {
   class Vector { constructor(x = 0, y = 0, z = 0) { Object.assign(this, { x, y, z }); } set() {} applyMatrix4() { return this; } }
   const context = vm.createContext({
     window, document, parent, materialSpy: material, location: { origin }, clamp, separation,
+    projectedCenter: () => ({ x: 0, y: 0 }),
     matchMedia: () => motion, performance: { now: () => 100 }, innerWidth: 900, innerHeight: 450,
     requestAnimationFrame: callback => { frames.set(++id, callback); return id; },
     cancelAnimationFrame: id => frames.delete(id),
