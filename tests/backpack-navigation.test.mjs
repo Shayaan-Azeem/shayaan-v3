@@ -33,7 +33,8 @@ test("routing is an explicit allowlist with direct-link titles and descriptions"
   for (const [path, metadata] of Object.entries(BACKPACK_ROUTES)) {
     assert.equal(getBackpackPath(path), path);
     if (path !== "/") assert.equal(getBackpackPath(`${path}/`), path);
-    assert.ok(metadata.title.includes("Shayaan Azeem"));
+    if (path === "/murph-e") assert.equal(metadata.title, "Murph-e");
+    else assert.ok(metadata.title.includes("Shayaan Azeem"));
     assert.ok(metadata.description.length > 20);
   }
   for (const path of ["/missing", "/projects/unknown", "/PROJECTS", "constructor", "__proto__", "https://example.com/projects"]) {

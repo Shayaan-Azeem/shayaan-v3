@@ -3,6 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { clamp, separation } from './motion.js';
 import { createCRT } from './crt.js';
+import { projectedCenter } from './framing.js';
 
 const tellParent = (type) => {
   document.body.dataset.murpheStatus = type === 'murphe-ready' ? 'ready' : 'error';
@@ -15,6 +16,7 @@ const parts = [];
 const scene = new THREE.Scene();
 const camera = new THREE.OrthographicCamera(-2, 2, 2, -2, 0.01, 50);
 const center = new THREE.Vector3(0.08, 1.27, 0.12);
+let framingProgress = NaN, framingCenter = { x: 0, y: 0 };
 
 function draw() {
   frame = 0;
@@ -24,6 +26,11 @@ function draw() {
   camera.position.set(center.x + Math.sin(angle) * 7, center.y + 2.9, center.z + Math.cos(angle) * 7);
   camera.lookAt(center);
   camera.updateMatrixWorld();
+  // CRT-only redraws reuse the framing; geometry moves only with scroll progress.
+  if (framingProgress !== progress) {
+    framingCenter = projectedCenter(model, camera);
+    framingProgress = progress;
+  }
   const width = Math.max(1, innerWidth), height = Math.max(1, innerHeight), aspect = width / height;
   const size = renderer.getSize(new THREE.Vector2());
   if (size.x !== width || size.y !== height) renderer.setSize(width, height, false);
@@ -36,8 +43,8 @@ function draw() {
     extentY = Math.max(extentY, Math.abs(point.y));
   }
   const halfHeight = Math.max(extentY, extentX / aspect) * 1.07;
-  camera.left = -halfHeight * aspect; camera.right = halfHeight * aspect;
-  camera.top = halfHeight; camera.bottom = -halfHeight;
+  camera.left = framingCenter.x - halfHeight * aspect; camera.right = framingCenter.x + halfHeight * aspect;
+  camera.top = framingCenter.y + halfHeight; camera.bottom = framingCenter.y - halfHeight;
   camera.updateProjectionMatrix();
   if (crt) crt.uniforms.time.value = motion.matches ? 0 : performance.now() / 1000;
   renderer.render(scene, camera);
