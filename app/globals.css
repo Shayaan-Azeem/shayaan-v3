@@ -51,6 +51,11 @@ button, a {
   border-radius: 2px;
 }
 
+#main-content:focus,
+#main-content:focus-visible {
+  outline: none;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
