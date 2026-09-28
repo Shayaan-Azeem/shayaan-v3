@@ -51,8 +51,11 @@ button, a {
   border-radius: 2px;
 }
 
+/* Navigation targets should not draw outlines around whole content blocks.
+   Links, buttons, form fields, and ARIA widgets keep their focus indicators. */
 #main-content:focus,
-#main-content:focus-visible {
+#main-content:focus-visible,
+[tabindex="-1"]:not(a, button, input, select, textarea, [role], [contenteditable]):focus {
   outline: none;
 }
 

@@ -5,7 +5,8 @@ import { gzipSync } from "node:zlib";
 import { BACKPACK_ROUTES } from "../app/lib/backpackNavigation.ts";
 
 const build = join(import.meta.dirname, "..", ".next");
-const budget = 250_000;
+// Eight eagerly bundled pages, including both long-form articles and video posters.
+const budget = 260_000;
 let expectedScripts;
 
 for (const route of Object.keys(BACKPACK_ROUTES)) {

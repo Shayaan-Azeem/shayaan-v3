@@ -1,0 +1,632 @@
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>From a spoken prompt to an arcade game</title><link rel="stylesheet" href="./base.css"></head><body><style>
+#murphe-minimal{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#090d10;color:#eef4ec;padding:16px;border-radius:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:center;box-sizing:border-box}
+#murphe-minimal *{box-sizing:border-box}
+#murphe-minimal .mm-label{color:#93a5ad;font-size:11px;letter-spacing:2px;margin-bottom:16px}
+#murphe-minimal blockquote{font-size:20px;line-height:1.65;font-weight:400;letter-spacing:-.4px;margin:0}
+
+
+
+#murphe-minimal canvas{display:block;width:100%;height:auto;aspect-ratio:256/224;image-rendering:pixelated;border-radius:0;background:#121d23}
+@media(max-width:540px){#murphe-minimal{grid-template-columns:1fr;padding:23px;gap:25px}#murphe-minimal blockquote{font-size:18px}}
+
+@font-face{font-family:'Murphe Console Pixel';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,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) format('woff2')}
+/* Console typography and playing layout from apps/cabinet/app/globals.css. */
+#murphe-minimal .arcade-screen {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  container-type: inline-size;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: 'Murphe Console Pixel', monospace;
+  text-transform: uppercase;
+  outline: none;
+  font-size: 2.5cqw;
+  user-select: none;
+}
+#murphe-minimal .arcade-header,
+#murphe-minimal .game-controls {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  font-size: 2cqw;
+  line-height: 1.8;
+  color: #aaa;
+}
+#murphe-minimal .arcade-header {
+  top: 8%;
+  display: flex;
+  justify-content: space-between;
+  gap: 3cqw;
+}
+#murphe-minimal .player-name {
+  display: flex;
+  font-size: 1.6cqw;
+  align-items: center;
+  gap: 1cqw;
+  min-width: 0;
+  max-width: 48%;
+  color: #fff;
+}
+#murphe-minimal .player-marker {
+  width: 1cqw;
+  height: 1cqw;
+  flex-shrink: 0;
+  background: #55ffff;
+}
+#murphe-minimal .player-number {color: #aaa;flex-shrink: 0;}
+#murphe-minimal .player-label {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+#murphe-minimal .game-frame {
+  position: absolute;
+  top: 16%;
+  left: 8%;
+  width: 84%;
+  height: calc(76% - min(var(--game-controls-height, 12cqw), 20cqw) - 2cqw);
+  border: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#murphe-minimal .game-frame canvas {
+  flex: none;
+  border-radius: 0;
+  background: #000;
+  image-rendering: pixelated;
+}
+#murphe-minimal .game-controls {
+  bottom: 8%;
+  color: #fff;
+  font-size: 1.8cqw;
+  line-height: 1.3;
+}
+#murphe-minimal .game-control-legend {
+  margin: 0;
+  font-weight: 400;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5cqw 1cqw;
+}
+#murphe-minimal .game-control-legend > div {min-width: 0;text-align: center;}
+#murphe-minimal .game-control-legend dt {color: #55ffff;}
+#murphe-minimal .game-control-legend dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-align: center;
+  font-size: 1.6cqw;
+}
+#murphe-minimal .game-control-legend dd span {display: block;}
+#murphe-minimal .game-hints {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2cqw;
+  margin-top: 1cqw;
+  font-size: 1.6cqw;
+  color: #aaa;
+}
+
+#murphe-minimal .stage {
+  position: absolute;
+  inset: 19% 8% 17%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5cqw;
+  text-align: center;
+  font-size: 2.5cqw;
+  line-height: 1.8;
+}
+#murphe-minimal .stage h1 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 4cqw;
+  line-height: 1.5;
+  color: #ffff55;
+}
+#murphe-minimal .voice-transcript {
+  margin: 0;
+  font-weight: 400;
+  font-size: 2.5cqw;
+  line-height: 1.8;
+  min-height: 14cqw;
+  letter-spacing: normal;
+  display: grid;
+  align-content: center;
+  overflow-wrap: anywhere;
+}
+#murphe-minimal .actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5cqw;
+}
+#murphe-minimal .console-button {
+  font: inherit;
+  text-transform: inherit;
+  background: none;
+  border: 0;
+  padding: 0.6cqw 0;
+  color: inherit;
+  line-height: 1.8;
+}
+#murphe-minimal .primary {color: #ffff55;font-size: 2.5cqw;}
+#murphe-minimal .back,
+#murphe-minimal .support {color: #aaa;font-size: 2cqw;line-height: 1.8;}
+#murphe-minimal .controls-strip {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 9%;
+  margin: 0;
+  text-align: center;
+  font-size: 1.8cqw;
+  line-height: 1.4;
+  color: #aaa;
+  pointer-events: none;
+}
+
+#murphe-minimal .voice-stage[hidden],#murphe-minimal .voice-done[hidden]{display:none}
+#murphe-minimal .voice-recording h1{color:#55ff55}
+#murphe-minimal .voice-recording[data-working] h1{color:#ffff55}
+#murphe-minimal .voice-hint{margin:0;font:inherit}
+#murphe-minimal .pixel-meter{width:50cqw;height:12.5cqw;aspect-ratio:4;border-radius:0;background:transparent;image-rendering:pixelated}
+</style>
+<div id="murphe-minimal" aria-label="A spoken prompt becomes a playable arcade game">
+  <div class="arcade-screen prompt-console" aria-label="Console transcript review for P1 Shayaan Azeem">
+    <header class="arcade-header"><span class="player-name"><span class="player-marker" aria-hidden="true"></span><span class="player-number">P1</span><span class="player-label">(SHAYAAN AZEEM)</span></span></header>
+    <section class="stage voice-stage voice-review" aria-label="Describe your game"><h1>YOU SAID</h1><blockquote class="voice-transcript">Mario Kart, but instead of cars use planes.</blockquote><div class="actions" aria-label="Console action labels"><button type="button" class="console-button primary talk-button cursor-interaction" aria-label="Hold to retry: replay voice animation">HOLD TO RETRY</button><span class="console-button primary">&gt; MAKE GAME</span><span class="console-button back">CANCEL</span></div></section>
+    <section class="stage voice-stage voice-recording" hidden aria-label="Simulated voice recording">
+      <h1 aria-live="polite">LISTENING</h1>
+      <p class="voice-hint">RELEASE WHEN DONE</p>
+      <canvas class="pixel-meter" width="160" height="40" aria-hidden="true"></canvas>
+      <div class="actions" aria-label="Console action labels"><span class="console-button primary talk-button">RELEASE TO FINISH</span><span class="console-button voice-done">DONE</span><span class="console-button back">CANCEL</span></div>
+    </section>
+    <p class="support controls-strip">CABINET · A: MAKE GAME · ◀ ▶: PAGE · B: CANCEL</p>
+  </div>
+  <div>
+    <div class="arcade-screen game-console" aria-label="Arcade console playing Sky Kart as P1 Shayaan Azeem">
+      <header class="arcade-header"><span class="player-name"><span class="player-marker" aria-hidden="true"></span><span class="player-number">P1</span><span class="player-label">(SHAYAAN AZEEM)</span></span></header>
+      <div class="game-frame"><canvas width="256" height="224" aria-label="Recorded Sky Kart output running locally">Sky Kart airplane racing game.</canvas></div>
+      <section class="game-controls" aria-label="Game controls"><dl class="game-control-legend"><div><dt>L / R</dt><dd><span>STEER</span></dd></div><div><dt>U / D</dt><dd><span>MOVE ONE…</span></dd></div><div><dt>A</dt><dd><span>USE THE HELD ITEM</span></dd></div><div><dt>B</dt><dd><span>ACTIVATE THE BOOST</span></dd></div></dl><div class="game-hints"><span>CABINET PLAYS</span><span>X: PAUSE</span></div></section>
+    </div>
+  </div>
+</div>
+<script>"use strict";var MurphePlayback=(()=>{var k=Object.defineProperty;var D=Object.getOwnPropertyDescriptor;var V=Object.getOwnPropertyNames;var K=Object.prototype.hasOwnProperty;var z=(h,t,e)=>t in h?k(h,t,{enumerable:!0,configurable:!0,writable:!0,value:e}):h[t]=e;var J=(h,t)=>{for(var e in t)k(h,e,{get:t[e],enumerable:!0})},Q=(h,t,e,n)=>{if(t&&typeof t=="object"||typeof t=="function")for(let r of V(t))!K.call(h,r)&&r!==e&&k(h,r,{get:()=>t[r],enumerable:!(n=D(t,r))||n.enumerable});return h};var Z=h=>Q(k({},"__esModule",{value:!0}),h);var u=(h,t,e)=>z(h,typeof t!="symbol"?t+"":t,e);var at={};J(at,{PLAYER_COLORS:()=>A,Runtime:()=>B});var G={jump:[{wave:"square",f:260,to:720,ms:120}],hit:[{wave:"saw",f:220,to:60,ms:150},{wave:"noise",ms:80,vol:.4}],coin:[{wave:"square",f:988,ms:70},{wave:"square",f:1319,ms:220,delay:70}],explode:[{wave:"noise",ms:450},{wave:"saw",f:120,to:30,ms:400,vol:.5}],select:[{wave:"square",f:660,ms:50}],die:[{wave:"saw",f:440,to:40,ms:600},{wave:"noise",ms:300,delay:120,vol:.5}],powerup:[{wave:"triangle",f:440,to:880,ms:120},{wave:"triangle",f:880,to:1760,ms:220,delay:120}],shoot:[{wave:"square",f:900,to:200,ms:90}]};var U={square:"square",triangle:"triangle",saw:"sawtooth"},F=class{constructor(t){u(this,"ctx",null);u(this,"master",null);u(this,"noise",null);u(this,"lastPlayed",new Map);u(this,"muted");this.muted=t}setMuted(t){this.muted=t,this.master&&(this.master.gain.value=t?0:1)}ensure(){if(this.muted)return null;if(!this.ctx)try{this.ctx=new AudioContext,this.master=this.ctx.createGain(),this.master.connect(this.ctx.destination)}catch{return this.muted=!0,null}return this.ctx.state==="suspended"&&this.ctx.resume().catch(()=>{}),this.ctx}unlock(){this.ensure()}sfx(t){let e=String(t),n=G[e];if(!n)return;let r=performance.now();if(!(r-(this.lastPlayed.get(e)??-1e9)<40)){this.lastPlayed.set(e,r);for(let s of n)this.play(s)}}tone(t,e,n="square"){let r=Number(t),s=Number(e);if(!Number.isFinite(r)||!Number.isFinite(s)||s<=0)return;let i=String(n),a=performance.now(),o=`tone:${r|0}`;a-(this.lastPlayed.get(o)??-1e9)<30||(this.lastPlayed.set(o,a),this.play({wave:i in U||i==="noise"?i:"square",f:r,ms:Math.min(s,2e3)}))}play(t){let e=this.ensure();if(!e)return;let n=e.currentTime+(t.delay??0)/1e3,r=t.ms/1e3,s=e.createGain(),i=(t.vol??1)*.12;if(s.gain.setValueAtTime(1e-4,n),s.gain.linearRampToValueAtTime(i,n+.005),s.gain.exponentialRampToValueAtTime(1e-4,n+r),s.connect(this.master),t.wave==="noise"){let o=e.createBufferSource();o.buffer=this.noiseBuffer(e);let l=e.createBiquadFilter();l.type="lowpass",l.frequency.setValueAtTime(4e3,n),l.frequency.exponentialRampToValueAtTime(200,n+r),o.connect(l).connect(s),o.start(n),o.stop(n+r+.05);return}let a=e.createOscillator();a.type=U[t.wave],a.frequency.setValueAtTime(t.f??440,n),t.to&&a.frequency.exponentialRampToValueAtTime(t.to,n+r),a.connect(s),a.start(n),a.stop(n+r+.05)}noiseBuffer(t){if(this.noise)return this.noise;let e=t.sampleRate,n=t.createBuffer(1,e,t.sampleRate),r=n.getChannelData(0);for(let s=0;s<e;s++)r[s]=Math.random()*2-1;return this.noise=n,n}};var tt={A:`.#####.
+#.....#
+#.....#
+#######
+#.....#
+#.....#
+#.....#`,B:`######.
+#.....#
+#.....#
+######.
+#.....#
+#.....#
+######.`,C:`.#####.
+#.....#
+#......
+#......
+#......
+#.....#
+.#####.`,D:`#####..
+#....#.
+#.....#
+#.....#
+#.....#
+#....#.
+#####..`,E:`#######
+#......
+#......
+#####..
+#......
+#......
+#######`,F:`#######
+#......
+#......
+#####..
+#......
+#......
+#......`,G:`.#####.
+#.....#
+#......
+#..####
+#.....#
+#.....#
+.#####.`,H:`#.....#
+#.....#
+#.....#
+#######
+#.....#
+#.....#
+#.....#`,I:`.#####.
+...#...
+...#...
+...#...
+...#...
+...#...
+.#####.`,J:`..#####
+....#..
+....#..
+....#..
+....#..
+#...#..
+.###...`,K:`#.....#
+#....#.
+#...#..
+####...
+#...#..
+#....#.
+#.....#`,L:`#......
+#......
+#......
+#......
+#......
+#......
+#######`,M:`#.....#
+##...##
+#.#.#.#
+#..#..#
+#.....#
+#.....#
+#.....#`,N:`#.....#
+##....#
+#.#...#
+#..#..#
+#...#.#
+#....##
+#.....#`,O:`.#####.
+#.....#
+#.....#
+#.....#
+#.....#
+#.....#
+.#####.`,P:`######.
+#.....#
+#.....#
+######.
+#......
+#......
+#......`,Q:`.#####.
+#.....#
+#.....#
+#.....#
+#...#.#
+#....#.
+.####.#`,R:`######.
+#.....#
+#.....#
+######.
+#...#..
+#....#.
+#.....#`,S:`.#####.
+#.....#
+#......
+.#####.
+......#
+#.....#
+.#####.`,T:`#######
+...#...
+...#...
+...#...
+...#...
+...#...
+...#...`,U:`#.....#
+#.....#
+#.....#
+#.....#
+#.....#
+#.....#
+.#####.`,V:`#.....#
+#.....#
+#.....#
+#.....#
+.#...#.
+..#.#..
+...#...`,W:`#.....#
+#.....#
+#.....#
+#..#..#
+#.#.#.#
+##...##
+#.....#`,X:`#.....#
+.#...#.
+..#.#..
+...#...
+..#.#..
+.#...#.
+#.....#`,Y:`#.....#
+.#...#.
+..#.#..
+...#...
+...#...
+...#...
+...#...`,Z:`#######
+.....#.
+....#..
+...#...
+..#....
+.#.....
+#######`,0:`.#####.
+#....##
+#...#.#
+#..#..#
+#.#...#
+##....#
+.#####.`,1:`...#...
+..##...
+...#...
+...#...
+...#...
+...#...
+.#####.`,2:`.#####.
+#.....#
+......#
+....##.
+..##...
+.#.....
+#######`,3:`.#####.
+#.....#
+......#
+...###.
+......#
+#.....#
+.#####.`,4:`....##.
+...#.#.
+..#..#.
+.#...#.
+#######
+.....#.
+.....#.`,5:`#######
+#......
+#......
+######.
+......#
+#.....#
+.#####.`,6:`.#####.
+#.....#
+#......
+######.
+#.....#
+#.....#
+.#####.`,7:`#######
+......#
+.....#.
+....#..
+...#...
+...#...
+...#...`,8:`.#####.
+#.....#
+#.....#
+.#####.
+#.....#
+#.....#
+.#####.`,9:`.#####.
+#.....#
+#.....#
+.######
+......#
+#.....#
+.#####.`," ":`.......
+.......
+.......
+.......
+.......
+.......
+.......`,".":`.......
+.......
+.......
+.......
+.......
+...##..
+...##..`,",":`.......
+.......
+.......
+.......
+...##..
+...##..
+..#....`,"!":`...#...
+...#...
+...#...
+...#...
+...#...
+.......
+...#...`,"?":`.#####.
+#.....#
+......#
+....##.
+...#...
+.......
+...#...`,":":`.......
+...##..
+...##..
+.......
+...##..
+...##..
+.......`,"-":`.......
+.......
+.......
+.#####.
+.......
+.......
+.......`,"+":`.......
+...#...
+...#...
+.#####.
+...#...
+...#...
+.......`,"/":`......#
+.....#.
+....#..
+...#...
+..#....
+.#.....
+#......`,"'":`...#...
+...#...
+..#....
+.......
+.......
+.......
+.......`,'"':`.#...#.
+.#...#.
+.#...#.
+.......
+.......
+.......
+.......`,"(":`....#..
+...#...
+..#....
+..#....
+..#....
+...#...
+....#..`,")":`..#....
+...#...
+....#..
+....#..
+....#..
+...#...
+..#....`,"<":`.....#.
+....#..
+...#...
+..#....
+...#...
+....#..
+.....#.`,">":`.#.....
+..#....
+...#...
+....#..
+...#...
+..#....
+.#.....`,"=":`.......
+.......
+.#####.
+.......
+.#####.
+.......
+.......`,"%":`##....#
+##...#.
+....#..
+...#...
+..#....
+.#...##
+#....##`,"*":`.......
+.#.#.#.
+..###..
+.#####.
+..###..
+.#.#.#.
+.......`,"#":`.#...#.
+.#...#.
+#######
+.#...#.
+#######
+.#...#.
+.#...#.`,_:`.......
+.......
+.......
+.......
+.......
+.......
+#######`,x:`.......
+.......
+#.....#
+.#...#.
+..#.#..
+...#...
+..#.#..`},O=8;var T=new Map;for(let[h,t]of Object.entries(tt)){let e=t.split(`
+`),n=new Uint8Array(7);for(let r=0;r<7;r++){let s=e[r]??"",i=0;for(let a=0;a<7;a++)s[a]==="#"&&(i|=1<<6-a);n[r]=i}T.set(h,n)}var L=["#000000","#1d2b53","#7e2553","#008751","#ab5236","#5f574f","#c2c3c7","#fff1e8","#ff004d","#ffa300","#ffec27","#00e436","#29adff","#83769c","#ff77a8","#ffccaa"],et=new Uint32Array(L.map(h=>{let t=Number.parseInt(h.slice(1,3),16),e=Number.parseInt(h.slice(3,5),16);return-16777216|Number.parseInt(h.slice(5,7),16)<<16|e<<8|t}));function w(h,t=7){let e=typeof h=="number"?h:Number(h);return Number.isFinite(e)?((e|0)%16+16)%16:t}var rt=16777216,_=L.map(h=>Number.parseInt(h.slice(1),16));function W(h){if(!Array.isArray(h)||h.length<1||h.length>16)throw new Error("Sprite palette must be an array of 1\u201316 #RRGGBB colors");return Uint32Array.from(h,(t,e)=>{if(typeof t!="string"||!/^#[0-9a-f]{6}$/i.test(t))throw new Error(`Sprite palette color ${e} must be a complete #RRGGBB string`);let n=Number.parseInt(t.slice(1),16),r=_.indexOf(n);return r>=0?r:rt|n})}function j(h){return h<16?et[h]:(4278190080|(h&255)<<16|h&65280|h>>>16&255)>>>0}function q(h){if(h<16)return h;let t=h>>>16&255,e=h>>>8&255,n=h&255,r=0,s=Number.POSITIVE_INFINITY;for(let i=0;i<_.length;i++){let a=_[i],o=(t-(a>>>16&255))**2+(e-(a>>>8&255))**2+(n-(a&255))**2;o<s&&(s=o,r=i)}return r}var c=256,b=224;function H(h){let t=(typeof h=="string"?h.split(`
+`):h).map(i=>String(i).trim()).filter(i=>i.length>0),e=t.length,n=t.reduce((i,a)=>Math.max(i,a.length),0),r=new Uint8Array(n*e).fill(255),s=-1;for(let i=0;i<e;i++){let a=t[i]??"";for(let o=0;o<a.length;o++){let l=a[o]??".",m=Number.parseInt(l,16);Number.isFinite(m)&&(r[i*n+o]=m&15,s=Math.max(s,m&15))}}return{w:n,h:e,px:r,maxIndex:s}}var E=class{constructor(){u(this,"fb",new Uint32Array(c*b));u(this,"objCache",new WeakMap);u(this,"strCache",new Map);u(this,"paletteCache",new WeakMap)}cls(t=0){this.fb.fill(w(t,0))}pset(t,e,n){let r=t|0,s=e|0;r<0||s<0||r>=c||s>=b||(this.fb[s*c+r]=w(n))}pget(t,e){let n=t|0,r=e|0;return n<0||r<0||n>=c||r>=b?0:q(this.fb[r*c+n]??0)}line(t,e,n,r,s){let i=t|0,a=e|0,o=n|0,l=r|0,m=Math.abs(o-i),p=-Math.abs(l-a),g=i<o?1:-1,y=a<l?1:-1,d=m+p,f=w(s);for(let v=0;v<4096&&(i>=0&&a>=0&&i<c&&a<b&&(this.fb[a*c+i]=f),!(i===o&&a===l));v++){let x=2*d;x>=p&&(d+=p,i+=g),x<=m&&(d+=m,a+=y)}}hline(t,e,n,r){let s=n|0;if(s<0||s>=b)return;let i=Math.max(0,Math.min(t,e)|0),a=Math.min(c-1,Math.max(t,e)|0),o=s*c;for(;i<=a;i++)this.fb[o+i]=r}rect(t,e,n,r,s){let i=t|0,a=e|0,o=n|0,l=r|0;if(o<=0||l<=0)return;let m=w(s);this.hline(i,i+o-1,a,m),this.hline(i,i+o-1,a+l-1,m);for(let p=a+1;p<a+l-1;p++){if(p<0||p>=b)continue;i>=0&&i<c&&(this.fb[p*c+i]=m);let g=i+o-1;g>=0&&g<c&&(this.fb[p*c+g]=m)}}rectfill(t,e,n,r,s){let i=t|0,a=e|0,o=n|0,l=r|0;if(o<=0||l<=0)return;let m=w(s),p=Math.max(0,a),g=Math.min(b,a+l),y=Math.max(0,i),d=Math.min(c,i+o);if(!(y>=d))for(let f=p;f<g;f++)this.fb.fill(m,f*c+y,f*c+d)}circ(t,e,n,r){let s=t|0,i=e|0,a=Math.abs(n|0);if(a===0){this.pset(s,i,r);return}let o=w(r),l=a,m=0,p=1-a;for(;l>=m;)this.plot8(s,i,l,m,o),m++,p<0?p+=2*m+1:(l--,p+=2*(m-l)+1);a=0}plot8(t,e,n,r,s){let i=[[t+n,e+r],[t-n,e+r],[t+n,e-r],[t-n,e-r],[t+r,e+n],[t-r,e+n],[t+r,e-n],[t-r,e-n]];for(let[a,o]of i)a>=0&&o>=0&&a<c&&o<b&&(this.fb[o*c+a]=s)}circfill(t,e,n,r){let s=t|0,i=e|0,a=Math.abs(n|0),o=w(r);if(a===0){this.pset(s,i,r);return}for(let l=-a;l<=a;l++){let m=Math.floor(Math.sqrt(a*a-l*l));this.hline(s-m,s+m,i+l,o)}}parsed(t){if(typeof t=="string"){let n=this.strCache.get(t);return n||(n=H(t),this.strCache.size>512&&this.strCache.clear(),this.strCache.set(t,n)),n}if(!Array.isArray(t))return null;let e=this.objCache.get(t);return e||(e=H(t),this.objCache.set(t,e)),e}spr(t,e,n,r=!1,s=!1,i){let a;i!==void 0&&(a=Array.isArray(i)?this.paletteCache.get(i):void 0,a||(a=W(i),this.paletteCache.set(i,a)));let o=this.parsed(t);if(o&&a&&o.maxIndex>=a.length)throw new Error(`Sprite pixel index ${o.maxIndex.toString(16)} has no color in its ${a.length}-entry palette`);if(!o||o.w===0||o.h===0)return;let l=e|0,m=n|0;for(let p=0;p<o.h;p++){let g=m+p;if(g<0||g>=b)continue;let y=s?o.h-1-p:p;for(let d=0;d<o.w;d++){let f=l+d;if(f<0||f>=c)continue;let v=r?o.w-1-d:d,x=o.px[y*o.w+v];x!==255&&x!==void 0&&(this.fb[g*c+f]=a?a[x]:x)}}}spriteSize(t){let e=this.parsed(t);return e?{w:e.w,h:e.h}:{w:0,h:0}}textWidth(t,e=1){return String(t).length*O*e}text(t,e,n,r,s=1){let i=String(t??"").toUpperCase(),a=w(r),o=Math.max(1,s|0),l=e|0,m=n|0;for(let p of i){let g=T.get(p)??T.get("?");for(let y=0;y<7;y++){let d=g[y]??0;if(d!==0){for(let f=0;f<7;f++)if(d&1<<6-f)if(o===1){let v=l+f,x=m+y;v>=0&&x>=0&&v<c&&x<b&&(this.fb[x*c+v]=a)}else this.rectfill(l+f*o,m+y*o,o,o,a)}}l+=O*o}}textCenter(t,e,n,r=1){let s=this.textWidth(t,r);this.text(t,(c-s)/2|0,e,n,r)}hash(t=0){let e=2166136261,n=this.fb;for(let r=Math.max(0,t|0)*c;r<n.length;r++){let s=n[r];s<16?e=Math.imul(e^s,16777619):(e=Math.imul(e^255,16777619),e=Math.imul(e^s>>>16&255,16777619),e=Math.imul(e^s>>>8&255,16777619),e=Math.imul(e^s&255,16777619))}return(e>>>0).toString(16).padStart(8,"0")}stats(){let t=new Map;for(let r of this.fb)t.set(r,(t.get(r)??0)+1);let e=0,n=0;for(let[r,s]of t)(s>n||s===n&&r<e)&&(e=r,n=s);return{colors:t.size,dominant:e,dominantShare:n/this.fb.length}}blit(t){let e=this.fb;for(let n=0;n<e.length;n++)t[n]=j(e[n])}};var S=["up","down","left","right","a","b","start"];function R(h){return S.indexOf(String(h).toLowerCase())}function P(h){let t=typeof h=="number"?h:Number(h??0);return Number.isFinite(t)?Math.max(0,Math.min(3,t|0)):0}var C=class{constructor(){u(this,"held",new Uint8Array(4*S.length));u(this,"prev",new Uint8Array(4*S.length));u(this,"latch",new Uint8Array(4*S.length));u(this,"scheduled",[])}set(t,e,n){let r=R(e);if(r<0)return;let s=P(t)*S.length+r;n&&!this.held[s]&&(this.latch[s]=1),this.held[s]=n?1:0}inject(t,e){for(let n of t){let r=R(n.button);r<0||this.scheduled.push({frame:e+Math.max(0,(n.at??0)|0),player:P(n.player),button:r,down:!!n.down})}this.scheduled.sort((n,r)=>n.frame-r.frame)}clearScheduled(){this.scheduled=[]}beginFrame(t){for(;this.scheduled.length>0&&this.scheduled[0].frame<=t;){let e=this.scheduled.shift(),n=e.player*S.length+e.button;e.down&&!this.held[n]&&(this.latch[n]=1),this.held[n]=e.down?1:0}}endFrame(){this.prev.set(this.held),this.latch.fill(0)}btn(t,e=0){let n=R(t);return n<0?!1:this.held[P(e)*S.length+n]===1}btnp(t,e=0){let n=R(t);if(n<0)return!1;let r=P(e)*S.length+n;return this.latch[r]===1||this.held[r]===1&&this.prev[r]===0}anyStartPressed(){for(let t=0;t<4;t++)if(this.btnp("start",t))return!0;return!1}releaseAll(){this.held.fill(0),this.prev.fill(0),this.latch.fill(0)}};function N(h){let t=h>>>0;return()=>{t=t+1831565813>>>0;let e=t;return e=Math.imul(e^e>>>15,e|1),e^=e+Math.imul(e^e>>>7,e|61),((e^e>>>14)>>>0)/4294967296}}var nt=4e3;function Y(){return{sfx:{},tone:0,flash:0,shake:0,scoreFrames:[],scoreDeltas:[]}}var I=1/60,$=45,X=4,st=12,A=[12,8];function M(h){return()=>{throw new Error(`${h} is not available in games. Do everything inside update(api, dt).`)}}function it(h,t,e){let n=`${h}
+;return {
+  init: typeof init === 'function' ? init : null,
+  update: typeof update === 'function' ? update : null,
+  draw: typeof draw === 'function' ? draw : null
+};`;return new Function("api","Math","window","document","globalThis","self","setTimeout","setInterval","requestAnimationFrame","fetch","XMLHttpRequest","localStorage","alert","prompt","confirm",n)(t,e,void 0,void 0,void 0,void 0,M("setTimeout"),M("setInterval"),M("requestAnimationFrame"),M("fetch"),void 0,void 0,M("alert"),M("prompt"),M("confirm"))}var B=class{constructor(t,e){u(this,"screen",new E);u(this,"input",new C);u(this,"synth");u(this,"opts");u(this,"ctx");u(this,"image");u(this,"pixels");u(this,"state","idle");u(this,"score",0);u(this,"scores",[0,0]);u(this,"hi",0);u(this,"players",1);u(this,"winner",null);u(this,"title","");u(this,"frame",0);u(this,"gameFrame",0);u(this,"telemetry",Y());u(this,"game",null);u(this,"api");u(this,"rng",N(1));u(this,"seed",1);u(this,"pendingState",null);u(this,"lockout",0);u(this,"flashFrames",0);u(this,"flashColor",7);u(this,"shakeFrames",0);u(this,"errorMessage","");u(this,"accumulator",0);u(this,"lastTime",0);u(this,"running",!1);u(this,"paused",!1);this.opts=e,this.synth=new F(e.probe),this.ctx=e.probe?null:t.getContext("2d"),this.ctx?(this.image=this.ctx.createImageData(c,b),this.pixels=new Uint32Array(this.image.data.buffer)):(this.image=null,this.pixels=null),this.api=this.makeApi()}load(t,e=1,n="",r=0,s=1){this.seed=e>>>0||1,this.rng=N(this.seed),this.title=String(n||"").slice(0,20),this.hi=Math.max(0,r|0),this.players=s===2?2:1,this.resetScores(),this.game=null,this.errorMessage="",this.input.releaseAll(),this.input.clearScheduled(),this.api=this.makeApi();let i=Object.create(Math);Object.defineProperty(i,"random",{value:()=>this.rng(),writable:!0});try{let a=it(String(t),this.api,i),o=["init","update","draw"].filter(l=>!a[l]);if(o.length>0)throw new Error(`game.js must define ${o.join(", ")} as top-level functions`);this.game=a}catch(a){return this.crash(a,"load"),{ok:!1,error:this.errorMessage}}return this.setState("title"),this.runInit()?(this.opts.post({type:"ready",title:this.title,players:this.players}),{ok:!0}):{ok:!1,error:this.errorMessage}}start(){!this.game||this.state==="error"||this.beginPlay()}reset(){this.game&&(this.resetScores(),this.input.clearScheduled(),this.setState("title"),this.runInit())}end(){this.state==="playing"&&(this.flashFrames=0,this.drawHud(),this.setState("gameover"),this.lockout=$)}setPaused(t){this.paused=t,this.accumulator=0,this.lastTime=performance.now(),this.input.releaseAll(),this.input.clearScheduled()}setMuted(t){this.synth.setMuted(this.opts.probe||t)}setInput(t,e,n){this.paused&&n||(this.input.set(t,e,n),n&&this.synth.unlock())}inject(t){Array.isArray(t)&&this.input.inject(t,this.frame)}step(t=1){for(let e=0;e<t;e++)this.tick()}frameHash(){return this.screen.hash(st)}run(){if(this.running)return;this.running=!0,this.lastTime=performance.now();let t=e=>{if(!this.running)return;let n=Math.min(.25,(e-this.lastTime)/1e3);if(this.lastTime=e,this.paused){requestAnimationFrame(t);return}this.accumulator+=n;let r=0;for(;this.accumulator>=I&&r<X;)this.tick(),this.accumulator-=I,r++;r===X&&(this.accumulator=0),this.present(),requestAnimationFrame(t)};requestAnimationFrame(t)}stop(){this.running=!1}tick(){switch(this.input.beginFrame(this.frame),this.state){case"idle":this.screen.cls(0),this.screen.textCenter("NO GAME LOADED",108,5);break;case"title":if(this.lockout>0)this.lockout--;else if(this.input.anyStartPressed()){this.beginPlay();break}this.guard("draw",()=>this.game?.draw?.(this.api)),this.drawHud(),this.drawTitle();break;case"playing":if(this.gameFrame++,this.api.frame=this.gameFrame,this.api.t=this.gameFrame*I,this.guard("update",()=>this.game?.update?.(this.api,I)),this.state!=="playing"||(this.guard("draw",()=>this.game?.draw?.(this.api)),this.state!=="playing"))break;if(this.pendingState){this.flashFrames=0,this.drawHud();let t=this.pendingState;this.pendingState=null,this.setState(t),this.lockout=$;break}this.applyFlash(),this.drawHud();break;case"gameover":case"win":if(this.lockout>0)this.lockout--;else if(this.input.anyStartPressed()){this.beginPlay();break}this.drawEnd();break;case"error":this.drawError();break}this.input.endFrame(),this.frame++,this.opts.probe&&this.opts.post({type:"frame",hash:this.screen.hash(),frame:this.frame})}present(){if(!this.ctx||!this.image||!this.pixels)return;this.screen.blit(this.pixels);let t=0,e=0;if(this.shakeFrames>0){this.shakeFrames--;let n=2;t=Math.round((Math.random()*2-1)*n),e=Math.round((Math.random()*2-1)*n),this.ctx.fillStyle="#000",this.ctx.fillRect(0,0,c,b)}this.ctx.putImageData(this.image,t,e)}beginPlay(){this.game&&(this.telemetry=Y(),this.resetScores(),this.lockout=0,this.pendingState=null,this.flashFrames=0,this.shakeFrames=0,this.input.clearScheduled(),this.runInit()&&(this.setState("playing"),this.synth.sfx("select")))}runInit(){return this.gameFrame=0,this.api.frame=0,this.api.t=0,this.rng=N(this.seed),this.screen.cls(0),this.guard("init",()=>this.game?.init?.(this.api))}resetScores(){this.score=0,this.scores=[0,0],this.winner=null}setScore(t,e){let n=typeof t=="number"&&Number.isFinite(t)?t|0:null,r=this.players===2?n===null?[0,1]:[Math.max(0,Math.min(1,n))]:[0],s=this.scores[0]+this.scores[1];for(let a of r)this.scores[a]=Math.max(0,Math.floor(e(this.scores[a]??0)));this.score=this.scores[0]??0,this.hi=Math.max(this.hi,...this.scores);let i=this.scores[0]+this.scores[1]-s;i!==0&&this.state==="playing"&&this.telemetry.scoreFrames.length<nt&&(this.telemetry.scoreFrames.push(this.gameFrame),this.telemetry.scoreDeltas.push(i))}setState(t){this.state=t,this.hi=Math.max(this.hi,...this.scores),this.opts.post({type:"state",state:t,score:this.score,hi:this.hi,players:this.players,scores:this.scores.slice(0,this.players),winner:this.winner})}guard(t,e){try{return e(),!0}catch(n){return this.crash(n,t),!1}}crash(t,e){let n=t instanceof Error?t:new Error(String(t));this.errorMessage=`${e}: ${n.message}`,this.state="error",this.opts.post({type:"error",message:n.message,stack:String(n.stack??"").split(`
+`).slice(0,6).join(`
+`),phase:e}),this.opts.post({type:"state",state:"error",score:this.score,hi:this.hi,players:this.players,scores:this.scores.slice(0,this.players),winner:null})}drawHud(){let t=this.screen;if(this.players===2){let s=`P1 ${this.scores[0]}`,i=`P2 ${this.scores[1]}`;t.text(s,3,3,0),t.text(s,2,2,A[0]);let a=c-2-t.textWidth(i);t.text(i,a+1,3,0),t.text(i,a,2,A[1]);return}let e=`SCORE ${this.score}`,n=`HI ${this.hi}`;t.text(e,3,3,0),t.text(e,2,2,7);let r=c-2-t.textWidth(n);t.text(n,r+1,3,0),t.text(n,r,2,7)}panel(t,e){let n=this.screen;n.rectfill(16,t,c-32,e,0),n.rect(16,t,c-32,e,7),n.rect(17,t+1,c-34,e-2,1)}drawTitle(){let t=this.screen;this.panel(72,80),this.title?t.textCenter(this.title,84,10,2):t.textCenter("READY",84,10,2),this.players===2&&t.textCenter("2 PLAYERS",106,6),this.frame%40<28&&t.textCenter("PRESS START",122,7)}drawEnd(){let t=this.screen,e=this.state==="win";if(this.panel(64,96),this.players===2){let n=this.winner;e&&n!==null?t.textCenter(`PLAYER ${n+1} WINS`,74,A[n]??11,2):t.textCenter(e?"YOU WIN":"GAME OVER",74,e?11:8,2),t.text(`P1 ${this.scores[0]}`,40,104,A[0]);let r=`P2 ${this.scores[1]}`;t.text(r,c-40-t.textWidth(r),104,A[1])}else t.textCenter(e?"YOU WIN":"GAME OVER",74,e?11:8,2),t.textCenter(`SCORE ${this.score}`,100,7),t.textCenter(`HI ${this.hi}`,112,6);this.lockout===0&&this.frame%40<28&&t.textCenter("PRESS START",136,7)}drawError(){let t=this.screen;t.cls(2),t.textCenter("GAME CRASHED",90,7,2);let e=this.errorMessage.slice(0,30);t.textCenter(e,120,15)}applyFlash(){this.flashFrames<=0||(this.flashFrames--,this.screen.cls(this.flashColor))}makeApi(){let t=this.screen,e=this.input,n={W:c,H:b,t:0,frame:0,players:this.players,P1:A[0],P2:A[1],btn:(r,s=0)=>e.btn(r,s),btnp:(r,s=0)=>e.btnp(r,s),cls:(r=0)=>t.cls(r),pset:(r,s,i)=>t.pset(r,s,i),pget:(r,s)=>t.pget(r,s),line:(r,s,i,a,o)=>t.line(r,s,i,a,o),rect:(r,s,i,a,o)=>t.rect(r,s,i,a,o),rectfill:(r,s,i,a,o)=>t.rectfill(r,s,i,a,o),circ:(r,s,i,a)=>t.circ(r,s,i,a),circfill:(r,s,i,a)=>t.circfill(r,s,i,a),spr:(r,s,i,a=!1,o=!1,l)=>t.spr(r,s,i,!!a,!!o,l),text:(r,s,i,a=7,o=1)=>t.text(r,s,i,a,o),textCenter:(r,s,i=7,a=1)=>t.textCenter(r,s,i,a),textWidth:(r,s=1)=>t.textWidth(r,s),sfx:r=>{let s=this.telemetry.sfx;s[String(r)]=(s[String(r)]??0)+1,this.synth.sfx(r)},tone:(r,s,i="square")=>{this.telemetry.tone++,this.synth.tone(r,s,i)},flash:(r=7,s=3)=>{this.telemetry.flash++,this.flashColor=r,this.flashFrames=Math.max(0,Math.min(10,s|0))},shake:(r=8)=>{this.telemetry.shake++,this.shakeFrames=Math.max(0,Math.min(60,r|0))},score:(r,s)=>this.setScore(s,()=>Number(r)||0),addScore:(r,s)=>this.setScore(s,i=>i+(Number(r)||0)),getScore:r=>{let s=this.players===2&&typeof r=="number"?Math.max(0,Math.min(1,r|0)):0;return this.scores[s]??0},gameOver:()=>{this.state==="playing"&&!this.pendingState&&(this.pendingState="gameover")},win:r=>{this.state!=="playing"||this.pendingState||(this.pendingState="win",this.winner=this.players===2&&typeof r=="number"&&Number.isFinite(r)?Math.max(0,Math.min(1,r|0)):null)},rnd:(r=1)=>this.rng()*(Number(r)||0),rndi:(r,s)=>{let i=Math.min(r|0,s|0),a=Math.max(r|0,s|0);return i+Math.floor(this.rng()*(a-i+1))},clamp:(r,s,i)=>Math.min(i,Math.max(s,r)),dist:(r,s,i,a)=>Math.hypot(i-r,a-s),collide:(r,s,i,a,o,l,m,p)=>r<o+m&&r+i>o&&s<l+p&&s+a>l};return n.print=n.text,n}};return Z(at);})();
+</script>
+<script type="application/json" id="murphe-minimal-code">"// <arcade-catalog-bundle>\n// sky-racer@1.0.0 a20db7a7d21b20fd5e8ed7cd70b0401ad8f46c19042120a5f8d5bf1921775fad\nconst ARCADE = Object.freeze({\n\"skyRacer\": (function skyRacer(config = {}) {\n  const allowed = ['rivalSpeed', 'boostCooldown', 'planePalette', 'courseNames', 'racerNames']\n  for (const key of Object.keys(config))\n    if (!allowed.includes(key)) throw new Error('Unknown skyRacer setting: ' + key)\n  const rivalSpeed = config.rivalSpeed ?? 1\n  const boostCooldown = config.boostCooldown ?? 2.7\n  if (!Number.isFinite(rivalSpeed) || rivalSpeed < 0.6 || rivalSpeed > 1.3)\n    throw new Error('rivalSpeed must be 0.6..1.3')\n  if (!Number.isFinite(boostCooldown) || boostCooldown < 0.7 || boostCooldown > 8)\n    throw new Error('boostCooldown must be 0.7..8 seconds')\n  if (\n    config.planePalette &&\n    (!Array.isArray(config.planePalette) ||\n      config.planePalette.length !== 8 ||\n      config.planePalette.some((c) => typeof c !== 'string' || !/^#[0-9a-f]{6}$/i.test(c)))\n  )\n    throw new Error('planePalette needs eight hex colors')\n  for (const [key, length] of [\n    ['courseNames', 3],\n    ['racerNames', 4],\n  ])\n    if (\n      config[key] &&\n      (!Array.isArray(config[key]) ||\n        config[key].length !== length ||\n        config[key].some((s) => typeof s !== 'string' || !s.trim()))\n    )\n      throw new Error(key + ' needs ' + length + ' nonempty names')\n  function cleanName(s) {\n    return s.toUpperCase().slice(0, 18)\n  }\n  const PLANE_PALETTE = config.planePalette\n    ? config.planePalette.slice()\n    : ['#182747', '#ce354a', '#ff6570', '#fff1d0', '#c6bca9', '#2469b3', '#71dafa', '#ffffff']\n  const PLANE = [\n    '...........33...........',\n    '..........3773..........',\n    '..........3113..........',\n    '..........1551..........',\n    '.........315513.........',\n    '........33166133........',\n    '......333311113333......',\n    '..33333333111133333333..',\n    '331111333311113333111133',\n    '332223333311113333222233',\n    '..........3113..........',\n    '..........3113..........',\n    '.........331133.........',\n    '.......3311111133.......',\n    '.......3331331333.......',\n    '..........1331..........',\n  ]\n  const BANK = [\n    '...........33...........',\n    '..........3773..........',\n    '..........3113..........',\n    '..........1551..........',\n    '.........315513.........',\n    '........3316613.........',\n    '......333311113.........',\n    '..33333333111133........',\n    '331111333311113333......',\n    '33222333331111331133....',\n    '..........31133322333...',\n    '..........3113..........',\n    '.........331133.........',\n    '.......331111133........',\n    '.......333133133........',\n    '..........1331..........',\n  ]\n  const BIPLANE = [\n    '.........77.........',\n    '........7997........',\n    '..aaaaaaaaaaaaaaaa..',\n    '.aa9999999999999aaa.',\n    '..a..a..9cc9..a..a..',\n    '..a..a..9cc9..a..a..',\n    '.aa9999999999999aaa.',\n    '..aaaaaaaaaaaaaaaa..',\n    '........9999........',\n    '........7997........',\n    '......aa9999aa......',\n    '......aaaaaaaa......',\n    '.........99.........',\n  ]\n  const JET = [\n    '.........b.........',\n    '........b7b........',\n    '........bcb........',\n    '.......bbccb.......',\n    '.......bbccb.......',\n    '......bbbbb3b......',\n    '.....bbbbbbb3b.....',\n    '....bbbbbbbbb3b....',\n    '..bbbbbbbbbbbbb3b..',\n    '.bb33bbbbbbbbb33bb.',\n    '.......bb3bb.......',\n    '......bbb3bbb......',\n    '......3b...b3......',\n  ]\n  const SEAPLANE = [\n    '.........dd.........',\n    '........d77d........',\n    '........dccd........',\n    '........dccd........',\n    '......ddd66ddd......',\n    '..ddddddd66ddddddd..',\n    '.dd222ddd66ddd222dd.',\n    '....dd..d66d..dd....',\n    '....66..d66d..66....',\n    '....66..d66d..66....',\n    '....66.dd66dd.66....',\n    '....66.dddddd.66....',\n    '....55...dd...55....',\n  ]\n  const COURSE_NAMES = config.courseNames\n    ? config.courseNames.map(cleanName)\n    : ['CORAL COAST', 'CLOUD GARDEN', 'TEMPEST PASS']\n  const LEVEL_NAMES = ['LOW', 'MID', 'HIGH']\n  const ITEM_NAMES = ['GUST', 'BALLOON', 'PUFF']\n  const RACER_NAMES = config.racerNames\n    ? config.racerNames.map((name) => cleanName(name).slice(0, 9))\n    : ['RED COMET', 'GOLD WING', 'GREEN JET', 'VIOLET']\n  const RACER_COLORS = [8, 10, 11, 13]\n  const POINTS = [15, 10, 6, 3]\n  const LAP_LENGTH = 1800\n  const RACE_LENGTH = 5400\n  const CHECKPOINTS = [300, 630, 960, 1290, 1700]\n\n  let player, rivals, objects, particles, missiles\n  let race, phase, elapsed, resultClock, cupPoints, finishOrder\n  let message, messageTime, hitSerial, altitudeRepeat, racePlace, finished\n  let backdropSeed\n\n  function clamp(v, a, b) {\n    return Math.max(a, Math.min(b, v))\n  }\n  function centerAt(s) {\n    const d = ((s % LAP_LENGTH) + LAP_LENGTH) % LAP_LENGTH\n    const fade = Math.min(d / 300, (LAP_LENGTH - d) / 170, 1)\n    return 128 + fade * (Math.sin(d / 290 + race * 0.55) * (12 + race * 8) + Math.sin(d / 117) * 6)\n  }\n  function widthAt(s) {\n    return 190 - race * 5 - 8 * Math.sin(s / 410) ** 2\n  }\n  function screenY(s) {\n    return 174 - (s - player.s) * 0.65\n  }\n  function objectX(o, t) {\n    return o.x + (o.move ? Math.sin(t * 1.3 + o.s * 0.017) * o.move : 0)\n  }\n  function announce(text, duration) {\n    message = text\n    messageTime = duration || 1.5\n  }\n  function burst(x, s, color, count) {\n    for (let i = 0; i < count; i++) {\n      if (particles.length >= 100) particles.shift()\n      particles.push({\n        x: x,\n        s: s,\n        vx: (Math.random() - 0.5) * 80,\n        vs: (Math.random() - 0.5) * 110,\n        life: 0.35 + Math.random() * 0.4,\n        color: color,\n      })\n    }\n  }\n  function addObject(type, s, x, alt, extra) {\n    const o = {\n      type: type,\n      s: s,\n      x: x,\n      alt: alt,\n      done: false,\n      cool: 0,\n      move: 0,\n      aiMask: 0,\n      pending: 0,\n      serial: -1,\n    }\n    if (extra) {\n      for (const key in extra) o[key] = extra[key]\n    }\n    objects.push(o)\n  }\n  function makeCourse() {\n    objects = []\n    for (let lap = 0; lap < 3; lap++) {\n      const base = lap * LAP_LENGTH\n      addObject('crate', base + 100, centerAt(base + 100), 1)\n      addObject('ring', base + 205, centerAt(base + 205), 1)\n      for (let k = 0; k < 5; k++) {\n        const s = base + CHECKPOINTS[k]\n        addObject('gate', s, centerAt(s), -1, {\n          half: k === 0 ? 73 : 57 - race * 2,\n          number: k + 1,\n        })\n      }\n      // The opening straight is safe even without steering or items.\n      addObject('cloud', base + 735, centerAt(base + 735) - 34, 1, {\n        move: race > 0 || lap > 0 ? 17 : 0,\n      })\n      addObject('crate', base + 805, centerAt(base + 805) + 49, 2)\n      addObject('ring', base + 875, centerAt(base + 875) + 49, 2)\n      addObject('balloon', base + 1080, centerAt(base + 1080) + 43, 2, { move: 9 + race * 3 })\n      addObject('cloud', base + 1180, centerAt(base + 1180) - 29, 0, { move: 12 + race * 4 })\n      addObject('crate', base + 1355, centerAt(base + 1355) - 42, 0)\n      addObject('ring', base + 1450, centerAt(base + 1450) - 48, 2)\n      if (race > 0 || lap > 0) {\n        addObject('wind', base + 985, centerAt(base + 985), -1, {\n          length: 165,\n          dir: (lap + race) % 2 ? -1 : 1,\n        })\n        addObject('cloud', base + 1490, centerAt(base + 1490) + 32, 1, { move: 20 })\n      }\n      if (race === 2) {\n        addObject('balloon', base + 490, centerAt(base + 490) - 40, 2, { move: 15 })\n      }\n    }\n    objects.sort((a, b) => a.s - b.s)\n  }\n  function startRace(api) {\n    phase = 'race'\n    elapsed = 0\n    resultClock = 0\n    hitSerial = 0\n    altitudeRepeat = 0\n    racePlace = 1\n    player = {\n      x: 128,\n      s: 0,\n      vx: 0,\n      alt: 1,\n      visualAlt: 1,\n      item: 0,\n      boost: 0,\n      cooldown: 0,\n      spin: 0,\n      inv: 3.1,\n      spins: 0,\n      crash: 0,\n      checkpoint: 0,\n      assist: 0,\n      time: 0,\n      finished: false,\n    }\n    rivals = []\n    for (let i = 0; i < 3; i++) {\n      rivals.push({\n        id: i + 1,\n        x: 75 + i * 52,\n        s: 23 + i * 17,\n        alt: i,\n        slow: 0,\n        fog: 0,\n        hurt: 0,\n        baseSpeed: (134 + i * 4 + race * 2) * rivalSpeed,\n        finished: false,\n        time: 0,\n      })\n    }\n    particles = []\n    missiles = []\n    finishOrder = [0, 1, 2, 3]\n    makeCourse()\n    announce('RACE ' + (race + 1) + '  ' + COURSE_NAMES[race], 2.3)\n    api.tone(660, 100, 'triangle')\n  }\n  function init(api) {\n    if (api.players !== 1) throw new Error('skyRacer supports one player')\n    race = 0\n    finished = false\n    cupPoints = [0, 0, 0, 0]\n    backdropSeed = Math.random() * 100\n    message = ''\n    messageTime = 0\n    api.score(0)\n    startRace(api)\n  }\n  function spinOut(api, why) {\n    if (player.inv > 0 || player.crash > 0) return\n    hitSerial++\n    player.spins++\n    player.spin = 1\n    player.inv = 1.8\n    player.boost = 0\n    player.vx *= -0.25\n    burst(player.x, player.s, 15, 14)\n    api.sfx('hit')\n    api.shake(5)\n    announce(why + ' - SPIN ' + player.spins + '/3', 1.3)\n    if (player.spins >= 3) {\n      player.crash = 3\n      player.spin = 0\n      player.inv = 4.8\n      api.sfx('explode')\n      api.flash(15, 2)\n      announce('CRASH! CHECKPOINT RESCUE', 3)\n    }\n  }\n  function useItem(api) {\n    if (player.item < 0) {\n      announce('FIND A FLOATING CRATE', 0.9)\n      api.tone(160, 50, 'triangle')\n      return\n    }\n    const item = player.item\n    player.item = -1\n    if (item === 0) {\n      player.boost = Math.max(player.boost, 1.2)\n      burst(player.x, player.s - 12, 12, 10)\n      api.sfx('powerup')\n      announce('BLUE GUST!', 0.8)\n    } else if (item === 1) {\n      let target = -1\n      let best = Infinity\n      for (let i = 0; i < rivals.length; i++) {\n        if (rivals[i].finished) continue\n        const d = Math.abs(rivals[i].s - player.s)\n        if (d < best) {\n          best = d\n          target = i\n        }\n      }\n      if (target >= 0) {\n        missiles.push({ x: player.x, s: player.s + 12, life: 1.1, target: target })\n      }\n      api.sfx('shoot')\n      announce('HOMING BALLOON!', 0.9)\n    } else {\n      for (let i = 0; i < rivals.length; i++) {\n        if (Math.abs(rivals[i].s - player.s) < 420 && !rivals[i].finished) {\n          rivals[i].fog = 2.6\n          rivals[i].slow = Math.max(rivals[i].slow, 1.4)\n        }\n      }\n      burst(player.x, player.s, 7, 24)\n      api.sfx('shoot')\n      announce('CLOUD COVER!', 0.9)\n    }\n  }\n  function updateRivals(api, dt) {\n    for (let i = 0; i < rivals.length; i++) {\n      const r = rivals[i]\n      if (r.finished) continue\n      r.slow = Math.max(0, r.slow - dt)\n      r.fog = Math.max(0, r.fog - dt)\n      r.hurt = Math.max(0, r.hurt - dt)\n      let target = centerAt(r.s + 75) + (i - 1) * 34\n      let targetAlt = i\n      for (let j = 0; j < objects.length; j++) {\n        const o = objects[j]\n        const ahead = o.s - r.s\n        if (ahead < 0 || ahead > 145) continue\n        if (o.type === 'gate') target = clamp(target, o.x - o.half + 15, o.x + o.half - 15)\n        if (\n          (o.type === 'cloud' || o.type === 'balloon') &&\n          o.alt === r.alt &&\n          Math.abs(objectX(o, api.t) - target) < 48\n        ) {\n          target = centerAt(r.s) + (objectX(o, api.t) > centerAt(r.s) ? -49 : 49)\n          if (ahead < 90 && Math.sin(o.s + i * 11) > -0.2) targetAlt = (r.alt + 1) % 3\n        }\n      }\n      if (r.fog <= 0) r.alt = targetAlt\n      r.x += clamp(target - r.x, -72 * dt, 72 * dt)\n      const old = r.s\n      let speed = r.baseSpeed + Math.sin(elapsed * 0.8 + i * 3) * 3\n      if (r.slow > 0) speed *= 0.56\n      if (r.fog > 0) speed *= 0.86\n      r.s += speed * dt\n      for (let j = 0; j < objects.length; j++) {\n        const o = objects[j]\n        if (o.s < old || o.s > r.s || o.aiMask & (1 << i)) continue\n        o.aiMask |= 1 << i\n        if (\n          (o.type === 'cloud' || o.type === 'balloon') &&\n          r.alt === o.alt &&\n          Math.abs(r.x - objectX(o, api.t)) < (o.type === 'cloud' ? 37 : 22)\n        ) {\n          r.slow = 1.2\n          r.hurt = 0.6\n          if (Math.abs(r.s - player.s) < 250) burst(r.x, r.s, 6, 5)\n        }\n        if (o.type === 'ring' && r.alt === o.alt && Math.abs(r.x - o.x) < 19) r.s += 34\n      }\n      if (r.s >= RACE_LENGTH) {\n        r.s = RACE_LENGTH\n        r.finished = true\n        r.time = elapsed\n      }\n    }\n  }\n  function finishRace(api) {\n    player.finished = true\n    player.time = elapsed\n    finishOrder = [0, 1, 2, 3]\n    finishOrder.sort((a, b) => {\n      const ra = a === 0 ? player : rivals[a - 1]\n      const rb = b === 0 ? player : rivals[b - 1]\n      if (ra.finished && rb.finished) return ra.time - rb.time\n      if (ra.finished !== rb.finished) return ra.finished ? -1 : 1\n      return rb.s - ra.s\n    })\n    for (let i = 0; i < 4; i++) {\n      cupPoints[finishOrder[i]] += POINTS[i]\n      if (finishOrder[i] === 0) racePlace = i + 1\n    }\n    api.addScore(POINTS[racePlace - 1])\n    api.sfx(racePlace === 1 ? 'powerup' : 'coin')\n    phase = 'result'\n    resultClock = 0\n    burst(player.x, player.s, 10, 22)\n  }\n  function update(api, dt) {\n    if (finished) return\n    messageTime = Math.max(0, messageTime - dt)\n    for (let i = particles.length - 1; i >= 0; i--) {\n      const p = particles[i]\n      p.life -= dt\n      p.x += p.vx * dt\n      p.s += p.vs * dt\n      if (p.life <= 0) particles.splice(i, 1)\n    }\n    if (phase === 'result') {\n      resultClock += dt\n      if (resultClock > 6 || (resultClock > 1.2 && api.btnp('a'))) {\n        if (race < 2) {\n          race++\n          startRace(api)\n        } else {\n          finished = true\n          const high = Math.max(cupPoints[1], cupPoints[2], cupPoints[3])\n          if (cupPoints[0] >= high) {\n            api.sfx('powerup')\n            api.win()\n          } else {\n            api.sfx('die')\n            api.gameOver()\n          }\n        }\n      }\n      return\n    }\n\n    elapsed += dt\n    player.boost = Math.max(0, player.boost - dt)\n    player.cooldown = Math.max(0, player.cooldown - dt)\n    player.inv = Math.max(0, player.inv - dt)\n    player.spin = Math.max(0, player.spin - dt)\n    player.assist = Math.max(0, player.assist - dt)\n    updateRivals(api, dt)\n\n    for (let i = missiles.length - 1; i >= 0; i--) {\n      const m = missiles[i]\n      const r = rivals[m.target]\n      m.life -= dt\n      m.x += (r.x - m.x) * Math.min(1, dt * 5)\n      m.s += (r.s - m.s) * Math.min(1, dt * 5)\n      if (m.life <= 0) {\n        r.slow = 3\n        r.hurt = 0.75\n        burst(r.x, r.s, 14, 12)\n        api.sfx('hit')\n        announce('RIVAL TANGLED!', 1)\n        missiles.splice(i, 1)\n      }\n    }\n\n    for (let i = 0; i < objects.length; i++) {\n      const o = objects[i]\n      o.cool = Math.max(0, o.cool - dt)\n      if (o.pending > 0) {\n        o.pending -= dt\n        if (o.pending <= 0 && o.serial === hitSerial) {\n          api.addScore(50)\n          api.sfx('coin')\n          announce('CLEAN SHORTCUT +50', 1)\n          burst(player.x, player.s, 10, 12)\n        }\n      }\n    }\n\n    if (player.crash > 0) {\n      player.crash -= dt\n      if (player.crash <= 0) {\n        player.s = player.checkpoint + 18\n        player.x = centerAt(player.s)\n        player.vx = 0\n        player.spins = 0\n        player.alt = 1\n        player.inv = 1.8\n        api.sfx('select')\n        announce('BACK IN THE RACE!', 1.2)\n      }\n      return\n    }\n\n    altitudeRepeat -= dt\n    const vertical = (api.btn('up') ? 1 : 0) - (api.btn('down') ? 1 : 0)\n    if (player.spin <= 0) {\n      if (vertical !== 0 && (altitudeRepeat <= 0 || api.btnp('up') || api.btnp('down'))) {\n        const oldAlt = player.alt\n        player.alt = clamp(player.alt + vertical, 0, 2)\n        altitudeRepeat = 0.33\n        if (oldAlt !== player.alt) {\n          api.tone(330 + player.alt * 160, 65, 'triangle')\n          burst(player.x, player.s, 6, 4)\n        }\n      }\n      if (!vertical) altitudeRepeat = 0\n      if (api.btnp('a')) useItem(api)\n      if (api.btnp('b') && player.cooldown <= 0) {\n        player.boost = Math.max(player.boost, 0.7)\n        player.cooldown = boostCooldown\n        api.sfx('powerup')\n        burst(player.x, player.s - 12, 12, 8)\n      }\n    }\n    player.visualAlt += (player.alt - player.visualAlt) * Math.min(1, dt * 12)\n\n    let steer = (api.btn('right') ? 1 : 0) - (api.btn('left') ? 1 : 0)\n    if (player.spin > 0) steer = 0\n    const maxSteer = player.boost > 0 ? 159 : 138\n    player.vx += (steer * maxSteer - player.vx) * dt * (steer ? 6.5 : 4.5)\n    player.x += player.vx * dt\n    if (player.assist > 0 && !steer) {\n      let next = null\n      for (let i = 0; i < objects.length; i++) {\n        if (objects[i].type === 'gate' && objects[i].s > player.s + 5) {\n          next = objects[i]\n          break\n        }\n      }\n      if (next) player.x += clamp(next.x - player.x, -70 * dt, 70 * dt)\n    }\n    let speed = player.spin > 0 ? 48 : player.boost > 0 ? 220 : 148\n    for (let i = 0; i < objects.length; i++) {\n      const o = objects[i]\n      if (o.type === 'wind' && player.s > o.s && player.s < o.s + o.length && player.alt > 0) {\n        player.x += o.dir * (player.alt === 2 ? 39 : 22) * dt\n        speed += 12\n      }\n    }\n    const oldS = player.s\n    player.s += speed * dt\n    player.x = clamp(player.x, 13, 243)\n    const c = centerAt(player.s)\n    const half = widthAt(player.s) * 0.5\n    if (Math.abs(player.x - c) > half - 8 && elapsed > 3.2) {\n      spinOut(api, 'CLIFF CLIP')\n      player.x = clamp(player.x, c - half + 9, c + half - 9)\n      player.assist = 1.5\n    }\n\n    for (let i = 0; i < objects.length; i++) {\n      const o = objects[i]\n      const ox = objectX(o, api.t)\n      const dx = Math.abs(player.x - ox)\n      const cross = oldS < o.s && player.s >= o.s\n      const close = Math.abs(o.s - player.s) < 16\n      if (o.type === 'gate' && cross && !o.done) {\n        o.done = true\n        if (dx < o.half - 5) {\n          api.addScore(10)\n          api.sfx('coin')\n          player.checkpoint = o.s\n          burst(player.x, player.s, 11, 5)\n        } else {\n          spinOut(api, 'MISSED GATE')\n          player.assist = 2.5\n          if (player.spin <= 0) announce('FOLLOW THE NEXT GATE', 1.2)\n        }\n      } else if (\n        o.type === 'crate' &&\n        close &&\n        dx < 22 &&\n        player.alt === o.alt &&\n        o.cool <= 0 &&\n        player.item < 0 &&\n        player.spin <= 0\n      ) {\n        player.item = o.alt === 2 ? Math.floor(Math.random() * 2) : Math.floor(Math.random() * 3)\n        o.cool = 3\n        api.sfx('powerup')\n        burst(ox, o.s, 10, 9)\n        announce(ITEM_NAMES[player.item] + ' READY', 0.9)\n      } else if (o.type === 'ring' && cross && !o.done) {\n        o.done = true\n        if (dx < 24 && player.alt === o.alt && player.spin <= 0) {\n          o.pending = 0.7\n          o.serial = hitSerial\n          player.boost = Math.max(player.boost, 0.85)\n          api.sfx('jump')\n          burst(ox, o.s, 10, 12)\n          announce('SHORTCUT!', 0.7)\n        }\n      } else if (\n        (o.type === 'cloud' || o.type === 'balloon') &&\n        close &&\n        dx < (o.type === 'cloud' ? 36 : 21) &&\n        player.alt === o.alt\n      ) {\n        spinOut(api, o.type === 'cloud' ? 'CLOUD WALL' : 'STORM BALLOON')\n      }\n    }\n    if (player.boost > 0 && api.frame % 3 === 0) {\n      burst(player.x - player.vx * 0.018, player.s - 20, 12, 1)\n    }\n    racePlace = 1\n    for (let i = 0; i < rivals.length; i++) {\n      if (rivals[i].s > player.s || rivals[i].finished) racePlace++\n    }\n    if (player.s >= RACE_LENGTH && player.crash <= 0) finishRace(api)\n  }\n\n  function altitudeBadge(api, x, y, alt) {\n    api.rectfill(x - 7, y, 15, 6, 1)\n    for (let i = 0; i < 3; i++) {\n      api.rectfill(x - 5 + i * 4, y + 4 - i, 3, 1 + i, i === alt ? 10 : 5)\n    }\n  }\n  function drawCloud(api, x, y, dangerous) {\n    api.circfill(x - 16, y + 4, 14, dangerous ? 1 : 6)\n    api.circfill(x + 16, y + 3, 15, dangerous ? 1 : 6)\n    api.rectfill(x - 23, y, 45, 15, dangerous ? 1 : 6)\n    api.circfill(x - 19, y - 3, 12, 6)\n    api.circfill(x, y - 8, 17, 7)\n    api.circfill(x + 19, y - 3, 12, 7)\n    api.rectfill(x - 23, y - 3, 46, 10, 7)\n    api.line(x - 20, y + 8, x + 21, y + 8, 6)\n    if (dangerous) {\n      api.line(x - 5, y + 1, x + 1, y - 3, 1)\n      api.line(x + 1, y - 3, x - 1, y + 3, 1)\n      api.line(x - 1, y + 3, x + 5, y, 1)\n    }\n  }\n  function drawBackground(api) {\n    api.rectfill(0, 12, 256, 212, 12)\n    // Quiet blue currents, followed by scalloped island cliffs.\n    for (let y = 41; y < 211; y += 6) {\n      const s = player.s + (174 - y) / 0.65\n      const c = centerAt(s)\n      const half = widthAt(s) / 2\n      const left = c - half\n      const right = c + half\n      api.rectfill(0, y, left - 4, 6, 3)\n      api.rectfill(left - 6, y, 7, 6, 11)\n      api.rectfill(left, y, 4, 6, 15)\n      api.rectfill(left + 4, y, 3, 6, 1)\n      api.rectfill(right - 3, y, 3, 6, 1)\n      api.rectfill(right, y, 4, 6, 15)\n      api.rectfill(right + 4, y, 6, 6, 11)\n      api.rectfill(right + 10, y, 256 - right, 6, 3)\n      if (Math.floor(s / 31) % 3 === 0) {\n        api.line(left + 14, y + 1, left + 20, y + 1, 6)\n        api.line(right - 18, y + 1, right - 12, y + 1, 6)\n      }\n    }\n    for (let i = 0; i < 11; i++) {\n      const sy = 44 + ((i * 47 + player.s * 0.31) % 164)\n      const side = i % 2\n      const sx = side ? 245 - (i % 3) * 3 : 5 + (i % 3) * 3\n      api.circfill(sx + 2, sy + 2, 6, 1)\n      api.circfill(sx, sy, 6, 3)\n      api.circfill(sx - 1, sy - 2, 4, 11)\n    }\n    for (let i = 0; i < 13; i++) {\n      const x = 43 + ((i * 43 + Math.floor(backdropSeed)) % 172)\n      const y = 42 + ((i * 37 + player.s * 0.21) % 164)\n      api.line(x, y, x + 4, y, 6)\n    }\n  }\n  function drawObject(api, o) {\n    const y = screenY(o.s)\n    const x = objectX(o, api.t)\n    if (o.type === 'wind') {\n      const end = screenY(o.s + o.length)\n      if (y < 41 || end > 207) return\n      for (let yy = Math.max(45, end); yy < Math.min(204, y); yy += 19) {\n        for (let xx = 65; xx < 212; xx += 37) {\n          const scroll = (api.frame % 20) * o.dir * 0.65\n          const ax = xx + scroll\n          api.line(ax - 7 * o.dir, yy, ax + 7 * o.dir, yy, 6)\n          api.line(ax + 7 * o.dir, yy, ax + 3 * o.dir, yy - 3, 6)\n          api.line(ax + 7 * o.dir, yy, ax + 3 * o.dir, yy + 3, 6)\n        }\n      }\n      return\n    }\n    if (y < 23 || y > 242) return\n    if (o.type === 'gate') {\n      const l = x - o.half\n      const r = x + o.half\n      api.line(l, y + 5, r, y + 5, 1)\n      for (let xx = l + 7; xx < r - 4; xx += 10) {\n        api.line(xx, y, xx + 4, y, o.done ? 11 : 7)\n      }\n      for (let side = 0; side < 2; side++) {\n        const gx = side ? r : l\n        api.circfill(gx + 3, y + 10, 7, 1)\n        api.rectfill(gx - 3, y - 13, 6, 22, 7)\n        api.rectfill(gx - 3, y - 9, 6, 5, 8)\n        api.rectfill(gx - 3, y + 1, 6, 5, 8)\n        api.line(gx, y - 20, gx, y - 10, 1)\n        api.rectfill(gx, y - 20, side ? -1 : 1, 1, 7)\n        api.rectfill(gx - (side ? 12 : 0), y - 20, 12, 6, o.done ? 11 : 9)\n      }\n      api.text('' + o.number, x - 4, y - 12, o.done ? 11 : 7)\n    } else if (o.type === 'crate') {\n      if (o.cool > 0) {\n        api.rect(x - 5, y - 5, 10, 10, 6)\n        return\n      }\n      const bob = Math.sin(api.t * 5 + o.s) * 2\n      api.circfill(x + 5, y + 11, 7, 1)\n      api.rectfill(x - 6, y - 6 + bob, 12, 12, 4)\n      api.rectfill(x - 5, y - 7 + bob, 10, 10, o.alt === 2 ? 14 : 10)\n      api.line(x - 4, y - 6 + bob, x + 3, y - 6 + bob, 7)\n      api.text('?', x - 4, y - 6 + bob, 1)\n      altitudeBadge(api, x, y + 13, o.alt)\n    } else if (o.type === 'ring') {\n      api.circ(x + 5, y + 9, 18, 1)\n      api.circ(x, y, 19, o.done ? 6 : 9)\n      api.circ(x, y, 18, o.done ? 6 : 10)\n      api.circ(x, y, 16, o.done ? 6 : 10)\n      api.line(x - 11, y - 14, x - 5, y - 17, 7)\n      if (!o.done) {\n        api.line(x - 6, y + 2, x, y - 4, 7)\n        api.line(x, y - 4, x + 6, y + 2, 7)\n        altitudeBadge(api, x, y + 21, o.alt)\n      }\n    } else if (o.type === 'cloud') {\n      drawCloud(api, x, y, true)\n      altitudeBadge(api, x, y + 18, o.alt)\n    } else if (o.type === 'balloon') {\n      api.circfill(x + 8, y + 14, 13, 1)\n      api.line(x, y + 7, x - 3, y + 19, 6)\n      api.circfill(x, y - 4, 12, 2)\n      api.circfill(x - 1, y - 6, 10, 8)\n      api.circfill(x - 5, y - 10, 3, 15)\n      api.line(x + 2, y - 12, x - 3, y - 4, 10)\n      api.line(x - 3, y - 4, x + 3, y - 4, 10)\n      api.line(x + 3, y - 4, x - 1, y + 3, 10)\n      altitudeBadge(api, x, y + 23, o.alt)\n    }\n  }\n  function drawRival(api, r, index) {\n    if (r.finished) return\n    const y = screenY(r.s)\n    if (y < 34 || y > 225) return\n    const x = r.x\n    api.circfill(x + 5 + r.alt * 2, y + 12 + r.alt * 3, 7, 1)\n    api.line(x - 9 + r.alt * 2, y + 12 + r.alt * 3, x + 17, y + 12 + r.alt * 3, 1)\n    if (r.hurt > 0 && api.frame % 6 < 3) {\n      api.line(x - 12, y - 9, x + 12, y + 9, RACER_COLORS[index + 1])\n      api.line(x + 9, y - 12, x - 9, y + 12, 7)\n    } else {\n      const sprite = index === 0 ? BIPLANE : index === 1 ? JET : SEAPLANE\n      api.spr(sprite, x - 10, y - 7)\n      if (index !== 1)\n        api.line(x - (api.frame % 4 < 2 ? 7 : 3), y - 9, x + (api.frame % 4 < 2 ? 7 : 3), y - 9, 7)\n      else api.rectfill(x - 2, y + 6, 4, 3 + (api.frame % 4), 9)\n    }\n    if (r.fog > 0) {\n      api.circfill(x - 8, y + 2, 7, 6)\n      api.circfill(x + 6, y - 3, 8, 7)\n    }\n  }\n  function drawPlayer(api) {\n    const x = player.x\n    const y = 174\n    const shadow = 8 + player.visualAlt * 5\n    api.circfill(x + shadow, y + shadow, 7, 1)\n    api.line(x - 11 + shadow, y + shadow, x + 11 + shadow, y + shadow, 1)\n    if (player.crash > 0) {\n      const a = api.t * 9\n      api.line(\n        x - Math.cos(a) * 15,\n        y - Math.sin(a) * 15,\n        x + Math.cos(a) * 15,\n        y + Math.sin(a) * 15,\n        8,\n      )\n      api.line(\n        x + Math.sin(a) * 10,\n        y - Math.cos(a) * 10,\n        x - Math.sin(a) * 10,\n        y + Math.cos(a) * 10,\n        15,\n      )\n      api.circfill(x, y, 5 + (api.frame % 4), 9)\n      api.circfill(x, y, 3, 10)\n      for (let i = 0; i < 4; i++) {\n        api.circfill(x + Math.sin(api.t * 4 + i) * 8, y - 8 - i * 9, 5 + i, i % 2 ? 5 : 6)\n      }\n      api.textCenter('RESCUE ' + Math.ceil(player.crash), 145, 7)\n      return\n    }\n    if (player.inv > 0 && api.frame % 6 < 2) return\n    if (player.boost > 0) {\n      const len = 13 + (api.frame % 7)\n      api.line(x - 3, y + 8, x, y + len + 8, 12)\n      api.line(x + 3, y + 8, x, y + len + 8, 12)\n      api.rectfill(x - 2, y + 8, 4, len, 6)\n      api.line(x, y + 8, x, y + len + 5, 7)\n      api.line(x - 20, y + 3, x - 20, y + 17, 7)\n      api.line(x + 20, y + 3, x + 20, y + 17, 7)\n    }\n    if (player.spin > 0) {\n      const a = api.t * 17\n      api.line(\n        x - Math.cos(a) * 14,\n        y - Math.sin(a) * 14,\n        x + Math.cos(a) * 14,\n        y + Math.sin(a) * 14,\n        15,\n      )\n      api.line(\n        x - Math.cos(a) * 13,\n        y - Math.sin(a) * 13 + 1,\n        x + Math.cos(a) * 13,\n        y + Math.sin(a) * 13 + 1,\n        8,\n      )\n      api.line(\n        x - Math.sin(a) * 9,\n        y + Math.cos(a) * 9,\n        x + Math.sin(a) * 9,\n        y - Math.cos(a) * 9,\n        8,\n      )\n      api.circfill(x, y, 3, 6)\n      api.circ(x, y, 19, 7)\n    } else {\n      const banking = Math.abs(player.vx) > 32\n      api.spr(banking ? BANK : PLANE, x - 12, y - 8, banking && player.vx > 0, false, PLANE_PALETTE)\n      const prop = api.frame % 4 < 2 ? 8 : 3\n      api.line(x - prop, y - 10, x + prop, y - 10, 7)\n      api.pset(x, y - 11, 1)\n    }\n    for (let i = 0; i < 3; i++) {\n      api.rectfill(x - 6 + i * 5, y + 21, 3, 3, i === player.alt ? 10 : 1)\n    }\n  }\n  function drawHUD(api) {\n    api.rectfill(0, 12, 256, 29, 1)\n    api.text(\n      'R' + (race + 1) + ' LAP ' + Math.min(3, Math.floor(player.s / LAP_LENGTH) + 1) + '/3',\n      5,\n      15,\n      7,\n    )\n    api.text('' + racePlace + '/4', 120, 15, 10)\n    const seconds = Math.floor(elapsed)\n    const timeText =\n      Math.floor(seconds / 60) + ':' + (seconds % 60 < 10 ? '0' : '') + (seconds % 60)\n    api.text(timeText, 207, 15, 7)\n    api.text('HULL', 5, 29, 6)\n    for (let i = 0; i < 3; i++) {\n      api.rectfill(43 + i * 9, 29, 6, 6, i < 3 - player.spins ? 11 : 5)\n    }\n    api.text('CUP ' + cupPoints[0], 91, 29, 6)\n    api.text(LEVEL_NAMES[player.alt], 208, 29, 10)\n    api.rectfill(0, 209, 256, 15, 1)\n    api.text(\n      'A:' + (player.item < 0 ? 'EMPTY' : ITEM_NAMES[player.item]),\n      4,\n      214,\n      player.item < 0 ? 6 : 7,\n    )\n    api.text('B', 120, 214, player.cooldown <= 0 ? 11 : 6)\n    api.rect(133, 214, 44, 7, 6)\n    api.rectfill(135, 216, 40 * (1 - player.cooldown / 2.7), 3, player.cooldown <= 0 ? 11 : 12)\n    api.text('ALT', 189, 214, 6)\n    for (let i = 0; i < 3; i++) {\n      api.rectfill(219 + i * 10, 219 - i * 2, 7, 2 + i * 2, player.alt === i ? 10 : 5)\n    }\n    // Tiny course ribbon; no second score display.\n    api.rectfill(249, 46, 5, 155, 1)\n    for (let i = 0; i < 3; i++) {\n      api.rectfill(249, 199 - (i + 1) * 50, 5, 1, 6)\n    }\n    for (let i = 0; i < 3; i++) {\n      api.rectfill(250, 198 - (rivals[i].s / RACE_LENGTH) * 150, 3, 3, RACER_COLORS[i + 1])\n    }\n    api.rectfill(248, 198 - (player.s / RACE_LENGTH) * 150, 7, 3, 8)\n    if (messageTime > 0) {\n      const w = api.textWidth(message)\n      api.rectfill((256 - w) / 2 - 4, 44, w + 8, 12, 1)\n      api.textCenter(message, 46, 7)\n    }\n  }\n  function drawResult(api) {\n    api.rectfill(17, 57, 222, 139, 1)\n    api.rect(19, 59, 218, 135, 6)\n    api.textCenter(race === 2 ? 'CUP COMPLETE' : 'RACE COMPLETE', 67, 10)\n    api.textCenter('PLACE ' + racePlace + '  +' + POINTS[racePlace - 1] + ' PTS', 82, 7)\n    api.text('FINISH', 29, 99, 6)\n    api.text('CUP', 193, 99, 6)\n    for (let i = 0; i < 4; i++) {\n      const id = finishOrder[i]\n      const y = 113 + i * 15\n      api.text(i + 1 + ' ' + RACER_NAMES[id], 29, y, RACER_COLORS[id])\n      api.text('' + cupPoints[id], 199, y, id === 0 ? 7 : 6)\n    }\n    if (resultClock > 1.2) api.textCenter(race === 2 ? 'A: CUP RESULTS' : 'A: NEXT RACE', 179, 7)\n  }\n  function draw(api) {\n    api.cls(1)\n    drawBackground(api)\n    for (let i = 0; i < objects.length; i++) {\n      if (objects[i].type === 'wind') drawObject(api, objects[i])\n    }\n    for (let i = 0; i < objects.length; i++) {\n      if (objects[i].type !== 'wind') drawObject(api, objects[i])\n    }\n    const finishY = screenY(RACE_LENGTH)\n    if (finishY > 39 && finishY < 209) {\n      for (let x = 37; x < 222; x += 9) {\n        for (let row = 0; row < 2; row++) {\n          api.rectfill(x, finishY + row * 7, 9, 7, (Math.floor((x - 37) / 9) + row) % 2 ? 1 : 7)\n        }\n      }\n      api.textCenter('FINISH', finishY - 12, 7)\n    }\n    for (let i = 0; i < rivals.length; i++) drawRival(api, rivals[i], i)\n    for (let i = 0; i < missiles.length; i++) {\n      const m = missiles[i]\n      const y = screenY(m.s)\n      api.line(m.x, y + 4, m.x - 3, y + 16, 7)\n      api.circfill(m.x, y, 7, 14)\n      api.circfill(m.x - 2, y - 3, 2, 7)\n    }\n    for (let i = 0; i < particles.length; i++) {\n      const p = particles[i]\n      const y = screenY(p.s)\n      api.rectfill(p.x, y, p.life > 0.3 ? 3 : 2, 2, p.color)\n    }\n    drawPlayer(api)\n    drawHUD(api)\n    if (phase === 'result') drawResult(api)\n  }\n\n  return {\n    init,\n    update,\n    draw,\n    inspect() {\n      return {\n        race,\n        phase,\n        finished,\n        racePlace,\n        elapsed,\n        cupPoints: cupPoints.slice(),\n        player: { ...player },\n        rivals: rivals.map((r) => ({ ...r })),\n        objects: objects.map((o) => ({ ...o })),\n        particleCount: particles.length,\n      }\n    },\n  }\n})\n});\n// <\/arcade-catalog-bundle>\nlet skyKart;\n\nfunction init(api) {\n  skyKart = ARCADE.skyRacer({});\n  skyKart.init(api);\n}\n\nfunction update(api, dt) {\n  skyKart.update(api, dt);\n}\n\nfunction draw(api) {\n  api.cls(12);\n  skyKart.draw(api);\n}\n"</script>
+<script>
+(()=>{
+const root=document.getElementById('murphe-minimal'),canvas=root.querySelector('.game-frame canvas'),ctx=canvas.getContext('2d'),image=ctx.createImageData(256,224);
+const screen=root.querySelector('.game-console'),footer=root.querySelector('.game-controls'),frameBox=root.querySelector('.game-frame');
+function fitConsole(){screen.style.setProperty('--game-controls-height',footer.getBoundingClientRect().height+'px');const scale=Math.min(frameBox.clientWidth/256,frameBox.clientHeight/224);canvas.style.width=256*scale+'px';canvas.style.height=224*scale+'px'}
+new ResizeObserver(fitConsole).observe(screen);new ResizeObserver(fitConsole).observe(footer);document.fonts.ready.then(fitConsole);fitConsole();
+const runtime=new MurphePlayback.Runtime(canvas,{probe:true,post:()=>{}});
+runtime.load(JSON.parse(document.getElementById('murphe-minimal-code').textContent),7,'SKY KART',0,1);runtime.start();runtime.step(120);
+function paint(){runtime.screen.blit(new Uint32Array(image.data.buffer));ctx.putImageData(image,0,0)}paint();
+const recording=root.querySelector('.voice-recording'),review=root.querySelector('.voice-review'),meter=recording.querySelector('canvas'),meterCtx=meter.getContext('2d'),strip=root.querySelector('.prompt-console .controls-strip');
+const reviewStrip=strip.textContent,peaks=new Float32Array(25);
+const transcript=review.querySelector('.voice-transcript'),fullText=transcript.textContent;
+const wordWrap=document.createElement('span');
+const words=fullText.split(' ').map((word,i)=>{const span=document.createElement('span');span.textContent=word;wordWrap.appendChild(span);if(i<fullText.split(' ').length-1)wordWrap.appendChild(document.createTextNode(' '));return span});
+transcript.replaceChildren(wordWrap);transcript.setAttribute('aria-label',fullText);
+let voiceStart=null,voiceFrame,voiceWorking=false,voiceElapsed=0,voiceActive=false;
+function showWords(count){words.forEach((word,i)=>word.style.visibility=i<count?'visible':'hidden')}
+function finishVoice(){recording.hidden=true;review.hidden=false;strip.textContent=reviewStrip;showWords(words.length);voiceActive=false;cancelAnimationFrame(voiceFrame)}
+function startVoice(){
+ cancelAnimationFrame(voiceFrame);
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){finishVoice();return}
+ voiceStart=null;voiceElapsed=0;voiceWorking=false;voiceActive=true;peaks.fill(0);
+ delete recording.dataset.working;recording.querySelector('h1').textContent='LISTENING';
+ recording.querySelector('.voice-hint').textContent='RELEASE WHEN DONE';
+ recording.querySelector('.talk-button').textContent='RELEASE TO FINISH';recording.querySelector('.voice-done').hidden=false;
+ review.hidden=true;recording.hidden=false;showWords(0);strip.textContent='CABINET · HOLD Y: TALK · B: CANCEL';
+ voiceFrame=requestAnimationFrame(drawVoice);
+}
+review.querySelector('button').addEventListener('click',startVoice);
+function drawVoice(now){
+  if(voiceStart===null)voiceStart=now;
+  voiceElapsed+=Math.min(80,now-voiceStart);voiceStart=now;
+  const time=voiceElapsed,working=time>=4000;
+  if(time>=5300){
+    recording.hidden=true;review.hidden=false;strip.textContent=reviewStrip;
+    const count=Math.min(words.length,Math.floor((time-5300)/190)+1);showWords(count);
+    if(count===words.length){finishVoice();return}
+    voiceFrame=requestAnimationFrame(drawVoice);return;
+  }
+  if(working&&!voiceWorking){voiceWorking=true;recording.dataset.working='';recording.querySelector('h1').textContent='ONE MOMENT';recording.querySelector('.voice-hint').textContent='READING YOUR VOICE...';recording.querySelector('.talk-button').textContent='MIC OFF';recording.querySelector('.voice-done').hidden=true}
+  meterCtx.clearRect(0,0,160,40);meterCtx.fillStyle=working?'#55ffff':'#55ff55';
+  // Same 25-column PixelMeter geometry and smoothing as the console.
+  // Speech amplitude is simulated locally; this preview never opens a microphone.
+  for(let i=0;i<25;i++){
+    const contour=0.2+0.8*Math.sin(Math.PI*i/24)**0.7;
+    const volume=(0.2+0.8*Math.abs(Math.sin(time/310)*Math.cos(time/790)));
+    const band=0.4+0.6*Math.abs(Math.sin(i*0.37+time/470));
+    const target=volume*contour*band;
+    peaks[i]+=(target-peaks[i])*(target>peaks[i]?0.65:0.16);
+    const radius=working?Math.round(contour*(1+Math.sin(i*0.5-time/220))*1.5):Math.round(peaks[i]*4);
+    for(let row=-radius;row<=radius;row++)meterCtx.fillRect(6+i*6,18+row*4,4,3);
+  }
+  voiceFrame=requestAnimationFrame(drawVoice);
+}
+const voiceObserver=new IntersectionObserver(entries=>{
+  if(!entries[0].isIntersecting)return;
+  voiceObserver.disconnect();
+  startVoice();
+},{threshold:.3});voiceObserver.observe(root.querySelector('.prompt-console'));
+document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(voiceFrame)}else if(voiceActive){voiceStart=null;voiceFrame=requestAnimationFrame(drawVoice)}});
+let started=false,frame=0,last=0,elapsed=0;
+function tick(now){
+  frame=0;
+  if(document.hidden||elapsed>=9000)return;
+  const dt=Math.min(100,now-last);last=now;elapsed+=dt;
+  runtime.step(Math.max(1,Math.round(dt/1000*60)));paint();
+  if(elapsed<9000)frame=requestAnimationFrame(tick);
+}
+function resumeGame(){
+  cancelAnimationFrame(frame);frame=0;
+  if(started&&elapsed<9000&&!document.hidden&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    last=performance.now();frame=requestAnimationFrame(tick);
+  }
+}
+const observer=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting&&!started){started=true;resumeGame()}
+},{threshold:.3});
+observer.observe(root);
+document.addEventListener('visibilitychange',resumeGame);
+})();
+</script>
+
+<script src="./resize.js" data-root="murphe-minimal"></script></body></html>

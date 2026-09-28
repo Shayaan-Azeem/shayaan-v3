@@ -8,19 +8,25 @@
     "check:backpack": "node --experimental-strip-types scripts/check-backpack.mjs",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test tests/*.test.mjs"
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "build:murphe": "node scripts/build-murphe.mjs",
+    "watch:murphe": "node scripts/build-murphe.mjs --watch",
+    "predev": "npm run build:murphe",
+    "prebuild": "npm run build:murphe"
   },
   "dependencies": {
     "lucide-react": "^1.37.0",
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-rough-notation": "^1.0.8"
+    "react-rough-notation": "^1.0.8",
+    "three": "0.180.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "esbuild": "0.28.2",
     "typescript": "^5"
   }
 }

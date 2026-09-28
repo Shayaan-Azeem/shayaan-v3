@@ -1,0 +1,14 @@
+.diagram {
+  display: block;
+  width: 100%;
+  height: 560px;
+  margin: 40px 0;
+  border: 0;
+}
+
+.diagram[data-diagram="prompt-to-game"] { height: 340px; }
+
+@media (max-width: 620px) {
+  .diagram { height: 1100px; margin: 32px 0; }
+  .diagram[data-diagram="prompt-to-game"] { height: 640px; }
+}

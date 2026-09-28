@@ -1,0 +1,233 @@
+{
+  "title": "Arcade machine \u2014 technical assembly",
+  "units": "meters",
+  "dimensionsEstimated": true,
+  "source": "../arcade-machine.glb",
+  "sourceSha256": "4ad322a01390111011d48fd42dd66274aa5e4b81b74123fdabc2571c67757ca2",
+  "groups": [
+    {
+      "id": "left-shell",
+      "label": "02 \u00b7 Left shell",
+      "description": "Upper cheek and lower side panel with tutorial sheets.",
+      "anchor": [
+        -0.4,
+        1.38,
+        -0.08
+      ],
+      "offset": [
+        -0.28,
+        0,
+        0
+      ],
+      "meshCount": 5
+    },
+    {
+      "id": "right-shell",
+      "label": "03 \u00b7 Right shell",
+      "description": "Upper cheek and lower side panel without adhesive strips.",
+      "anchor": [
+        0.4,
+        1.38,
+        -0.08
+      ],
+      "offset": [
+        0.28,
+        0,
+        0
+      ],
+      "meshCount": 2
+    },
+    {
+      "id": "rear-shell",
+      "label": "04 \u00b7 Rear panels",
+      "description": "Lower back and upper enclosure.",
+      "anchor": [
+        0,
+        1.3,
+        -0.37
+      ],
+      "offset": [
+        0,
+        0.08,
+        -0.18
+      ],
+      "meshCount": 2
+    },
+    {
+      "id": "hood",
+      "label": "05 \u00b7 Top hood",
+      "description": "Folded top enclosure.",
+      "anchor": [
+        0,
+        1.97,
+        -0.12
+      ],
+      "offset": [
+        0,
+        0.3,
+        -0.12
+      ],
+      "meshCount": 1
+    },
+    {
+      "id": "marquee",
+      "label": "06 \u00b7 Marquee",
+      "description": "Sign fascia and printed title.",
+      "anchor": [
+        0,
+        1.88,
+        0.18
+      ],
+      "offset": [
+        0,
+        0.55,
+        0
+      ],
+      "meshCount": 3
+    },
+    {
+      "id": "display",
+      "label": "07 \u00b7 CRT display",
+      "description": "Monitor body, silver bezel, speakers and screen.",
+      "anchor": [
+        0,
+        1.44,
+        0.23
+      ],
+      "offset": [
+        0,
+        0.22,
+        0.22
+      ],
+      "meshCount": 10
+    },
+    {
+      "id": "control-deck",
+      "label": "08 \u00b7 Control deck",
+      "description": "Cardboard deck, printed edge trim and microphone.",
+      "anchor": [
+        0,
+        1.07,
+        0.37
+      ],
+      "offset": [
+        0,
+        0.1,
+        0.26
+      ],
+      "meshCount": 12
+    },
+    {
+      "id": "front-print",
+      "label": "09 \u00b7 Front artwork",
+      "description": "Printed front sheet.",
+      "anchor": [
+        0,
+        0.53,
+        0.29
+      ],
+      "offset": [
+        0.65,
+        0,
+        0.25
+      ],
+      "meshCount": 2
+    },
+    {
+      "id": "left-print",
+      "label": "10 \u00b7 Left artwork",
+      "description": "Lower left printed sheet.",
+      "anchor": [
+        -0.39,
+        0.53,
+        -0.04
+      ],
+      "offset": [
+        -0.33,
+        0,
+        0
+      ],
+      "meshCount": 1
+    },
+    {
+      "id": "right-print",
+      "label": "11 \u00b7 Right artwork",
+      "description": "Lower right printed sheet.",
+      "anchor": [
+        0.39,
+        0.53,
+        -0.04
+      ],
+      "offset": [
+        0.33,
+        0,
+        0
+      ],
+      "meshCount": 1
+    },
+    {
+      "id": "tire-rack",
+      "label": "12 \u00b7 Tire rack",
+      "description": "Slotted steel uprights supporting the CRT, with casters directly beneath the four feet.",
+      "anchor": [
+        -0.31,
+        0.7,
+        0.16
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "meshCount": 32
+    },
+    {
+      "id": "control-board",
+      "label": "13 \u00b7 Control board",
+      "description": "Removable DIY controller: open frame, exposed wiring, joystick and Xbox buttons.",
+      "anchor": [
+        -0.03,
+        1.15,
+        0.34
+      ],
+      "offset": [
+        0.03,
+        0.34,
+        0.54
+      ],
+      "meshCount": 46
+    }
+  ],
+  "bounds": {
+    "min": [
+      -0.7262000012397767,
+      0.027499999850988388,
+      -0.55
+    ],
+    "max": [
+      1.0150000000000001,
+      2.515000033378601,
+      0.9480580675690921
+    ]
+  },
+  "assembledBounds": {
+    "min": [
+      -0.41999998688697815,
+      0.027499999850988388,
+      -0.3700000047683716
+    ],
+    "max": [
+      0.41999998688697815,
+      2.015000104904175,
+      0.49000000953674316
+    ]
+  },
+  "style": "White surfaces, grayscale print, welded feature-edge outlines",
+  "notes": [
+    "Photo-estimated geometry; not a fabrication drawing.",
+    "Four cardboard panels surround a photo-referenced steel tire rack; no base platform or floor panel.",
+    "Four casters sit directly beneath the rack feet; fork tops meet foot undersides at y=0.110 meters.",
+    "TV underside and rack top rails meet at y=1.085 meters in the assembled view.",
+    "The removable control board lifts independently from the cardboard deck; adhesive strips are omitted."
+  ]
+}
