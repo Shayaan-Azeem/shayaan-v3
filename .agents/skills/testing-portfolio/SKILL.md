@@ -23,3 +23,10 @@ None.
 - Capture errors verbatim and distinguish instrumentation/external-site errors, dev warnings, and actual app failures.
 - Avoid shared-browser interference: reserve the browser while recording. If navigation changes unexpectedly, recheck the URL and redo only affected steps.
 - Native keyboard shortcuts and text entry can lose characters if rushed. Verify address-bar navigation before evidence capture; never infer the route from the filename.
+
+# Navigation focus checks
+- Chrome mouse navigation may not trigger `:focus-visible`; use native Tab/Enter to reproduce programmatic main-wrapper outlines without forcing CSS states.
+- Check both `Layout` and the separate `/forus` article wrapper. Reach Forus from the first projects card, and verify `document.activeElement.id` alongside computed outline and screenshots.
+- From focused main, Shift+Tab returns to the last header nav link. On projects, four Tabs reach the Forus media link (after three category buttons).
+- For regression checks, global link rings are generally 2px; Forus article links have their own 3px blue rule and some article buttons use 2px custom rules. Verify against the control-specific styling rather than assuming every ring is identical.
+- Computer-tool DOM inspection during initial hydration can add `devin-*` attributes and produce hydration mismatch warnings. Wait for hydration before inspecting; attribute-only instrumentation warnings should be separated from application failures.
