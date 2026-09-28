@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preload" href="./arcade-machine-diagram.glb" as="fetch" crossorigin>
+  <link rel="preload" href="./crt-screen.webp" as="image" crossorigin>
   <title>Murph-E assembly diagram</title>
   <style>html,body{margin:0;width:100%;height:100%;overflow:hidden}canvas{display:block;width:100%;height:100%}</style>
 </head>
-<body><script type="module" src="./viewer.bundle.js"></script></body>
+<body><script type="module" src="./viewer.bundle.js" onerror="document.body.dataset.murpheStatus='error';parent.postMessage({type: 'murphe-error'}, location.origin)"></script></body>
 </html>

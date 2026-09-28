@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 export async function createCRT() {
-  const picture = await new THREE.TextureLoader().loadAsync('./crt-screen.png');
+  const picture = await new THREE.TextureLoader().loadAsync('./crt-screen.webp');
   picture.flipY = false;
   picture.colorSpace = THREE.SRGBColorSpace;
   return new THREE.ShaderMaterial({

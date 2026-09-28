@@ -14,15 +14,16 @@ function viewer() {
   }
   const window = new Events(), document = new Events(), motion = new Events();
   document.hidden = false; document.body = { dataset: {} }; motion.matches = false;
-  const parent = {}, origin = "https://portfolio.test";
+  const messages = [];
+  const parent = { postMessage: message => messages.push(message) }, origin = "https://portfolio.test";
   let id = 0, paints = 0;
   const frames = new Map(), disposed = [];
   const texture = { isTexture: true, source: { data: { close: () => disposed.push("bitmap") } }, dispose: () => disposed.push("texture") };
-  const material = { map: texture, uniforms: { picture: { value: texture } }, dispose: () => disposed.push("material") };
+  const material = { map: texture, uniforms: { picture: { value: texture }, time: { value: 0 } }, dispose: () => disposed.push("material") };
   const geometry = { dispose: () => disposed.push("geometry") };
   class Vector { constructor(x = 0, y = 0, z = 0) { Object.assign(this, { x, y, z }); } set() {} applyMatrix4() { return this; } }
   const context = vm.createContext({
-    window, document, parent, location: { origin }, clamp, separation,
+    window, document, parent, materialSpy: material, location: { origin }, clamp, separation,
     matchMedia: () => motion, performance: { now: () => 100 }, innerWidth: 900, innerHeight: 450,
     requestAnimationFrame: callback => { frames.set(++id, callback); return id; },
     cancelAnimationFrame: id => frames.delete(id),
@@ -37,9 +38,10 @@ function viewer() {
     },
   });
   vm.runInContext(source, context);
-  vm.runInContext("renderer = rendererSpy; model = {}; manifest = { bounds: { min: [-1, -1, -1], max: [1, 1, 1] } }; crt = { uniforms: { time: { value: 0 } } };", context);
+  vm.runInContext("renderer = rendererSpy; model = {}; manifest = { bounds: { min: [-1, -1, -1], max: [1, 1, 1] } }; crt = materialSpy; ready = true;", context);
   return {
-    window, document, disposed,
+    window, document, disposed, messages,
+    init() { window.emit("message", { source: parent, origin, data: { type: "murphe-init" } }); },
     get frames() { return frames.size; }, get paints() { return paints; },
     progress(value) { window.emit("message", { source: parent, origin, data: { type: "murphe-progress", progress: value, visible: true } }); },
     paint() { const pending = [...frames.values()]; frames.clear(); pending.forEach(callback => callback(100)); },
@@ -83,4 +85,16 @@ test("a final unload releases resources once and later events cannot restart the
   page.progress(0.8);
   assert.deepEqual(page.disposed, released);
   assert.equal(page.frames, 0);
+});
+
+
+test("a parent that hydrates after the viewer is ready can recover the ready message without a progress loop", () => {
+  const page = viewer();
+  page.init();
+  assert.deepEqual(page.messages.map(message => message.type), ["murphe-ready"]);
+  page.progress(0.4);
+  assert.equal(page.messages.length, 1, "ordinary progress updates must not reply and trigger another update");
+  page.window.emit("pagehide", { persisted: false });
+  page.init();
+  assert.equal(page.messages.length, 1, "disposed viewers cannot report ready");
 });

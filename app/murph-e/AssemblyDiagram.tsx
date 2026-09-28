@@ -9,8 +9,13 @@ export default function AssemblyDiagram() {
   const panel = useRef<HTMLDivElement>(null);
   const iframe = useRef<HTMLIFrameElement>(null);
   const update = useRef<() => void>(() => {});
-  const [load, setLoad] = useState(false);
   const [status, setStatus] = useState<"loading" | "ready" | "fallback">("loading");
+  const initialize = () => {
+    // An eager iframe can fail before React attaches its message listener.
+    if (iframe.current?.contentDocument?.body?.dataset.murpheStatus === "error") setStatus("fallback");
+    else iframe.current?.contentWindow?.postMessage({ type: "murphe-init" }, location.origin);
+    update.current();
+  };
 
   useEffect(() => {
     if (status === "ready") update.current();
@@ -35,7 +40,7 @@ export default function AssemblyDiagram() {
     sync();
     const observer = new IntersectionObserver(([entry]) => {
       near = entry.isIntersecting;
-      if (near) { setLoad(true); schedule(); }
+      if (near) schedule();
       else sync();
     }, { rootMargin: "600px" });
     observer.observe(root);
@@ -50,6 +55,7 @@ export default function AssemblyDiagram() {
     window.addEventListener("resize", schedule);
     document.addEventListener("visibilitychange", schedule);
     motion.addEventListener("change", changeMotion);
+    initialize();
     return () => {
       cancelAnimationFrame(frame); observer.disconnect(); resize.disconnect();
       window.removeEventListener("message", receive);
@@ -61,18 +67,12 @@ export default function AssemblyDiagram() {
     };
   }, []);
 
-  useEffect(() => {
-    if (!load || status !== "loading") return;
-    const timeout = setTimeout(() => setStatus("fallback"), 20000);
-    return () => clearTimeout(timeout);
-  }, [load, status]);
-
   return (
     <section ref={section} data-status={status} className={`${styles.section} ${status === "fallback" ? styles.fallback : ""}`} aria-label="Arcade assembly diagram">
       <div ref={panel} className={styles.panel}>
         <div className={styles.stage}>
           {status !== "ready" && <p className={styles.loading} role="status">{status === "fallback" ? "The 3D model couldn’t load." : "Loading 3D model…"}</p>}
-          {load && status !== "fallback" && <iframe ref={iframe} className={styles.model} src="/murph-e/model/index.html" title="Scroll-controlled 3D assembly of Murph-E" tabIndex={-1} aria-hidden="true" style={{ opacity: status === "ready" ? 1 : 0 }} />}
+          {status !== "fallback" && <iframe ref={iframe} className={styles.model} src="/murph-e/model/index.html" onLoad={initialize} onError={() => setStatus("fallback")} title="Scroll-controlled 3D assembly of Murph-E" tabIndex={-1} aria-hidden="true" style={{ opacity: status === "ready" ? 1 : 0 }} />}
         </div>
 
       </div>

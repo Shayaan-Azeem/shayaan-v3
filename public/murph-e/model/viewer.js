@@ -1,10 +1,14 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { clamp, separation } from './motion.js';
 import { createCRT } from './crt.js';
 
-const tellParent = (type) => parent.postMessage({ type }, location.origin);
-let renderer, model, manifest, disposed = false, progress = 0, frame = 0;
+const tellParent = (type) => {
+  document.body.dataset.murpheStatus = type === 'murphe-ready' ? 'ready' : 'error';
+  parent.postMessage({ type }, location.origin);
+};
+let renderer, model, manifest, disposed = false, ready = false, progress = 0, frame = 0;
 let crt, visible = true, suspended = false, animation = 0, lastPaint = 0;
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const parts = [];
@@ -54,7 +58,12 @@ function syncAnimation() {
   if (crt && visible && !disposed && !suspended && !document.hidden && !motion.matches) animation = requestAnimationFrame(animate);
 }
 function receive(event) {
-  if (event.source !== parent || event.origin !== location.origin || event.data?.type !== 'murphe-progress') return;
+  if (event.source !== parent || event.origin !== location.origin) return;
+  if (event.data?.type === 'murphe-init') {
+    if (ready && !disposed) tellParent('murphe-ready');
+    return;
+  }
+  if (event.data?.type !== 'murphe-progress') return;
   if (!Number.isFinite(event.data.progress)) return;
   progress = clamp(event.data.progress);
   visible = event.data.visible !== false;
@@ -87,12 +96,13 @@ function dispose() {
   const materials = new Set(), textures = new Set(), geometries = new Set();
   scene.traverse(object => {
     if (object.geometry) geometries.add(object.geometry);
-    for (const material of [].concat(object.material || [])) {
-      materials.add(material);
-      for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
-      for (const uniform of Object.values(material.uniforms || {})) if (uniform.value?.isTexture) textures.add(uniform.value);
-    }
+    for (const material of [].concat(object.material || [])) materials.add(material);
   });
+  if (crt) materials.add(crt);
+  for (const material of materials) {
+    for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
+    for (const uniform of Object.values(material.uniforms || {})) if (uniform.value?.isTexture) textures.add(uniform.value);
+  }
   for (const texture of textures) { texture.source?.data?.close?.(); texture.dispose(); }
   for (const material of materials) material.dispose();
   for (const geometry of geometries) geometry.dispose();
@@ -123,18 +133,24 @@ try {
   scene.add(new THREE.HemisphereLight(0xffffff, 0xd6dbe0, 2.05));
   const key = new THREE.DirectionalLight(0xffffff, 2.25); key.position.set(-4, 7, 5); scene.add(key);
   const fill = new THREE.DirectionalLight(0xe8ebef, 0.7); fill.position.set(4, 2, -3); scene.add(fill);
-  const response = await fetch('./assembly.json');
-  if (!response.ok) throw new Error('Assembly data unavailable');
-  manifest = await response.json();
-  const gltf = await new GLTFLoader().loadAsync('./arcade-machine-diagram.glb');
-  model = gltf.scene;
-  scene.add(model);
-  try {
-    crt = await createCRT();
-    model.traverse(object => {
-      if (object.isMesh && (object.name.startsWith('Curved_CRT_glass') || object.parent?.name.startsWith('Curved_CRT_glass'))) object.material = crt;
-    });
-  } catch (error) { console.warn('CRT image unavailable:', error); }
+  // Start independent downloads together and collect all resources before cleanup.
+  const [assemblyResult, modelResult, crtResult] = await Promise.allSettled([
+    fetch('./assembly.json').then(response => {
+      if (!response.ok) throw new Error('Assembly data unavailable');
+      return response.json();
+    }),
+    new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync('./arcade-machine-diagram.glb'),
+    createCRT(),
+  ]);
+  if (modelResult.status === 'fulfilled') { model = modelResult.value.scene; scene.add(model); }
+  if (crtResult.status === 'fulfilled') crt = crtResult.value;
+  else console.warn('CRT image unavailable:', crtResult.reason);
+  if (assemblyResult.status === 'rejected') throw assemblyResult.reason;
+  if (modelResult.status === 'rejected') throw modelResult.reason;
+  manifest = assemblyResult.value;
+  if (crt) model.traverse(object => {
+    if (object.isMesh && (object.name.startsWith('Curved_CRT_glass') || object.parent?.name.startsWith('Curved_CRT_glass'))) object.material = crt;
+  });
   if (disposed) { disposed = false; dispose(); }
   else {
     model.traverse(object => {
@@ -145,6 +161,7 @@ try {
     });
     draw();
     syncAnimation();
+    ready = true;
     tellParent('murphe-ready');
   }
 } catch (error) {

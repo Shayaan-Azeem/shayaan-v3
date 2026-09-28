@@ -629,19 +629,4 @@ document.addEventListener('visibilitychange',resumeGame);
 })();
 </script>
 
-<script>
-(() => {
- const root = document.getElementById('murphe-minimal');
- let frame = 0;
- const measure = () => {
-   cancelAnimationFrame(frame);
-   frame = requestAnimationFrame(() => parent.postMessage({type: 'murphe-diagram-height', height: Math.ceil(root.getBoundingClientRect().height)}, '*'));
- };
- const observer = new ResizeObserver(measure);
- observer.observe(root);
- document.fonts.ready.then(measure);
- window.addEventListener('resize', measure);
- window.addEventListener('pagehide', () => { observer.disconnect(); cancelAnimationFrame(frame); window.removeEventListener('resize', measure); }, {once: true});
- measure();
-})();
-</script></body></html>
+<script src="./resize.js" data-root="murphe-minimal"></script></body></html>

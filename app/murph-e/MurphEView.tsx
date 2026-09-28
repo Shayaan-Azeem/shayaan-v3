@@ -21,7 +21,7 @@ export default function MurphEView() {
       <header className={articleStyles.hero}>
         <h1 className={articleStyles.heroTitle}>Murph-E Arcade</h1>
         <p className={articleStyles.heroMeta}>Hack the North 2026</p>
-        <p className={articleStyles.heroMeta}>Team: Shayaan Azeem, Tony Pan, Sahiti Dasari, and Zane Beeai.</p>
+        <p className={articleStyles.heroMeta}>Team: Tony Pan, Sahiti Dasari, and Zane Beeai.</p>
       </header>
       <article className={styles.article} aria-label="Murph-E Arcade fieldnote">
         <div className={styles.prose}>
