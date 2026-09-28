@@ -9,6 +9,7 @@ import Philosophy from "../philosophy/PhilosophyView";
 import Events from "../events/EventsView";
 import Favourites from "../favourites/FavouritesView";
 import Forus from "../forus/ForusView";
+import MurphE from "../murph-e/MurphEView";
 import { BACKPACK_ROUTES, createBackpackNavigation, getBackpackPath, type BackpackPath, type ScrollPosition } from "../lib/backpackNavigation";
 import { BackpackNavigationContext } from "./BackpackLink";
 
@@ -22,6 +23,7 @@ const VIEWS = {
   "/events": Events,
   "/favourites": Favourites,
   "/forus": Forus,
+  "/murph-e": MurphE,
 } satisfies Record<BackpackPath, typeof Home>;
 
 export default function BackpackSite({ initialPath }: { initialPath: BackpackPath }) {

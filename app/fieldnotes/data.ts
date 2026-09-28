@@ -2,6 +2,12 @@ import type { DatedEntry } from "../components/DatedEntryList";
 
 export const POSTS: DatedEntry[] = [
   {
+    title: "Murphy’s Law & Hack the North 2026",
+    date: "2026-09-20",
+    images: ["/murph-e/photos/15-team-finale.webp"],
+    href: "/murph-e",
+  },
+  {
     title: "Knowing When to Stop Using Agents",
     date: "2026-09-12",
     images: ["/forus/prescription-workflow.png"],

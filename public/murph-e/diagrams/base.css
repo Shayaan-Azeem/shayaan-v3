@@ -1,0 +1,21 @@
+/* Shared resets used by the two standalone diagrams. */
+:root { color-scheme: light; background: #fff; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  color: #171717;
+  font-family: -apple-system, system-ui, "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-weight: 430;
+  line-height: 21px;
+}
+h1, h2, h3, h4, h5, h6, p { margin-block: 0; }
+h1, h2 { font-weight: 500; line-height: 1.25; }
+h3, h4, h5, h6 { font-weight: 500; line-height: 1.3; }
+b, strong, th { font-weight: 500; }
+code:not(pre code) { overflow-wrap: anywhere; word-break: break-word; }
+.cursor-interaction { cursor: pointer; }
+svg { display: block; max-width: 100%; height: auto; }

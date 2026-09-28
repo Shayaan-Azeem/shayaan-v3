@@ -15,6 +15,10 @@ export const BACKPACK_ROUTES = {
     title: "Fieldnotes — Shayaan Azeem",
     description: "Notes and essays by Shayaan Azeem on building, learning, and life.",
   },
+  "/murph-e": {
+    title: "Murph-E Arcade — Shayaan Azeem",
+    description: "Building Murph-E Arcade at Hack the North 2026: spoken ideas become playable games on a homemade arcade machine, with hacker badges as controllers.",
+  },
   "/philosophy": {
     title: "Philosophy — Shayaan Azeem",
     description: "Shayaan Azeem's philosophy on effort and ambition.",

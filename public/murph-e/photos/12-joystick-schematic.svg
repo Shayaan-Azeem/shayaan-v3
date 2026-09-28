@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 465" role="img" aria-labelledby="joystick-title joystick-desc" class="joystick-schematic">
+<title id="joystick-title">Analog joystick circuit</title>
+<desc id="joystick-desc">Two 10 kiloohm potentiometers between 3.3 volts and ground. Each wiper feeds an ADC input through a 1 kiloohm resistor, with a 100 nanofarad capacitor from the ADC input to ground. Each RC filter has a cutoff of approximately 1.6 kilohertz.</desc>
+<style>.joystick-schematic .wire{fill:none;stroke:#999;stroke-width:1.8}.joystick-schematic .component{fill:#fff;stroke:#bbb;stroke-width:1.8}.joystick-schematic .node{fill:#999}.joystick-schematic .label{fill:#222;font:17px Manrope,Arial,sans-serif}.joystick-schematic .detail{fill:#777;font:14px Manrope,Arial,sans-serif}</style>
+<path class="joystick-outline" d="M10 40H380L470 130V435L455 450H110L10 350Z" fill="none" stroke="#bbb" stroke-width="1.8" stroke-dasharray="13 7" stroke-linejoin="miter"/>
+<text x="24" y="25" class="label">Joystick</text>
+<g class="wire">
+<path d="M100 120V70H300V120M240 70V48M233 57L240 48L247 57"/>
+<path d="M100 180V370H360M300 180V370M240 370V388"/>
+<path d="M118 150H160V202M318 150H360V202M160 242V320M360 242V320M160 334V370M360 334V370M160 280H215M360 280H415"/>
+</g>
+<g class="component">
+<path d="M90 120H110V180H90ZM290 120H310V180H290Z"/>
+<path d="M110 150L122 145V155ZM310 150L322 145V155Z" fill="#555"/>
+<path d="M150 202H170V242H150ZM350 202H370V242H350Z"/>
+<path d="M140 320H180M140 334H180M340 320H380M340 334H380"/>
+<path d="M229 388H251L240 399Z"/>
+</g>
+<g class="node"><circle cx="240" cy="70" r="3.5"/><circle cx="160" cy="280" r="3.5"/><circle cx="360" cy="280" r="3.5"/><circle cx="160" cy="370" r="3.5"/><circle cx="300" cy="370" r="3.5"/><circle cx="240" cy="370" r="3.5"/></g>
+<g class="label">
+<text x="255" y="55">+3V3</text>
+<text x="27" y="143">stick_X</text><text x="227" y="143">stick_Y</text>
+<text x="184" y="215">R1</text><text x="384" y="215">R2</text>
+<text x="184" y="313">C1</text><text x="384" y="313">C2</text>
+<text x="177" y="270">adc_x</text><text x="377" y="270">adc_y</text>
+</g>
+<g class="detail"><text x="43" y="163">10kΩ</text><text x="243" y="163">10kΩ</text><text x="184" y="235">1kΩ</text><text x="384" y="235">1kΩ</text><text x="184" y="334">100nF</text><text x="384" y="334">100nF</text><text x="224" y="421">GND</text><text x="330" y="421">fc ≈ 1.6kHz</text></g>
+</svg>

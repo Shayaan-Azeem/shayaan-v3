@@ -69,6 +69,17 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
+    title: "Murph-E",
+    category: "project",
+    desc: "An arcade machine that turns voice prompts into playable games. Built a custom cabinet around a CRT, generated games with AI, and turned Hack the North badges into multiplayer controllers.",
+    images: ["/projects/murph-e.webp"],
+    href: "/murph-e",
+    video: "/projects/murph-e-film.mp4",
+    videoEffect: "ascii",
+    shortMedia: true,
+    featured: true,
+  },
+  {
     title: "TensorForest",
     category: "project",
     desc: "Drones that find early forest fire risks. Used remote sensing, NDVI, and onboard ML to detect dangerous vegetation zones and generate orthomosaic risk maps before fires start. Worked with the Town of Oakville to test it.",
@@ -77,7 +88,6 @@ export const PROJECTS: Project[] = [
     video: "/projects/tensorforest-film.mp4",
     videoEffect: "ascii",
     shortMedia: true,
-    featured: true,
   },
   {
     title: "Performative Purity Test",
