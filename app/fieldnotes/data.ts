@@ -2,6 +2,13 @@ import type { DatedEntry } from "../components/DatedEntryList";
 
 export const POSTS: DatedEntry[] = [
   {
+    title: "My Summer at Forus",
+    date: "2026-10-15",
+    images: ["/forus/prescription-workflow.png"],
+    coverBackground: "linear-gradient(135deg, #f4f0e5 0%, #dfe7dc 100%)",
+    href: "https://x.com/shayaan_azeem/status/2110789903562817941",
+  },
+  {
     title: "Murphy’s Law & Hack the North 2026",
     date: "2026-09-20",
     images: ["/murph-e/photos/15-team-finale.webp"],
