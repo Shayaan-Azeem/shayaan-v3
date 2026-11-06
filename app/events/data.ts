@@ -43,4 +43,22 @@ export const EVENTS: DatedEntry[] = [
     images: ["/events/cafe-cursor-waterloo.avif"],
     href: "https://luma.com/uwaterloo-1",
   },
+  {
+    title: "Teen Builders Club: Show ’n Tell",
+    date: "2025-08-14",
+    images: ["/events/teen-builders-show-and-tell.webp"],
+    href: "https://luma.com/h70tti0n",
+  },
+  {
+    title: "Teen Builders Club: Coworking / Demo Night",
+    date: "2025-07-31",
+    images: ["/events/teen-builders-demo-night.webp"],
+    href: "https://luma.com/7e2ji2mj",
+  },
+  {
+    title: "Teen Builders Club: Coffee / Matcha Meetup",
+    date: "2025-07-06",
+    images: ["/events/teen-builders-coffee-matcha.webp"],
+    href: "https://luma.com/ezqlmllq",
+  },
 ];
