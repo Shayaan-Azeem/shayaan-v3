@@ -55,6 +55,13 @@ The Forus detail page at `/forus` uses a brief rise-and-fade entrance that respe
 
 When adding a page, register its metadata in `backpackNavigation.ts`, eagerly import its view into `BackpackSite.tsx`, and keep a server `page.tsx` entry for direct visits. Do not import filesystem, credentials, user-specific data, or server-only modules into the view graph. Re-run the build and verify internal navigation, browser history, direct links, and project filters.
 
-Videos respect reduced motion by default; visitors can explicitly play them. They pause outside the viewport and in background tabs. Small first-frame WebP posters are embedded in the initial HTML and page bundle, so video cards have a preview before hydration or video download. Posters include the same ASCII/halftone treatment and stay behind the canvas until it paints a decoded frame. Native videos also use the poster attribute. Playback still loads separately when visible.
+Videos respect reduced motion by default; visitors can explicitly play them. They pause outside the viewport and in background tabs. Small first-frame WebP and indexed PNG posters are embedded in the initial HTML and page bundle, so video cards have a preview before hydration or video download. Posters include the same ASCII/halftone treatment and stay behind the canvas until it paints a decoded frame. Native and canvas backing videos also use the poster attribute: a paused video with a poster does not download its media until played. Videos without posters still decode a first frame when visible. Background tabs defer loading until foregrounded.
+
+Project cards use a 640px Forus preview and a 240px Murph-E source for its 120-column ASCII canvas. The Forus article retains the full-resolution original. To regenerate the smaller previews, run these from the repository root, then regenerate the posters below:
+
+```sh
+ffmpeg -i public/projects/forus-prior-authorization.mp4 -vf 'scale=640:-2,fps=24' -an -c:v libx264 -preset slow -crf 30 -pix_fmt yuv420p -movflags +faststart -threads 2 -y public/projects/forus-preview.mp4
+ffmpeg -i public/projects/murph-e-film.mp4 -vf scale=240:-2 -an -c:v libx264 -preset slow -crf 20 -pix_fmt yuv420p -movflags +faststart -threads 2 -y public/projects/murph-e-preview.mp4
+```
 
 After changing a video or effect, regenerate `app/projects/videoPosters.json` with `node --experimental-strip-types scripts/generate-video-posters.mjs`. This authoring script requires `ffmpeg` and `@napi-rs/canvas`; an existing canvas package path can be supplied as its first argument. These tools are not needed to build or serve the site.

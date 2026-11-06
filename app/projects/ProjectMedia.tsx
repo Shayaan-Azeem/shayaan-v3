@@ -68,6 +68,7 @@ export default function ProjectMedia({
           ) : project.videoEffect === "ascii" && project.video ? (
             <AsciiVideo
               src={project.video}
+              poster={poster}
               paused={paused}
               onPlaybackChange={setPlaying}
               alt={`${project.title} project preview rendered as ASCII art`}
@@ -76,6 +77,7 @@ export default function ProjectMedia({
           ) : project.videoEffect === "halftone" && project.video ? (
             <HalftoneVideo
               src={project.video}
+              poster={poster}
               paused={paused}
               onPlaybackChange={setPlaying}
               alt={`${project.title} montage rendered as a field of dots`}

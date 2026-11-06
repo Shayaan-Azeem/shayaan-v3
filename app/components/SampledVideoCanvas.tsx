@@ -6,6 +6,7 @@ import { useVideoPlayback } from "./videoPlayback";
 
 export default function SampledVideoCanvas({
   src,
+  poster,
   paused,
   className,
   alt,
@@ -16,6 +17,7 @@ export default function SampledVideoCanvas({
   onPlaybackChange,
 }: {
   src: string;
+  poster?: string;
   paused: boolean;
   className?: string;
   alt: string;
@@ -62,6 +64,7 @@ export default function SampledVideoCanvas({
       <video
         ref={videoRef}
         src={src}
+        poster={poster}
         muted
         loop
         playsInline

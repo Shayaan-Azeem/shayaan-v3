@@ -5,12 +5,14 @@ import { paintHalftoneFrame } from "./pixelCanvas";
 
 export default function HalftoneVideo({
   src,
+  poster,
   paused,
   onPlaybackChange,
   className,
   alt = "Video rendered as a field of dots",
 }: {
   src: string;
+  poster?: string;
   paused: boolean;
   onPlaybackChange?: (playing: boolean) => void;
   className?: string;
@@ -19,6 +21,7 @@ export default function HalftoneVideo({
   return (
     <SampledVideoCanvas
       src={src}
+      poster={poster}
       paused={paused}
       onPlaybackChange={onPlaybackChange}
       className={className}

@@ -21,6 +21,12 @@ export function observeVideoPlayback(
   const shouldPlay = () => !disposed && visible && !paused && !document.hidden;
 
   const sync = () => {
+    // Existing posters already provide the still image for paused videos.
+    // Keep their media request deferred until motion or an explicit play needs it.
+    if (visible && !document.hidden && video.preload === "none" && (!paused || !video.poster)) {
+      video.preload = "auto";
+      video.load();
+    }
     if (!shouldPlay()) {
       video.pause();
       onPlaybackChange?.(false);
@@ -47,11 +53,6 @@ export function observeVideoPlayback(
   const stopped = () => onPlaybackChange?.(false);
   const observer = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
-    // Decode a still frame even when motion is disabled or autoplay is blocked.
-    if (visible && video.preload === "none") {
-      video.preload = "auto";
-      video.load();
-    }
     sync();
   });
 

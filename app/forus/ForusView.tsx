@@ -11,6 +11,7 @@ import { articleHtml } from "./articleContent";
 import { initializeArticle } from "./articleRuntime";
 import styles from "./forus.module.css";
 import sharedStyles from "../page.module.css";
+import videoPosters from "../projects/videoPosters.json";
 import "./article.css";
 
 export default function ForusView() {
@@ -61,7 +62,7 @@ export default function ForusView() {
         <h1 className={styles.heroTitle}>Forus</h1>
         <p className={styles.heroMeta}>Summer 2026</p>
         <div ref={videoFrame} className={styles.heroVideo}>
-          <video ref={video} src="/projects/forus-prior-authorization.mp4" muted loop playsInline preload="none" aria-hidden="true" />
+          <video ref={video} src="/projects/forus-prior-authorization.mp4" poster={videoPosters["/projects/forus-preview.mp4"]} muted loop playsInline preload="none" aria-hidden="true" />
           <Image className={styles.heroLogo} src="/projects/forus-light.svg" alt="" width={499} height={136} loading="eager" />
           <button
             type="button"

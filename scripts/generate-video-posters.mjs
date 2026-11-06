@@ -33,8 +33,14 @@ for (const project of PROJECTS.filter(project => project.video)) {
   } else {
     context.drawImage(source, 0, 0);
   }
-  const webp = await sharp(canvas.toBuffer("image/png")).resize({ width: 192 }).webp({ quality: 40 }).toBuffer();
-  posters[project.video] = `data:image/webp;base64,${webp.toString("base64")}`;
-  console.log(`${project.title}: ${webp.length} bytes`);
+  const image = sharp(canvas.toBuffer("image/png"));
+  // Keep the small dots distinct when this still is used for reduced motion.
+  // A 16-color PNG preserves their edges more efficiently than a larger WebP.
+  const halftone = project.videoEffect === "halftone";
+  const poster = halftone
+    ? await image.png({ palette: true, colors: 16, dither: 0, compressionLevel: 9 }).toBuffer()
+    : await image.resize({ width: 192 }).webp({ quality: 40 }).toBuffer();
+  posters[project.video] = `data:image/${halftone ? "png" : "webp"};base64,${poster.toString("base64")}`;
+  console.log(`${project.title}: ${poster.length} bytes`);
 }
 writeFileSync("app/projects/videoPosters.json", `${JSON.stringify(posters, null, 2)}\n`);

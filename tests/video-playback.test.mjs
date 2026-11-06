@@ -80,6 +80,36 @@ test("a paused or reduced-motion video loads a still without autoplay", () => {
   assert.equal(video.paused, true);
 });
 
+test("a reduced-motion poster avoids media downloads until the visitor plays", async () => {
+  const video = new Video();
+  video.poster = "data:image/webp;base64,poster";
+  const { observer } = mount(video, true);
+  observer.intersect(true);
+  assert.equal(video.loads, 0);
+  assert.equal(video.preload, "none");
+  assert.equal(video.playCalls, 0);
+  requestVideoPlayback(video, false);
+  await settle();
+  assert.equal(video.loads, 1);
+  assert.equal(video.paused, false);
+  observer.intersect(false);
+  observer.intersect(true);
+  await settle();
+  assert.equal(video.loads, 1);
+});
+
+test("a video waits for a foreground tab before loading or playing", async () => {
+  document.hidden = true;
+  const video = new Video();
+  mount(video).observer.intersect(true);
+  assert.equal(video.loads, 0);
+  document.hidden = false;
+  document.dispatchEvent(new Event("visibilitychange"));
+  await settle();
+  assert.equal(video.loads, 1);
+  assert.equal(video.paused, false);
+});
+
 test("backgrounding the document stops video and foregrounding resumes it", async () => {
   const video = new Video();
   mount(video).observer.intersect(true);
