@@ -4,8 +4,7 @@ export const POSTS: DatedEntry[] = [
   {
     title: "My Summer at Forus",
     date: "2026-10-15",
-    images: ["/fieldnotes/summer-at-forus.png"],
-    coverBackground: "#ffffff",
+    images: ["/fieldnotes/summer-at-forus-cover.webp"],
     href: "https://x.com/shayaan_azeem/status/2110789903562817941",
   },
   {
