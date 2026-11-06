@@ -2,6 +2,12 @@ import type { DatedEntry } from "../components/DatedEntryList";
 
 export const EVENTS: DatedEntry[] = [
   {
+    title: "Chapter Fireside Chat with Cobi & Hamza @ Waterloo",
+    date: "2026-10-22",
+    images: ["/events/chapter-logo.webp"],
+    href: "https://x.com/shayaan_azeem/status/2113281789775007758",
+  },
+  {
     title: "Forus Game Night",
     date: "2026-08-13",
     images: ["/events/forus-game-night.jpg"],
