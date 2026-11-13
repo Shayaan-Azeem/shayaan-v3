@@ -462,8 +462,8 @@
 @media(max-width:450px){.forus-article .recovery-comparison{padding:18px}.forus-article .recovery-heading{align-items:flex-start;flex-direction:column;gap:8px}.forus-article .recovery-label strong{font-size:20px}}
 
 
-/* Based on the rendered Habitat diagrams: dotted canvas, white cards, fine ink lines. */
-.forus-article figure:not(#figure-4) .diag-wrap{background-color:#fff;background-image:radial-gradient(#ddd .55px,transparent .55px);background-size:5px 5px;border:1px solid #e5e5e5;border-radius:3px}
+/* Diagram surfaces: white canvas and cards, fine ink lines. */
+.forus-article figure:not(#figure-4) .diag-wrap{background-color:#fff;border:1px solid #e5e5e5;border-radius:3px}
 .forus-article .technical-diagram text,.forus-article #figure-8 text{fill:#373737}
 .forus-article .technical-diagram .title,.forus-article #figure-7 .technical-diagram .title,.forus-article #figure-8 .title{fill:#171717;font-weight:500}
 .forus-article .technical-diagram .group-label{font-family:ui-monospace,SFMono-Regular,monospace;fill:#333;font-weight:600;letter-spacing:.2px}
@@ -534,7 +534,6 @@
 
 
 /* Semantic hierarchy: state/output fills, check borders, failure tint. */
-.forus-article figure:not(#figure-4) .diag-wrap{background-image:radial-gradient(#e9e9e9 .45px,transparent .45px);background-size:6px 6px}
 .forus-article .technical-diagram .connection polyline,.forus-article .technical-diagram .connection.rose polyline,.forus-article .technical-diagram .connection.blue polyline,.forus-article #figure-8 .reset-line{stroke:#666;stroke-width:1.3}
 .forus-article .technical-diagram marker path{stroke:#555;stroke-width:1.2}
 .forus-article #figure-1 .technical-diagram .node.semantic-state rect{fill:#ededed!important;stroke:#666!important}
@@ -578,7 +577,7 @@
 
 
 .forus-article .selector-comparison{margin:28px 0 32px}
-.forus-article .selector-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;padding:20px;background:radial-gradient(#e9e9e9 .45px,transparent .45px) 0 0/6px 6px;border:1px solid #e5e5e5;border-radius:3px}
+.forus-article .selector-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;padding:20px;background:#fff;border:1px solid #e5e5e5;border-radius:3px}
 .forus-article .selector-case{min-width:0}.forus-article .selector-case-title{font-size:13px;font-weight:500;margin-bottom:8px}
 .forus-article .selector-query{display:block;font-size:10px;padding:8px;background:#fff;border:1px solid #ddd;border-radius:3px;white-space:nowrap;overflow-x:auto;overflow-wrap:normal}
 .forus-article .selector-browser{border:1px solid #aaa;border-radius:3px;margin-top:14px;background:#fff;overflow:hidden}
@@ -640,7 +639,7 @@
 @media(max-width:450px){.forus-article .reset-impact-stats{gap:12px}.forus-article .reset-impact-stats strong{font-size:24px}.forus-article .reset-impact-stats>div>span{font-size:11px}}
 
 
-.forus-article .reset-preview-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;padding:20px;background:radial-gradient(#e9e9e9 .45px,transparent .45px) 0 0/6px 6px;border:1px solid #e5e5e5;border-radius:3px}
+.forus-article .reset-preview-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;padding:20px;background:#fff;border:1px solid #e5e5e5;border-radius:3px}
 .forus-article .reset-preview-case{min-width:0;display:flex;flex-direction:column}.forus-article .reset-preview-label{font-size:13px;font-weight:500;margin-bottom:12px}
 .forus-article .reset-preview-browser{border:1px solid #aaa;border-radius:3px;overflow:hidden;background:#f5f5f5;flex:1}
 .forus-article .reset-preview-chrome{height:25px;padding:0 10px;border-bottom:1px solid #ddd;background:#fafafa;color:#bbb;letter-spacing:3px;font-size:8px;line-height:25px}
@@ -829,12 +828,12 @@
 .forus-article #figure-6 .technical-diagram .gate-heading{font:600 18px ui-sans-serif,system-ui,sans-serif;fill:#333;letter-spacing:0}.forus-article #figure-6 .technical-diagram .gate-purpose{font:400 15px ui-sans-serif,system-ui,sans-serif;fill:#555;letter-spacing:0}
 .forus-article #reset-screen-examples .reset-preview-browser,.forus-article #reset-screen-examples .reset-preview-browser *{cursor:default}
 
-.forus-article .forus-product-gradient{padding:26px 18px;background:linear-gradient(135deg,#f4f0e5 0%,#dfe7dc 100%);border-radius:7px;overflow:hidden}
+.forus-article .forus-product-gradient{padding:26px 18px;background:linear-gradient(135deg,#d8c5ff 0%,#b290ff 100%);border-radius:7px;overflow:hidden}
 .forus-article .forus-product-gradient img{display:block;width:100%;height:auto;max-width:none;margin:0;border-radius:0}
 @media(max-width:520px){.forus-article .forus-product-gradient{padding:16px 8px}}
 
 .forus-article #figure-3 .flow-controls button{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;letter-spacing:0}
-.forus-article #figure-4>.diag-wrap{background-color:#fff;background-image:radial-gradient(#e5e5e5 .6px,transparent .6px);background-size:8px 8px}.forus-article #figure-4 .demo-grid{background:transparent}
+.forus-article #figure-4>.diag-wrap{background-color:#fff;}.forus-article #figure-4 .demo-grid{background:transparent}
 
 .forus-article .blog-toc{font:12px/1.5 ui-sans-serif,system-ui,sans-serif;z-index:20}
 .forus-article .blog-toc summary{color:#888;font-size:11px;cursor:pointer;padding:10px 0}
@@ -902,7 +901,7 @@
 
 
 
-.forus-article #figure-2 .authoring-lanes-wrap{padding:18px 12px;overflow-x:auto;background-color:#fff;background-image:radial-gradient(#e1e1e1 .6px,transparent .6px);background-size:8px 8px}
+.forus-article #figure-2 .authoring-lanes-wrap{padding:18px 12px;overflow-x:auto;background-color:#fff;}
 .forus-article #figure-2 .authoring-lanes{display:block;width:100%;min-width:620px;height:auto}
 .forus-article #figure-2 .authoring-lanes text{font-size:14px;fill:#555;letter-spacing:0}
 .forus-article #figure-2 .authoring-lanes .phase-label{font-size:16px;fill:#333;font-weight:500}

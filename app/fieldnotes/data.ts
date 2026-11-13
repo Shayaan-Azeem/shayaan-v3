@@ -2,22 +2,33 @@ import type { DatedEntry } from "../components/DatedEntryList";
 
 export const POSTS: DatedEntry[] = [
   {
+    title: "Can an Agent Make Money Entirely on Its Own?",
+    date: "2026-11-13",
+    images: ["/fieldnotes/the-trillium-company.jpg"],
+    imageSizes: "(max-width: 639px) 120px, 132px",
+    href: "https://thetrilliumcompany.com/",
+  },
+  {
     title: "My Summer at Forus",
     date: "2026-10-15",
     images: ["/fieldnotes/summer-at-forus-cover.webp"],
+    imageSizes: "(max-width: 639px) 120px, 132px",
     href: "https://x.com/shayaan_azeem/status/2110789903562817941",
   },
   {
     title: "Murphy’s Law & Hack the North 2026",
     date: "2026-09-20",
-    images: ["/murph-e/photos/15-team-finale.webp"],
+    images: ["/fieldnotes/murphys-law-arcade.webp"],
+    imageSizes: "100px",
+    imageScale: 1.2,
     href: "/murph-e",
   },
   {
     title: "Knowing When to Stop Using Agents",
     date: "2026-09-12",
     images: ["/forus/prescription-workflow.png"],
-    coverBackground: "linear-gradient(135deg, #f4f0e5 0%, #dfe7dc 100%)",
+    coverBackground: "linear-gradient(135deg, #d8c5ff 0%, #b290ff 100%)",
+    imageSizes: "80px",
     href: "/forus",
   },
   {

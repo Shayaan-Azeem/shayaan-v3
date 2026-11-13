@@ -10,6 +10,9 @@ export type DatedEntry = {
   href: string;
   images: string[];
   coverBackground?: string;
+  /** Source width before object-fit cropping and CSS scaling. */
+  imageSizes?: string;
+  imageScale?: number;
 };
 
 const THUMBNAIL = {
@@ -69,7 +72,8 @@ export default function DatedEntryList({
                           alt=""
                           width={width}
                           height={height}
-                          sizes={sizes}
+                          sizes={entry.imageSizes ?? sizes}
+                          style={entry.imageScale ? { transform: `scale(${entry.imageScale})` } : undefined}
                         />
                       </span>
                     ))}
